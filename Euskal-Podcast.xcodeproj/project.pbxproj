@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
+		425DCB53263E076700958689 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425DCB51263E076700958689 /* MainViewController.xib */; };
 		42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB28263DAB7800463FB4 /* AppDelegate.swift */; };
 		42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */; };
-		42EBBB2D263DAB7800463FB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB2C263DAB7800463FB4 /* ViewController.swift */; };
-		42EBBB30263DAB7800463FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EBBB2E263DAB7800463FB4 /* Main.storyboard */; };
 		42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EBBB31263DAB7800463FB4 /* Assets.xcassets */; };
 		42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		425DCB50263E076700958689 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		425DCB51263E076700958689 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		42EBBB25263DAB7800463FB4 /* Euskal-Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Euskal-Podcast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EBBB28263DAB7800463FB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		42EBBB2C263DAB7800463FB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		42EBBB2F263DAB7800463FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42EBBB31263DAB7800463FB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42EBBB34263DAB7800463FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42EBBB36263DAB7800463FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,10 +58,10 @@
 			children = (
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
-				42EBBB2C263DAB7800463FB4 /* ViewController.swift */,
-				42EBBB2E263DAB7800463FB4 /* Main.storyboard */,
-				42EBBB31263DAB7800463FB4 /* Assets.xcassets */,
+				425DCB50263E076700958689 /* MainViewController.swift */,
+				425DCB51263E076700958689 /* MainViewController.xib */,
 				42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */,
+				42EBBB31263DAB7800463FB4 /* Assets.xcassets */,
 				42EBBB36263DAB7800463FB4 /* Info.plist */,
 			);
 			path = "Euskal-Podcast";
@@ -125,8 +125,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */,
+				425DCB53263E076700958689 /* MainViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
-				42EBBB30263DAB7800463FB4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +137,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42EBBB2D263DAB7800463FB4 /* ViewController.swift in Sources */,
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
+				425DCB52263E076700958689 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		42EBBB2E263DAB7800463FB4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				42EBBB2F263DAB7800463FB4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,6 +281,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9WUS7ZBGW;
 				INFOPLIST_FILE = "Euskal-Podcast/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +289,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "eus.aitorzubizarreta.Euskal-Podcast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,6 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9WUS7ZBGW;
 				INFOPLIST_FILE = "Euskal-Podcast/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "eus.aitorzubizarreta.Euskal-Podcast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
