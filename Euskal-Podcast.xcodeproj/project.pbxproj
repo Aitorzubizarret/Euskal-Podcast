@@ -37,6 +37,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		425DCB5A263E0E2B00958689 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				425DCB50263E076700958689 /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		425DCB5B263E0E3B00958689 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				425DCB51263E076700958689 /* MainViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		425DCB5C263E0E4100958689 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		42EBBB1C263DAB7800463FB4 = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +81,11 @@
 			children = (
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
-				425DCB50263E076700958689 /* MainViewController.swift */,
-				425DCB51263E076700958689 /* MainViewController.xib */,
-				42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */,
+				425DCB5C263E0E4100958689 /* Models */,
+				425DCB5B263E0E3B00958689 /* Views */,
+				425DCB5A263E0E2B00958689 /* Controllers */,
 				42EBBB31263DAB7800463FB4 /* Assets.xcassets */,
+				42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */,
 				42EBBB36263DAB7800463FB4 /* Info.plist */,
 			);
 			path = "Euskal-Podcast";
