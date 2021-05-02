@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
+		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
 		425DCB53263E076700958689 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425DCB51263E076700958689 /* MainViewController.xib */; };
 		42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB28263DAB7800463FB4 /* AppDelegate.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		425DCB50263E076700958689 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		425DCB51263E076700958689 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		42EBBB25263DAB7800463FB4 /* Euskal-Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Euskal-Podcast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				425DCB50263E076700958689 /* MainViewController.swift */,
+				4212F413263F29CC00B9C021 /* PlayerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -49,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				425DCB51263E076700958689 /* MainViewController.xib */,
+				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */,
+				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				425DCB53263E076700958689 /* MainViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
 			);
@@ -162,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
+				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				425DCB52263E076700958689 /* MainViewController.swift in Sources */,
 			);
