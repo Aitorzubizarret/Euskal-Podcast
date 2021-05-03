@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
     
     
     ///
-    ///
+    /// Setup the Table View.
     ///
     private func setupTableView() {
         self.tableView.delegate = self
@@ -33,12 +33,18 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - UITableView Delegate
+
 extension MainViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let playerVC: PlayerViewController = PlayerViewController()
         self.navigationController?.pushViewController(playerVC, animated: true)
     }
+    
 }
+
+// MARK: - UITableView Date Source
 
 extension MainViewController: UITableViewDataSource {
     

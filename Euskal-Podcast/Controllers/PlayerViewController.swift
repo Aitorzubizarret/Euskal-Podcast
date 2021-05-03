@@ -34,6 +34,9 @@ class PlayerViewController: UIViewController {
         self.setupPlayer()
     }
     
+    ///
+    /// Setup the AVPlayer.
+    ///
     private func setupPlayer() {
         guard let url: URL = URL(string: self.urlString) else { return }
         
