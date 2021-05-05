@@ -15,12 +15,20 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
+    var episodes: [Episode] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    let episodeTableViewCell: String = "EpisodeTableViewCell"
+    
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupTableView()
+        self.createData()
     }
     
     
@@ -30,6 +38,23 @@ class MainViewController: UIViewController {
     private func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        // Register cell.
+        let episodeCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
+        self.tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCell)
+        
+        self.tableView.estimatedRowHeight = 75
+    }
+    
+    ///
+    /// Create data.
+    ///
+    private func createData() {
+        let episode: Episode = Episode(name: "Miseriaren Adarrak",
+                                       program: "Bertso Zaharrak",
+                                       mp3Url: "https://www.ivoox.com/miseriaren-adarrak-xenpelarren-bertso-sorta_mf_50074712_feed_1.mp3",
+                                       duration: "02:19")
+        self.episodes.append(episode)
     }
 }
 
@@ -39,6 +64,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let playerVC: PlayerViewController = PlayerViewController()
+        playerVC.episode = self.episodes[indexPath.row]
         self.navigationController?.pushViewController(playerVC, animated: true)
     }
     
@@ -52,11 +78,11 @@ extension MainViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.episodes.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.textLabel?.text = "Play"
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.episodeTableViewCell) as! EpisodeTableViewCell
+        cell.episode = self.episodes[indexPath.row]
         return cell
     }
     

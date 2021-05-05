@@ -22,29 +22,31 @@ class PlayerViewController: UIViewController {
     var player: AVPlayer?
     var playerItem:AVPlayerItem?
     var isPlaying: Bool = false
-    let urlString: String = "https://www.ivoox.com/miseriaren-adarrak-xenpelarren-bertso-sorta_mf_50074712_feed_1.mp3"
+    var isPlayerConfigured: Bool = false
+    var episode: Episode?
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.playPauseButton.setTitle("Stop", for: .normal)
+        self.playPauseButton.setTitle("Play", for: .normal)
         
-        self.setupPlayer()
     }
     
     ///
-    /// Setup the AVPlayer.
+    /// Configure the Player.
     ///
-    private func setupPlayer() {
-        guard let url: URL = URL(string: self.urlString) else { return }
+    private func configurePlayer() {
+        guard let receivedEpisode = self.episode,
+              let episodeURL: URL = URL(string: receivedEpisode.mp3Url) else { return }
         
-        let asset = AVAsset(url: url)
+        let asset = AVAsset(url: episodeURL)
         self.playerItem = AVPlayerItem(asset: asset)
         self.player = AVPlayer(playerItem: playerItem)
         
         self.player?.volume = 1.0
+        self.isPlayerConfigured = true
     }
     
     ///
@@ -52,10 +54,13 @@ class PlayerViewController: UIViewController {
     ///
     private func playPauseAction() {
         if isPlaying {
-            self.playPauseButton.setTitle("Pause", for: .normal)
+            self.playPauseButton.setTitle("Play", for: .normal)
             self.player?.pause()
         } else {
-            self.playPauseButton.setTitle("Play", for: .normal)
+            if !isPlayerConfigured {
+                self.configurePlayer()
+            }
+            self.playPauseButton.setTitle("Pause", for: .normal)
             self.player?.play()
         }
         
