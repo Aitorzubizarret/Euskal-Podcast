@@ -12,6 +12,9 @@ class PlayerViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    @IBOutlet weak var elementsStackView: UIStackView!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBAction func playPauseButtonTapped(_ sender: Any) {
         self.playPauseAction()
@@ -30,8 +33,27 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupView()
+    }
+    
+    ///
+    /// Setup the View.
+    ///
+    private func setupView() {
+        // Button.
+        self.playPauseButton.backgroundColor = UIColor.blue
         self.playPauseButton.setTitle("Play", for: .normal)
+        self.playPauseButton.layer.cornerRadius = 25
         
+        // ImageView.
+        self.coverImageView.backgroundColor = UIColor.red
+        self.coverImageView.layer.cornerRadius = 10
+        
+        // Check if we have an Episode.
+        guard let episode = self.episode else { return }
+        
+        // Label
+        self.titleLabel.text = episode.name
     }
     
     ///
