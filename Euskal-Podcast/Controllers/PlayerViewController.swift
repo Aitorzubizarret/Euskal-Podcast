@@ -15,6 +15,11 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var elementsStackView: UIStackView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var durationSlider: UISlider!
+    @IBAction func durationSliderTapped(_ sender: Any) {
+    }
+    @IBOutlet weak var currentDurationTimeLabel: UILabel!
+    @IBOutlet weak var totalDurationTimeLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBAction func playPauseButtonTapped(_ sender: Any) {
         self.playPauseAction()
@@ -54,6 +59,12 @@ class PlayerViewController: UIViewController {
         
         // Label
         self.titleLabel.text = episode.name
+        self.currentDurationTimeLabel.text = "00:00"
+        self.totalDurationTimeLabel.text = "00:00"
+        
+        // Slider
+        self.durationSlider.minimumValue = 0
+        self.durationSlider.isContinuous = true
     }
     
     ///
@@ -67,7 +78,23 @@ class PlayerViewController: UIViewController {
         self.playerItem = AVPlayerItem(asset: asset)
         self.player = AVPlayer(playerItem: playerItem)
         
-        self.player?.volume = 1.0
+        guard let player = self.player,
+              let currentItem = player.currentItem else { return }
+        
+        player.volume = 1.0
+        let episodeDuration: CMTime = currentItem.asset.duration
+        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
+        self.totalDurationTimeLabel.text = receivedEpisode.duration
+        
+        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
+            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
+            let episodeCurrentTime = CMTimeGetSeconds(time)
+            let progress = episodeCurrentTime/episodeDuration
+            self.durationSlider.setValue(Float(progress), animated: true)
+            print("Progress : \(progress)")
+            self.currentDurationTimeLabel.text = "\(progress)"
+        }
+        
         self.isPlayerConfigured = true
     }
     

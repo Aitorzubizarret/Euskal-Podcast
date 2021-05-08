@@ -12,9 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerViewController" customModule="Euskal_Podcast" customModuleProvider="target">
             <connections>
                 <outlet property="coverImageView" destination="pDN-GV-Hjs" id="M6N-xt-jCo"/>
+                <outlet property="currentDurationTimeLabel" destination="x79-fX-8XL" id="hzB-GB-IsU"/>
+                <outlet property="durationSlider" destination="R75-HK-YuD" id="wni-jB-xbW"/>
                 <outlet property="elementsStackView" destination="HGk-Hx-p9b" id="49F-35-VTo"/>
                 <outlet property="playPauseButton" destination="kXJ-NN-Kfe" id="psX-Zf-KeR"/>
                 <outlet property="titleLabel" destination="mpy-Ai-XxQ" id="l0G-cm-vgr"/>
+                <outlet property="totalDurationTimeLabel" destination="41u-w6-9TI" id="9jA-Jo-wrF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,8 +44,32 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fp3-8l-3T8">
                             <rect key="frame" x="0.0" y="500" width="350" height="100"/>
                             <subviews>
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="R75-HK-YuD">
+                                    <rect key="frame" x="-2" y="5" width="354" height="31"/>
+                                    <connections>
+                                        <action selector="durationSliderTapped:" destination="-1" eventType="valueChanged" id="PBU-jL-aVd"/>
+                                    </connections>
+                                </slider>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x79-fX-8XL">
+                                    <rect key="frame" x="0.0" y="40" width="50" height="20.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="h1D-Mp-KrR"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41u-w6-9TI">
+                                    <rect key="frame" x="300" y="40" width="50" height="20.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="8yl-7F-1i1"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXJ-NN-Kfe">
-                                    <rect key="frame" x="150" y="25" width="50" height="50"/>
+                                    <rect key="frame" x="150" y="45" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="MFN-jf-VUq"/>
                                         <constraint firstAttribute="width" constant="50" id="rNl-G0-0On"/>
@@ -55,8 +82,15 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="kXJ-NN-Kfe" firstAttribute="centerY" secondItem="fp3-8l-3T8" secondAttribute="centerY" id="944-cr-R9b"/>
-                                <constraint firstItem="kXJ-NN-Kfe" firstAttribute="centerX" secondItem="fp3-8l-3T8" secondAttribute="centerX" id="XVa-eo-3xG"/>
+                                <constraint firstItem="kXJ-NN-Kfe" firstAttribute="centerX" secondItem="fp3-8l-3T8" secondAttribute="centerX" id="4Hx-ct-1wa"/>
+                                <constraint firstItem="x79-fX-8XL" firstAttribute="top" secondItem="R75-HK-YuD" secondAttribute="bottom" constant="5" id="5WE-20-jgO"/>
+                                <constraint firstItem="x79-fX-8XL" firstAttribute="leading" secondItem="R75-HK-YuD" secondAttribute="leading" id="9Vi-a8-lnQ"/>
+                                <constraint firstItem="kXJ-NN-Kfe" firstAttribute="top" secondItem="R75-HK-YuD" secondAttribute="bottom" constant="10" id="AIc-To-Vk6"/>
+                                <constraint firstItem="41u-w6-9TI" firstAttribute="trailing" secondItem="R75-HK-YuD" secondAttribute="trailing" id="DGl-wS-qLo"/>
+                                <constraint firstItem="41u-w6-9TI" firstAttribute="top" secondItem="R75-HK-YuD" secondAttribute="bottom" constant="5" id="RYV-vj-AWm"/>
+                                <constraint firstItem="R75-HK-YuD" firstAttribute="leading" secondItem="fp3-8l-3T8" secondAttribute="leading" id="Sef-q0-lZf"/>
+                                <constraint firstItem="R75-HK-YuD" firstAttribute="top" secondItem="fp3-8l-3T8" secondAttribute="top" constant="5" id="ZJW-cU-khI"/>
+                                <constraint firstAttribute="trailing" secondItem="R75-HK-YuD" secondAttribute="trailing" id="b92-zO-aEv"/>
                                 <constraint firstAttribute="height" constant="100" id="equ-Cg-nnA"/>
                             </constraints>
                         </view>
