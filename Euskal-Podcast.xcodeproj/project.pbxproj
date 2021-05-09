@@ -13,6 +13,7 @@
 		425DCB53263E076700958689 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425DCB51263E076700958689 /* MainViewController.xib */; };
 		427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */; };
 		427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */; };
+		42BE3FA526486F9B00C6DA7E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE3FA426486F9B00C6DA7E /* CloudKit.framework */; };
 		42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB28263DAB7800463FB4 /* AppDelegate.swift */; };
 		42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */; };
 		42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EBBB31263DAB7800463FB4 /* Assets.xcassets */; };
@@ -27,6 +28,8 @@
 		425DCB51263E076700958689 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeTableViewCell.xib; sourceTree = "<group>"; };
+		42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Euskal-Podcast.entitlements"; sourceTree = "<group>"; };
+		42BE3FA426486F9B00C6DA7E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		42EBBB25263DAB7800463FB4 /* Euskal-Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Euskal-Podcast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EBBB28263DAB7800463FB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42BE3FA526486F9B00C6DA7E /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,11 +94,20 @@
 			path = EpisodeTableViewCell;
 			sourceTree = "<group>";
 		};
+		42BE3FA326486F9B00C6DA7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42BE3FA426486F9B00C6DA7E /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42EBBB1C263DAB7800463FB4 = {
 			isa = PBXGroup;
 			children = (
 				42EBBB27263DAB7800463FB4 /* Euskal-Podcast */,
 				42EBBB26263DAB7800463FB4 /* Products */,
+				42BE3FA326486F9B00C6DA7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +122,7 @@
 		42EBBB27263DAB7800463FB4 /* Euskal-Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */,
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
 				425DCB5C263E0E4100958689 /* Models */,
@@ -338,6 +352,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Euskal-Podcast/Euskal-Podcast.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9WUS7ZBGW;
 				INFOPLIST_FILE = "Euskal-Podcast/Info.plist";
@@ -358,6 +373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Euskal-Podcast/Euskal-Podcast.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9WUS7ZBGW;
 				INFOPLIST_FILE = "Euskal-Podcast/Info.plist";
