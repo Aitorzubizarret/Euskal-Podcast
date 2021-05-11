@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
+    var dataViewModel: DataViewModel = DataViewModel()
     var episodes: [Episode] = [] {
         didSet {
             self.tableView.reloadData()
@@ -28,7 +29,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         self.setupTableView()
-        self.createData()
+        self.bind()
+        
+        self.dataViewModel.getLocalData()
     }
     
     
@@ -46,16 +49,17 @@ class MainViewController: UIViewController {
         self.tableView.estimatedRowHeight = 75
     }
     
+    //
+    /// Get new data from DataViewModel.
     ///
-    /// Create data.
-    ///
-    private func createData() {
-        let episode: Episode = Episode(name: "Miseriaren Adarrak",
-                                       program: "Bertso Zaharrak",
-                                       mp3Url: "https://www.ivoox.com/miseriaren-adarrak-xenpelarren-bertso-sorta_mf_50074712_feed_1.mp3",
-                                       duration: "02:19")
-        self.episodes.append(episode)
+    private func bind() {
+        self.dataViewModel.binding = {
+            if let receivedEpisodes = self.dataViewModel.episodesList {
+                self.episodes = receivedEpisodes
+            }
+        }
     }
+    
 }
 
 // MARK: - UITableView Delegate
