@@ -15,7 +15,7 @@ class DataViewModel {
     var binding = { () -> () in }
     
     // Data Source.
-    var episodesList: [Episode]? {
+    var companyList: [Company]? {
         didSet {
             self.binding()
         }
@@ -27,6 +27,8 @@ class DataViewModel {
     /// Get Local Data.
     ///
     func getLocalData() {
+        
+        // Episodes
         var newEpisodes: [Episode] = []
         let episode1: Episode = Episode(name: "Miseriaren Adarrak",
                                        program: "Bertso Zaharrak",
@@ -34,6 +36,29 @@ class DataViewModel {
                                        duration: "02:19")
         newEpisodes.append(episode1)
         
-        self.episodesList = newEpisodes
+        // Seasons
+        var newSeasons: [Season] = []
+        let season1: Season = Season(id: 0,
+                                     name: "",
+                                     dateStart: Date(),
+                                     dateEnd: Date(),
+                                     episodes: newEpisodes)
+        newSeasons.append(season1)
+        
+        // Programs
+        var newPrograms: [Program] = []
+        let program1: Program = Program(id: 0,
+                                              name: "Bertso Zaharrak",
+                                              seasons: newSeasons)
+        newPrograms.append(program1)
+        
+        // Companies
+        var newCompanies: [Company] = []
+        let company1: Company = Company(id: 0,
+                                     name: "Argia",
+                                     programs: newPrograms)
+        newCompanies.append(company1)
+        
+        self.companyList = newCompanies
     }
 }

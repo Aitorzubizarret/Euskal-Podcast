@@ -16,24 +16,34 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     
     var dataViewModel: DataViewModel = DataViewModel()
-    var episodes: [Episode] = [] {
+    var companies: [Company] = [] {
         didSet {
             self.tableView.reloadData()
         }
     }
     let episodeTableViewCell: String = "EpisodeTableViewCell"
+    let seasonTableViewCell: String  = "SeasonTableViewCell"
+    let programTableViewCell: String = "ProgramTableViewCell"
+    let companyTableViewCell: String = "CompanyTableViewCell"
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.setupView()
         self.setupTableView()
         self.bind()
         
         self.dataViewModel.getLocalData()
     }
     
+    ///
+    /// Setup the View.
+    ///
+    private func setupView() {
+        self.title = "Euskal Podcast"
+    }
     
     ///
     /// Setup the Table View.
@@ -42,9 +52,18 @@ class MainViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        // Register cell.
+        // Register cells
         let episodeCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
-        self.tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCell)
+        self.tableView.register(episodeCell, forCellReuseIdentifier: self.episodeTableViewCell)
+        
+        let seasonCell: UINib = UINib(nibName: "SeasonTableViewCell", bundle: nil)
+        self.tableView.register(seasonCell, forCellReuseIdentifier: self.seasonTableViewCell)
+        
+        let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
+        self.tableView.register(programCell, forCellReuseIdentifier: self.programTableViewCell)
+        
+        let companyCell: UINib = UINib(nibName: "CompanyTableViewCell", bundle: nil)
+        self.tableView.register(companyCell, forCellReuseIdentifier: self.companyTableViewCell)
         
         self.tableView.estimatedRowHeight = 75
     }
@@ -54,8 +73,8 @@ class MainViewController: UIViewController {
     ///
     private func bind() {
         self.dataViewModel.binding = {
-            if let receivedEpisodes = self.dataViewModel.episodesList {
-                self.episodes = receivedEpisodes
+            if let receivedCompanies = self.dataViewModel.companyList {
+                self.companies = receivedCompanies
             }
         }
     }
@@ -67,9 +86,13 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let playerVC: PlayerViewController = PlayerViewController()
-        playerVC.episode = self.episodes[indexPath.row]
-        self.navigationController?.pushViewController(playerVC, animated: true)
+//        let playerVC: PlayerViewController = PlayerViewController()
+//        playerVC.episode = self.episodes[indexPath.row]
+//        self.navigationController?.pushViewController(playerVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
 }
@@ -82,11 +105,11 @@ extension MainViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.episodes.count
+        return self.companies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.episodeTableViewCell) as! EpisodeTableViewCell
-        cell.episode = self.episodes[indexPath.row]
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.companyTableViewCell) as! CompanyTableViewCell
+        cell.company = self.companies[indexPath.row]
         return cell
     }
     

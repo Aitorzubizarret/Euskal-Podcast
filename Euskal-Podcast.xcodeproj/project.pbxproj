@@ -11,6 +11,12 @@
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
 		425DCB53263E076700958689 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425DCB51263E076700958689 /* MainViewController.xib */; };
+		42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E27264DB3BC00271A85 /* CompanyTableViewCell.swift */; };
+		42621E2A264DB3BC00271A85 /* CompanyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E28264DB3BC00271A85 /* CompanyTableViewCell.xib */; };
+		42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */; };
+		42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */; };
+		42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */; };
+		42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */; };
 		426DCB90264C85A20020AC72 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB8F264C85A20020AC72 /* Company.swift */; };
 		426DCB93264C85BD0020AC72 /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB92264C85BD0020AC72 /* Program.swift */; };
 		426DCB97264C863C0020AC72 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB96264C863C0020AC72 /* Season.swift */; };
@@ -30,6 +36,12 @@
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		425DCB50263E076700958689 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		425DCB51263E076700958689 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		42621E27264DB3BC00271A85 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
+		42621E28264DB3BC00271A85 /* CompanyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyTableViewCell.xib; sourceTree = "<group>"; };
+		42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCell.swift; sourceTree = "<group>"; };
+		42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
+		42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTableViewCell.swift; sourceTree = "<group>"; };
+		42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeasonTableViewCell.xib; sourceTree = "<group>"; };
 		426DCB8F264C85A20020AC72 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		426DCB92264C85BD0020AC72 /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		426DCB96264C863C0020AC72 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
@@ -88,21 +100,51 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		42621E24264DB38200271A85 /* Season */ = {
+			isa = PBXGroup;
+			children = (
+				42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */,
+				42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */,
+			);
+			path = Season;
+			sourceTree = "<group>";
+		};
+		42621E25264DB39A00271A85 /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */,
+				42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */,
+			);
+			path = Program;
+			sourceTree = "<group>";
+		};
+		42621E26264DB3A000271A85 /* Company */ = {
+			isa = PBXGroup;
+			children = (
+				42621E27264DB3BC00271A85 /* CompanyTableViewCell.swift */,
+				42621E28264DB3BC00271A85 /* CompanyTableViewCell.xib */,
+			);
+			path = Company;
+			sourceTree = "<group>";
+		};
 		427E1C412640AF6000FBCDF7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				427E1C482640B15A00FBCDF7 /* EpisodeTableViewCell */,
+				42621E26264DB3A000271A85 /* Company */,
+				42621E25264DB39A00271A85 /* Program */,
+				42621E24264DB38200271A85 /* Season */,
+				427E1C482640B15A00FBCDF7 /* Episode */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		427E1C482640B15A00FBCDF7 /* EpisodeTableViewCell */ = {
+		427E1C482640B15A00FBCDF7 /* Episode */ = {
 			isa = PBXGroup;
 			children = (
 				427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */,
 				427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */,
 			);
-			path = EpisodeTableViewCell;
+			path = Episode;
 			sourceTree = "<group>";
 		};
 		42AC65B2264B13CB0077002E /* ViewModels */ = {
@@ -216,7 +258,10 @@
 				42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */,
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				425DCB53263E076700958689 /* MainViewController.xib in Resources */,
+				42621E2A264DB3BC00271A85 /* CompanyTableViewCell.xib in Resources */,
+				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
+				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,9 +277,12 @@
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
+				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
+				42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */,
+				42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */,
 				42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */,
 				425DCB52263E076700958689 /* MainViewController.swift in Sources */,
 				426DCB90264C85A20020AC72 /* Company.swift in Sources */,
