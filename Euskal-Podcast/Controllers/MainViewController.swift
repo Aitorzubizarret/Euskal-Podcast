@@ -86,9 +86,9 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let playerVC: PlayerViewController = PlayerViewController()
-//        playerVC.episode = self.episodes[indexPath.row]
-//        self.navigationController?.pushViewController(playerVC, animated: true)
+        let companyVC: CompanyViewController = CompanyViewController()
+        companyVC.company = self.companies[indexPath.row]
+        self.navigationController?.pushViewController(companyVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
