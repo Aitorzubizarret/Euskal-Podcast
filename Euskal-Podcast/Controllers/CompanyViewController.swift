@@ -11,6 +11,8 @@ class CompanyViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: - Properties
     
     var company: Company? {
@@ -25,7 +27,38 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.setupTableView()
     }
+    
+    ///
+    /// Setup the TableView.
+    ///
+    private func setupTableView() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+}
+
+// MARK: - UITableView Delegate
+
+extension CompanyViewController: UITableViewDelegate {}
+
+// MARK: - UITableView Data Source
+
+extension CompanyViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell()
+        cell.textLabel?.text = "Company"
+        return cell
+    }
+    
 }
