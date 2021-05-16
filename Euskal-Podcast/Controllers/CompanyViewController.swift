@@ -15,6 +15,7 @@ class CompanyViewController: UIViewController {
     
     // MARK: - Properties
     
+    let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     var company: Company? {
         didSet {
             guard let receivedCompany = self.company else { return }
@@ -37,12 +38,22 @@ class CompanyViewController: UIViewController {
     private func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        // Register cells.
+        let programsList: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
+        self.tableView.register(programsList, forCellReuseIdentifier: self.programsListTableViewCellIdentifier)
     }
 }
 
 // MARK: - UITableView Delegate
 
-extension CompanyViewController: UITableViewDelegate {}
+extension CompanyViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 195
+    }
+    
+}
 
 // MARK: - UITableView Data Source
 
@@ -56,9 +67,9 @@ extension CompanyViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.textLabel?.text = "Company"
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
         return cell
+        
     }
     
 }
