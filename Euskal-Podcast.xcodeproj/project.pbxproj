@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		425DCB50263E076700958689 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		42EBBB1C263DAB7800463FB4 = {
 			isa = PBXGroup;
 			children = (
+				420BF37A2655ACE600E3A2A8 /* README.md */,
 				42EBBB27263DAB7800463FB4 /* Euskal-Podcast */,
 				42EBBB26263DAB7800463FB4 /* Products */,
 				42BE3FA326486F9B00C6DA7E /* Frameworks */,
