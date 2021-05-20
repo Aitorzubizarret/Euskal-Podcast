@@ -4,23 +4,62 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ProgramCollectionViewCell" customModule="Euskal_Podcast" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="106" height="158"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="106" height="158"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQ5-by-Mgb">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <rect key="frame" x="0.0" y="0.0" width="106" height="158"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Skh-uM-Pdk">
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Skh-uM-Pdk" secondAttribute="height" id="Y2s-Xf-U1y"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BG4-Ry-VDi">
+                                <rect key="frame" x="0.0" y="101" width="106" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="NRE-0o-q98"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnS-RK-FKX">
+                                <rect key="frame" x="0.0" y="121" width="106" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="yfo-qo-lCs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" id="Bw4-B3-HbO"/>
+                            <constraint firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="Jls-yg-N3O"/>
+                            <constraint firstAttribute="height" constant="158" id="Lkm-RB-vAJ"/>
+                            <constraint firstItem="BG4-Ry-VDi" firstAttribute="top" secondItem="Skh-uM-Pdk" secondAttribute="bottom" constant="5" id="Vem-15-ehj"/>
+                            <constraint firstItem="hnS-RK-FKX" firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="c3g-Mu-SgN"/>
+                            <constraint firstItem="hnS-RK-FKX" firstAttribute="top" secondItem="BG4-Ry-VDi" secondAttribute="bottom" id="g3u-j4-lD3"/>
+                            <constraint firstItem="hnS-RK-FKX" firstAttribute="leading" secondItem="BG4-Ry-VDi" secondAttribute="leading" id="i3P-T7-xin"/>
+                            <constraint firstAttribute="trailing" secondItem="Skh-uM-Pdk" secondAttribute="trailing" constant="10" id="icC-YY-0We"/>
+                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="top" secondItem="hQ5-by-Mgb" secondAttribute="top" id="rFQ-tv-GlK"/>
+                            <constraint firstItem="BG4-Ry-VDi" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" id="uTQ-cD-8LR"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -31,13 +70,13 @@
                 <constraint firstAttribute="bottom" secondItem="hQ5-by-Mgb" secondAttribute="bottom" id="NZ9-L0-5a4"/>
                 <constraint firstAttribute="trailing" secondItem="hQ5-by-Mgb" secondAttribute="trailing" id="ePm-wa-dTA"/>
             </constraints>
-            <size key="customSize" width="80" height="100"/>
-            <point key="canvasLocation" x="162.31884057971016" y="152.67857142857142"/>
+            <size key="customSize" width="106" height="158"/>
+            <point key="canvasLocation" x="181.15942028985509" y="172.09821428571428"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

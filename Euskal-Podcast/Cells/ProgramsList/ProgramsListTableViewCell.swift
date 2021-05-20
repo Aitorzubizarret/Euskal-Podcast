@@ -61,6 +61,7 @@ class ProgramsListTableViewCell: UITableViewCell {
         // Layout.
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 10
         }
@@ -85,10 +86,22 @@ extension ProgramsListTableViewCell: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.programCollectionViewCellIdentifier, for: indexPath) as! ProgramCollectionViewCell
         return cell
     }
+}
+
+// MARK: - UICollectionView Delegate FlowLayout
+
+extension ProgramsListTableViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = 118
+        let cellHeight = 158
+        return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
 }

@@ -50,7 +50,7 @@ class CompanyViewController: UIViewController {
 extension CompanyViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 195
+        return 256
     }
     
 }
