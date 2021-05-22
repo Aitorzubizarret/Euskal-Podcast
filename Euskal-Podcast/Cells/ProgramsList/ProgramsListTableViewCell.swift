@@ -14,11 +14,13 @@ class ProgramsListTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var seeAllButton: UIButton!
     @IBAction func seeAllButtonTapped(_ sender: Any) {
+        self.goToProgramsList()
     }
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     
+    var hostVC: UIViewController?
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
     
     // MARK: - Methods
@@ -71,6 +73,14 @@ class ProgramsListTableViewCell: UITableViewCell {
         // Register cell.
         let programCell: UINib = UINib(nibName: "ProgramCollectionViewCell", bundle: nil)
         self.collectionView.register(programCell, forCellWithReuseIdentifier: self.programCollectionViewCellIdentifier)
+    }
+    
+    ///
+    /// Go to ProgramsViewController.
+    ///
+    private func goToProgramsList() {
+        let programsVC: ProgramsViewController = ProgramsViewController()
+        self.hostVC?.navigationController?.pushViewController(programsVC, animated: true)
     }
 }
 

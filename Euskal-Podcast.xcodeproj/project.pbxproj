@@ -25,6 +25,8 @@
 		42A719AC264F1A0F0026648E /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A719AA264F1A0F0026648E /* CompanyViewController.swift */; };
 		42A719AD264F1A0F0026648E /* CompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A719AB264F1A0F0026648E /* CompanyViewController.xib */; };
 		42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AC65B3264B13F90077002E /* DataViewModel.swift */; };
+		42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BB9C142659A6980014A560 /* ProgramsViewController.swift */; };
+		42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42BB9C152659A6980014A560 /* ProgramsViewController.xib */; };
 		42BE3FA526486F9B00C6DA7E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE3FA426486F9B00C6DA7E /* CloudKit.framework */; };
 		42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB28263DAB7800463FB4 /* AppDelegate.swift */; };
 		42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */; };
@@ -57,6 +59,8 @@
 		42A719AA264F1A0F0026648E /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		42A719AB264F1A0F0026648E /* CompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyViewController.xib; sourceTree = "<group>"; };
 		42AC65B3264B13F90077002E /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
+		42BB9C142659A6980014A560 /* ProgramsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsViewController.swift; sourceTree = "<group>"; };
+		42BB9C152659A6980014A560 /* ProgramsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramsViewController.xib; sourceTree = "<group>"; };
 		42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Euskal-Podcast.entitlements"; sourceTree = "<group>"; };
 		42BE3FA426486F9B00C6DA7E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		42EBBB25263DAB7800463FB4 /* Euskal-Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Euskal-Podcast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,7 @@
 			children = (
 				425DCB50263E076700958689 /* MainViewController.swift */,
 				42A719AA264F1A0F0026648E /* CompanyViewController.swift */,
+				42BB9C142659A6980014A560 /* ProgramsViewController.swift */,
 				4212F413263F29CC00B9C021 /* PlayerViewController.swift */,
 			);
 			path = Controllers;
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				42621E26264DB3A000271A85 /* Company */,
+				42BB9C192659A6C50014A560 /* Programs */,
 				42621E25264DB39A00271A85 /* Program */,
 				42F38AD72651A7B1005F9AB1 /* ProgramsList */,
 				42F38ADE2651C76D005F9AB1 /* ProgramsListCell */,
@@ -170,6 +176,14 @@
 				42AC65B3264B13F90077002E /* DataViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		42BB9C192659A6C50014A560 /* Programs */ = {
+			isa = PBXGroup;
+			children = (
+				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
+			);
+			path = Programs;
 			sourceTree = "<group>";
 		};
 		42BE3FA326486F9B00C6DA7E /* Frameworks */ = {
@@ -300,6 +314,7 @@
 				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
 				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
+				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 			);
@@ -315,6 +330,7 @@
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,
+				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
