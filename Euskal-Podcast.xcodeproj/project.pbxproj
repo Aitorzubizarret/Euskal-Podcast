@@ -104,6 +104,7 @@
 			children = (
 				425DCB51263E076700958689 /* MainViewController.xib */,
 				42A719AB264F1A0F0026648E /* CompanyViewController.xib */,
+				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
 				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
 			);
 			path = Views;
@@ -151,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				42621E26264DB3A000271A85 /* Company */,
-				42BB9C192659A6C50014A560 /* Programs */,
 				42621E25264DB39A00271A85 /* Program */,
 				42F38AD72651A7B1005F9AB1 /* ProgramsList */,
 				42F38ADE2651C76D005F9AB1 /* ProgramsListCell */,
@@ -176,14 +176,6 @@
 				42AC65B3264B13F90077002E /* DataViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		42BB9C192659A6C50014A560 /* Programs */ = {
-			isa = PBXGroup;
-			children = (
-				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
-			);
-			path = Programs;
 			sourceTree = "<group>";
 		};
 		42BE3FA326486F9B00C6DA7E /* Frameworks */ = {
