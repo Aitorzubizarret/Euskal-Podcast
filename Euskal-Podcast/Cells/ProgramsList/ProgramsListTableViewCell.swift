@@ -22,6 +22,11 @@ class ProgramsListTableViewCell: UITableViewCell {
     
     var hostVC: UIViewController?
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
+    var programs: [Program] = [] {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     // MARK: - Methods
     
@@ -96,10 +101,11 @@ extension ProgramsListTableViewCell: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.programs.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.programCollectionViewCellIdentifier, for: indexPath) as! ProgramCollectionViewCell
+        cell.program = self.programs[indexPath.row]
         return cell
     }
 }

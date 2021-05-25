@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="width" secondItem="Skh-uM-Pdk" secondAttribute="height" id="Y2s-Xf-U1y"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BG4-Ry-VDi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BG4-Ry-VDi">
                                 <rect key="frame" x="0.0" y="101" width="106" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="NRE-0o-q98"/>
@@ -71,6 +71,10 @@
                 <constraint firstAttribute="trailing" secondItem="hQ5-by-Mgb" secondAttribute="trailing" id="ePm-wa-dTA"/>
             </constraints>
             <size key="customSize" width="106" height="158"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="hnS-RK-FKX" id="kRt-4B-mrZ"/>
+                <outlet property="titleLabel" destination="BG4-Ry-VDi" id="Krs-vM-U9F"/>
+            </connections>
             <point key="canvasLocation" x="181.15942028985509" y="172.09821428571428"/>
         </collectionViewCell>
     </objects>

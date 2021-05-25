@@ -69,6 +69,9 @@ extension CompanyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
         cell.hostVC = self
+        if let receivedCompany = self.company {
+            cell.programs = receivedCompany.programs
+        }
         return cell
         
     }
