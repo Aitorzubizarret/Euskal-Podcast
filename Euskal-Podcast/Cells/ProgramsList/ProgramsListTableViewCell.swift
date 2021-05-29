@@ -91,7 +91,14 @@ class ProgramsListTableViewCell: UITableViewCell {
 
 // MARK: - UICollectionView Delegate
 
-extension ProgramsListTableViewCell: UICollectionViewDelegate {}
+extension ProgramsListTableViewCell: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let programVC: ProgramViewController = ProgramViewController()
+        self.hostVC?.navigationController?.pushViewController(programVC, animated: true)
+    }
+    
+}
 
 // MARK: - UICollectionView Data Source
 

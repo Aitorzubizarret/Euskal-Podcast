@@ -22,6 +22,8 @@
 		426DCB97264C863C0020AC72 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB96264C863C0020AC72 /* Season.swift */; };
 		427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */; };
 		427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */; };
+		428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428C2B572662EAB4009E5B0F /* ProgramViewController.swift */; };
+		428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 428C2B582662EAB4009E5B0F /* ProgramViewController.xib */; };
 		42A719AC264F1A0F0026648E /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A719AA264F1A0F0026648E /* CompanyViewController.swift */; };
 		42A719AD264F1A0F0026648E /* CompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A719AB264F1A0F0026648E /* CompanyViewController.xib */; };
 		42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AC65B3264B13F90077002E /* DataViewModel.swift */; };
@@ -56,6 +58,8 @@
 		426DCB96264C863C0020AC72 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeTableViewCell.xib; sourceTree = "<group>"; };
+		428C2B572662EAB4009E5B0F /* ProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
+		428C2B582662EAB4009E5B0F /* ProgramViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramViewController.xib; sourceTree = "<group>"; };
 		42A719AA264F1A0F0026648E /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		42A719AB264F1A0F0026648E /* CompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyViewController.xib; sourceTree = "<group>"; };
 		42AC65B3264B13F90077002E /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				425DCB50263E076700958689 /* MainViewController.swift */,
 				42A719AA264F1A0F0026648E /* CompanyViewController.swift */,
 				42BB9C142659A6980014A560 /* ProgramsViewController.swift */,
+				428C2B572662EAB4009E5B0F /* ProgramViewController.swift */,
 				4212F413263F29CC00B9C021 /* PlayerViewController.swift */,
 			);
 			path = Controllers;
@@ -106,6 +111,7 @@
 				42A719AB264F1A0F0026648E /* CompanyViewController.xib */,
 				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
 				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
+				428C2B582662EAB4009E5B0F /* ProgramViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
 				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
 				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
+				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 			);
@@ -336,6 +343,7 @@
 				425DCB52263E076700958689 /* MainViewController.swift in Sources */,
 				42A719AC264F1A0F0026648E /* CompanyViewController.swift in Sources */,
 				426DCB90264C85A20020AC72 /* Company.swift in Sources */,
+				428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
