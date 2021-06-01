@@ -123,7 +123,7 @@ extension ProgramsListTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = 118
-        let cellHeight = 158
+        let cellHeight = 170
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
