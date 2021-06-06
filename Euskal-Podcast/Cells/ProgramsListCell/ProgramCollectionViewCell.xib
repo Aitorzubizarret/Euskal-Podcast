@@ -73,6 +73,7 @@
             <size key="customSize" width="106" height="158"/>
             <connections>
                 <outlet property="descriptionLabel" destination="hnS-RK-FKX" id="kRt-4B-mrZ"/>
+                <outlet property="photoImageView" destination="Skh-uM-Pdk" id="0fJ-I6-pwS"/>
                 <outlet property="titleLabel" destination="BG4-Ry-VDi" id="Krs-vM-U9F"/>
             </connections>
             <point key="canvasLocation" x="181.15942028985509" y="172.09821428571428"/>

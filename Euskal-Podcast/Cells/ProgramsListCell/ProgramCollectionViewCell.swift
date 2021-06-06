@@ -11,6 +11,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Elements
     
+    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -29,6 +30,15 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.setupView()
     }
     
+    ///
+    /// Setup the View.
+    ///
+    private func setupView() {
+        // ImageView.
+        self.photoImageView.layer.cornerRadius = 6
+    }
 }
