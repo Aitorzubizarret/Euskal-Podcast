@@ -85,6 +85,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     ///
     private func goToProgramsList() {
         let programsVC: ProgramsViewController = ProgramsViewController()
+        programsVC.programs = self.programs
         self.hostVC?.navigationController?.pushViewController(programsVC, animated: true)
     }
 }

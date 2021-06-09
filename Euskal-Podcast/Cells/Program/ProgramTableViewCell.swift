@@ -8,7 +8,23 @@
 import UIKit
 
 class ProgramTableViewCell: UITableViewCell {
-
+    
+    // MARK: - UI Elements
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    // MARK: - Properties
+    
+    var program: Program? {
+        didSet {
+            guard let receivedProgram = self.program else { return }
+            
+            self.titleLabel.text = receivedProgram.name
+        }
+    }
+    
+    // MARK: - Methods
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
