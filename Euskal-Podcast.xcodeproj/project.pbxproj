@@ -27,6 +27,8 @@
 		42A719AC264F1A0F0026648E /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A719AA264F1A0F0026648E /* CompanyViewController.swift */; };
 		42A719AD264F1A0F0026648E /* CompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A719AB264F1A0F0026648E /* CompanyViewController.xib */; };
 		42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AC65B3264B13F90077002E /* DataViewModel.swift */; };
+		42AC92E42679593000CF6264 /* CompanyDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AC92E22679593000CF6264 /* CompanyDetailTableViewCell.swift */; };
+		42AC92E52679593000CF6264 /* CompanyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42AC92E32679593000CF6264 /* CompanyDetailTableViewCell.xib */; };
 		42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BB9C142659A6980014A560 /* ProgramsViewController.swift */; };
 		42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42BB9C152659A6980014A560 /* ProgramsViewController.xib */; };
 		42BE3FA526486F9B00C6DA7E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE3FA426486F9B00C6DA7E /* CloudKit.framework */; };
@@ -63,6 +65,8 @@
 		42A719AA264F1A0F0026648E /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		42A719AB264F1A0F0026648E /* CompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyViewController.xib; sourceTree = "<group>"; };
 		42AC65B3264B13F90077002E /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
+		42AC92E22679593000CF6264 /* CompanyDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailTableViewCell.swift; sourceTree = "<group>"; };
+		42AC92E32679593000CF6264 /* CompanyDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyDetailTableViewCell.xib; sourceTree = "<group>"; };
 		42BB9C142659A6980014A560 /* ProgramsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsViewController.swift; sourceTree = "<group>"; };
 		42BB9C152659A6980014A560 /* ProgramsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramsViewController.xib; sourceTree = "<group>"; };
 		42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Euskal-Podcast.entitlements"; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				42621E26264DB3A000271A85 /* Company */,
+				42AC92E12679590E00CF6264 /* CompanyDetail */,
 				42621E25264DB39A00271A85 /* Program */,
 				42F38AD72651A7B1005F9AB1 /* ProgramsList */,
 				42F38ADE2651C76D005F9AB1 /* ProgramsListCell */,
@@ -182,6 +187,15 @@
 				42AC65B3264B13F90077002E /* DataViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		42AC92E12679590E00CF6264 /* CompanyDetail */ = {
+			isa = PBXGroup;
+			children = (
+				42AC92E22679593000CF6264 /* CompanyDetailTableViewCell.swift */,
+				42AC92E32679593000CF6264 /* CompanyDetailTableViewCell.xib */,
+			);
+			path = CompanyDetail;
 			sourceTree = "<group>";
 		};
 		42BE3FA326486F9B00C6DA7E /* Frameworks */ = {
@@ -307,6 +321,7 @@
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				42F38ADB2651A7D7005F9AB1 /* ProgramsListTableViewCell.xib in Resources */,
 				425DCB53263E076700958689 /* MainViewController.xib in Resources */,
+				42AC92E52679593000CF6264 /* CompanyDetailTableViewCell.xib in Resources */,
 				42A719AD264F1A0F0026648E /* CompanyViewController.xib in Resources */,
 				42621E2A264DB3BC00271A85 /* CompanyTableViewCell.xib in Resources */,
 				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
@@ -326,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42AC92E42679593000CF6264 /* CompanyDetailTableViewCell.swift in Sources */,
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,

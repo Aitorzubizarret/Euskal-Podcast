@@ -15,6 +15,7 @@ class CompanyViewController: UIViewController {
     
     // MARK: - Properties
     
+    let companyDetailTableViewCellIdentifier: String = "CompanyDetailTableViewCell"
     let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     var company: Company? {
         didSet {
@@ -40,6 +41,9 @@ class CompanyViewController: UIViewController {
         self.tableView.dataSource = self
         
         // Register cells.
+        let companyDetailCell: UINib = UINib(nibName: "CompanyDetailTableViewCell", bundle: nil)
+        self.tableView.register(companyDetailCell, forCellReuseIdentifier: self.companyDetailTableViewCellIdentifier)
+        
         let programsList: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
         self.tableView.register(programsList, forCellReuseIdentifier: self.programsListTableViewCellIdentifier)
     }
@@ -63,16 +67,25 @@ extension CompanyViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
-        cell.hostVC = self
-        if let receivedCompany = self.company {
-            cell.programs = receivedCompany.programs
+        switch indexPath.row {
+        case 0:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: self.companyDetailTableViewCellIdentifier) as! CompanyDetailTableViewCell
+            return cell
+        case 1:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
+            cell.hostVC = self
+            if let receivedCompany = self.company {
+                cell.programs = receivedCompany.programs
+            }
+            return cell
+        default:
+            return UITableViewCell()
         }
-        return cell
+        
         
     }
     
