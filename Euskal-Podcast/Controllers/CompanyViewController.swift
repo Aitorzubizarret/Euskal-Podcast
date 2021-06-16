@@ -20,8 +20,6 @@ class CompanyViewController: UIViewController {
     var company: Company? {
         didSet {
             guard let receivedCompany = self.company else { return }
-            
-            self.title = receivedCompany.name
         }
     }
     
@@ -54,7 +52,14 @@ class CompanyViewController: UIViewController {
 extension CompanyViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 256
+        switch indexPath.row {
+        case 0:
+            return 235
+        case 1:
+            return 256
+        default:
+            return 0
+        }
     }
     
 }
@@ -74,6 +79,9 @@ extension CompanyViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: self.companyDetailTableViewCellIdentifier) as! CompanyDetailTableViewCell
+            if let receivedCompany = self.company {
+                cell.company = receivedCompany
+            }
             return cell
         case 1:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
