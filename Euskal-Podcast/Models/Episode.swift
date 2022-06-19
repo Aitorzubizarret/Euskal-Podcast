@@ -14,8 +14,7 @@ struct Episode: Codable {
     let Description: String
     let ReleaseDate: String
     let Duration: String
-    let MP3URL: String
-    let YoutubeURL: String
+    let URLs: Media
 }
 
 //http://img.youtube.com/vi/VIDEOID/#.jpg

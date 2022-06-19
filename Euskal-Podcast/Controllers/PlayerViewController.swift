@@ -80,9 +80,10 @@ class PlayerViewController: UIViewController {
     /// Configure the Player.
     ///
     private func configurePlayer(episode: Episode) {
-        guard let episodeAudioURL: URL = URL(string: episode.MP3URL) else { return }
+        guard let episodeMediaMP3 = episode.URLs.MP3,
+              let episodeMediaMP3URL: URL = URL(string: episodeMediaMP3) else { return }
         
-        let asset = AVAsset(url: episodeAudioURL)
+        let asset = AVAsset(url: episodeMediaMP3URL)
         playerItem = AVPlayerItem(asset: asset)
         player = AVPlayer(playerItem: playerItem)
         
