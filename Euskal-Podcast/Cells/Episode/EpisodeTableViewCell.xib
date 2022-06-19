@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,47 +25,48 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvY-Az-vmy">
-                        <rect key="frame" x="74" y="12.5" width="230" height="19.5"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <rect key="frame" x="72" y="16.5" width="171" height="19"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8C-ub-k0g">
-                        <rect key="frame" x="74" y="44.5" width="155" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="72" y="41.5" width="171" height="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-Om-Ss3">
-                        <rect key="frame" x="249" y="44.5" width="55" height="18"/>
+                        <rect key="frame" x="249" y="16.5" width="55" height="42"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Cll-TB-Tcw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="yvY-Az-vmy" secondAttribute="trailing" constant="16" id="3B9-iP-R0L"/>
                     <constraint firstItem="Fne-W2-GPF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12.5" id="CMf-o0-rVx"/>
-                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="leading" secondItem="Z8C-ub-k0g" secondAttribute="trailing" constant="20" id="M2o-CV-1qy"/>
-                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="leading" secondItem="Fne-W2-GPF" secondAttribute="trailing" constant="8" symbolic="YES" id="PY9-G9-BYC"/>
+                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="leading" secondItem="yvY-Az-vmy" secondAttribute="trailing" constant="6" id="HlP-d0-sfM"/>
+                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="leading" secondItem="Z8C-ub-k0g" secondAttribute="trailing" constant="6" id="M2o-CV-1qy"/>
+                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="leading" secondItem="Fne-W2-GPF" secondAttribute="trailing" constant="6" id="PY9-G9-BYC"/>
                     <constraint firstAttribute="trailing" secondItem="FW8-Om-Ss3" secondAttribute="trailing" constant="16" id="QI0-nv-Qn9"/>
-                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="bottom" secondItem="Fne-W2-GPF" secondAttribute="bottom" id="bhK-2x-VZg"/>
+                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="bottom" secondItem="Z8C-ub-k0g" secondAttribute="bottom" id="T7U-oV-bNk"/>
                     <constraint firstAttribute="bottom" secondItem="Fne-W2-GPF" secondAttribute="bottom" constant="12.5" id="dd3-rp-3kp"/>
-                    <constraint firstItem="yvY-Az-vmy" firstAttribute="top" secondItem="Fne-W2-GPF" secondAttribute="top" id="evv-al-Npd"/>
-                    <constraint firstItem="yvY-Az-vmy" firstAttribute="leading" secondItem="Fne-W2-GPF" secondAttribute="trailing" constant="8" symbolic="YES" id="gAR-zS-5jM"/>
+                    <constraint firstItem="yvY-Az-vmy" firstAttribute="top" secondItem="Fne-W2-GPF" secondAttribute="top" constant="4" id="evv-al-Npd"/>
+                    <constraint firstItem="yvY-Az-vmy" firstAttribute="leading" secondItem="Fne-W2-GPF" secondAttribute="trailing" constant="6" id="gAR-zS-5jM"/>
                     <constraint firstItem="Fne-W2-GPF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="huE-J2-yvu"/>
+                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="top" secondItem="yvY-Az-vmy" secondAttribute="top" id="ipt-Oa-OMJ"/>
                     <constraint firstItem="Fne-W2-GPF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kEg-F2-xWD"/>
-                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="bottom" secondItem="Fne-W2-GPF" secondAttribute="bottom" id="yKM-gl-eUr"/>
+                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="bottom" secondItem="Fne-W2-GPF" secondAttribute="bottom" constant="-4" id="yKM-gl-eUr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="coverImageView" destination="Fne-W2-GPF" id="Im6-Gu-AEh"/>
                 <outlet property="durationLabel" destination="FW8-Om-Ss3" id="fJt-Ct-4xy"/>
-                <outlet property="programNameLabel" destination="Z8C-ub-k0g" id="Ats-Ay-bUf"/>
+                <outlet property="releaseDateLabel" destination="Z8C-ub-k0g" id="Tr5-pz-cuH"/>
                 <outlet property="titleLabel" destination="yvY-Az-vmy" id="xgo-yv-plY"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="146.31696428571428"/>

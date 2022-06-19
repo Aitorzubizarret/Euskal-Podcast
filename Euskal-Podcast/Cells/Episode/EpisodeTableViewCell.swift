@@ -13,7 +13,7 @@ class EpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var programNameLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
     // MARK: - Properties
@@ -23,7 +23,7 @@ class EpisodeTableViewCell: UITableViewCell {
             guard let receivedEpisode: Episode = episode else { return }
             
             titleLabel.text = receivedEpisode.Name
-            //self.programNameLabel.text = receivedEpisode
+            releaseDateLabel.text = receivedEpisode.ReleaseDate
             durationLabel.text = receivedEpisode.Duration
         }
     }

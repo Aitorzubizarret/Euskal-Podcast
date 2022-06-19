@@ -22,7 +22,7 @@ class ProgramViewController: UIViewController {
         didSet {
             guard let safeProgram = program else { return }
             
-            print("Program data: \(safeProgram.Name)")
+            tableView.reloadData()
         }
     }
     
@@ -68,11 +68,11 @@ class ProgramViewController: UIViewController {
 extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
             return 235
         default:
-            return 0
+            return 75
         }
     }
     
@@ -83,15 +83,27 @@ extension ProgramViewController: UITableViewDelegate {
 extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if let safeProgram = program {
+            return 1 + safeProgram.Seasons.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            if let safeProgram = program {
+                return safeProgram.Seasons[section-1].Episodes.count
+            } else {
+                return 0
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
             if let safeProgram = program {
@@ -100,6 +112,9 @@ extension ProgramViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
+            if let safeProgram = program {
+                cell.episode = safeProgram.Seasons[indexPath.section-1].Episodes[indexPath.row]
+            }
             return cell
         }
     }
