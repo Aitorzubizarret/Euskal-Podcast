@@ -22,7 +22,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var totalDurationTimeLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBAction func playPauseButtonTapped(_ sender: Any) {
-        self.playPauseAction()
+        playPauseAction()
     }
     
     // MARK: - Properties
@@ -39,7 +39,7 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupView()
+        setupView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,31 +51,29 @@ class PlayerViewController: UIViewController {
     ///
     private func setupView() {
         // Button.
-        self.playPauseButton.backgroundColor = UIColor.blue
-        self.playPauseButton.setTitle("Play", for: .normal)
-        self.playPauseButton.layer.cornerRadius = 25
+        playPauseButton.backgroundColor = UIColor.blue
+        playPauseButton.setTitle("Play", for: .normal)
+        playPauseButton.layer.cornerRadius = 25
         
         // ImageView.
-        self.coverImageView.backgroundColor = UIColor.red
-        self.coverImageView.layer.cornerRadius = 10
+        coverImageView.backgroundColor = UIColor.red
+        coverImageView.layer.cornerRadius = 10
         
         // Check if we have an Episode.
-        guard let episode = self.episode else { return }
+        guard let safeEpisode = episode else { return }
         
         // Label
-        self.titleLabel.text = episode.Name
-        self.currentDurationTimeLabel.text = "00:00"
-        self.totalDurationTimeLabel.text = "00:00"
+        titleLabel.text = safeEpisode.Name
+        currentDurationTimeLabel.text = "00:00"
+        totalDurationTimeLabel.text = "00:00"
         
-        // Slider
-        self.durationSlider.minimumValue = 0
-        self.durationSlider.isContinuous = true
-        
-        guard let safeEpisode = self.episode else { return }
+        // Slider.
+        durationSlider.minimumValue = 0
+        durationSlider.maximumValue = 1
+        durationSlider.setValue(0, animated: false)
+        durationSlider.isContinuous = true
         
         configurePlayer(episode: safeEpisode)
-        
-        titleLabel.text = safeEpisode.Name
     }
     
     ///
@@ -85,27 +83,26 @@ class PlayerViewController: UIViewController {
         guard let episodeAudioURL: URL = URL(string: episode.MP3URL) else { return }
         
         let asset = AVAsset(url: episodeAudioURL)
-        self.playerItem = AVPlayerItem(asset: asset)
-        self.player = AVPlayer(playerItem: playerItem)
+        playerItem = AVPlayerItem(asset: asset)
+        player = AVPlayer(playerItem: playerItem)
         
-        guard let player = self.player,
-              let currentItem = player.currentItem else { return }
+        guard let safePlayer = player,
+              let currentItem = safePlayer.currentItem else { return }
         
-        player.volume = 1.0
-        let episodeDuration: CMTime = currentItem.asset.duration
-        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
-        self.totalDurationTimeLabel.text = episode.Duration
+        safePlayer.volume = 1.0
         
-        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
+        totalDurationTimeLabel.text = episode.Duration
+        
+        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
             let episodeDuration = CMTimeGetSeconds(currentItem.duration)
             let episodeCurrentTime = CMTimeGetSeconds(time)
-            let progress = episodeCurrentTime/episodeDuration
-            self.durationSlider.setValue(Float(progress), animated: true)
-            print("Progress : \(progress)")
-            self.currentDurationTimeLabel.text = "\(progress)"
+            let progress: Float = Float(episodeCurrentTime/episodeDuration)
+            self.durationSlider.setValue(progress, animated: true)
+            
+            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
         }
         
-        self.isPlayerConfigured = true
+        isPlayerConfigured = true
     }
     
     ///
@@ -122,5 +119,23 @@ class PlayerViewController: UIViewController {
         
         isPlaying.toggle()
     }
-
+    
+    ///
+    /// Calculate how much time has been played from the MP3 file and display it on a label.
+    ///
+    private func displayCurrentTime(timeInSeconds: Int) {
+        // Label.
+        var seconds: Int = 0
+        var minutes: Int = 0
+        
+        seconds = timeInSeconds
+        if seconds > 59 {
+            minutes = seconds / 60
+            seconds = seconds - (minutes * 60)
+        }
+        
+        let timeString = String(format: "%02d:%02d", minutes, seconds)
+        currentDurationTimeLabel.text = timeString
+    }
+    
 }
