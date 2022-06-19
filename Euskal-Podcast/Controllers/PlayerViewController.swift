@@ -27,11 +27,12 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Properties
     
-    var player: AVPlayer?
-    var playerItem:AVPlayerItem?
-    var isPlaying: Bool = false
-    var isPlayerConfigured: Bool = false
-    var episode: Episode?
+    private var player: AVPlayer?
+    private var playerItem: AVPlayerItem?
+    private var isPlaying: Bool = false
+    private var isPlayerConfigured: Bool = false
+    
+    public var episode: Episode?
     
     // MARK: - Methods
     
@@ -39,6 +40,10 @@ class PlayerViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        player?.pause()
     }
     
     ///
@@ -65,55 +70,57 @@ class PlayerViewController: UIViewController {
         // Slider
         self.durationSlider.minimumValue = 0
         self.durationSlider.isContinuous = true
+        
+        guard let safeEpisode = self.episode else { return }
+        
+        configurePlayer(episode: safeEpisode)
+        
+        titleLabel.text = safeEpisode.Name
     }
     
     ///
     /// Configure the Player.
     ///
-//    private func configurePlayer() {
-//        guard let receivedEpisode = self.episode,
-//              let episodeURL: URL = URL(string: receivedEpisode.mp3Url) else { return }
-//        
-//        let asset = AVAsset(url: episodeURL)
-//        self.playerItem = AVPlayerItem(asset: asset)
-//        self.player = AVPlayer(playerItem: playerItem)
-//        
-//        guard let player = self.player,
-//              let currentItem = player.currentItem else { return }
-//        
-//        player.volume = 1.0
-//        let episodeDuration: CMTime = currentItem.asset.duration
-//        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
-//        self.totalDurationTimeLabel.text = receivedEpisode.duration
-//        
-//        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
-//            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-//            let episodeCurrentTime = CMTimeGetSeconds(time)
-//            let progress = episodeCurrentTime/episodeDuration
-//            self.durationSlider.setValue(Float(progress), animated: true)
-//            print("Progress : \(progress)")
-//            self.currentDurationTimeLabel.text = "\(progress)"
-//        }
-//        
-//        self.isPlayerConfigured = true
-//    }
+    private func configurePlayer(episode: Episode) {
+        guard let episodeAudioURL: URL = URL(string: episode.MP3URL) else { return }
+        
+        let asset = AVAsset(url: episodeAudioURL)
+        self.playerItem = AVPlayerItem(asset: asset)
+        self.player = AVPlayer(playerItem: playerItem)
+        
+        guard let player = self.player,
+              let currentItem = player.currentItem else { return }
+        
+        player.volume = 1.0
+        let episodeDuration: CMTime = currentItem.asset.duration
+        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
+        self.totalDurationTimeLabel.text = episode.Duration
+        
+        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
+            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
+            let episodeCurrentTime = CMTimeGetSeconds(time)
+            let progress = episodeCurrentTime/episodeDuration
+            self.durationSlider.setValue(Float(progress), animated: true)
+            print("Progress : \(progress)")
+            self.currentDurationTimeLabel.text = "\(progress)"
+        }
+        
+        self.isPlayerConfigured = true
+    }
     
     ///
     /// Play or Pause the media file.
     ///
     private func playPauseAction() {
         if isPlaying {
-            self.playPauseButton.setTitle("Play", for: .normal)
-            self.player?.pause()
+            playPauseButton.setTitle("Play", for: .normal)
+            player?.pause()
         } else {
-            if !isPlayerConfigured {
-//                self.configurePlayer()
-            }
-            self.playPauseButton.setTitle("Pause", for: .normal)
-            self.player?.play()
+            playPauseButton.setTitle("Pause", for: .normal)
+            player?.play()
         }
         
-        self.isPlaying.toggle()
+        isPlaying.toggle()
     }
 
 }

@@ -67,6 +67,16 @@ class ProgramViewController: UIViewController {
 
 extension ProgramViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section > 0 {
+            let playerVC = PlayerViewController()
+            if let safeProgram = program {
+                playerVC.episode = safeProgram.Seasons[indexPath.section-1].Episodes[indexPath.row]
+            }
+            show(playerVC, sender: self)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
