@@ -17,9 +17,9 @@ class CompanyDetailTableViewCell: UITableViewCell {
     
     var company: Company? {
         didSet {
-            guard let receivedCompany = self.company else { return }
+            guard let receivedCompany = company else { return }
             
-            self.companyNameLabel.text = receivedCompany.name
+            companyNameLabel.text = receivedCompany.Name
         }
     }
     
@@ -28,7 +28,7 @@ class CompanyDetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.setupView()
+        setupView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,7 +8,9 @@
 import Foundation
 
 struct Program: Codable {
-    let id: Int
-    let name: String
-    let seasons: [Season]
+    let Id: Int
+    let Name: String
+    let Seasons: [Season]
+    let IconURL: String
+    let YoutubeURL: String
 }

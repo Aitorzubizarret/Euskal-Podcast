@@ -20,11 +20,11 @@ class EpisodeTableViewCell: UITableViewCell {
     
     var episode: Episode? {
         didSet {
-            guard let receivedEpisode: Episode = self.episode else { return }
+            guard let receivedEpisode: Episode = episode else { return }
             
-            self.titleLabel.text = receivedEpisode.name
-            self.programNameLabel.text = receivedEpisode.program
-            self.durationLabel.text = receivedEpisode.duration
+            titleLabel.text = receivedEpisode.Name
+            //self.programNameLabel.text = receivedEpisode
+            durationLabel.text = receivedEpisode.Duration
         }
     }
     
@@ -33,7 +33,7 @@ class EpisodeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.setupView()
+        setupView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,10 +47,10 @@ class EpisodeTableViewCell: UITableViewCell {
     ///
     private func setupView() {
         // Cell.
-        self.selectionStyle = .none
+        selectionStyle = .none
         
         // ImageView.
-        self.coverImageView.backgroundColor = UIColor.blue
-        self.coverImageView.layer.cornerRadius = 6
+        coverImageView.backgroundColor = UIColor.blue
+        coverImageView.layer.cornerRadius = 6
     }
 }

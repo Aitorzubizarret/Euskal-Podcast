@@ -14,7 +14,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var seeAllButton: UIButton!
     @IBAction func seeAllButtonTapped(_ sender: Any) {
-        self.goToProgramsList()
+        goToProgramsList()
     }
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -24,7 +24,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
     var programs: [Program] = [] {
         didSet {
-            self.collectionView.reloadData()
+            collectionView.reloadData()
         }
     }
     
@@ -33,8 +33,8 @@ class ProgramsListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.setupView()
-        self.setupCollectionView()
+        setupView()
+        setupCollectionView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,13 +48,13 @@ class ProgramsListTableViewCell: UITableViewCell {
     ///
     private func setupView() {
         // Cell
-        self.selectionStyle = .none
+        selectionStyle = .none
         
         // Label.
-        self.titleLabel.text = "Programak"
+        titleLabel.text = "Programak"
         
         // Button.
-        self.seeAllButton.setTitle("Zerrenda", for: .normal)
+        seeAllButton.setTitle("Zerrenda", for: .normal)
         
     }
     
@@ -62,31 +62,31 @@ class ProgramsListTableViewCell: UITableViewCell {
     /// Setup the CollectionView.
     ///
     private func setupCollectionView() {
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         // Layout.
-        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 10
         }
         
-        self.collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         
         // Register cell.
         let programCell: UINib = UINib(nibName: "ProgramCollectionViewCell", bundle: nil)
-        self.collectionView.register(programCell, forCellWithReuseIdentifier: self.programCollectionViewCellIdentifier)
+        collectionView.register(programCell, forCellWithReuseIdentifier: programCollectionViewCellIdentifier)
     }
     
     ///
     /// Go to ProgramsViewController.
     ///
     private func goToProgramsList() {
-        let programsVC: ProgramsViewController = ProgramsViewController()
+        let programsVC = ProgramsViewController()
         programsVC.programs = self.programs
-        self.hostVC?.navigationController?.pushViewController(programsVC, animated: true)
+        hostVC?.show(programsVC, sender: self)
     }
 }
 
@@ -95,8 +95,8 @@ class ProgramsListTableViewCell: UITableViewCell {
 extension ProgramsListTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let programVC: ProgramViewController = ProgramViewController()
-        self.hostVC?.navigationController?.pushViewController(programVC, animated: true)
+        let programVC = ProgramViewController()
+        hostVC?.show(programVC, sender: self)
     }
     
 }
@@ -109,11 +109,11 @@ extension ProgramsListTableViewCell: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.programs.count
+        return programs.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.programCollectionViewCellIdentifier, for: indexPath) as! ProgramCollectionViewCell
-        cell.program = self.programs[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: programCollectionViewCellIdentifier, for: indexPath) as! ProgramCollectionViewCell
+        cell.program = programs[indexPath.row]
         return cell
     }
 }

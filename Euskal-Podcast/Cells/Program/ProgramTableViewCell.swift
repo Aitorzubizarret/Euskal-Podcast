@@ -17,9 +17,9 @@ class ProgramTableViewCell: UITableViewCell {
     
     var program: Program? {
         didSet {
-            guard let receivedProgram = self.program else { return }
+            guard let receivedProgram = program else { return }
             
-            self.titleLabel.text = receivedProgram.name
+            titleLabel.text = receivedProgram.Name
         }
     }
     

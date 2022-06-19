@@ -8,8 +8,18 @@
 import Foundation
 
 struct Episode: Codable {
-    let name: String
-    let program: String
-    let mp3Url: String
-    let duration: String
+    let Id: Int
+    let Name: String
+    let Number: Int
+    let Description: String
+    let ReleaseDate: String
+    let Duration: String
+    let MP3URL: String
+    let YoutubeURL: String
 }
+
+//http://img.youtube.com/vi/VIDEOID/#.jpg
+//
+//http://img.youtube.com/vi/AAhrLlNeBiY/#.jpg
+//http://img.youtube.com/vi/AAhrLlNeBiY/0.jpg
+//https://www.youtube.com/watch?v=AAhrLlNeBiY

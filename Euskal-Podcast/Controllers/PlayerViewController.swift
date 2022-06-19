@@ -58,7 +58,7 @@ class PlayerViewController: UIViewController {
         guard let episode = self.episode else { return }
         
         // Label
-        self.titleLabel.text = episode.name
+        self.titleLabel.text = episode.Name
         self.currentDurationTimeLabel.text = "00:00"
         self.totalDurationTimeLabel.text = "00:00"
         
@@ -70,33 +70,33 @@ class PlayerViewController: UIViewController {
     ///
     /// Configure the Player.
     ///
-    private func configurePlayer() {
-        guard let receivedEpisode = self.episode,
-              let episodeURL: URL = URL(string: receivedEpisode.mp3Url) else { return }
-        
-        let asset = AVAsset(url: episodeURL)
-        self.playerItem = AVPlayerItem(asset: asset)
-        self.player = AVPlayer(playerItem: playerItem)
-        
-        guard let player = self.player,
-              let currentItem = player.currentItem else { return }
-        
-        player.volume = 1.0
-        let episodeDuration: CMTime = currentItem.asset.duration
-        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
-        self.totalDurationTimeLabel.text = receivedEpisode.duration
-        
-        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
-            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-            let episodeCurrentTime = CMTimeGetSeconds(time)
-            let progress = episodeCurrentTime/episodeDuration
-            self.durationSlider.setValue(Float(progress), animated: true)
-            print("Progress : \(progress)")
-            self.currentDurationTimeLabel.text = "\(progress)"
-        }
-        
-        self.isPlayerConfigured = true
-    }
+//    private func configurePlayer() {
+//        guard let receivedEpisode = self.episode,
+//              let episodeURL: URL = URL(string: receivedEpisode.mp3Url) else { return }
+//        
+//        let asset = AVAsset(url: episodeURL)
+//        self.playerItem = AVPlayerItem(asset: asset)
+//        self.player = AVPlayer(playerItem: playerItem)
+//        
+//        guard let player = self.player,
+//              let currentItem = player.currentItem else { return }
+//        
+//        player.volume = 1.0
+//        let episodeDuration: CMTime = currentItem.asset.duration
+//        self.durationSlider.maximumValue = Float(CMTimeGetSeconds(episodeDuration))
+//        self.totalDurationTimeLabel.text = receivedEpisode.duration
+//        
+//        player.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { (time) in
+//            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
+//            let episodeCurrentTime = CMTimeGetSeconds(time)
+//            let progress = episodeCurrentTime/episodeDuration
+//            self.durationSlider.setValue(Float(progress), animated: true)
+//            print("Progress : \(progress)")
+//            self.currentDurationTimeLabel.text = "\(progress)"
+//        }
+//        
+//        self.isPlayerConfigured = true
+//    }
     
     ///
     /// Play or Pause the media file.
@@ -107,7 +107,7 @@ class PlayerViewController: UIViewController {
             self.player?.pause()
         } else {
             if !isPlayerConfigured {
-                self.configurePlayer()
+//                self.configurePlayer()
             }
             self.playPauseButton.setTitle("Pause", for: .normal)
             self.player?.play()

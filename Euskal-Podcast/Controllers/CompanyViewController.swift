@@ -19,7 +19,7 @@ class CompanyViewController: UIViewController {
     let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     var company: Company? {
         didSet {
-            guard let receivedCompany = self.company else { return }
+            guard let receivedCompany = company else { return }
         }
     }
     
@@ -28,22 +28,22 @@ class CompanyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupTableView()
+        setupTableView()
     }
     
     ///
     /// Setup the TableView.
     ///
     private func setupTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Register cells.
         let companyDetailCell: UINib = UINib(nibName: "CompanyDetailTableViewCell", bundle: nil)
-        self.tableView.register(companyDetailCell, forCellReuseIdentifier: self.companyDetailTableViewCellIdentifier)
+        tableView.register(companyDetailCell, forCellReuseIdentifier: self.companyDetailTableViewCellIdentifier)
         
         let programsList: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
-        self.tableView.register(programsList, forCellReuseIdentifier: self.programsListTableViewCellIdentifier)
+        tableView.register(programsList, forCellReuseIdentifier: self.programsListTableViewCellIdentifier)
     }
 }
 
@@ -78,16 +78,16 @@ extension CompanyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: self.companyDetailTableViewCellIdentifier) as! CompanyDetailTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: companyDetailTableViewCellIdentifier) as! CompanyDetailTableViewCell
             if let receivedCompany = self.company {
                 cell.company = receivedCompany
             }
             return cell
         case 1:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
             cell.hostVC = self
-            if let receivedCompany = self.company {
-                cell.programs = receivedCompany.programs
+            if let receivedCompany = company {
+                cell.programs = receivedCompany.Programs
             }
             return cell
         default:

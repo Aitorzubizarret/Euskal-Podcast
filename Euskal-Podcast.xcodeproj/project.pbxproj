@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A7CC4A9285E7D79003F2379 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4A8285E7D79003F2379 /* APIManager.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A7CC4A8285E7D79003F2379 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A7CC4A7285E7D50003F2379 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		425DCB5A263E0E2B00958689 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +237,7 @@
 		42EBBB27263DAB7800463FB4 /* Euskal-Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				1A7CC4A7285E7D50003F2379 /* Managers */,
 				42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */,
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
@@ -353,6 +364,7 @@
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
 				42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */,
 				42F38AE12651C7A1005F9AB1 /* ProgramCollectionViewCell.swift in Sources */,
+				1A7CC4A9285E7D79003F2379 /* APIManager.swift in Sources */,
 				42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */,
 				42F38ADA2651A7D7005F9AB1 /* ProgramsListTableViewCell.swift in Sources */,
 				42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */,

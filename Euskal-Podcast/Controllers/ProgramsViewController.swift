@@ -23,20 +23,20 @@ class ProgramsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Programak"
+        title = "Programak"
         
-        self.setupTableView()
+        setupTableView()
     }
     ///
     /// Setup the Table View.
     ///
     private func setupTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Register cells.
         let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
-        self.tableView.register(programCell, forCellReuseIdentifier: self.programTableViewCell)
+        tableView.register(programCell, forCellReuseIdentifier: programTableViewCell)
     }
 }
 
@@ -52,12 +52,12 @@ extension ProgramsViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.programs.count
+        return programs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: self.programTableViewCell) as! ProgramTableViewCell
-        cell.program = self.programs[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: programTableViewCell) as! ProgramTableViewCell
+        cell.program = programs[indexPath.row]
         return cell
     }
     

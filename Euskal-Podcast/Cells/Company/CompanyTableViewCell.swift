@@ -18,9 +18,9 @@ class CompanyTableViewCell: UITableViewCell {
     
     var company: Company? {
         didSet {
-            guard let receivedCompany = self.company else { return }
+            guard let receivedCompany = company else { return }
             
-            self.nameLabel.text = receivedCompany.name
+            nameLabel.text = receivedCompany.Name
         }
     }
     
@@ -29,7 +29,7 @@ class CompanyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.setupView()
+        setupView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,9 +43,9 @@ class CompanyTableViewCell: UITableViewCell {
     ///
     private func setupView() {
         // Cell.
-        self.selectionStyle = .none
+        selectionStyle = .none
         
         // ImageView.
-        self.logoImageView.backgroundColor = UIColor.blue
+        logoImageView.backgroundColor = UIColor.blue
     }
 }

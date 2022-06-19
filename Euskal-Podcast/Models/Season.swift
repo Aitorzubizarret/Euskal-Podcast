@@ -8,9 +8,10 @@
 import Foundation
 
 struct Season: Codable {
-    let id: Int
-    let name: String
-    let dateStart: Date
-    let dateEnd: Date
-    let episodes: [Episode]
+    let Id: Int
+    let Name: String
+    let Number: Int
+    let DateStart: String
+    let DateEnd: String?
+    let Episodes: [Episode]
 }

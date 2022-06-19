@@ -19,10 +19,17 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     var program: Program? {
         didSet {
-            guard let receivedProgram = self.program else { return }
+            guard let receivedProgram = program else { return }
             
-            self.titleLabel.text = receivedProgram.name
-            self.descriptionLabel.text = receivedProgram.seasons.count == 1 ? "Denboraldi bat" : receivedProgram.seasons.count > 0 ? "\(receivedProgram.seasons.count) denboraldi" : "Denboraldirik gabe"
+            titleLabel.text = receivedProgram.Name
+            switch receivedProgram.Seasons.count {
+            case 0:
+                descriptionLabel.text = "Denboraldirik gabe"
+            case 1:
+                descriptionLabel.text = "Denboraldi bat"
+            default:
+                descriptionLabel.text = "\(receivedProgram.Seasons.count) denboraldi"
+            }
         }
     }
     
@@ -31,7 +38,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.setupView()
+        setupView()
     }
     
     ///
@@ -39,6 +46,6 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     ///
     private func setupView() {
         // ImageView.
-        self.photoImageView.layer.cornerRadius = 6
+        photoImageView.layer.cornerRadius = 6
     }
 }
