@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    var companies: [Company] = [] {
+    private var companies: [Company] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -53,18 +53,21 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Appearance.
+        tableView.separatorStyle = .none
+        
         // Register cells
-        let episodeCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
-        tableView.register(episodeCell, forCellReuseIdentifier: self.episodeTableViewCell)
+        let episodeCell: UINib = UINib(nibName: episodeTableViewCell, bundle: nil)
+        tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCell)
         
-        let seasonCell: UINib = UINib(nibName: "SeasonTableViewCell", bundle: nil)
-        tableView.register(seasonCell, forCellReuseIdentifier: self.seasonTableViewCell)
+        let seasonCell: UINib = UINib(nibName: seasonTableViewCell, bundle: nil)
+        tableView.register(seasonCell, forCellReuseIdentifier: seasonTableViewCell)
         
-        let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
-        tableView.register(programCell, forCellReuseIdentifier: self.programTableViewCell)
+        let programCell: UINib = UINib(nibName: programTableViewCell, bundle: nil)
+        tableView.register(programCell, forCellReuseIdentifier: programTableViewCell)
         
-        let companyCell: UINib = UINib(nibName: "CompanyTableViewCell", bundle: nil)
-        tableView.register(companyCell, forCellReuseIdentifier: self.companyTableViewCell)
+        let companyCell: UINib = UINib(nibName: companyTableViewCell, bundle: nil)
+        tableView.register(companyCell, forCellReuseIdentifier: companyTableViewCell)
         
         tableView.estimatedRowHeight = 75
     }
@@ -92,7 +95,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let companyVC: CompanyViewController = CompanyViewController()
-        companyVC.company = self.companies[indexPath.row]
+        companyVC.company = companies[indexPath.row]
         show(companyVC, sender: self)
     }
     
@@ -113,7 +116,7 @@ extension MainViewController: UITableViewDataSource {
         return companies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.companyTableViewCell) as! CompanyTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: companyTableViewCell) as! CompanyTableViewCell
         cell.company = companies[indexPath.row]
         return cell
     }

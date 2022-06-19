@@ -15,8 +15,9 @@ class ProgramsViewController: UIViewController {
     
     // MARK: - Properties
     
-    let programTableViewCell: String = "ProgramTableViewCell"
-    var programs: [Program] = []
+    private let programTableViewCell: String = "ProgramTableViewCell"
+    
+    public var programs: [Program] = []
     
     // MARK: - Methods
     
@@ -33,6 +34,9 @@ class ProgramsViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // Appearance.
+        tableView.separatorStyle = .none
         
         // Register cells.
         let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)

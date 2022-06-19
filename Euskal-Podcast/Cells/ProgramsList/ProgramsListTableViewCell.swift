@@ -85,7 +85,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     ///
     private func goToProgramsList() {
         let programsVC = ProgramsViewController()
-        programsVC.programs = self.programs
+        programsVC.programs = programs
         hostVC?.show(programsVC, sender: self)
     }
 }
@@ -96,6 +96,7 @@ extension ProgramsListTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let programVC = ProgramViewController()
+        programVC.program = programs[indexPath.row]
         hostVC?.show(programVC, sender: self)
     }
     

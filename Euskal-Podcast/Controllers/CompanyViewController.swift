@@ -15,9 +15,10 @@ class CompanyViewController: UIViewController {
     
     // MARK: - Properties
     
-    let companyDetailTableViewCellIdentifier: String = "CompanyDetailTableViewCell"
-    let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
-    var company: Company? {
+    private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
+    private let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
+    
+    public var company: Company? {
         didSet {
             guard let receivedCompany = company else { return }
         }
@@ -38,12 +39,15 @@ class CompanyViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Register cells.
-        let companyDetailCell: UINib = UINib(nibName: "CompanyDetailTableViewCell", bundle: nil)
-        tableView.register(companyDetailCell, forCellReuseIdentifier: self.companyDetailTableViewCellIdentifier)
+        // Appearance.
+        tableView.separatorStyle = .none
         
-        let programsList: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
-        tableView.register(programsList, forCellReuseIdentifier: self.programsListTableViewCellIdentifier)
+        // Register cells.
+        let mainTitleCell = UINib(nibName: mainTitleTableViewCellIdentifier, bundle: nil)
+        tableView.register(mainTitleCell, forCellReuseIdentifier: mainTitleTableViewCellIdentifier)
+        
+        let programsList: UINib = UINib(nibName: programsListTableViewCellIdentifier, bundle: nil)
+        tableView.register(programsList, forCellReuseIdentifier: programsListTableViewCellIdentifier)
     }
 }
 
@@ -78,9 +82,9 @@ extension CompanyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: companyDetailTableViewCellIdentifier) as! CompanyDetailTableViewCell
-            if let receivedCompany = self.company {
-                cell.company = receivedCompany
+            let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
+            if let safeCompany = company {
+                cell.titleName = safeCompany.Name
             }
             return cell
         case 1:
