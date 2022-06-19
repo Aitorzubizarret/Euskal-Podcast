@@ -18,11 +18,7 @@ class CompanyViewController: UIViewController {
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     
-    public var company: Company? {
-        didSet {
-            guard let receivedCompany = company else { return }
-        }
-    }
+    public var company: Company?
     
     // MARK: - Methods
     
@@ -75,8 +71,13 @@ extension CompanyViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if let _ = company {
+            return 2
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,8 +98,6 @@ extension CompanyViewController: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
-        
-        
     }
     
 }
