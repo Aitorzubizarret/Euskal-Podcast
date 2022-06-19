@@ -90,6 +90,19 @@ extension ProgramViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return ""
+        default:
+            if let safeProgram = program {
+                return safeProgram.Seasons[section-1].Name
+            } else {
+                return ""
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
