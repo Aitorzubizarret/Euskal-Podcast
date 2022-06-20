@@ -22,14 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="106" height="170"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Skh-uM-Pdk">
-                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                <rect key="frame" x="2" y="2" width="96" height="96"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Skh-uM-Pdk" secondAttribute="height" id="Y2s-Xf-U1y"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BG4-Ry-VDi">
-                                <rect key="frame" x="0.0" y="101" width="106" height="20"/>
+                                <rect key="frame" x="0.0" y="103" width="106" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="NRE-0o-q98"/>
                                 </constraints>
@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnS-RK-FKX">
-                                <rect key="frame" x="0.0" y="121" width="106" height="17"/>
+                                <rect key="frame" x="0.0" y="123" width="106" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="yfo-qo-lCs"/>
                                 </constraints>
@@ -49,15 +49,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" id="Bw4-B3-HbO"/>
+                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" constant="2" id="Bw4-B3-HbO"/>
                             <constraint firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="Jls-yg-N3O"/>
                             <constraint firstAttribute="height" constant="170" id="Lkm-RB-vAJ"/>
                             <constraint firstItem="BG4-Ry-VDi" firstAttribute="top" secondItem="Skh-uM-Pdk" secondAttribute="bottom" constant="5" id="Vem-15-ehj"/>
                             <constraint firstItem="hnS-RK-FKX" firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="c3g-Mu-SgN"/>
                             <constraint firstItem="hnS-RK-FKX" firstAttribute="top" secondItem="BG4-Ry-VDi" secondAttribute="bottom" id="g3u-j4-lD3"/>
                             <constraint firstItem="hnS-RK-FKX" firstAttribute="leading" secondItem="BG4-Ry-VDi" secondAttribute="leading" id="i3P-T7-xin"/>
-                            <constraint firstAttribute="trailing" secondItem="Skh-uM-Pdk" secondAttribute="trailing" constant="10" id="icC-YY-0We"/>
-                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="top" secondItem="hQ5-by-Mgb" secondAttribute="top" id="rFQ-tv-GlK"/>
+                            <constraint firstAttribute="trailing" secondItem="Skh-uM-Pdk" secondAttribute="trailing" constant="8" id="icC-YY-0We"/>
+                            <constraint firstItem="Skh-uM-Pdk" firstAttribute="top" secondItem="hQ5-by-Mgb" secondAttribute="top" constant="2" id="rFQ-tv-GlK"/>
                             <constraint firstItem="BG4-Ry-VDi" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" id="uTQ-cD-8LR"/>
                         </constraints>
                     </view>

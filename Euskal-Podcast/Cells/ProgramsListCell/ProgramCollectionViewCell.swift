@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProgramCollectionViewCell: UICollectionViewCell {
     
@@ -21,6 +22,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let receivedProgram = program else { return }
             
+            // Label.
             titleLabel.text = receivedProgram.Name
             switch receivedProgram.Seasons.count {
             case 0:
@@ -29,6 +31,11 @@ class ProgramCollectionViewCell: UICollectionViewCell {
                 descriptionLabel.text = "Denboraldi bat"
             default:
                 descriptionLabel.text = "\(receivedProgram.Seasons.count) denboraldi"
+            }
+            
+            // Image.
+            if let iconURL: URL = URL(string: receivedProgram.IconURL) {
+                photoImageView.kf.setImage(with: iconURL)
             }
         }
     }
@@ -47,5 +54,8 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     private func setupView() {
         // ImageView.
         photoImageView.layer.cornerRadius = 6
+        
+        photoImageView.layer.borderWidth = 1
+        photoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
     }
 }

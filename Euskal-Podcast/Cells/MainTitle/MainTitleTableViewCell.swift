@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainTitleTableViewCell: UITableViewCell {
     
@@ -21,6 +22,13 @@ class MainTitleTableViewCell: UITableViewCell {
     public var titleName: String = "" {
         didSet {
             nameLabel.text = titleName
+        }
+    }
+    public var imageURL: String = "" {
+        didSet {
+            guard let safeImageURL: URL = URL(string: imageURL) else { return }
+            
+            backgroundImageImageView.kf.setImage(with: safeImageURL)
         }
     }
     

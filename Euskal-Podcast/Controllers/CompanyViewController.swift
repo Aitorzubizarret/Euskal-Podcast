@@ -85,6 +85,7 @@ extension CompanyViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
             if let safeCompany = company {
+                cell.imageURL = safeCompany.IconURL
                 cell.titleName = safeCompany.Name
             }
             return cell

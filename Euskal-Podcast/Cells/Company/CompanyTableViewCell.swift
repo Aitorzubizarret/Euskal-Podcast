@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CompanyTableViewCell: UITableViewCell {
     
@@ -20,7 +21,13 @@ class CompanyTableViewCell: UITableViewCell {
         didSet {
             guard let receivedCompany = company else { return }
             
+            // Label.
             nameLabel.text = receivedCompany.Name
+            
+            // Image.
+            if let iconURL: URL = URL(string: receivedCompany.IconURL) {
+                logoImageView.kf.setImage(with: iconURL)
+            }
         }
     }
     
@@ -46,6 +53,11 @@ class CompanyTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         // ImageView.
-        logoImageView.backgroundColor = UIColor.blue
+        logoImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        logoImageView.layer.cornerRadius = 6
+        
+        logoImageView.layer.borderWidth = 1
+        logoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
     }
 }

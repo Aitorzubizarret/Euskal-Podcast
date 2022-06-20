@@ -130,6 +130,7 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
             if let safeProgram = program {
+                cell.imageURL = safeProgram.IconURL
                 cell.titleName = safeProgram.Name
             }
             return cell
