@@ -55,7 +55,7 @@ class CompanyTableViewCell: UITableViewCell {
         // ImageView.
         logoImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         
-        logoImageView.layer.cornerRadius = 6
+        logoImageView.layer.cornerRadius = 4
         
         logoImageView.layer.borderWidth = 1
         logoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor

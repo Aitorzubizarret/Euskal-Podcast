@@ -51,7 +51,14 @@ class MainTitleTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         // ImageView.
-        bottomLineImageView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        backgroundImageImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        backgroundImageImageView.layer.cornerRadius = 4
+        
+        backgroundImageImageView.layer.borderWidth = 1
+        backgroundImageImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
+        bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
     
 }

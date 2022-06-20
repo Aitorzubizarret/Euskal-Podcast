@@ -53,7 +53,9 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     ///
     private func setupView() {
         // ImageView.
-        photoImageView.layer.cornerRadius = 6
+        photoImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        photoImageView.layer.cornerRadius = 4
         
         photoImageView.layer.borderWidth = 1
         photoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
