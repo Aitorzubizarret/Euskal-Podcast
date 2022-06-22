@@ -29,6 +29,14 @@ class MainTitleTableViewCell: UITableViewCell {
             guard let safeImageURL: URL = URL(string: imageURL) else { return }
             
             backgroundImageImageView.kf.setImage(with: safeImageURL)
+            
+            backgroundImageImageView.layer.shadowColor = UIColor.black.cgColor
+            backgroundImageImageView.layer.shadowOpacity = 0.2
+            backgroundImageImageView.layer.shadowRadius = 4
+            backgroundImageImageView.layer.shadowOffset = CGSize(width: 0, height: 8)
+            backgroundImageImageView.layer.masksToBounds = false
+            
+            setupMainViewBacgroundGradient()
         }
     }
     
@@ -59,6 +67,17 @@ class MainTitleTableViewCell: UITableViewCell {
         backgroundImageImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
         
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+    }
+    
+    private func setupMainViewBacgroundGradient() {
+        // Gradient background for the main view.
+        let colorTop = UIColor.template.lightPurple.cgColor
+        let colorBottom = UIColor.template.darkPurple.cgColor
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [colorTop, colorBottom]
+        mainView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
 }
