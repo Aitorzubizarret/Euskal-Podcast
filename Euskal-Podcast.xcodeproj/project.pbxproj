@@ -13,6 +13,8 @@
 		1A7CC4AF285F2C3E003F2379 /* MainTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */; };
 		1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A7CC4AE285F2C3E003F2379 /* MainTitleTableViewCell.xib */; };
 		1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4B1285F90FF003F2379 /* Media.swift */; };
+		1A842A40286514EE0086C480 /* PlayerBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */; };
+		1A842A41286514EE0086C480 /* PlayerBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -53,6 +55,8 @@
 		1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTitleTableViewCell.swift; sourceTree = "<group>"; };
 		1A7CC4AE285F2C3E003F2379 /* MainTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTitleTableViewCell.xib; sourceTree = "<group>"; };
 		1A7CC4B1285F90FF003F2379 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBarViewController.swift; sourceTree = "<group>"; };
+		1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerBarViewController.xib; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				42BB9C142659A6980014A560 /* ProgramsViewController.swift */,
 				428C2B572662EAB4009E5B0F /* ProgramViewController.swift */,
 				4212F413263F29CC00B9C021 /* PlayerViewController.swift */,
+				1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
 				428C2B582662EAB4009E5B0F /* ProgramViewController.xib */,
 				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
+				1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,6 +368,7 @@
 				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
+				1A842A41286514EE0086C480 /* PlayerBarViewController.xib in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 				1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */,
 			);
@@ -378,6 +385,7 @@
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
 				1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,
+				1A842A40286514EE0086C480 /* PlayerBarViewController.swift in Sources */,
 				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,

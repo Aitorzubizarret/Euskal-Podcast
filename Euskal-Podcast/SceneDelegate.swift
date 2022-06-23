@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var playerBarWindow: UIWindow?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -31,6 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
         }
+        
+        // Player Bar ViewController.
+        playerBarWindow = UIWindow(windowScene: windowScene)
+        playerBarWindow?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 130, width: UIScreen.main.bounds.size.width, height: 130)
+        playerBarWindow?.rootViewController = PlayerBarViewController()
+        playerBarWindow?.isHidden = false
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
