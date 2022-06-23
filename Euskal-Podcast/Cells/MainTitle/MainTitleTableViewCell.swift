@@ -30,12 +30,6 @@ class MainTitleTableViewCell: UITableViewCell {
             
             backgroundImageImageView.kf.setImage(with: safeImageURL)
             
-            backgroundImageImageView.layer.shadowColor = UIColor.black.cgColor
-            backgroundImageImageView.layer.shadowOpacity = 0.2
-            backgroundImageImageView.layer.shadowRadius = 4
-            backgroundImageImageView.layer.shadowOffset = CGSize(width: 0, height: 8)
-            backgroundImageImageView.layer.masksToBounds = false
-            
             setupMainViewBacgroundGradient()
         }
     }
@@ -61,10 +55,15 @@ class MainTitleTableViewCell: UITableViewCell {
         // ImageView.
         backgroundImageImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         
-        backgroundImageImageView.layer.cornerRadius = 4
-        
         backgroundImageImageView.layer.borderWidth = 1
         backgroundImageImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
+        backgroundImageImageView.layer.masksToBounds = false
+        
+        backgroundImageImageView.layer.shadowOffset = CGSize.init(width: 0, height: 4)
+        backgroundImageImageView.layer.shadowColor = UIColor.gray.cgColor
+        backgroundImageImageView.layer.shadowRadius = 4
+        backgroundImageImageView.layer.shadowOpacity = 0.5
         
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
