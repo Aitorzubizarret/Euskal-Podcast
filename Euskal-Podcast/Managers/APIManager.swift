@@ -13,7 +13,7 @@ final class APIManager {
     
     static var shared: APIManager = APIManager()
     
-    private var companiesURL: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast-all.json"
+    private var companiesURL: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/euskalpodcast-all.json"
     
     // MARK: - Methods
     
