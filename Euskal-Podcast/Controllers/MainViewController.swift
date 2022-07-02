@@ -92,13 +92,21 @@ class MainViewController: UIViewController {
     /// Get data from the Internet.
     ///
     private func getData() {
-        APIManager.shared.getCompaniesData { [weak self] receivedCompanies in
-            if !receivedCompanies.isEmpty {
-                // For debug purposes.
-                //debugPrint("Companies \(receivedCompanies)")
-                self?.companies = receivedCompanies
+//        APIManager.shared.getCompaniesData { [weak self] receivedCompanies in
+//            if !receivedCompanies.isEmpty {
+//                // For debug purposes.
+//                //debugPrint("Companies \(receivedCompanies)")
+//                self?.companies = receivedCompanies
+//            } else {
+//                print("MainViewController - getData - No data received.")
+//            }
+//        }
+        
+        APIManager.shared.getRSS(rssString: APIManager.shared.EITB_YOKO_ONA_RSS) { response in
+            if response {
+                print("Response true")
             } else {
-                print("MainViewController - getData - No data received.")
+                print("Response false")
             }
         }
     }
