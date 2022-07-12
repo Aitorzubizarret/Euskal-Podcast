@@ -15,6 +15,9 @@
 		1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4B1285F90FF003F2379 /* Media.swift */; };
 		1A842A40286514EE0086C480 /* PlayerBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */; };
 		1A842A41286514EE0086C480 /* PlayerBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */; };
+		1A975623287C710C006C213A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975622287C710C006C213A /* Source.swift */; };
+		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
+		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -57,6 +60,9 @@
 		1A7CC4B1285F90FF003F2379 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBarViewController.swift; sourceTree = "<group>"; };
 		1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerBarViewController.xib; sourceTree = "<group>"; };
+		1A975622287C710C006C213A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
+		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -133,6 +139,15 @@
 			path = MainTitle;
 			sourceTree = "<group>";
 		};
+		1A975624287C85DD006C213A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				1A975625287C85F7006C213A /* SourceTableViewCell.swift */,
+				1A975626287C85F7006C213A /* SourceTableViewCell.xib */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		425DCB5A263E0E2B00958689 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +177,7 @@
 		425DCB5C263E0E4100958689 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A975622287C710C006C213A /* Source.swift */,
 				426DCB8F264C85A20020AC72 /* Company.swift */,
 				426DCB92264C85BD0020AC72 /* Program.swift */,
 				426DCB96264C863C0020AC72 /* Season.swift */,
@@ -202,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				1A7CC4AC285F2BE5003F2379 /* MainTitle */,
+				1A975624287C85DD006C213A /* Source */,
 				42621E26264DB3A000271A85 /* Company */,
 				42621E25264DB39A00271A85 /* Program */,
 				42F38AD72651A7B1005F9AB1 /* ProgramsList */,
@@ -368,6 +385,7 @@
 				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
+				1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */,
 				1A842A41286514EE0086C480 /* PlayerBarViewController.xib in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 				1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */,
@@ -389,6 +407,8 @@
 				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
+				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
+				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,

@@ -13,16 +13,16 @@ final class APIManager {
     
     static var shared: APIManager = APIManager()
     
-    private var companiesURL: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/euskalpodcast-all.json"
+    private var sourcesURL: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/main.json"
     
     // MARK: - Methods
     
     private init() {}
     
-    public func getCompaniesData(completionHandler: @escaping([Company]) -> Void) {
-        guard let safeCompaniesURL: URL = URL(string: companiesURL) else { return }
+    public func getSources(completionHandler: @escaping([Source]) -> Void) {
+        guard let safeSourcesURL: URL = URL(string: sourcesURL) else { return }
         
-        let task = URLSession.shared.dataTask(with: safeCompaniesURL) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: safeSourcesURL) { (data, response, error) in
             
             if let safeError = error {
                 print("Error \(safeError.localizedDescription)")
@@ -39,8 +39,8 @@ final class APIManager {
                 //debugPrint("DebugPrint - Data: \(receivedData) - Response: \(response) - Error: \(error)")
                 
                 do {
-                    let companies = try JSONDecoder().decode([Company].self, from: safeData)
-                    completionHandler(companies)
+                    let sources = try JSONDecoder().decode([Source].self, from: safeData)
+                    completionHandler(sources)
                 } catch let error {
                     print("Error JSONDecoder : \(error)")
                 }

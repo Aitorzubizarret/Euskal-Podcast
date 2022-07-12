@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var companies: [Company] = [] {
+    private var sources: [Source] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     let seasonTableViewCell: String  = "SeasonTableViewCell"
     let programTableViewCell: String = "ProgramTableViewCell"
     let companyTableViewCell: String = "CompanyTableViewCell"
+    let sourceTableViewCell: String  = "SourceTableViewCell"
     
     // MARK: - Methods
     
@@ -36,7 +37,7 @@ class MainViewController: UIViewController {
         setupView()
         setupTableView()
         
-        getData()
+        getSourceData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +74,9 @@ class MainViewController: UIViewController {
         tableView.separatorStyle = .none
         
         // Register cells
+        let sourceCell: UINib = UINib(nibName: sourceTableViewCell, bundle: nil)
+        tableView.register(sourceCell, forCellReuseIdentifier: sourceTableViewCell)
+        
         let episodeCell: UINib = UINib(nibName: episodeTableViewCell, bundle: nil)
         tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCell)
         
@@ -89,18 +93,25 @@ class MainViewController: UIViewController {
     }
     
     ///
-    /// Get data from the Internet.
+    /// Get available sources from the Internet.
     ///
-    private func getData() {
-        APIManager.shared.getCompaniesData { [weak self] receivedCompanies in
-            if !receivedCompanies.isEmpty {
+    private func getSourceData() {
+        APIManager.shared.getSources { [weak self] receivedSources in
+            if !receivedSources.isEmpty {
                 // For debug purposes.
-                //debugPrint("Companies \(receivedCompanies)")
-                self?.companies = receivedCompanies
+                //debugPrint("Companies \(receivedSources)")
+                self?.sources = receivedSources
             } else {
-                print("MainViewController - getData - No data received.")
+                print("MainViewController - getSourceData - No data received.")
             }
         }
+    }
+    
+    ///
+    /// Get data from the received sources.
+    ///
+    private func getDataFromSources(url: String) {
+        
     }
     
 }
@@ -111,7 +122,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let companyVC: CompanyViewController = CompanyViewController()
-        companyVC.company = companies[indexPath.row]
+        //companyVC.company = companies[indexPath.row]
         show(companyVC, sender: self)
     }
     
@@ -129,11 +140,11 @@ extension MainViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companies.count
+        return sources.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: companyTableViewCell) as! CompanyTableViewCell
-        cell.company = companies[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: sourceTableViewCell) as! SourceTableViewCell
+        cell.source = sources[indexPath.row]
         return cell
     }
     
