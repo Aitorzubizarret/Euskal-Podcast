@@ -19,7 +19,11 @@ final class APIManager {
     
     private init() {}
     
-    public func getSources(completionHandler: @escaping([Source]) -> Void) {
+    public func start() {
+        getSources()
+    }
+    
+    private func getSources() {
         guard let safeSourcesURL: URL = URL(string: sourcesURL) else { return }
         
         let task = URLSession.shared.dataTask(with: safeSourcesURL) { (data, response, error) in
@@ -40,7 +44,8 @@ final class APIManager {
                 
                 do {
                     let sources = try JSONDecoder().decode([Source].self, from: safeData)
-                    completionHandler(sources)
+                    
+                    DataManager.shared.sources = sources
                 } catch let error {
                     print("Error JSONDecoder : \(error)")
                 }

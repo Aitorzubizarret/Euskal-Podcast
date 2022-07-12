@@ -18,6 +18,7 @@
 		1A975623287C710C006C213A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975622287C710C006C213A /* Source.swift */; };
 		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
+		1A97562A287D8E63006C213A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975629287D8E63006C213A /* DataManager.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -63,6 +64,7 @@
 		1A975622287C710C006C213A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
+		1A975629287D8E63006C213A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
+				1A975629287D8E63006C213A /* DataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
+				1A97562A287D8E63006C213A /* DataManager.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
 				1A7C938428611697003E0C00 /* UIColor-Extension.swift in Sources */,

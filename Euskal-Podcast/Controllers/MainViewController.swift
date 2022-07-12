@@ -15,14 +15,6 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var sources: [Source] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
     let episodeTableViewCell: String = "EpisodeTableViewCell"
     let seasonTableViewCell: String  = "SeasonTableViewCell"
     let programTableViewCell: String = "ProgramTableViewCell"
@@ -34,10 +26,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        APIManager.shared.start()
+        
         setupView()
         setupTableView()
         
-        getSourceData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name("Sources"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,26 +86,10 @@ class MainViewController: UIViewController {
         tableView.estimatedRowHeight = 75
     }
     
-    ///
-    /// Get available sources from the Internet.
-    ///
-    private func getSourceData() {
-        APIManager.shared.getSources { [weak self] receivedSources in
-            if !receivedSources.isEmpty {
-                // For debug purposes.
-                //debugPrint("Companies \(receivedSources)")
-                self?.sources = receivedSources
-            } else {
-                print("MainViewController - getSourceData - No data received.")
-            }
+    @objc private func updateTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
-    }
-    
-    ///
-    /// Get data from the received sources.
-    ///
-    private func getDataFromSources(url: String) {
-        
     }
     
 }
@@ -140,11 +118,11 @@ extension MainViewController: UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sources.count
+        return DataManager.shared.sources.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: sourceTableViewCell) as! SourceTableViewCell
-        cell.source = sources[indexPath.row]
+        cell.source = DataManager.shared.sources[indexPath.row]
         return cell
     }
     
