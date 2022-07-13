@@ -23,7 +23,8 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             guard let receivedProgram = program else { return }
             
             // Label.
-            titleLabel.text = receivedProgram.Name
+            titleLabel.text = receivedProgram.Title
+            
             switch receivedProgram.Seasons.count {
             case 0:
                 descriptionLabel.text = "Denboraldirik gabe"
@@ -34,9 +35,9 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             }
             
             // Image.
-            if let iconURL: URL = URL(string: receivedProgram.IconURL) {
-                photoImageView.kf.setImage(with: iconURL)
-            }
+//            if let iconURL: URL = URL(string: receivedProgram.IconURL) {
+//                photoImageView.kf.setImage(with: iconURL)
+//            }
         }
     }
     

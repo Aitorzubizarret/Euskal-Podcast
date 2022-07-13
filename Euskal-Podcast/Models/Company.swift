@@ -8,8 +8,8 @@
 import Foundation
 
 struct Company: Codable {
-    let Id: Int
-    let Name: String
+    let Title: String
+    let Description: String
     let Programs: [Program]
-    let IconURL: String
+    let URLs: [Media]
 }

@@ -13,9 +13,23 @@ final class DataManager {
     
     static var shared = DataManager()
     
-    var sources: [Source] = [] {
+    var sources: [Source] = []
+    var companies: [Company] = [] {
         didSet {
-            NotificationCenter.default.post(name: Notification.Name("Sources"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("Companies"), object: nil)
+            
+            var tempPrograms: [Program] = []
+            for company in companies {
+                for program in company.Programs {
+                    tempPrograms.append(program)
+                }
+            }
+            programs = tempPrograms
+        }
+    }
+    var programs: [Program] = [] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)
         }
     }
     

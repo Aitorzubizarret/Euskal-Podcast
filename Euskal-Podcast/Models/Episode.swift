@@ -8,13 +8,12 @@
 import Foundation
 
 struct Episode: Codable {
-    let Id: Int
-    let Name: String
-    let Number: Int
+    let Title: String
+    let Number: String
     let Description: String
-    let ReleaseDate: String
+    let PubDate: String
     let Duration: String
-    let URLs: Media
+    let URLs: [Media]
 }
 
 //http://img.youtube.com/vi/VIDEOID/#.jpg

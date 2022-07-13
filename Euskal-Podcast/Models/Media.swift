@@ -8,7 +8,6 @@
 import Foundation
 
 struct Media: Codable {
-    let Source: String
-    let MP3: String?
-    let Youtube: String?
+    let Name: String
+    let URL: String
 }

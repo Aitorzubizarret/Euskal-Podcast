@@ -22,11 +22,11 @@ class SourceTableViewCell: UITableViewCell {
             guard let safeSource = source else { return }
             
             // Icon.
-            if let iconURL: URL = URL(string: safeSource.IconURL) {
-                iconImageView.kf.setImage(with: iconURL)
-            } else {
-                iconImageView.image = nil
-            }
+//            if let iconURL: URL = URL(string: safeSource.IconURL) {
+//                iconImageView.kf.setImage(with: iconURL)
+//            } else {
+//                iconImageView.image = nil
+//            }
             
             // Title.
             nameLabel.text = safeSource.Title

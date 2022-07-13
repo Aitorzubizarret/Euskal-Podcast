@@ -15,11 +15,12 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    let episodeTableViewCell: String = "EpisodeTableViewCell"
-    let seasonTableViewCell: String  = "SeasonTableViewCell"
-    let programTableViewCell: String = "ProgramTableViewCell"
-    let companyTableViewCell: String = "CompanyTableViewCell"
-    let sourceTableViewCell: String  = "SourceTableViewCell"
+    let episodeTableViewCell:     String = "EpisodeTableViewCell"
+    let seasonTableViewCell:      String = "SeasonTableViewCell"
+    let programTableViewCell:     String = "ProgramTableViewCell"
+    let companyTableViewCell:     String = "CompanyTableViewCell"
+    let sourceTableViewCell:      String = "SourceTableViewCell"
+    let programListTableViewCell: String = "ProgramsListTableViewCell"
     
     // MARK: - Methods
     
@@ -31,7 +32,8 @@ class MainViewController: UIViewController {
         setupView()
         setupTableView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name("Sources"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name("Companies"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: Notification.Name("Programs"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,13 +85,20 @@ class MainViewController: UIViewController {
         let companyCell: UINib = UINib(nibName: companyTableViewCell, bundle: nil)
         tableView.register(companyCell, forCellReuseIdentifier: companyTableViewCell)
         
-        tableView.estimatedRowHeight = 75
+        let programListCell = UINib(nibName: programListTableViewCell, bundle: nil)
+        tableView.register(programListCell, forCellReuseIdentifier: programListTableViewCell)
+        
+        //tableView.estimatedRowHeight = 75
     }
     
     @objc private func updateTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    @objc private func update() {
+        print("\(DataManager.shared.companies)")
     }
     
 }
@@ -105,7 +114,11 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        if indexPath.section == 0 {
+            return 256
+        } else {
+            return 60
+        }
     }
     
 }
@@ -115,15 +128,25 @@ extension MainViewController: UITableViewDelegate {
 extension MainViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.shared.sources.count
+        if section == 0 {
+            return 1
+        } else {
+            return DataManager.shared.companies.count
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: sourceTableViewCell) as! SourceTableViewCell
-        cell.source = DataManager.shared.sources[indexPath.row]
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: programListTableViewCell) as! ProgramsListTableViewCell
+            cell.programs = DataManager.shared.programs
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: companyTableViewCell) as! CompanyTableViewCell
+            cell.company = DataManager.shared.companies[indexPath.row]
+            return cell
+        }
     }
     
 }

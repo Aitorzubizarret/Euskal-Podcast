@@ -22,11 +22,14 @@ class CompanyTableViewCell: UITableViewCell {
             guard let receivedCompany = company else { return }
             
             // Label.
-            nameLabel.text = receivedCompany.Name
+            nameLabel.text = receivedCompany.Title
             
             // Image.
-            if let iconURL: URL = URL(string: receivedCompany.IconURL) {
-                logoImageView.kf.setImage(with: iconURL)
+            for url in receivedCompany.URLs {
+                if url.Name == "Icon",
+                   let safeUrl: URL = URL(string: url.URL) {
+                    logoImageView.kf.setImage(with: safeUrl)
+                }
             }
         }
     }

@@ -22,8 +22,8 @@ class EpisodeTableViewCell: UITableViewCell {
         didSet {
             guard let receivedEpisode: Episode = episode else { return }
             
-            titleLabel.text = receivedEpisode.Name
-            releaseDateLabel.text = receivedEpisode.ReleaseDate
+            //titleLabel.text = receivedEpisode.Name
+            //releaseDateLabel.text = receivedEpisode.ReleaseDate
             durationLabel.text = receivedEpisode.Duration
         }
     }

@@ -63,7 +63,7 @@ class PlayerViewController: UIViewController {
         guard let safeEpisode = episode else { return }
         
         // Label
-        titleLabel.text = safeEpisode.Name
+        //titleLabel.text = safeEpisode.Name
         currentDurationTimeLabel.text = "00:00"
         totalDurationTimeLabel.text = "00:00"
         
@@ -80,30 +80,30 @@ class PlayerViewController: UIViewController {
     /// Configure the Player.
     ///
     private func configurePlayer(episode: Episode) {
-        guard let episodeMediaMP3 = episode.URLs.MP3,
-              let episodeMediaMP3URL: URL = URL(string: episodeMediaMP3) else { return }
-        
-        let asset = AVAsset(url: episodeMediaMP3URL)
-        playerItem = AVPlayerItem(asset: asset)
-        player = AVPlayer(playerItem: playerItem)
-        
-        guard let safePlayer = player,
-              let currentItem = safePlayer.currentItem else { return }
-        
-        safePlayer.volume = 1.0
-        
-        totalDurationTimeLabel.text = episode.Duration
-        
-        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
-            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-            let episodeCurrentTime = CMTimeGetSeconds(time)
-            let progress: Float = Float(episodeCurrentTime/episodeDuration)
-            self.durationSlider.setValue(progress, animated: true)
-            
-            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
-        }
-        
-        isPlayerConfigured = true
+//        guard let episodeMediaMP3 = episode.URLs.MP3,
+//              let episodeMediaMP3URL: URL = URL(string: episodeMediaMP3) else { return }
+//        
+//        let asset = AVAsset(url: episodeMediaMP3URL)
+//        playerItem = AVPlayerItem(asset: asset)
+//        player = AVPlayer(playerItem: playerItem)
+//        
+//        guard let safePlayer = player,
+//              let currentItem = safePlayer.currentItem else { return }
+//        
+//        safePlayer.volume = 1.0
+//        
+//        totalDurationTimeLabel.text = episode.Duration
+//        
+//        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
+//            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
+//            let episodeCurrentTime = CMTimeGetSeconds(time)
+//            let progress: Float = Float(episodeCurrentTime/episodeDuration)
+//            self.durationSlider.setValue(progress, animated: true)
+//            
+//            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
+//        }
+//        
+//        isPlayerConfigured = true
     }
     
     ///

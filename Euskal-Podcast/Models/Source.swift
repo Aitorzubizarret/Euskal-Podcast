@@ -9,6 +9,5 @@ import Foundation
 
 struct Source: Codable {
     let Title: String
-    let IconURL: String
     let JSONUrl: String
 }
