@@ -64,7 +64,7 @@ final class APIManager {
                     }
                     
                     self.companiesGroup.notify(queue: .main) {
-                        DataManager.shared.companies = self.tempCompanies
+                        DataManager.shared.companies = self.tempCompanies.sorted { $0.Title < $1.Title }
                     }
                     
                 } catch let error {
