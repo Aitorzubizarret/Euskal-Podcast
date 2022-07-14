@@ -141,6 +141,7 @@ extension MainViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: programListTableViewCell) as! ProgramsListTableViewCell
             cell.programs = DataManager.shared.programs
+            cell.hostVC = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: companyTableViewCell) as! CompanyTableViewCell
