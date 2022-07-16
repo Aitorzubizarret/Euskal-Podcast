@@ -14,4 +14,5 @@ struct Program: Codable {
     let DateEnd: String
     let Seasons: [Season]
     let Episodes: [Episode]
+    let URLs: [Media]
 }
