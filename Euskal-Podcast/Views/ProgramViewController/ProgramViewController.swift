@@ -13,6 +13,7 @@ class ProgramViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: MainCoordinator?
     private let tableView = UITableView()
     
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
@@ -30,6 +31,8 @@ class ProgramViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Programa"
         
         setupTableView()
     }
@@ -85,11 +88,7 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            let playerVC = PlayerViewController()
-            if let safeProgram = program {
-                playerVC.episode = safeProgram.Seasons[indexPath.section-1].Episodes[indexPath.row]
-            }
-            show(playerVC, sender: self)
+            coordinator?.goToPlayer() // TODO: Send which episode. program.Season[id].Episode[id]
         }
     }
     

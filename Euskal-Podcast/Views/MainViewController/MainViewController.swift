@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: MainCoordinator?
     let episodeTableViewCell:     String = "EpisodeTableViewCell"
     let seasonTableViewCell:      String = "SeasonTableViewCell"
     let programTableViewCell:     String = "ProgramTableViewCell"
@@ -108,9 +109,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let companyVC: CompanyViewController = CompanyViewController()
-        //companyVC.company = companies[indexPath.row]
-        show(companyVC, sender: self)
+        coordinator?.goToCompany()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -15,6 +15,7 @@ class CompanyViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: MainCoordinator?
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     
@@ -24,6 +25,8 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Empresa"
         
         setupTableView()
     }

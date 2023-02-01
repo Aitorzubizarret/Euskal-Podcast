@@ -27,6 +27,7 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: MainCoordinator?
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
     private var isPlaying: Bool = false
@@ -38,6 +39,8 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Player"
         
         setupView()
     }

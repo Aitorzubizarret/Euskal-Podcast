@@ -9,23 +9,24 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    private var mainCoordinator: Coordinator?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Create an instance of the Main VC.
-        let mainVC: MainViewController = MainViewController()
-        
-        // Create the Navigation Controller and add the Main VC to it.
+        // Creates the Navigation Controller.
         let navigationController: UINavigationController = UINavigationController()
-        navigationController.pushViewController(mainVC, animated: false)
         
-        // Create the window and add the Navigation Controller as the root view.
+        // Creates the MainCoordinator with the Navigation Controllers, and starts it.
+        mainCoordinator = MainCoordinator(navigationController: navigationController)
+        mainCoordinator?.start()
+        
+        // Create the window and add the Main Coordinator's navigation controller as the root view.
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         if let window = window {
-            window.rootViewController = navigationController
+            window.rootViewController = mainCoordinator?.navigationController
             window.makeKeyAndVisible()
         }
         

@@ -15,6 +15,7 @@ class ProgramsViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: MainCoordinator?
     private let programTableViewCell: String = "ProgramTableViewCell"
     
     public var programs: [Program] = []

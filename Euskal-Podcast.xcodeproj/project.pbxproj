@@ -19,6 +19,8 @@
 		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
 		1A97562A287D8E63006C213A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975629287D8E63006C213A /* DataManager.swift */; };
+		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
+		1AF85E8C298A96310087C77B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E8B298A96310087C77B /* MainCoordinator.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -65,6 +67,8 @@
 		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
 		1A975629287D8E63006C213A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1AF85E8B298A96310087C77B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -205,6 +209,15 @@
 			path = PlayerBarViewController;
 			sourceTree = "<group>";
 		};
+		1AF85E88298A960F0087C77B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1AF85E89298A961E0087C77B /* Coordinator.swift */,
+				1AF85E8B298A96310087C77B /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		425DCB5B263E0E3B00958689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +335,7 @@
 				42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */,
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
+				1AF85E88298A960F0087C77B /* Coordinator */,
 				425DCB5C263E0E4100958689 /* Models */,
 				1A7CC4A7285E7D50003F2379 /* Managers */,
 				42AC65B2264B13CB0077002E /* ViewModels */,
@@ -443,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
+				1AF85E8C298A96310087C77B /* MainCoordinator.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
 				1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,
@@ -450,6 +465,7 @@
 				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
+				1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */,
 				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
