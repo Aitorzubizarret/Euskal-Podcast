@@ -151,28 +151,69 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		425DCB5A263E0E2B00958689 /* Controllers */ = {
+		1AF85E82298A92B60087C77B /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				425DCB51263E076700958689 /* MainViewController.xib */,
 				425DCB50263E076700958689 /* MainViewController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		1AF85E83298A92C50087C77B /* CompanyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42A719AB264F1A0F0026648E /* CompanyViewController.xib */,
 				42A719AA264F1A0F0026648E /* CompanyViewController.swift */,
+			);
+			path = CompanyViewController;
+			sourceTree = "<group>";
+		};
+		1AF85E84298A92DD0087C77B /* ProgramsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
 				42BB9C142659A6980014A560 /* ProgramsViewController.swift */,
+			);
+			path = ProgramsViewController;
+			sourceTree = "<group>";
+		};
+		1AF85E85298A92F30087C77B /* ProgramViewController */ = {
+			isa = PBXGroup;
+			children = (
+				428C2B582662EAB4009E5B0F /* ProgramViewController.xib */,
 				428C2B572662EAB4009E5B0F /* ProgramViewController.swift */,
+			);
+			path = ProgramViewController;
+			sourceTree = "<group>";
+		};
+		1AF85E86298A93030087C77B /* PlayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
 				4212F413263F29CC00B9C021 /* PlayerViewController.swift */,
+			);
+			path = PlayerViewController;
+			sourceTree = "<group>";
+		};
+		1AF85E87298A93160087C77B /* PlayerBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */,
 				1A842A3E286514EE0086C480 /* PlayerBarViewController.swift */,
 			);
-			path = Controllers;
+			path = PlayerBarViewController;
 			sourceTree = "<group>";
 		};
 		425DCB5B263E0E3B00958689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				425DCB51263E076700958689 /* MainViewController.xib */,
-				42A719AB264F1A0F0026648E /* CompanyViewController.xib */,
-				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
-				428C2B582662EAB4009E5B0F /* ProgramViewController.xib */,
-				4212F414263F29CC00B9C021 /* PlayerViewController.xib */,
-				1A842A3F286514EE0086C480 /* PlayerBarViewController.xib */,
+				1AF85E87298A93160087C77B /* PlayerBarViewController */,
+				1AF85E86298A93030087C77B /* PlayerViewController */,
+				1AF85E85298A92F30087C77B /* ProgramViewController */,
+				1AF85E84298A92DD0087C77B /* ProgramsViewController */,
+				1AF85E83298A92C50087C77B /* CompanyViewController */,
+				1AF85E82298A92B60087C77B /* MainViewController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,7 +327,6 @@
 				42AC65B2264B13CB0077002E /* ViewModels */,
 				425DCB5B263E0E3B00958689 /* Views */,
 				427E1C412640AF6000FBCDF7 /* Cells */,
-				425DCB5A263E0E2B00958689 /* Controllers */,
 				1A7C9380286111DA003E0C00 /* Extensions */,
 				42EBBB31263DAB7800463FB4 /* Assets.xcassets */,
 				42EBBB33263DAB7800463FB4 /* LaunchScreen.storyboard */,
