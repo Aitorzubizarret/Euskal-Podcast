@@ -143,7 +143,9 @@ extension XMLParserManager: XMLParserDelegate {
                                             episodes: episodes)
                 program = newProgram
             case "title":
-                programTitle = programTitle + XMLcontent
+                if programTitle != XMLcontent {
+                    programTitle = programTitle + XMLcontent
+                }
             case "description":
                 programDescription = programDescription + XMLcontent
             case "itunes:image":
@@ -176,7 +178,8 @@ extension XMLParserManager: XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         if let program = program {
-            print("\(program)")
+//            print("\(program)")
+            DataManager.shared.programsXML.append(program)
         }
     }
     
