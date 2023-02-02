@@ -18,26 +18,20 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var program: Program? {
+    var program: ProgramXML? {
         didSet {
             guard let receivedProgram = program else { return }
             
-            // Label.
-            titleLabel.text = receivedProgram.Title
+            // Title.
+            titleLabel.text = receivedProgram.title
             
-            switch receivedProgram.Seasons.count {
-            case 0:
-                descriptionLabel.text = "Denboraldirik gabe"
-            case 1:
-                descriptionLabel.text = "Denboraldi bat"
-            default:
-                descriptionLabel.text = "\(receivedProgram.Seasons.count) denboraldi"
-            }
+            // Description.
+            descriptionLabel.text = receivedProgram.copyrightOwnerName
             
             // Image.
-//            if let iconURL: URL = URL(string: receivedProgram.IconURL) {
-//                photoImageView.kf.setImage(with: iconURL)
-//            }
+            if let iconURL: URL = URL(string: receivedProgram.imageURL) {
+                photoImageView.kf.setImage(with: iconURL)
+            }
         }
     }
     

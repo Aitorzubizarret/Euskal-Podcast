@@ -22,7 +22,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     
     var hostVC: UIViewController?
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
-    var programs: [Program] = [] {
+    var programs: [ProgramXML] = [] {
         didSet {
             collectionView.reloadData()
         }

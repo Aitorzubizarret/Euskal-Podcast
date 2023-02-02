@@ -19,7 +19,7 @@ class ProgramViewController: UIViewController {
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let episodeTableViewCellIdentifier: String = "EpisodeTableViewCell"
     
-    public var program: Program? {
+    public var program: ProgramXML? {
         didSet {
             guard let safeProgram = program else { return }
             
@@ -109,7 +109,7 @@ extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if let safeProgram = program {
-            return 1 + safeProgram.Seasons.count
+            return (safeProgram.episodes.count > 0) ? 2 : 1
         } else {
             return 0
         }
@@ -121,8 +121,7 @@ extension ProgramViewController: UITableViewDataSource {
             return ""
         default:
             if let safeProgram = program {
-                return ""
-                //return safeProgram.Seasons[section-1].Name
+                return safeProgram.title
             } else {
                 return ""
             }
@@ -134,7 +133,7 @@ extension ProgramViewController: UITableViewDataSource {
             return 1
         } else {
             if let safeProgram = program {
-                return safeProgram.Seasons[section-1].Episodes.count
+                return safeProgram.episodes.count
             } else {
                 return 0
             }
@@ -146,14 +145,14 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
             if let safeProgram = program {
-                //cell.imageURL = safeProgram.IconURL
-                //cell.titleName = safeProgram.Name
+                cell.imageURL = safeProgram.imageURL
+                cell.titleName = safeProgram.title
             }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
             if let safeProgram = program {
-                cell.episode = safeProgram.Seasons[indexPath.section-1].Episodes[indexPath.row]
+                cell.episode = safeProgram.episodes[indexPath.row]
             }
             return cell
         }

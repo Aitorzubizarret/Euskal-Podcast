@@ -18,13 +18,13 @@ class EpisodeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var episode: Episode? {
+    var episode: EpisodeXML? {
         didSet {
-            guard let receivedEpisode: Episode = episode else { return }
+            guard let receivedEpisode: EpisodeXML = episode else { return }
             
-            //titleLabel.text = receivedEpisode.Name
-            //releaseDateLabel.text = receivedEpisode.ReleaseDate
-            durationLabel.text = receivedEpisode.Duration
+            titleLabel.text = receivedEpisode.title
+            releaseDateLabel.text = receivedEpisode.pubDate
+            durationLabel.text = receivedEpisode.duration
         }
     }
     

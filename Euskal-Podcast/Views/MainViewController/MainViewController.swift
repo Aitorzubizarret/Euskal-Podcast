@@ -139,7 +139,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: programListTableViewCell) as! ProgramsListTableViewCell
-            cell.programs = DataManager.shared.programs
+            cell.programs = DataManager.shared.programsXML
             cell.hostVC = self
             return cell
         } else {

@@ -18,7 +18,7 @@ class ProgramsViewController: UIViewController {
     weak var coordinator: MainCoordinator?
     private let programTableViewCell: String = "ProgramTableViewCell"
     
-    public var programs: [Program] = []
+    public var programs: [ProgramXML] = []
     
     // MARK: - Methods
     

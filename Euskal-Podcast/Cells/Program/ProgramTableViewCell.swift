@@ -15,11 +15,11 @@ class ProgramTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var program: Program? {
+    var program: ProgramXML? {
         didSet {
             guard let receivedProgram = program else { return }
             
-            //titleLabel.text = receivedProgram.Name
+            titleLabel.text = receivedProgram.title
         }
     }
     

@@ -10,6 +10,6 @@ import Foundation
 struct Company: Codable {
     let Title: String
     let Description: String
-    let Programs: [Program]
+    let Programs: [ProgramXML]
     let URLs: [Media]
 }

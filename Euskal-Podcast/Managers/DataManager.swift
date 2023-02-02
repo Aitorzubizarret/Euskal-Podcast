@@ -18,16 +18,21 @@ final class DataManager {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("Companies"), object: nil)
             
-            var tempPrograms: [Program] = []
+            var tempPrograms: [ProgramXML] = []
             for company in companies {
                 for program in company.Programs {
                     tempPrograms.append(program)
                 }
             }
-            programs = tempPrograms
+            programsXML = tempPrograms
         }
     }
     var programs: [Program] = [] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)
+        }
+    }
+    var programsXML: [ProgramXML] = [] {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)
         }
