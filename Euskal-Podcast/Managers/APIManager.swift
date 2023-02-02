@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class APIManager {
+final class APIManager: NSObject {
     
     // MARK: - Properties
     
@@ -22,10 +22,9 @@ final class APIManager {
     
     // MARK: - Methods
     
-    private init() {}
-    
     public func start() {
-        getSources()
+        //getSources()
+        getXMLDemo()
     }
     
     ///
@@ -75,6 +74,13 @@ final class APIManager {
         }
         task.resume()
         
+    }
+    
+    private func getXMLDemo() {
+        let demoURL: String = "https://api.eitb.eus/api/eitbpodkast/getRss/590855897/itunes/"
+        
+        let xmlParserManager = XMLParserManager()
+        xmlParserManager.parseURL(urlString: demoURL)
     }
     
     ///
