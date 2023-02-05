@@ -42,15 +42,17 @@ extension MainCoordinator: Coordinator {
         navigationController.pushViewController(companyVC, animated: true)
     }
     
-    func goToPrograms() {
+    func goToPrograms(programs: [ProgramXML]) {
         let programsVC = ProgramsViewController()
         programsVC.coordinator = self
+        programsVC.programs = programs
         navigationController.pushViewController(programsVC, animated: true)
     }
     
-    func goToProgram() {
+    func goToProgram(program: ProgramXML) {
         let programVC = ProgramViewController()
         programVC.coordinator = self
+        programVC.program = program
         navigationController.pushViewController(programVC, animated: true)
     }
     

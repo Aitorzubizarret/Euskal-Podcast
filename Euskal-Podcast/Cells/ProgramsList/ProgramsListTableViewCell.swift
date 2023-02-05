@@ -20,7 +20,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var hostVC: UIViewController?
+    weak var coordinator: MainCoordinator?
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
     var programs: [ProgramXML] = [] {
         didSet {
@@ -84,9 +84,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     /// Go to ProgramsViewController.
     ///
     private func goToProgramsList() {
-        let programsVC = ProgramsViewController()
-        programsVC.programs = programs
-        hostVC?.show(programsVC, sender: self)
+        coordinator?.goToPrograms(programs: programs)
     }
 }
 
@@ -95,9 +93,7 @@ class ProgramsListTableViewCell: UITableViewCell {
 extension ProgramsListTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let programVC = ProgramViewController()
-        programVC.program = programs[indexPath.row]
-        hostVC?.show(programVC, sender: self)
+        coordinator?.goToProgram(program: programs[indexPath.row])
     }
     
 }

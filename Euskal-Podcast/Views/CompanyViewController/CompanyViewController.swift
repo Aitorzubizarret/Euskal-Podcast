@@ -110,7 +110,7 @@ extension CompanyViewController: UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: programsListTableViewCellIdentifier) as! ProgramsListTableViewCell
-            cell.hostVC = self
+//            cell.hostVC = self
             if let receivedCompany = company {
                 cell.programs = receivedCompany.Programs
             }

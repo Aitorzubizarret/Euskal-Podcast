@@ -57,6 +57,8 @@ class ProgramTableViewCell: UITableViewCell {
     /// Setup the View.
     ///
     private func setupView() {
+        self.selectionStyle = .none
+        
         // ImageView.
         photoImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         

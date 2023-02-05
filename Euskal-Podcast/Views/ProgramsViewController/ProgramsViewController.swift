@@ -43,11 +43,18 @@ class ProgramsViewController: UIViewController {
         let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
         tableView.register(programCell, forCellReuseIdentifier: programTableViewCell)
     }
+    
 }
 
 // MARK: - UITableView Delegate
 
-extension ProgramsViewController: UITableViewDelegate {}
+extension ProgramsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator?.goToProgram(program: programs[indexPath.row])
+    }
+    
+}
 
 // MARK: - UITableView Date Source
 
@@ -56,6 +63,7 @@ extension ProgramsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return programs.count
     }
