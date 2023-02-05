@@ -15,11 +15,22 @@ class CompanyViewController: UIViewController {
     
     // MARK: - Properties
     
-    weak var coordinator: MainCoordinator?
+    var coordinator: Coordinator
+    
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let programsListTableViewCellIdentifier: String = "ProgramsListTableViewCell"
     
     public var company: Company?
+    
+    init(coordinator: Coordinator) {
+        self.coordinator = coordinator
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Methods
     

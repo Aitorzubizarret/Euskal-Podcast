@@ -31,34 +31,29 @@ extension MainCoordinator: Coordinator {
     }
     
     func goToMain() {
-        let mainVC = MainViewController()
-        mainVC.coordinator = self
+        let mainVC = MainViewController(coordinator: self)
         navigationController.pushViewController(mainVC, animated: true)
     }
     
     func goToCompany() {
-        let companyVC = CompanyViewController()
-        companyVC.coordinator = self
+        let companyVC = CompanyViewController(coordinator: self)
         navigationController.pushViewController(companyVC, animated: true)
     }
     
     func goToPrograms(programs: [ProgramXML]) {
-        let programsVC = ProgramsViewController()
-        programsVC.coordinator = self
+        let programsVC = ProgramsViewController(coordinator: self)
         programsVC.programs = programs
         navigationController.pushViewController(programsVC, animated: true)
     }
     
     func goToProgram(program: ProgramXML) {
-        let programVC = ProgramViewController()
-        programVC.coordinator = self
+        let programVC = ProgramViewController(coordinator: self)
         programVC.program = program
         navigationController.pushViewController(programVC, animated: true)
     }
     
     func goToPlayer() {
-        let playerVC = PlayerViewController()
-        playerVC.coordinator = self
+        let playerVC = PlayerViewController(coordinator: self)
         navigationController.pushViewController(playerVC, animated: true)
     }
     

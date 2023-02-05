@@ -13,7 +13,8 @@ class ProgramViewController: UIViewController {
     
     // MARK: - Properties
     
-    weak var coordinator: MainCoordinator?
+    var coordinator: Coordinator
+    
     private let tableView = UITableView()
     
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
@@ -28,6 +29,16 @@ class ProgramViewController: UIViewController {
     }
     
     // MARK: - Methods
+    
+    init(coordinator: Coordinator) {
+        self.coordinator = coordinator
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +99,7 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            coordinator?.goToPlayer() // TODO: Send which episode. program.Season[id].Episode[id]
+            coordinator.goToPlayer() // TODO: Send which episode. program.Season[id].Episode[id]
         }
     }
     

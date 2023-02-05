@@ -15,12 +15,23 @@ class ProgramsViewController: UIViewController {
     
     // MARK: - Properties
     
-    weak var coordinator: MainCoordinator?
+    var coordinator: Coordinator
+    
     private let programTableViewCell: String = "ProgramTableViewCell"
     
     public var programs: [ProgramXML] = []
     
     // MARK: - Methods
+    
+    init(coordinator: Coordinator) {
+        self.coordinator = coordinator
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +62,7 @@ class ProgramsViewController: UIViewController {
 extension ProgramsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.goToProgram(program: programs[indexPath.row])
+        coordinator.goToProgram(program: programs[indexPath.row])
     }
     
 }

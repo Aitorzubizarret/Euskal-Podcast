@@ -20,7 +20,8 @@ class ProgramsListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    weak var coordinator: MainCoordinator?
+    var coordinator: Coordinator?
+    
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
     var programs: [ProgramXML] = [] {
         didSet {
