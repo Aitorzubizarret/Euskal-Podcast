@@ -95,6 +95,9 @@ class PlayerViewController: UIViewController {
     private func configurePlayer(episode: EpisodeXML) {
         guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
         
+        // Makes posible to listen to audio files even in "silent mode".
+        try! AVAudioSession.sharedInstance().setCategory(.playback)
+        
         let asset = AVAsset(url: episodeAudioURL)
         playerItem = AVPlayerItem(asset: asset)
         player = AVPlayer(playerItem: playerItem)
