@@ -139,9 +139,9 @@
 		1A7CC4A7285E7D50003F2379 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
 				1AD0C89429903943003A39FE /* DataManagerProtocol.swift */,
 				1A975629287D8E63006C213A /* DataManager.swift */,
+				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
 				1AFD3490298BEF910074C338 /* XMLParserManager.swift */,
 			);
 			path = Managers;
@@ -150,8 +150,8 @@
 		1A7CC4AC285F2BE5003F2379 /* MainTitle */ = {
 			isa = PBXGroup;
 			children = (
-				1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */,
 				1A7CC4AE285F2C3E003F2379 /* MainTitleTableViewCell.xib */,
+				1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */,
 			);
 			path = MainTitle;
 			sourceTree = "<group>";
@@ -159,8 +159,8 @@
 		1A975624287C85DD006C213A /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				1A975625287C85F7006C213A /* SourceTableViewCell.swift */,
 				1A975626287C85F7006C213A /* SourceTableViewCell.xib */,
+				1A975625287C85F7006C213A /* SourceTableViewCell.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -259,8 +259,8 @@
 		42621E24264DB38200271A85 /* Season */ = {
 			isa = PBXGroup;
 			children = (
-				42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */,
 				42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */,
+				42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */,
 			);
 			path = Season;
 			sourceTree = "<group>";
@@ -268,8 +268,8 @@
 		42621E25264DB39A00271A85 /* Program */ = {
 			isa = PBXGroup;
 			children = (
-				42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */,
 				42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */,
+				42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */,
 			);
 			path = Program;
 			sourceTree = "<group>";
@@ -277,8 +277,8 @@
 		42621E26264DB3A000271A85 /* Company */ = {
 			isa = PBXGroup;
 			children = (
-				42621E27264DB3BC00271A85 /* CompanyTableViewCell.swift */,
 				42621E28264DB3BC00271A85 /* CompanyTableViewCell.xib */,
+				42621E27264DB3BC00271A85 /* CompanyTableViewCell.swift */,
 			);
 			path = Company;
 			sourceTree = "<group>";
@@ -301,8 +301,8 @@
 		427E1C482640B15A00FBCDF7 /* Episode */ = {
 			isa = PBXGroup;
 			children = (
-				427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */,
 				427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */,
+				427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */,
 			);
 			path = Episode;
 			sourceTree = "<group>";
@@ -364,8 +364,8 @@
 		42F38AD72651A7B1005F9AB1 /* ProgramsList */ = {
 			isa = PBXGroup;
 			children = (
-				42F38AD82651A7D7005F9AB1 /* ProgramsListTableViewCell.swift */,
 				42F38AD92651A7D7005F9AB1 /* ProgramsListTableViewCell.xib */,
+				42F38AD82651A7D7005F9AB1 /* ProgramsListTableViewCell.swift */,
 			);
 			path = ProgramsList;
 			sourceTree = "<group>";
@@ -373,8 +373,8 @@
 		42F38ADE2651C76D005F9AB1 /* ProgramsListCell */ = {
 			isa = PBXGroup;
 			children = (
-				42F38ADF2651C7A1005F9AB1 /* ProgramCollectionViewCell.swift */,
 				42F38AE02651C7A1005F9AB1 /* ProgramCollectionViewCell.xib */,
+				42F38ADF2651C7A1005F9AB1 /* ProgramCollectionViewCell.swift */,
 			);
 			path = ProgramsListCell;
 			sourceTree = "<group>";
