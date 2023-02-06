@@ -28,13 +28,12 @@ class PlayerViewController: UIViewController {
     // MARK: - Properties
     
     var coordinator: Coordinator
+    var episodeXML: EpisodeXML?
     
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
     private var isPlaying: Bool = false
     private var isPlayerConfigured: Bool = false
-    
-    public var episode: Episode?
     
     // MARK: - Methods
     
@@ -74,10 +73,10 @@ class PlayerViewController: UIViewController {
         coverImageView.layer.cornerRadius = 10
         
         // Check if we have an Episode.
-        guard let safeEpisode = episode else { return }
+        guard let episodeXML = episodeXML else { return }
         
         // Label
-        //titleLabel.text = safeEpisode.Name
+        titleLabel.text = episodeXML.title
         currentDurationTimeLabel.text = "00:00"
         totalDurationTimeLabel.text = "00:00"
         
@@ -87,37 +86,36 @@ class PlayerViewController: UIViewController {
         durationSlider.setValue(0, animated: false)
         durationSlider.isContinuous = true
         
-        configurePlayer(episode: safeEpisode)
+        configurePlayer(episode: episodeXML)
     }
     
     ///
     /// Configure the Player.
     ///
-    private func configurePlayer(episode: Episode) {
-//        guard let episodeMediaMP3 = episode.URLs.MP3,
-//              let episodeMediaMP3URL: URL = URL(string: episodeMediaMP3) else { return }
-//        
-//        let asset = AVAsset(url: episodeMediaMP3URL)
-//        playerItem = AVPlayerItem(asset: asset)
-//        player = AVPlayer(playerItem: playerItem)
-//        
-//        guard let safePlayer = player,
-//              let currentItem = safePlayer.currentItem else { return }
-//        
-//        safePlayer.volume = 1.0
-//        
-//        totalDurationTimeLabel.text = episode.Duration
-//        
-//        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
-//            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-//            let episodeCurrentTime = CMTimeGetSeconds(time)
-//            let progress: Float = Float(episodeCurrentTime/episodeDuration)
-//            self.durationSlider.setValue(progress, animated: true)
-//            
-//            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
-//        }
-//        
-//        isPlayerConfigured = true
+    private func configurePlayer(episode: EpisodeXML) {
+        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
+        
+        let asset = AVAsset(url: episodeAudioURL)
+        playerItem = AVPlayerItem(asset: asset)
+        player = AVPlayer(playerItem: playerItem)
+        
+        guard let safePlayer = player,
+              let currentItem = safePlayer.currentItem else { return }
+
+        safePlayer.volume = 1.0
+
+        totalDurationTimeLabel.text = episode.duration
+
+        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
+            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
+            let episodeCurrentTime = CMTimeGetSeconds(time)
+            let progress: Float = Float(episodeCurrentTime/episodeDuration)
+            self.durationSlider.setValue(progress, animated: true)
+
+            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
+        }
+
+        isPlayerConfigured = true
     }
     
     ///

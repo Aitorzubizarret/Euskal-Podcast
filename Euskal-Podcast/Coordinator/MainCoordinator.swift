@@ -54,8 +54,9 @@ extension MainCoordinator: Coordinator {
         navigationController.pushViewController(programVC, animated: true)
     }
     
-    func goToPlayer() {
+    func goToPlayer(episode: EpisodeXML) {
         let playerVC = PlayerViewController(coordinator: self)
+        playerVC.episodeXML = episode
         navigationController.pushViewController(playerVC, animated: true)
     }
     

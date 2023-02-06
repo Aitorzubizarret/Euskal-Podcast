@@ -16,5 +16,5 @@ protocol Coordinator {
     func goToCompany()
     func goToPrograms(programs: [ProgramXML])
     func goToProgram(program: ProgramXML)
-    func goToPlayer()
+    func goToPlayer(episode: EpisodeXML)
 }

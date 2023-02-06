@@ -99,7 +99,10 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            coordinator.goToPlayer() // TODO: Send which episode. program.Season[id].Episode[id]
+            if let program = program {
+                let selectedEpisode: EpisodeXML = program.episodes[indexPath.row]
+                coordinator.goToPlayer(episode: selectedEpisode)
+            }
         }
     }
     
