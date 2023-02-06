@@ -24,7 +24,38 @@ final class APIManager {
     
     public func start() {
         //getSources()
-        getXMLDemo()
+        
+        var programsURLString: [String] = []
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/590855897/itunes/")
+        programsURLString.append("https://www.ivoox.com/feed_fg_f11397658_filtro_1.xml")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/596735897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/328715897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/328775897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/332275897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/445875897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/329795897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/355895897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/368015897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/464515897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/330455897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/456735897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/329435897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/330575897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/612735897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/329075897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/330215897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/331175897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/339995897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/367955897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/396335897/itunes/")
+        programsURLString.append("https://api.eitb.eus/api/eitbpodkast/getRss/438635897/itunes/")
+        programsURLString.append("https://www.ivoox.com/gazteon_fg_f1766426_filtro_1.xml")
+        programsURLString.append("https://www.ivoox.com/gazteon_fg_f1795727_filtro_1.xml")
+        programsURLString.append("https://www.ivoox.com/feed_fg_f11381606_filtro_1.xml")
+        
+        for programURLString in programsURLString {
+            getDataXMLSource(urlString: programURLString)
+        }
     }
     
     ///
@@ -80,12 +111,10 @@ final class APIManager {
         
     }
     
-    private func getXMLDemo() {
-        let demoURL: String = "https://api.eitb.eus/api/eitbpodkast/getRss/590855897/itunes/"
-        
+    private func getDataXMLSource(urlString: String) {
         if let dataManager = dataManager {
             let xmlParserManager = XMLParserManager(dataManager: dataManager)
-            xmlParserManager.parseURL(urlString: demoURL)
+            xmlParserManager.parseURL(urlString: urlString)
         }
         
     }
