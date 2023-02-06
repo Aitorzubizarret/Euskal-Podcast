@@ -15,11 +15,19 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var elementsStackView: UIStackView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var durationSlider: UISlider!
-    @IBAction func durationSliderTapped(_ sender: Any) {
+    @IBAction func durationSliderTouchOn(_ sender: Any) {
+        updateSliderPosition = false
     }
+    @IBAction func durationSliderEndMoving(_ sender: Any) {
+        let slider = sender as! UISlider
+        seekAudioFilePosition(position: slider.value)
+    }
+    
     @IBOutlet weak var currentDurationTimeLabel: UILabel!
     @IBOutlet weak var totalDurationTimeLabel: UILabel!
+    
     @IBOutlet weak var playPauseButton: UIButton!
     @IBAction func playPauseButtonTapped(_ sender: Any) {
         playPauseAction()
@@ -29,6 +37,8 @@ class PlayerViewController: UIViewController {
     
     var coordinator: Coordinator
     var episodeXML: EpisodeXML?
+    
+    private var updateSliderPosition: Bool = true
     
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
@@ -84,7 +94,7 @@ class PlayerViewController: UIViewController {
         durationSlider.minimumValue = 0
         durationSlider.maximumValue = 1
         durationSlider.setValue(0, animated: false)
-        durationSlider.isContinuous = true
+        durationSlider.isContinuous = false
         
         configurePlayer(episode: episodeXML)
     }
@@ -113,7 +123,9 @@ class PlayerViewController: UIViewController {
             let episodeDuration = CMTimeGetSeconds(currentItem.duration)
             let episodeCurrentTime = CMTimeGetSeconds(time)
             let progress: Float = Float(episodeCurrentTime/episodeDuration)
-            self.durationSlider.setValue(progress, animated: true)
+            if self.updateSliderPosition {
+                self.durationSlider.setValue(progress, animated: true)
+            }
 
             self.displayCurrentTime(timeInSeconds: Int(time.seconds))
         }
@@ -152,6 +164,19 @@ class PlayerViewController: UIViewController {
         
         let timeString = String(format: "%02d:%02d", minutes, seconds)
         currentDurationTimeLabel.text = timeString
+    }
+    
+    private func seekAudioFilePosition(position: Float) {
+        guard let episodeXML = episodeXML,
+              let episodeDuration: Float = Float(episodeXML.duration) else { return }
+        
+        let time = episodeDuration * position
+        
+        player?.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000), completionHandler: { success in
+            if success {
+                self.updateSliderPosition = true
+            }
+        })
     }
     
 }
