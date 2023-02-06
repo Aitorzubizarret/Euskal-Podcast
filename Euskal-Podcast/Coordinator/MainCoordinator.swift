@@ -31,7 +31,9 @@ extension MainCoordinator: Coordinator {
     }
     
     func goToMain() {
-        let mainVC = MainViewController(coordinator: self)
+        let dataManager: DataManagerProtocol = DataManager()
+        
+        let mainVC = MainViewController(coordinator: self, dataManager: dataManager)
         navigationController.pushViewController(mainVC, animated: true)
     }
     

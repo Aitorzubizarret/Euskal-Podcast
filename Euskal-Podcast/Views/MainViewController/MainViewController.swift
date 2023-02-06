@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     
     var coordinator: Coordinator
+    var dataManager: DataManagerProtocol
     
     let episodeTableViewCell:     String = "EpisodeTableViewCell"
     let seasonTableViewCell:      String = "SeasonTableViewCell"
@@ -26,8 +27,9 @@ class MainViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(coordinator: Coordinator) {
+    init(coordinator: Coordinator, dataManager: DataManagerProtocol) {
         self.coordinator = coordinator
+        self.dataManager = dataManager
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,8 +40,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        APIManager.shared.start()
         
         setupView()
         setupTableView()
@@ -110,7 +110,7 @@ class MainViewController: UIViewController {
     }
     
     @objc private func update() {
-        print("\(DataManager.shared.companies)")
+//        print("\(DataManager.shared.companies)")
     }
     
 }
@@ -144,18 +144,19 @@ extension MainViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return DataManager.shared.companies.count
+            return dataManager.getCompanies().count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: programListTableViewCell) as! ProgramsListTableViewCell
             cell.coordinator = coordinator
-            cell.programs = DataManager.shared.programsXML
+            cell.programs = dataManager.getPrograms()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: companyTableViewCell) as! CompanyTableViewCell
-            cell.company = DataManager.shared.companies[indexPath.row]
+            let companies = dataManager.getCompanies()
+            cell.company = companies[indexPath.row] // TODO: Create a method with a parameter.
             return cell
         }
     }

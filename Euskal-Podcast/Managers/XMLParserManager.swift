@@ -11,6 +11,8 @@ final class XMLParserManager: NSObject {
     
     // MARK: - Properties
     
+    var dataManager: DataManagerProtocol
+    
     var parser = XMLParser()
     
     var XMLcontent : String = ""
@@ -41,6 +43,10 @@ final class XMLParserManager: NSObject {
     var episodes: [EpisodeXML] = []
     
     // MARK: - Methods
+    
+    init(dataManager: DataManagerProtocol) {
+        self.dataManager = dataManager
+    }
     
     func parseURL(urlString: String) {
         guard let safeURL: URL = URL(string: urlString) else { return }
@@ -178,8 +184,7 @@ extension XMLParserManager: XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         if let program = program {
-//            print("\(program)")
-            DataManager.shared.programsXML.append(program)
+            dataManager.setProgram(program: program)
         }
     }
     

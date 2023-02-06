@@ -11,8 +11,6 @@ final class DataManager {
     
     // MARK: - Properties
     
-    static var shared = DataManager()
-    
     var sources: [Source] = []
     var companies: [Company] = [] {
         didSet {
@@ -38,6 +36,49 @@ final class DataManager {
         }
     }
     
+    var apiManager: APIManager
+    
     // MARK: - Methods
+    
+    init() {
+        apiManager = APIManager()
+        apiManager.dataManager = self
+        
+        apiManager.start()
+    }
+    
+}
+
+// MARK: - DataManagerProtocol
+
+extension DataManager: DataManagerProtocol {
+    
+    func setSources(sources: [Source]) {
+        self.sources = sources
+    }
+    
+    func getSources() -> [Source] {
+        return sources
+    }
+    
+    func setCompanies(companies: [Company]) {
+        self.companies = companies
+    }
+    
+    func getCompanies() -> [Company] {
+        return companies
+    }
+    
+    func setPrograms(programs: [ProgramXML]) {
+        self.programsXML = programs
+    }
+    
+    func getPrograms() -> [ProgramXML] {
+        return programsXML
+    }
+    
+    func setProgram(program: ProgramXML) {
+        self.programsXML.append(program)
+    }
     
 }

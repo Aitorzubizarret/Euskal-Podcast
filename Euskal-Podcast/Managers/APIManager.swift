@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class APIManager: NSObject {
+final class APIManager {
     
     // MARK: - Properties
     
-    static var shared: APIManager = APIManager()
+    var dataManager: DataManagerProtocol?
     
     private let urlPath: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/"
     private let sourcesURL: String = "main.json"
@@ -54,7 +54,9 @@ final class APIManager: NSObject {
                 do {
                     let sources = try JSONDecoder().decode([Source].self, from: safeData)
                     
-                    DataManager.shared.sources = sources
+                    if let dateManager = self.dataManager {
+                        dateManager.setSources(sources: sources)
+                    }
                     
                     for source in sources {
                         if !source.JSONUrl.isEmpty {
@@ -63,7 +65,9 @@ final class APIManager: NSObject {
                     }
                     
                     self.companiesGroup.notify(queue: .main) {
-                        DataManager.shared.companies = self.tempCompanies.sorted { $0.Title < $1.Title }
+                        if let dataManager = self.dataManager {
+                            dataManager.setCompanies(companies: self.tempCompanies.sorted { $0.Title < $1.Title } )
+                        }
                     }
                     
                 } catch let error {
@@ -79,8 +83,11 @@ final class APIManager: NSObject {
     private func getXMLDemo() {
         let demoURL: String = "https://api.eitb.eus/api/eitbpodkast/getRss/590855897/itunes/"
         
-        let xmlParserManager = XMLParserManager()
-        xmlParserManager.parseURL(urlString: demoURL)
+        if let dataManager = dataManager {
+            let xmlParserManager = XMLParserManager(dataManager: dataManager)
+            xmlParserManager.parseURL(urlString: demoURL)
+        }
+        
     }
     
     ///

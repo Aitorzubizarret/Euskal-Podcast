@@ -21,6 +21,7 @@
 		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
 		1A97562A287D8E63006C213A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975629287D8E63006C213A /* DataManager.swift */; };
+		1AD0C89529903943003A39FE /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0C89429903943003A39FE /* DataManagerProtocol.swift */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
 		1AF85E8C298A96310087C77B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E8B298A96310087C77B /* MainCoordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
@@ -72,6 +73,7 @@
 		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
 		1A975629287D8E63006C213A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1AD0C89429903943003A39FE /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AF85E8B298A96310087C77B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
+				1AD0C89429903943003A39FE /* DataManagerProtocol.swift */,
 				1A975629287D8E63006C213A /* DataManager.swift */,
 				1AFD3490298BEF910074C338 /* XMLParserManager.swift */,
 			);
@@ -492,6 +495,7 @@
 				42AC65B4264B13F90077002E /* DataViewModel.swift in Sources */,
 				425DCB52263E076700958689 /* MainViewController.swift in Sources */,
 				42A719AC264F1A0F0026648E /* CompanyViewController.swift in Sources */,
+				1AD0C89529903943003A39FE /* DataManagerProtocol.swift in Sources */,
 				426DCB90264C85A20020AC72 /* Company.swift in Sources */,
 				1A4D99EC298ADBF3003A1A38 /* EpisodeXML.swift in Sources */,
 				428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */,
