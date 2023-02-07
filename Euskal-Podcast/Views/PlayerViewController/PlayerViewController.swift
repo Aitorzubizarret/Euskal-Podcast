@@ -22,7 +22,7 @@ class PlayerViewController: UIViewController {
     }
     @IBAction func durationSliderEndMoving(_ sender: Any) {
         let slider = sender as! UISlider
-        seekAudioFilePosition(position: slider.value)
+        seekAudioFilePosition(position: Double(slider.value))
     }
     
     @IBOutlet weak var currentDurationTimeLabel: UILabel!
@@ -117,7 +117,7 @@ class PlayerViewController: UIViewController {
 
         safePlayer.volume = 1.0
 
-        totalDurationTimeLabel.text = episode.duration
+        totalDurationTimeLabel.text = episode.getDurationFormatted()
 
         safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
             let episodeDuration = CMTimeGetSeconds(currentItem.duration)
@@ -166,11 +166,10 @@ class PlayerViewController: UIViewController {
         currentDurationTimeLabel.text = timeString
     }
     
-    private func seekAudioFilePosition(position: Float) {
-        guard let episodeXML = episodeXML,
-              let episodeDuration: Float = Float(episodeXML.duration) else { return }
+    private func seekAudioFilePosition(position: Double) {
+        guard let episodeXML = episodeXML else { return }
         
-        let time = episodeDuration * position
+        let time = episodeXML.getDurationInSeconds() * position
         
         player?.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000), completionHandler: { success in
             if success {
