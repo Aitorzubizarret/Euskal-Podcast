@@ -24,7 +24,7 @@ class EpisodeTableViewCell: UITableViewCell {
             
             titleLabel.text = receivedEpisode.title
             releaseDateLabel.text = receivedEpisode.pubDate
-            durationLabel.text = receivedEpisode.duration
+            durationLabel.text = receivedEpisode.getDurationFormatted()
         }
     }
     
