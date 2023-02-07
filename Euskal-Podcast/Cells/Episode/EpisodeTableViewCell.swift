@@ -11,10 +11,10 @@ class EpisodeTableViewCell: UITableViewCell {
 
     // MARK: - UI Elements
     
-    @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
     
@@ -49,8 +49,7 @@ class EpisodeTableViewCell: UITableViewCell {
         // Cell.
         selectionStyle = .none
         
-        // ImageView.
-        coverImageView.backgroundColor = UIColor.blue
-        coverImageView.layer.cornerRadius = 6
+        // UIImageView.
+        bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
 }

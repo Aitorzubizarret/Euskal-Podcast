@@ -111,7 +111,7 @@ extension ProgramViewController: UITableViewDelegate {
         case 0:
             return 265
         default:
-            return 75
+            return UITableView.automaticDimension
         }
     }
     
