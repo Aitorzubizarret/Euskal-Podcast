@@ -23,7 +23,9 @@ class PodcastsViewController: UIViewController {
     
     private var programs: [ProgramXML] = [] {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -48,7 +50,7 @@ class PodcastsViewController: UIViewController {
         setupTableView()
         subscriptions()
         
-        viewModel.fetchDemoData()
+        viewModel.getPrograms()
     }
     
     private func setupTableView() {
@@ -67,11 +69,10 @@ class PodcastsViewController: UIViewController {
     
     private func subscriptions() {
         viewModel.programs.sink { receiveCompletion in
-            print("received")
+            print("Received completion")
         } receiveValue: { [weak self] programs in
             self?.programs = programs
         }.store(in: &subscribedTo)
-
     }
     
 }

@@ -42,9 +42,6 @@ final class DataManager {
     
     init() {
         apiManager = APIManager()
-        apiManager.dataManager = self
-        
-        apiManager.start()
     }
     
 }

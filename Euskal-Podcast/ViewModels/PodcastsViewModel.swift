@@ -13,6 +13,9 @@ final class PodcastsViewModel {
     
     // MARK: - Properties
     
+    var apiManager: APIManager
+    private var subscribedTo: [AnyCancellable] = []
+    
     var allPrograms: [ProgramXML] = []
     
     // Observable subjets.
@@ -20,33 +23,22 @@ final class PodcastsViewModel {
     
     // MARK: - Methods
     
-    init() {}
-    
-    func fetchDemoData() {
-        let demoProgram1 = ProgramXML(title: "Title 1",
-                                     description: "Description 1",
-                                     category: "",
-                                     imageURL: "",
-                                     explicit: "",
-                                     language: "",
-                                     author: "",
-                                     link: "",
-                                     copyright: "",
-                                     copyrightOwnerName: "",
-                                     copyrightOwnerEmail: "",
-                                     episodes: [])
-        let demoProgram2 = ProgramXML(title: "Title 2",
-                                     description: "Description 2",
-                                     category: "",
-                                     imageURL: "",
-                                     explicit: "",
-                                     language: "",
-                                     author: "",
-                                     link: "",
-                                     copyright: "",
-                                     copyrightOwnerName: "",
-                                     copyrightOwnerEmail: "",
-                                     episodes: [])
-        programs.send([demoProgram1, demoProgram2])
+    init(apiManager: APIManager) {
+        self.apiManager = apiManager
+        
+        subscriptions()
     }
+    
+    private func subscriptions() {
+        apiManager.programs.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] programs in
+            self?.programs.send(programs)
+        }.store(in: &subscribedTo)
+    }
+    
+    func getPrograms() {
+        apiManager.fetchPrograms()
+    }
+    
 }

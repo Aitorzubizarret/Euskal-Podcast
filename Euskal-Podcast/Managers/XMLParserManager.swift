@@ -6,18 +6,20 @@
 //
 
 import Foundation
+import Combine
 
-final class XMLParserManager: NSObject {
+class XMLParserManager: NSObject {
     
     // MARK: - Properties
     
-    var dataManager: DataManagerProtocol
+    // Observable subjets.
+    var program = PassthroughSubject<ProgramXML, Error>()
     
     var parser = XMLParser()
     
     var XMLcontent : String = ""
     
-    var program: ProgramXML?
+    var newProgram: ProgramXML?
     var programTitle:               String = ""
     var programDescription:         String = ""
     var programCategory:            String = ""
@@ -44,10 +46,6 @@ final class XMLParserManager: NSObject {
     
     // MARK: - Methods
     
-    init(dataManager: DataManagerProtocol) {
-        self.dataManager = dataManager
-    }
-    
     func parseURL(urlString: String) {
         guard let safeURL: URL = URL(string: urlString) else { return }
         
@@ -63,7 +61,32 @@ final class XMLParserManager: NSObject {
 
 extension XMLParserManager: XMLParserDelegate {
     
-    func parserDidStartDocument(_ parser: XMLParser) {}
+    func parserDidStartDocument(_ parser: XMLParser) {
+        XMLcontent = ""
+        
+        newProgram = nil
+        programTitle = ""
+        programDescription = ""
+        programCategory = ""
+        programImageURL = ""
+        programExplicit = ""
+        programLanguage = ""
+        programAuthor = ""
+        programLink = ""
+        programCopyright = ""
+        programCopyrightOwnerName = ""
+        programCopyrightOwnerEmail = ""
+        
+        isItem = false
+        episodeTitle = ""
+        episodeDescription = ""
+        episodePubDate = ""
+        episodeExplicit = ""
+        episodeFileURL = ""
+        episodeFileSize = ""
+        episodeDuration = ""
+        episodeLink = ""
+    }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if elementName == "item" {
@@ -135,7 +158,7 @@ extension XMLParserManager: XMLParserDelegate {
             // Program data.
             switch elementName {
             case "channel":
-                let newProgram = ProgramXML(title: programTitle,
+                let program = ProgramXML(title: programTitle,
                                             description: programDescription,
                                             category: programCategory,
                                             imageURL: programImageURL,
@@ -147,7 +170,7 @@ extension XMLParserManager: XMLParserDelegate {
                                             copyrightOwnerName: programCopyrightOwnerName,
                                             copyrightOwnerEmail: programCopyrightOwnerEmail,
                                             episodes: episodes)
-                program = newProgram
+                newProgram = program
             case "title":
                 if programTitle != XMLcontent {
                     programTitle = programTitle + XMLcontent
@@ -183,8 +206,8 @@ extension XMLParserManager: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        if let program = program {
-            dataManager.setProgram(program: program)
+        if let newProgram = newProgram {
+            program.send(newProgram)
         }
     }
     
