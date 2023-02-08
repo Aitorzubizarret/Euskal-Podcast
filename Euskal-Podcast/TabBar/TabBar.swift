@@ -26,8 +26,8 @@ class TabBar: UITabBarController {
     /// Setup ViewControllers.
     private func setupVCs() {
         // Podcasts Tab.
-        let podcastVC = PodcastsViewController()
-        podcastVC.coordinator = podcastsCoordinator
+        let podcastVC = PodcastsViewController(coordinator: podcastsCoordinator)
+        
         podcastVC.tabBarItem = UITabBarItem(title: "Podcastak",
                                             image: UIImage(systemName: "list.bullet.circle"),
                                             selectedImage: UIImage(systemName: "list.bullet.circle.fill"))
@@ -35,8 +35,8 @@ class TabBar: UITabBarController {
         podcastsCoordinator.navigationController.viewControllers = [podcastVC]
         
         // Search Tab.
-        let searchVC = SearchViewController()
-        searchVC.coordinator = searchCoordinator
+        let searchVC = SearchViewController(coordinator: searchCoordinator)
+        
         searchVC.tabBarItem = UITabBarItem(title: "Bilatu",
                                            image: UIImage(systemName: "magnifyingglass.circle"),
                                            selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
@@ -44,8 +44,8 @@ class TabBar: UITabBarController {
         searchCoordinator.navigationController.viewControllers = [searchVC]
         
         // Me Tab.
-        let meVC = MeViewController()
-        meVC.coordinator = meCoordinator
+        let meVC = MeViewController(coordinator: meCoordinator)
+        
         meVC.tabBarItem = UITabBarItem(title: "Ni",
                                        image: UIImage(systemName: "person.crop.circle"),
                                        selectedImage: UIImage(systemName: "person.crop.circle.fill"))
