@@ -11,22 +11,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    private var mainCoordinator: Coordinator?
+    var tabbarController: TabBar?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Creates the Navigation Controller.
-        let navigationController: UINavigationController = UINavigationController()
-        
-        // Creates the MainCoordinator with the Navigation Controllers, and starts it.
-        mainCoordinator = MainCoordinator(navigationController: navigationController)
-        mainCoordinator?.start()
+        // Creates the Tabbar Controller.
+        tabbarController = TabBar()
         
         // Create the window and add the Main Coordinator's navigation controller as the root view.
         let frame = UIScreen.main.bounds
         window = UIWindow(frame: frame)
         if let window = window {
-            window.rootViewController = mainCoordinator?.navigationController
+            window.rootViewController = tabbarController
             window.makeKeyAndVisible()
         }
         

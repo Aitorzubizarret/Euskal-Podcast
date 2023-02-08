@@ -10,11 +10,4 @@ import UIKit
 
 protocol Coordinator {
     var navigationController: UINavigationController { get set }
-    
-    func start()
-    func goToMain()
-    func goToCompany()
-    func goToPrograms(programs: [ProgramXML])
-    func goToProgram(program: ProgramXML)
-    func goToPlayer(episode: EpisodeXML)
 }

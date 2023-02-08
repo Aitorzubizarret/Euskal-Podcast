@@ -101,7 +101,7 @@ extension ProgramViewController: UITableViewDelegate {
         if indexPath.section > 0 {
             if let program = program {
                 let selectedEpisode: EpisodeXML = program.episodes[indexPath.row]
-                coordinator.goToPlayer(episode: selectedEpisode)
+//                coordinator.goToPlayer(episode: selectedEpisode)
             }
         }
     }

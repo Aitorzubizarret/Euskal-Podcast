@@ -85,7 +85,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     /// Go to ProgramsViewController.
     ///
     private func goToProgramsList() {
-        coordinator?.goToPrograms(programs: programs)
+//        coordinator?.goToPrograms(programs: programs)
     }
 }
 
@@ -94,7 +94,7 @@ class ProgramsListTableViewCell: UITableViewCell {
 extension ProgramsListTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.goToProgram(program: programs[indexPath.row])
+//        coordinator?.goToProgram(program: programs[indexPath.row])
     }
     
 }

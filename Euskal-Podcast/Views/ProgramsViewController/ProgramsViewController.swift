@@ -62,7 +62,7 @@ class ProgramsViewController: UIViewController {
 extension ProgramsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator.goToProgram(program: programs[indexPath.row])
+//        coordinator.goToProgram(program: programs[indexPath.row])
     }
     
 }

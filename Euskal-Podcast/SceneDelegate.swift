@@ -11,34 +11,30 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var mainCoordinator: Coordinator?
+    var tabbarController: TabBar?
     
     var playerBarWindow: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        // Creates the Navigation Controller.
-        let navigationController: UINavigationController = UINavigationController()
-        
-        // Creates the MainCoordinator with the Navigation Controllers, and starts it.
-        mainCoordinator = MainCoordinator(navigationController: navigationController)
-        mainCoordinator?.start()
+        // Creates the Tabbar Controller.
+        tabbarController = TabBar()
         
         // Create the window and add the Main Coordinator's navigation controller as the root view.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = mainCoordinator?.navigationController
+        window?.rootViewController = tabbarController
         window?.makeKeyAndVisible()
         
         // Player Bar ViewController.
-        playerBarWindow = UIWindow(windowScene: windowScene)
-        playerBarWindow?.frame = CGRect(x: 0,
-                                        y: UIScreen.main.bounds.height - 130,
-                                        width: UIScreen.main.bounds.size.width,
-                                        height: 130)
-        playerBarWindow?.rootViewController = PlayerBarViewController()
-        playerBarWindow?.isHidden = false
+//        playerBarWindow = UIWindow(windowScene: windowScene)
+//        playerBarWindow?.frame = CGRect(x: 0,
+//                                        y: UIScreen.main.bounds.height - 130,
+//                                        width: UIScreen.main.bounds.size.width,
+//                                        height: 130)
+//        playerBarWindow?.rootViewController = PlayerBarViewController()
+//        playerBarWindow?.isHidden = false
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

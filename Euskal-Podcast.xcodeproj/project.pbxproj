@@ -22,8 +22,17 @@
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
 		1A97562A287D8E63006C213A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975629287D8E63006C213A /* DataManager.swift */; };
 		1AD0C89529903943003A39FE /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0C89429903943003A39FE /* DataManagerProtocol.swift */; };
+		1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5E92993112C007AEDB6 /* TabBar.swift */; };
+		1ADAD5EC2993A253007AEDB6 /* PodcastsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */; };
+		1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */; };
+		1ADAD5F02993A26B007AEDB6 /* MeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5EF2993A26B007AEDB6 /* MeCoordinator.swift */; };
+		1ADAD5F62993AFC8007AEDB6 /* PodcastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5F42993AFC8007AEDB6 /* PodcastsViewController.swift */; };
+		1ADAD5F72993AFC8007AEDB6 /* PodcastsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5F52993AFC8007AEDB6 /* PodcastsViewController.xib */; };
+		1ADAD5FA2993AFD5007AEDB6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5F82993AFD4007AEDB6 /* SearchViewController.swift */; };
+		1ADAD5FB2993AFD5007AEDB6 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5F92993AFD5007AEDB6 /* SearchViewController.xib */; };
+		1ADAD5FE2993AFE0007AEDB6 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5FC2993AFE0007AEDB6 /* MeViewController.swift */; };
+		1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
-		1AF85E8C298A96310087C77B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E8B298A96310087C77B /* MainCoordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
@@ -74,8 +83,17 @@
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
 		1A975629287D8E63006C213A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		1AD0C89429903943003A39FE /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
+		1ADAD5E92993112C007AEDB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsCoordinator.swift; sourceTree = "<group>"; };
+		1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		1ADAD5EF2993A26B007AEDB6 /* MeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeCoordinator.swift; sourceTree = "<group>"; };
+		1ADAD5F42993AFC8007AEDB6 /* PodcastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewController.swift; sourceTree = "<group>"; };
+		1ADAD5F52993AFC8007AEDB6 /* PodcastsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastsViewController.xib; sourceTree = "<group>"; };
+		1ADAD5F82993AFD4007AEDB6 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1ADAD5F92993AFD5007AEDB6 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		1ADAD5FC2993AFE0007AEDB6 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		1AF85E8B298A96310087C77B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +183,41 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		1ADAD5E829931103007AEDB6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAD5E92993112C007AEDB6 /* TabBar.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		1ADAD5F12993AF97007AEDB6 /* PodcastsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAD5F42993AFC8007AEDB6 /* PodcastsViewController.swift */,
+				1ADAD5F52993AFC8007AEDB6 /* PodcastsViewController.xib */,
+			);
+			path = PodcastsViewController;
+			sourceTree = "<group>";
+		};
+		1ADAD5F22993AFA3007AEDB6 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAD5F82993AFD4007AEDB6 /* SearchViewController.swift */,
+				1ADAD5F92993AFD5007AEDB6 /* SearchViewController.xib */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		1ADAD5F32993AFAB007AEDB6 /* MeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAD5FC2993AFE0007AEDB6 /* MeViewController.swift */,
+				1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */,
+			);
+			path = MeViewController;
+			sourceTree = "<group>";
+		};
 		1AF85E82298A92B60087C77B /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				1AF85E89298A961E0087C77B /* Coordinator.swift */,
-				1AF85E8B298A96310087C77B /* MainCoordinator.swift */,
+				1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */,
+				1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */,
+				1ADAD5EF2993A26B007AEDB6 /* MeCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -231,6 +286,9 @@
 		425DCB5B263E0E3B00958689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1ADAD5F12993AF97007AEDB6 /* PodcastsViewController */,
+				1ADAD5F22993AFA3007AEDB6 /* SearchViewController */,
+				1ADAD5F32993AFAB007AEDB6 /* MeViewController */,
 				1AF85E87298A93160087C77B /* PlayerBarViewController */,
 				1AF85E86298A93030087C77B /* PlayerViewController */,
 				1AF85E85298A92F30087C77B /* ProgramViewController */,
@@ -347,6 +405,7 @@
 				42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */,
 				42EBBB28263DAB7800463FB4 /* AppDelegate.swift */,
 				42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */,
+				1ADAD5E829931103007AEDB6 /* TabBar */,
 				1AF85E88298A960F0087C77B /* Coordinator */,
 				425DCB5C263E0E4100958689 /* Models */,
 				1A7CC4A7285E7D50003F2379 /* Managers */,
@@ -443,18 +502,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */,
+				1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */,
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				42F38ADB2651A7D7005F9AB1 /* ProgramsListTableViewCell.xib in Resources */,
 				425DCB53263E076700958689 /* MainViewController.xib in Resources */,
 				42A719AD264F1A0F0026648E /* CompanyViewController.xib in Resources */,
 				42621E2A264DB3BC00271A85 /* CompanyTableViewCell.xib in Resources */,
 				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
+				1ADAD5F72993AFC8007AEDB6 /* PodcastsViewController.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
 				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
 				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
 				1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */,
+				1ADAD5FB2993AFD5007AEDB6 /* SearchViewController.xib in Resources */,
 				1A842A41286514EE0086C480 /* PlayerBarViewController.xib in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 				1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */,
@@ -468,12 +530,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ADAD5FE2993AFE0007AEDB6 /* MeViewController.swift in Sources */,
+				1ADAD5F02993A26B007AEDB6 /* MeCoordinator.swift in Sources */,
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
-				1AF85E8C298A96310087C77B /* MainCoordinator.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
+				1ADAD5FA2993AFD5007AEDB6 /* SearchViewController.swift in Sources */,
 				1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,
+				1ADAD5F62993AFC8007AEDB6 /* PodcastsViewController.swift in Sources */,
 				1A842A40286514EE0086C480 /* PlayerBarViewController.swift in Sources */,
+				1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */,
 				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
@@ -498,8 +564,10 @@
 				1AD0C89529903943003A39FE /* DataManagerProtocol.swift in Sources */,
 				426DCB90264C85A20020AC72 /* Company.swift in Sources */,
 				1A4D99EC298ADBF3003A1A38 /* EpisodeXML.swift in Sources */,
+				1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */,
 				428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */,
 				1A7CC4AF285F2C3E003F2379 /* MainTitleTableViewCell.swift in Sources */,
+				1ADAD5EC2993A253007AEDB6 /* PodcastsCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
