@@ -32,6 +32,7 @@
 		1ADAD5FB2993AFD5007AEDB6 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5F92993AFD5007AEDB6 /* SearchViewController.xib */; };
 		1ADAD5FE2993AFE0007AEDB6 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5FC2993AFE0007AEDB6 /* MeViewController.swift */; };
 		1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */; };
+		1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
@@ -93,6 +94,7 @@
 		1ADAD5F92993AFD5007AEDB6 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		1ADAD5FC2993AFE0007AEDB6 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
+		1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewModel.swift; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				42AC65B3264B13F90077002E /* DataViewModel.swift */,
+				1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				42621E29264DB3BC00271A85 /* CompanyTableViewCell.swift in Sources */,
 				1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */,
 				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
+				1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */,
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				1A97562A287D8E63006C213A /* DataManager.swift in Sources */,

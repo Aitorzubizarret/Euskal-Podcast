@@ -26,13 +26,14 @@ class TabBar: UITabBarController {
     /// Setup ViewControllers.
     private func setupVCs() {
         // Podcasts Tab.
-        let podcastVC = PodcastsViewController(coordinator: podcastsCoordinator)
+        let podcastsViewModel = PodcastsViewModel()
+        let podcastsVC = PodcastsViewController(coordinator: podcastsCoordinator, viewModel: podcastsViewModel)
         
-        podcastVC.tabBarItem = UITabBarItem(title: "Podcastak",
+        podcastsVC.tabBarItem = UITabBarItem(title: "Podcastak",
                                             image: UIImage(systemName: "list.bullet.circle"),
                                             selectedImage: UIImage(systemName: "list.bullet.circle.fill"))
         
-        podcastsCoordinator.navigationController.viewControllers = [podcastVC]
+        podcastsCoordinator.navigationController.viewControllers = [podcastsVC]
         
         // Search Tab.
         let searchVC = SearchViewController(coordinator: searchCoordinator)

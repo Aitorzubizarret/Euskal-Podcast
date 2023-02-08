@@ -6,17 +6,32 @@
 //
 
 import UIKit
+import Combine
 
 class PodcastsViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: - Properties
     
-    var coordinator: PodcastsCoordinator
+    private var coordinator: PodcastsCoordinator
     
-    init(coordinator: PodcastsCoordinator) {
+    private var viewModel: PodcastsViewModel
+    private var subscribedTo: [AnyCancellable] = []
+    
+    private var programs: [ProgramXML] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Methods
+    
+    init(coordinator: PodcastsCoordinator, viewModel: PodcastsViewModel) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,12 +40,64 @@ class PodcastsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Podcastak"
+        
+        setupTableView()
+        subscriptions()
+        
+        viewModel.fetchDemoData()
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // Appearance.
+        tableView.separatorStyle = .none
+        
+        // Register cells.
+        let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
+        tableView.register(programCell, forCellReuseIdentifier: "ProgramTableViewCell")
+        
+        tableView.estimatedRowHeight = 110
+    }
+    
+    private func subscriptions() {
+        viewModel.programs.sink { receiveCompletion in
+            print("received")
+        } receiveValue: { [weak self] programs in
+            self?.programs = programs
+        }.store(in: &subscribedTo)
+
+    }
+    
+}
+
+// MARK: - UITableView Delegate
+
+extension PodcastsViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - UITableView Data Source
+
+extension PodcastsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return programs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
+        cell.program = programs[indexPath.row]
+        return cell
     }
     
 }
