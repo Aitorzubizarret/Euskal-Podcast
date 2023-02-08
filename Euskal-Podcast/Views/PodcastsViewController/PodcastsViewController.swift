@@ -81,6 +81,10 @@ class PodcastsViewController: UIViewController {
 
 extension PodcastsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator.showProgramDetail(program: programs[indexPath.row])
+    }
+    
 }
 
 // MARK: - UITableView Data Source
