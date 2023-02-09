@@ -10,58 +10,72 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="109" id="KGk-i7-Jjw" customClass="EpisodeTableViewCell" customModule="Euskal_Podcast" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="154" id="KGk-i7-Jjw" customClass="EpisodeTableViewCell" customModule="Euskal_Podcast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podcast Episode Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvY-Az-vmy">
-                        <rect key="frame" x="20" y="10" width="253" height="34"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Published Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8C-ub-k0g">
+                        <rect key="frame" x="20" y="10" width="253" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="I8p-SI-4hx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvY-Az-vmy">
+                        <rect key="frame" x="20" y="31" width="253" height="34.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="amQ-t3-hct"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UXj-xf-EJX">
-                        <rect key="frame" x="20" y="55" width="17" height="14.5"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9Y-kH-oVZ">
+                        <rect key="frame" x="20" y="75.5" width="253" height="17.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="Jei-n6-1p7"/>
-                            <constraint firstAttribute="width" constant="17" id="U2x-9c-FiX"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="b96-EY-SWk"/>
                         </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podcast Episode Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8C-ub-k0g">
-                        <rect key="frame" x="47" y="54" width="226" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="Ppj-LG-TiA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qc0-ID-ToE">
-                        <rect key="frame" x="20" y="81.5" width="17" height="16"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kf-pD-Eze">
+                        <rect key="frame" x="20" y="103" width="253" height="40"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="j67-tF-n7A">
+                                <rect key="frame" x="0.0" y="5.5" width="30" height="29"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="99p-In-kLz"/>
+                                    <constraint firstAttribute="width" constant="30" id="lwS-5Y-Nvr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-Om-Ss3">
+                                <rect key="frame" x="40" y="11.5" width="213" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="iLx-Rr-Oby"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="R6k-k3-gOV"/>
-                            <constraint firstAttribute="width" constant="17" id="pB0-7T-Mpo"/>
+                            <constraint firstAttribute="height" constant="40" id="4ad-pA-d5v"/>
+                            <constraint firstAttribute="trailing" secondItem="FW8-Om-Ss3" secondAttribute="trailing" id="FT2-GK-JnD"/>
+                            <constraint firstItem="j67-tF-n7A" firstAttribute="centerY" secondItem="9kf-pD-Eze" secondAttribute="centerY" id="bGm-gV-RQe"/>
+                            <constraint firstItem="j67-tF-n7A" firstAttribute="leading" secondItem="9kf-pD-Eze" secondAttribute="leading" id="j2U-Qo-YTu"/>
+                            <constraint firstItem="FW8-Om-Ss3" firstAttribute="centerY" secondItem="9kf-pD-Eze" secondAttribute="centerY" id="lBC-B4-Jzv"/>
+                            <constraint firstItem="FW8-Om-Ss3" firstAttribute="leading" secondItem="j67-tF-n7A" secondAttribute="trailing" constant="10" id="nLs-L1-wZU"/>
                         </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podcast Episode Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-Om-Ss3">
-                        <rect key="frame" x="47" y="81" width="226" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="kSR-BS-8gW"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="w0w-Ur-ufZ">
-                        <rect key="frame" x="283" y="48" width="17" height="13.5"/>
+                        <rect key="frame" x="288" y="70.5" width="17" height="13.5"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="HUr-b2-nuC"/>
@@ -69,47 +83,46 @@
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwH-YW-BjC">
-                        <rect key="frame" x="0.0" y="108" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="153" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="gAv-Qt-MoE"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="FW8-Om-Ss3" secondAttribute="trailing" constant="10" id="0th-Th-6ch"/>
-                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="yvY-Az-vmy" secondAttribute="trailing" constant="10" id="1Oe-hp-aKV"/>
-                    <constraint firstItem="qc0-ID-ToE" firstAttribute="top" secondItem="UXj-xf-EJX" secondAttribute="bottom" constant="10" id="45c-of-VBd"/>
-                    <constraint firstItem="UXj-xf-EJX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="47O-lC-XyQ"/>
-                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="leading" secondItem="UXj-xf-EJX" secondAttribute="trailing" constant="10" id="6Hv-5o-mOS"/>
-                    <constraint firstItem="yvY-Az-vmy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="7bF-X2-PEe"/>
-                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="Z8C-ub-k0g" secondAttribute="trailing" constant="10" id="9it-kp-7Ik"/>
-                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="top" secondItem="yvY-Az-vmy" secondAttribute="bottom" constant="10" id="B5T-O0-xXy"/>
+                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="yvY-Az-vmy" secondAttribute="trailing" constant="15" id="1Oe-hp-aKV"/>
+                    <constraint firstItem="9kf-pD-Eze" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="2n4-dX-WoE"/>
+                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="Z8C-ub-k0g" secondAttribute="trailing" constant="15" id="HFs-Bi-dgQ"/>
                     <constraint firstAttribute="trailing" secondItem="pwH-YW-BjC" secondAttribute="trailing" id="HTn-MK-5lP"/>
-                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="top" secondItem="Z8C-ub-k0g" secondAttribute="bottom" constant="10" id="HdR-yP-4Vf"/>
-                    <constraint firstItem="FW8-Om-Ss3" firstAttribute="leading" secondItem="qc0-ID-ToE" secondAttribute="trailing" constant="10" id="Spr-Vz-gPj"/>
+                    <constraint firstItem="yvY-Az-vmy" firstAttribute="top" secondItem="Z8C-ub-k0g" secondAttribute="bottom" constant="4" id="HVP-lO-6pC"/>
+                    <constraint firstItem="o9Y-kH-oVZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Kou-gU-4Rk"/>
+                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="KrE-nk-qRv"/>
                     <constraint firstAttribute="bottom" secondItem="pwH-YW-BjC" secondAttribute="bottom" id="ToK-HU-vSN"/>
-                    <constraint firstItem="pwH-YW-BjC" firstAttribute="top" secondItem="FW8-Om-Ss3" secondAttribute="bottom" constant="10" id="W5e-Vv-41Q"/>
-                    <constraint firstAttribute="trailing" secondItem="w0w-Ur-ufZ" secondAttribute="trailing" constant="20" id="Xhv-br-sWV"/>
-                    <constraint firstItem="qc0-ID-ToE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ZKd-4F-KQk"/>
+                    <constraint firstAttribute="trailing" secondItem="w0w-Ur-ufZ" secondAttribute="trailing" constant="15" id="Xhv-br-sWV"/>
+                    <constraint firstItem="Z8C-ub-k0g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bE6-KL-6mM"/>
                     <constraint firstItem="yvY-Az-vmy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dsy-YY-3o1"/>
-                    <constraint firstItem="UXj-xf-EJX" firstAttribute="top" secondItem="yvY-Az-vmy" secondAttribute="bottom" constant="10" id="h3m-bg-zgP"/>
+                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="o9Y-kH-oVZ" secondAttribute="trailing" constant="15" id="iGO-bj-A4O"/>
+                    <constraint firstItem="o9Y-kH-oVZ" firstAttribute="top" secondItem="yvY-Az-vmy" secondAttribute="bottom" constant="10" id="mzl-95-XrK"/>
                     <constraint firstItem="pwH-YW-BjC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nqO-CT-xV6"/>
                     <constraint firstItem="w0w-Ur-ufZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pat-3k-6PF"/>
+                    <constraint firstItem="9kf-pD-Eze" firstAttribute="top" secondItem="o9Y-kH-oVZ" secondAttribute="bottom" constant="10" id="tWO-No-SoP"/>
+                    <constraint firstItem="pwH-YW-BjC" firstAttribute="top" secondItem="9kf-pD-Eze" secondAttribute="bottom" constant="10" id="vC0-u7-kp8"/>
+                    <constraint firstItem="w0w-Ur-ufZ" firstAttribute="leading" secondItem="9kf-pD-Eze" secondAttribute="trailing" constant="15" id="w5y-bb-Flm"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="bottomLineImageView" destination="pwH-YW-BjC" id="R4y-Qd-K78"/>
+                <outlet property="descriptionLabel" destination="o9Y-kH-oVZ" id="u9s-Yv-3pF"/>
                 <outlet property="durationLabel" destination="FW8-Om-Ss3" id="fJt-Ct-4xy"/>
                 <outlet property="releaseDateLabel" destination="Z8C-ub-k0g" id="Tr5-pz-cuH"/>
                 <outlet property="titleLabel" destination="yvY-Az-vmy" id="xgo-yv-plY"/>
             </connections>
-            <point key="canvasLocation" x="140.57971014492756" y="157.03125"/>
+            <point key="canvasLocation" x="140.57971014492756" y="175.44642857142856"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
-        <image name="clock" catalog="system" width="128" height="123"/>
+        <image name="play.circle" catalog="system" width="128" height="123"/>
     </resources>
 </document>

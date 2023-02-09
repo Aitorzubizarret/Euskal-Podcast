@@ -12,6 +12,7 @@ class EpisodeTableViewCell: UITableViewCell {
     // MARK: - UI Elements
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
@@ -22,15 +23,19 @@ class EpisodeTableViewCell: UITableViewCell {
         didSet {
             guard let receivedEpisode: EpisodeXML = episode else { return }
             
-            // Title.
-            titleLabel.text = receivedEpisode.title
-            
             // Published date.
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEEE, yyyy/MM/dd"
             dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
+            dateFormatter.locale = Locale(identifier: "eu")
             let episodeDate: String = dateFormatter.string(from: receivedEpisode.pubDate)
-            releaseDateLabel.text = episodeDate // receivedEpisode.pubDate
+            releaseDateLabel.text = episodeDate.uppercased()
+            
+            // Title.
+            titleLabel.text = receivedEpisode.title
+            
+            // Description.
+            descriptionLabel.text = receivedEpisode.description
             
             // Duration.
             durationLabel.text = receivedEpisode.getDurationFormatted()
