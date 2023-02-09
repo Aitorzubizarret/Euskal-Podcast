@@ -109,7 +109,7 @@ extension ProgramViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 265
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
@@ -158,9 +158,10 @@ extension ProgramViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
-            if let safeProgram = program {
-                cell.imageURL = safeProgram.imageURL
-                cell.titleName = safeProgram.title
+            if let program = program {
+                cell.imageURL = program.imageURL
+                cell.titleName = program.title
+                cell.descriptionText = program.description
             }
             return cell
         default:

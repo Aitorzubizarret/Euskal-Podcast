@@ -15,22 +15,26 @@ class MainTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var backgroundImageImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
     
-    public var titleName: String = "" {
+    var titleName: String = "" {
         didSet {
             nameLabel.text = titleName
         }
     }
-    public var imageURL: String = "" {
+    var descriptionText: String = "" {
+        didSet {
+            descriptionLabel.text = descriptionText
+        }
+    }
+    var imageURL: String = "" {
         didSet {
             guard let safeImageURL: URL = URL(string: imageURL) else { return }
             
             backgroundImageImageView.kf.setImage(with: safeImageURL)
-            
-            setupMainViewBacgroundGradient()
         }
     }
     
@@ -46,6 +50,10 @@ class MainTitleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        setupMainViewBackgroundGradient()
     }
     
     private func setupView() {
@@ -68,7 +76,7 @@ class MainTitleTableViewCell: UITableViewCell {
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
     
-    private func setupMainViewBacgroundGradient() {
+    private func setupMainViewBackgroundGradient() {
         // Gradient background for the main view.
         let colorTop = UIColor.template.lightPurple.cgColor
         let colorBottom = UIColor.template.darkPurple.cgColor
