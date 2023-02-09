@@ -68,6 +68,16 @@ struct EpisodeXML: Codable {
         return durationFormatted
     }
     
+    func getPublishedDateFormatter() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, yyyy/MM/dd"
+        dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
+        dateFormatter.locale = Locale(identifier: "eu")
+        let episodeDate: String = dateFormatter.string(from: pubDate)
+        
+        return episodeDate.uppercased()
+    }
+    
     func convertToMb() -> String {
         return "3 Mb"
     }

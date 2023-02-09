@@ -19,26 +19,24 @@ class EpisodeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var episode: EpisodeXML? {
+    var releaseDateText: String = "" {
         didSet {
-            guard let receivedEpisode: EpisodeXML = episode else { return }
-            
-            // Published date.
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE, yyyy/MM/dd"
-            dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
-            dateFormatter.locale = Locale(identifier: "eu")
-            let episodeDate: String = dateFormatter.string(from: receivedEpisode.pubDate)
-            releaseDateLabel.text = episodeDate.uppercased()
-            
-            // Title.
-            titleLabel.text = receivedEpisode.title
-            
-            // Description.
-            descriptionLabel.text = receivedEpisode.description
-            
-            // Duration.
-            durationLabel.text = receivedEpisode.getDurationFormatted()
+            releaseDateLabel.text = releaseDateText
+        }
+    }
+    var titleText: String = "" {
+        didSet {
+            titleLabel.text = titleText
+        }
+    }
+    var descriptionText: String = "" {
+        didSet {
+            descriptionLabel.text = descriptionText
+        }
+    }
+    var durationText: String = "" {
+        didSet {
+            durationLabel.text = durationText
         }
     }
     
@@ -66,4 +64,5 @@ class EpisodeTableViewCell: UITableViewCell {
         // UIImageView.
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
+    
 }

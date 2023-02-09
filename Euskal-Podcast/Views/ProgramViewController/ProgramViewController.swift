@@ -22,7 +22,7 @@ class ProgramViewController: UIViewController {
     
     public var program: ProgramXML? {
         didSet {
-            guard let safeProgram = program else { return }
+            guard let _ = program else { return }
             
             tableView.reloadData()
         }
@@ -107,12 +107,7 @@ extension ProgramViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return UITableView.automaticDimension
-        default:
-            return UITableView.automaticDimension
-        }
+        return UITableView.automaticDimension
     }
     
 }
@@ -166,8 +161,12 @@ extension ProgramViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
-            if let safeProgram = program {
-                cell.episode = safeProgram.episodes[indexPath.row]
+            if let program = program {
+                let episode = program.episodes[indexPath.row]
+                cell.releaseDateText = episode.getPublishedDateFormatter()
+                cell.titleText = episode.title
+                cell.descriptionText = episode.description
+                cell.durationText = episode.getDurationFormatted()
             }
             return cell
         }
