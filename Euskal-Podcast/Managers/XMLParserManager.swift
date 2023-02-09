@@ -35,7 +35,7 @@ class XMLParserManager: NSObject {
     var isItem:               Bool = false
     var episodeTitle:       String = ""
     var episodeDescription: String = ""
-    var episodePubDate:     String = ""
+    var episodePubDate:       Date = Date()
     var episodeExplicit:    String = ""
     var episodeFileURL:     String = ""
     var episodeFileSize:    String = ""
@@ -80,7 +80,7 @@ extension XMLParserManager: XMLParserDelegate {
         isItem = false
         episodeTitle = ""
         episodeDescription = ""
-        episodePubDate = ""
+        episodePubDate = Date()
         episodeExplicit = ""
         episodeFileURL = ""
         episodeFileSize = ""
@@ -96,7 +96,7 @@ extension XMLParserManager: XMLParserDelegate {
             
             episodeTitle = ""
             episodeDescription = ""
-            episodePubDate = ""
+            episodePubDate = Date()
             episodeExplicit = ""
             episodeFileURL = ""
             episodeFileSize = ""
@@ -146,7 +146,12 @@ extension XMLParserManager: XMLParserDelegate {
             case "description":
                 episodeDescription = episodeDescription + XMLcontent
             case "pubDate":
-                episodePubDate = episodePubDate + XMLcontent
+                let dateFormatter = DateFormatter() // Tue, 31 Jan 2023 23:00:00 GMT -> E, d MMM yyyy HH:mm:ss Z
+                dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
+                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+                let episodeDate: Date = dateFormatter.date(from: XMLcontent) ?? Date()
+                
+                episodePubDate = episodeDate
             case "itunes:explicit":
                 episodeExplicit = episodeExplicit + XMLcontent
             case "itunes:duration":

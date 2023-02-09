@@ -22,8 +22,17 @@ class EpisodeTableViewCell: UITableViewCell {
         didSet {
             guard let receivedEpisode: EpisodeXML = episode else { return }
             
+            // Title.
             titleLabel.text = receivedEpisode.title
-            releaseDateLabel.text = receivedEpisode.pubDate
+            
+            // Published date.
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE, yyyy/MM/dd"
+            dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
+            let episodeDate: String = dateFormatter.string(from: receivedEpisode.pubDate)
+            releaseDateLabel.text = episodeDate // receivedEpisode.pubDate
+            
+            // Duration.
             durationLabel.text = receivedEpisode.getDurationFormatted()
         }
     }

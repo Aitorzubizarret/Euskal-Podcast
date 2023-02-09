@@ -11,7 +11,7 @@ struct EpisodeXML: Codable {
     let title: String
     let description: String
     // let image: String
-    let pubDate: String
+    let pubDate: Date
     let explicit: String
     let audioFileURL: String
     let audioFileSize: String
