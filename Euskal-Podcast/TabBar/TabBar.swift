@@ -11,9 +11,18 @@ class TabBar: UITabBarController {
     
     // MARK: - Properties
     
-    let podcastsCoordinator = PodcastsCoordinator()
-    let searchCoordinator = SearchCoordinator()
-    let meCoordinator = MeCoordinator()
+    private let podcastsCoordinator = PodcastsCoordinator()
+    private let searchCoordinator = SearchCoordinator()
+    private let meCoordinator = MeCoordinator()
+    
+    var nowPlayingView: UIView = {
+        let customView = UIView()
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        return customView
+    }()
+    var nowPlayingViewController: NowPlayingViewController?
+    
+    private let notificationCenter = NotificationCenter.default
     
     // MARK: - Methods
     
@@ -21,6 +30,10 @@ class TabBar: UITabBarController {
         super.viewDidLoad()
         
         setupVCs()
+        
+        embedNowPlayingViewController()
+        
+        setupNotificationsObservers()
     }
     
     /// Setup ViewControllers.
@@ -56,6 +69,49 @@ class TabBar: UITabBarController {
         
         // Tabbar's View Controllers. Each ViewController will display a TabBarItem in the bar.
         viewControllers = [podcastsCoordinator.navigationController, searchCoordinator.navigationController, meCoordinator.navigationController]
+    }
+    
+    private func embedNowPlayingViewController() {
+        nowPlayingViewController = NowPlayingViewController()
+        
+        guard let nowPlayingViewController = nowPlayingViewController else { return }
+        
+        nowPlayingViewController.willMove(toParent: self)
+        nowPlayingViewController.view.frame = nowPlayingView.frame
+        nowPlayingView.addSubview(nowPlayingViewController.view)
+        addChild(nowPlayingViewController)
+        nowPlayingViewController.didMove(toParent: self)
+    }
+    
+    private func setupNotificationsObservers() {
+        notificationCenter.addObserver(self, selector: #selector(showNowPlayingView),
+                                       name: Notification.Name(rawValue: "ShowNowPlayingView"), object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(hideNowPlayingView),
+                                       name: Notification.Name(rawValue: "HideNowPlayingView"), object: nil)
+    }
+    
+}
+
+extension TabBar {
+    
+    @objc private func showNowPlayingView() {
+        view.insertSubview(nowPlayingView, aboveSubview: tabBar)
+        
+        view.addConstraints([
+            NSLayoutConstraint(item: nowPlayingView, attribute: .leading, relatedBy: .equal,
+                               toItem: tabBar, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: nowPlayingView, attribute: .trailing, relatedBy: .equal,
+                               toItem: tabBar, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: nowPlayingView, attribute: .top, relatedBy: .equal,
+                               toItem: tabBar, attribute: .top, multiplier: 1, constant: -60),
+            NSLayoutConstraint(item: nowPlayingView, attribute: .bottom, relatedBy: .equal,
+                               toItem: tabBar, attribute: .top, multiplier: 1, constant: 0)
+        ])
+    }
+    
+    @objc private func hideNowPlayingView() {
+        nowPlayingView.removeFromSuperview()
     }
     
 }
