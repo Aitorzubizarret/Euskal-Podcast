@@ -11,10 +11,7 @@ class NowPlayingViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBAction func playPauseButtonTapped(_ sender: Any) {
-        playPauseAction()
-    }
+    @IBOutlet weak var playPauseImageView: UIImageView!
     
     @IBOutlet weak var episodeTitleLabel: UILabel!
     
@@ -27,9 +24,9 @@ class NowPlayingViewController: UIViewController {
     var isPlaying: Bool = false {
         didSet {
             if isPlaying {
-                playPauseButton.setImage(UIImage(systemName: "pause.circle"), for: .normal)
+                playPauseImageView.image = UIImage(systemName: "pause.circle")
             } else {
-                playPauseButton.setImage(UIImage(systemName: "play.circle"), for: .normal)
+                playPauseImageView.image = UIImage(systemName: "play.circle")
             }
         }
     }
@@ -49,7 +46,19 @@ class NowPlayingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         setupNotificationsObservers()
+    }
+    
+    private func setupView() {
+        // Gesture Recognizers.
+        let playPauseGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPauseAction))
+        playPauseImageView.addGestureRecognizer(playPauseGR)
+        playPauseImageView.isUserInteractionEnabled = true
+        
+        let viewTapGR = UITapGestureRecognizer(target: self, action: #selector(showPlayerFull))
+        view.addGestureRecognizer(viewTapGR)
+        view.isUserInteractionEnabled = true
     }
     
     private func setupNotificationsObservers() {
@@ -60,7 +69,14 @@ class NowPlayingViewController: UIViewController {
                                        name: Notification.Name(rawValue: "SongPause"), object: nil)
     }
     
-    private func playPauseAction() {
+    private func closeView() {
+        AudioManager.shared.pauseSong()
+        
+        let notification: Notification = Notification(name: Notification.Name(rawValue: "HideNowPlayingView"))
+        notificationCenter.post(notification)
+    }
+    
+    @objc private func playPauseAction() {
         if isPlaying {
             AudioManager.shared.pauseSong()
         } else {
@@ -68,10 +84,8 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
-    private func closeView() {
-        AudioManager.shared.pauseSong()
-        
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "HideNowPlayingView"))
+    @objc private func showPlayerFull() {
+        let notification = Notification(name: Notification.Name(rawValue: "ShowPlayerViewController"))
         notificationCenter.post(notification)
     }
     

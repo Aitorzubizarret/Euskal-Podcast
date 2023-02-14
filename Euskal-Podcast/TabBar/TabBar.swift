@@ -89,6 +89,9 @@ class TabBar: UITabBarController {
         
         notificationCenter.addObserver(self, selector: #selector(hideNowPlayingView),
                                        name: Notification.Name(rawValue: "HideNowPlayingView"), object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(showPlayerView),
+                                       name: Notification.Name(rawValue: "ShowPlayerViewController"), object: nil)
     }
     
 }
@@ -112,6 +115,12 @@ extension TabBar {
     
     @objc private func hideNowPlayingView() {
         nowPlayingView.removeFromSuperview()
+    }
+    
+    @objc private func showPlayerView() {
+        let playerVC = PlayerViewController()
+        playerVC.modalPresentationStyle = .pageSheet
+        present(playerVC, animated: true)
     }
     
 }
