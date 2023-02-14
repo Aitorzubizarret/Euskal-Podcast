@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // Start reciving remote control events so the users can control the music from the lock screen.
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
         // Creates the Tabbar Controller.
         tabbarController = TabBar()
         

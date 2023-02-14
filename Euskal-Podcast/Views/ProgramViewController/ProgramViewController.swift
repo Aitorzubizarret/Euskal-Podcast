@@ -103,7 +103,7 @@ extension ProgramViewController: UITableViewDelegate {
                 let selectedEpisode: EpisodeXML = program.episodes[indexPath.row]
 //                coordinator.goToPlayer(episode: selectedEpisode)
                 
-                AudioManager.shared.playSong(episode: selectedEpisode)
+                AudioManager.shared.playSong(episode: selectedEpisode, programName: program.title, programImageString: program.imageURL)
             }
         }
     }

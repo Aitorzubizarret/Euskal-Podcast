@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import MediaPlayer // Control music from the Lock Screen.
 
 final class AudioManager {
     
@@ -21,6 +22,8 @@ final class AudioManager {
     
     // Audio files data.
     var episode: EpisodeXML?
+    var programName: String?
+    var programImage: URL?
     var isPlaying: Bool = false
     var totalDurationString = ""
     
@@ -36,12 +39,17 @@ final class AudioManager {
     private func configurePlayer() {
         // Makes posible to listen to audio files even in "silent mode".
         try? AVAudioSession.sharedInstance().setCategory(.playback)
+        
+        setupRemoteControls()
     }
     
-    func playSong(episode: EpisodeXML) {
-        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
+    func playSong(episode: EpisodeXML, programName: String, programImageString: String) {
+        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL),
+              let programImageURL: URL = URL(string: programImageString) else { return }
         
         self.episode = episode
+        self.programName = programName
+        self.programImage = programImageURL
         
         let asset = AVAsset(url: episodeAudioURL)
         playerItem = AVPlayerItem(asset: asset)
@@ -71,6 +79,8 @@ final class AudioManager {
         isPlaying = true
         
         notifySongPlaying()
+        
+        updateRemoteDisplayInfo()
     }
     
     func playSong() {
@@ -78,6 +88,8 @@ final class AudioManager {
         isPlaying = true
         
         notifySongPlaying()
+        
+        updateRemoteDisplayInfo()
     }
     
     func pauseSong() {
@@ -85,6 +97,8 @@ final class AudioManager {
         isPlaying = false
         
         notifySongPause()
+        
+        updateRemoteDisplayInfo()
     }
     
 }
@@ -111,6 +125,78 @@ extension AudioManager {
     func notifySongPause() {
         let notification: Notification = Notification(name: Notification.Name(rawValue: "SongPause"))
         notificationCenter.post(notification)
+    }
+    
+}
+
+// MARK: - Methods for Controlling Background Audio from Control Center.
+
+extension AudioManager {
+    
+    func setupRemoteControls() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.addTarget { [unowned self] event in
+            if !self.isPlaying {
+                self.player?.play()
+                self.isPlaying = true
+                
+                notifySongPlaying()
+                
+                return .success
+            }
+            
+            return .commandFailed
+        }
+        
+        commandCenter.pauseCommand.addTarget { [unowned self] event in
+            if self.isPlaying {
+                self.player?.pause()
+                self.isPlaying = false
+                
+                notifySongPause()
+                
+                return .success
+            }
+            
+            return .commandFailed
+        }
+        
+        // TODO: - Add logic for more commands.
+        // - commandCenter.nextTrackCommand
+        // - commandCenter.previousTrackCommand
+        
+    }
+    
+    func updateRemoteDisplayInfo() {
+        // Define 'nowPlayingInfo' data.
+        var nowPlayingInfo = [String: Any]()
+        
+        // Artist -> Podcast Program Title.
+        nowPlayingInfo[MPMediaItemPropertyArtist] = self.programName
+        
+        // TODO: - Get image from the Program.
+        // Image.
+        if let image = UIImage(systemName: "exclamationmark.triangle") {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
+                return image
+            }
+        }
+        
+        // Title.
+        nowPlayingInfo[MPMediaItemPropertyTitle] = episode?.title
+        
+        // Duration.
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = episode?.duration
+        
+        // Rate.
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player?.rate
+        
+        // Current time.
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player?.currentTime()
+        
+        // Set the metadata.
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
 }
