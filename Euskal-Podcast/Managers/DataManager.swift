@@ -25,11 +25,11 @@ final class DataManager {
             programsXML = tempPrograms
         }
     }
-    var programs: [Program] = [] {
-        didSet {
-            NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)
-        }
-    }
+//    var programs: [Program] = [] {
+//        didSet {
+//            NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)
+//        }
+//    }
     var programsXML: [ProgramXML] = [] {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("Programs"), object: nil)

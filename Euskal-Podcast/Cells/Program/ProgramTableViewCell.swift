@@ -19,23 +19,26 @@ class ProgramTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var program: ProgramXML? {
+    var iconURL: String = "" {
         didSet {
-            guard let receivedProgram = program else { return }
-            
-            // Photo ImageView.
-            if let iconURL: URL = URL(string: receivedProgram.imageURL) {
+            if let iconURL: URL = URL(string: iconURL) {
                 photoImageView.kf.setImage(with: iconURL)
             }
-            
-            // Title Label.
-            titleLabel.text = receivedProgram.title
-            
-            // Description Label.
-            descriptionLabel.text = receivedProgram.description
-            
-            // Author Label.
-            authorLabel.text = receivedProgram.author
+        }
+    }
+    var titleText: String = "" {
+        didSet {
+            titleLabel.text = titleText
+        }
+    }
+    var descriptionText: String = "" {
+        didSet {
+            descriptionLabel.text = descriptionText
+        }
+    }
+    var authorText: String = "" {
+        didSet {
+            authorLabel.text = authorText
         }
     }
     

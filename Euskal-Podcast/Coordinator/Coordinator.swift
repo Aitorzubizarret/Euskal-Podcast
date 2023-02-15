@@ -11,6 +11,6 @@ import UIKit
 protocol Coordinator {
     var navigationController: UINavigationController { get set }
     
-    func showProgramDetail(program: ProgramXML)
-    func showEpisodeDetail(episode: EpisodeXML)
+    func showProgramDetail(program: Program)
+    func showEpisodeDetail(episode: Episode)
 }

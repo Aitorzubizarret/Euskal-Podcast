@@ -81,7 +81,7 @@ extension ProgramsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: programTableViewCell) as! ProgramTableViewCell
-        cell.program = programs[indexPath.row]
+        // cell.program = programs[indexPath.row]
         return cell
     }
     

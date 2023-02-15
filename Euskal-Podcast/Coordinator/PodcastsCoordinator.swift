@@ -26,14 +26,14 @@ final class PodcastsCoordinator {
 
 extension PodcastsCoordinator: Coordinator {
     
-    func showProgramDetail(program: ProgramXML) {
+    func showProgramDetail(program: Program) {
         let programVC = ProgramViewController(coordinator: self)
         programVC.program = program
         
         navigationController.show(programVC, sender: nil)
     }
     
-    func showEpisodeDetail(episode: EpisodeXML) {
+    func showEpisodeDetail(episode: Episode) {
         let episodeVC = EpisodeViewController(coordinator: self)
         episodeVC.episode = episode
         

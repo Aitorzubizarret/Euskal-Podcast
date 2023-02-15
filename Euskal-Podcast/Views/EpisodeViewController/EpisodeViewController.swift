@@ -32,7 +32,7 @@ class EpisodeViewController: UIViewController {
     
     var coordinator: Coordinator
     
-    public var episode: EpisodeXML?
+    public var episode: Episode?
     
     // MARK: - Methods
     
@@ -54,7 +54,7 @@ class EpisodeViewController: UIViewController {
         guard let episode = episode else { return }
         
         titleValueLabel.text = episode.title
-        descriptionValueLabel.text = episode.description
+        descriptionValueLabel.text = episode.descriptionText
         publishedDateValueLabel.text = episode.getPublishedDateFormatter()
         explicitValueLabel.text = episode.explicit
         audioFileURLValueLabel.text = episode.audioFileURL

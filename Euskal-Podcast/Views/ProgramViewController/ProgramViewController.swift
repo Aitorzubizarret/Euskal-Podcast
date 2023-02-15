@@ -20,7 +20,7 @@ class ProgramViewController: UIViewController {
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let episodeTableViewCellIdentifier: String = "EpisodeTableViewCell"
     
-    var program: ProgramXML? {
+    var program: Program? {
         didSet {
             guard let _ = program else { return }
             
@@ -101,7 +101,7 @@ extension ProgramViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             if let program = program {
-                let selectedEpisode: EpisodeXML = program.episodes[indexPath.row]
+                let selectedEpisode: Episode = program.episodes[indexPath.row]
                 coordinator.showEpisodeDetail(episode: selectedEpisode)
             }
         }
@@ -130,8 +130,8 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             return ""
         default:
-            if let safeProgram = program {
-                return safeProgram.title
+            if let program = program {
+                return program.title
             } else {
                 return ""
             }
@@ -142,8 +142,8 @@ extension ProgramViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            if let safeProgram = program {
-                return safeProgram.episodes.count
+            if let program = program {
+                return program.episodes.count
             } else {
                 return 0
             }
@@ -157,7 +157,7 @@ extension ProgramViewController: UITableViewDataSource {
             if let program = program {
                 cell.imageURL = program.imageURL
                 cell.titleName = program.title
-                cell.descriptionText = program.description
+                cell.descriptionText = program.descriptionText
             }
             return cell
         default:
@@ -169,7 +169,7 @@ extension ProgramViewController: UITableViewDataSource {
                 let episode = program.episodes[indexPath.row]
                 cell.releaseDateText = episode.getPublishedDateFormatter()
                 cell.titleText = episode.title
-                cell.descriptionText = episode.description
+                cell.descriptionText = episode.descriptionText
                 cell.durationText = episode.getDurationFormatted()
                 
                 if rowSelectedEpisode == indexPath.row {

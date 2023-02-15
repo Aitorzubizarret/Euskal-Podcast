@@ -30,7 +30,7 @@ class NowPlayingViewController: UIViewController {
             }
         }
     }
-    var currentEpisode: EpisodeXML? {
+    var currentEpisode: Episode? {
         didSet {
             if let currentEpisode = currentEpisode {
                 episodeTitleLabel.text = currentEpisode.title

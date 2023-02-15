@@ -10,7 +10,7 @@ import Foundation
 protocol DataManagerProtocol {
     var sources: [Source] { get set }
     var companies: [Company] { get set }
-    var programs: [Program] { get set }
+//    var programs: [Program] { get set }
     var programsXML: [ProgramXML] { get set }
     var apiManager: APIManager { get set }
     

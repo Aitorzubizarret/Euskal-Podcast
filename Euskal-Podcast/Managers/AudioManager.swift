@@ -21,7 +21,7 @@ final class AudioManager {
     private var playerItem: AVPlayerItem?
     
     // Audio files data.
-    var episode: EpisodeXML?
+    var episode: Episode?
     var programName: String?
     var programImage: URL?
     var isPlaying: Bool = false
@@ -43,7 +43,7 @@ final class AudioManager {
         setupRemoteControls()
     }
     
-    func playSong(episode: EpisodeXML, programName: String, programImageString: String) {
+    func playSong(episode: Episode, programName: String, programImageString: String) {
         guard let episodeAudioURL: URL = URL(string: episode.audioFileURL),
               let programImageURL: URL = URL(string: programImageString) else { return }
         

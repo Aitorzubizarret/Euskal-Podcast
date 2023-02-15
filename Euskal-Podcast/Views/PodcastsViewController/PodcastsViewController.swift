@@ -21,7 +21,7 @@ class PodcastsViewController: UIViewController {
     private var viewModel: PodcastsViewModel
     private var subscribedTo: [AnyCancellable] = []
     
-    private var programs: [ProgramXML] = [] {
+    private var programs: [Program] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -50,7 +50,7 @@ class PodcastsViewController: UIViewController {
         setupTableView()
         subscriptions()
         
-        viewModel.getPrograms()
+        viewModel.getData()
     }
     
     private func setupTableView() {
@@ -101,7 +101,13 @@ extension PodcastsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
-        cell.program = programs[indexPath.row]
+        
+        let program = programs[indexPath.row]
+        cell.iconURL = program.imageURL
+        cell.titleText = program.title
+        cell.descriptionText = program.descriptionText
+        cell.authorText = program.author
+        
         return cell
     }
     
