@@ -33,4 +33,11 @@ extension SearchCoordinator: Coordinator {
         navigationController.show(programVC, sender: nil)
     }
     
+    func showEpisodeDetail(episode: EpisodeXML) {
+        let episodeVC = EpisodeViewController(coordinator: self)
+        episodeVC.episode = episode
+        
+        navigationController.show(episodeVC, sender: nil)
+    }
+    
 }

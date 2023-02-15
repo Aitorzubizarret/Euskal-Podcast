@@ -115,6 +115,7 @@
                 <outlet property="bottomLineImageView" destination="pwH-YW-BjC" id="R4y-Qd-K78"/>
                 <outlet property="descriptionLabel" destination="o9Y-kH-oVZ" id="u9s-Yv-3pF"/>
                 <outlet property="durationLabel" destination="FW8-Om-Ss3" id="fJt-Ct-4xy"/>
+                <outlet property="playImageView" destination="j67-tF-n7A" id="xqK-7O-wcC"/>
                 <outlet property="releaseDateLabel" destination="Z8C-ub-k0g" id="Tr5-pz-cuH"/>
                 <outlet property="titleLabel" destination="yvY-Az-vmy" id="xgo-yv-plY"/>
             </connections>

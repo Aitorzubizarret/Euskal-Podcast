@@ -36,6 +36,8 @@
 		1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
+		1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3325299C538B0092C464 /* EpisodeViewController.swift */; };
+		1AFE3328299C538B0092C464 /* EpisodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE3326299C538B0092C464 /* EpisodeViewController.xib */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		425DCB52263E076700958689 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DCB50263E076700958689 /* MainViewController.swift */; };
@@ -99,6 +101,8 @@
 		1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewModel.swift; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
+		1AFE3325299C538B0092C464 /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
+		1AFE3326299C538B0092C464 /* EpisodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeViewController.xib; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -288,6 +292,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		1AFE3324299C535D0092C464 /* EpisodeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1AFE3325299C538B0092C464 /* EpisodeViewController.swift */,
+				1AFE3326299C538B0092C464 /* EpisodeViewController.xib */,
+			);
+			path = EpisodeViewController;
+			sourceTree = "<group>";
+		};
 		425DCB5B263E0E3B00958689 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +310,7 @@
 				1A48E11B29957FDA00275BB4 /* NowPlayingViewController */,
 				1AF85E86298A93030087C77B /* PlayerViewController */,
 				1AF85E85298A92F30087C77B /* ProgramViewController */,
+				1AFE3324299C535D0092C464 /* EpisodeViewController */,
 				1AF85E84298A92DD0087C77B /* ProgramsViewController */,
 				1AF85E83298A92C50087C77B /* CompanyViewController */,
 				1AF85E82298A92B60087C77B /* MainViewController */,
@@ -517,6 +531,7 @@
 				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
 				1ADAD5F72993AFC8007AEDB6 /* PodcastsViewController.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
+				1AFE3328299C538B0092C464 /* EpisodeViewController.xib in Resources */,
 				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
 				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
@@ -540,6 +555,7 @@
 				1ADAD5F02993A26B007AEDB6 /* MeCoordinator.swift in Sources */,
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
+				1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */,
 				1ADAD5FA2993AFD5007AEDB6 /* SearchViewController.swift in Sources */,
 				1A7CC4B2285F90FF003F2379 /* Media.swift in Sources */,
 				426DCB97264C863C0020AC72 /* Season.swift in Sources */,

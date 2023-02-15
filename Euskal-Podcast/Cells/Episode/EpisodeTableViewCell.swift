@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol EpisodeCellDelegate {
+    func playEpisode(rowAt: Int)
+    func pauseEpisode(rowAt: Int)
+}
+
 class EpisodeTableViewCell: UITableViewCell {
 
     // MARK: - UI Elements
@@ -14,10 +19,24 @@ class EpisodeTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var playImageView: UIImageView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
+    
+    var delegate: EpisodeCellDelegate?
+    var rowAt: Int?
+    
+    var isPlaying: Bool = false {
+        didSet {
+            if isPlaying {
+                playImageView.image = UIImage(systemName: "pause.circle")
+            } else {
+                playImageView.image = UIImage(systemName: "play.circle")
+            }
+        }
+    }
     
     var releaseDateText: String = "" {
         didSet {
@@ -63,6 +82,23 @@ class EpisodeTableViewCell: UITableViewCell {
         
         // UIImageView.
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        // Gesture Recognizer.
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(playPauseEpisode))
+        playImageView.addGestureRecognizer(tapGR)
+        playImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc private func playPauseEpisode() {
+        guard let rowAt = rowAt else { return }
+        
+        if isPlaying {
+            delegate?.pauseEpisode(rowAt: rowAt)
+        } else {
+            delegate?.playEpisode(rowAt: rowAt)
+        }
+        
+        isPlaying.toggle()
     }
     
 }

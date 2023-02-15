@@ -20,13 +20,14 @@ class ProgramViewController: UIViewController {
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let episodeTableViewCellIdentifier: String = "EpisodeTableViewCell"
     
-    public var program: ProgramXML? {
+    var program: ProgramXML? {
         didSet {
             guard let _ = program else { return }
             
             tableView.reloadData()
         }
     }
+    var rowSelectedEpisode: Int = 0
     
     // MARK: - Methods
     
@@ -90,7 +91,7 @@ class ProgramViewController: UIViewController {
         let episodeCell: UINib = UINib(nibName: episodeTableViewCellIdentifier, bundle: nil)
         tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCellIdentifier)
     }
-
+    
 }
 
 // MARK: - UITableView Delegate
@@ -101,9 +102,7 @@ extension ProgramViewController: UITableViewDelegate {
         if indexPath.section > 0 {
             if let program = program {
                 let selectedEpisode: EpisodeXML = program.episodes[indexPath.row]
-//                coordinator.goToPlayer(episode: selectedEpisode)
-                
-                AudioManager.shared.playSong(episode: selectedEpisode, programName: program.title, programImageString: program.imageURL)
+                coordinator.showEpisodeDetail(episode: selectedEpisode)
             }
         }
     }
@@ -163,15 +162,42 @@ extension ProgramViewController: UITableViewDataSource {
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
+            cell.delegate = self
+            cell.rowAt = indexPath.row
+            
             if let program = program {
                 let episode = program.episodes[indexPath.row]
                 cell.releaseDateText = episode.getPublishedDateFormatter()
                 cell.titleText = episode.title
                 cell.descriptionText = episode.description
                 cell.durationText = episode.getDurationFormatted()
+                
+                if rowSelectedEpisode == indexPath.row {
+                    cell.isPlaying = AudioManager.shared.isPlaying
+                } else {
+                    cell.isPlaying = false
+                }
             }
+            
             return cell
         }
+    }
+    
+}
+
+extension ProgramViewController: EpisodeCellDelegate {
+    
+    func playEpisode(rowAt: Int) {
+        guard let program = program else { return }
+        
+        rowSelectedEpisode = rowAt
+        let selectedEpisode = program.episodes[rowAt]
+        
+        AudioManager.shared.playSong(episode: selectedEpisode, programName: program.title, programImageString: program.imageURL)
+    }
+    
+    func pauseEpisode(rowAt: Int) {
+        AudioManager.shared.pauseSong()
     }
     
 }

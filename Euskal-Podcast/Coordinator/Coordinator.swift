@@ -12,4 +12,5 @@ protocol Coordinator {
     var navigationController: UINavigationController { get set }
     
     func showProgramDetail(program: ProgramXML)
+    func showEpisodeDetail(episode: EpisodeXML)
 }
