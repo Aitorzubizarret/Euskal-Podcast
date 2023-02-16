@@ -27,7 +27,6 @@ class ProgramViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    var rowSelectedEpisode: Int = 0
     
     // MARK: - Methods
     
@@ -172,7 +171,7 @@ extension ProgramViewController: UITableViewDataSource {
                 cell.descriptionText = episode.descriptionText
                 cell.durationText = episode.getDurationFormatted()
                 
-                if rowSelectedEpisode == indexPath.row {
+                if AudioManager.shared.getEpisodeId() == episode.id {
                     cell.isPlaying = AudioManager.shared.isPlaying
                 } else {
                     cell.isPlaying = false
@@ -190,7 +189,6 @@ extension ProgramViewController: EpisodeCellDelegate {
     func playEpisode(rowAt: Int) {
         guard let program = program else { return }
         
-        rowSelectedEpisode = rowAt
         let selectedEpisode = program.episodes[rowAt]
         
         AudioManager.shared.playSong(episode: selectedEpisode, programName: program.title, programImageString: program.imageURL)

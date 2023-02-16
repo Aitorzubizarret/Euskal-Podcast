@@ -101,6 +101,11 @@ final class AudioManager {
         updateRemoteDisplayInfo()
     }
     
+    func getEpisodeId() -> String {
+        guard let episode = episode else { return "" }
+        return episode.id
+    }
+    
 }
 
 // MARK: - Methods that uses NotificationCenter.
