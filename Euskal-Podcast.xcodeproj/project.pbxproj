@@ -39,6 +39,7 @@
 		1AFE332D299D088B0092C464 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1AFE332C299D088B0092C464 /* RealmSwift */; };
 		1AFE3331299D16300092C464 /* Results-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3330299D16300092C464 /* Results-Extension.swift */; };
 		1AFE3333299D36910092C464 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3332299D36910092C464 /* RealmManager.swift */; };
+		1AFE3335299E38BC0092C464 /* RealManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3334299E38BC0092C464 /* RealManagerProtocol.swift */; };
 		4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212F413263F29CC00B9C021 /* PlayerViewController.swift */; };
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */; };
@@ -94,6 +95,7 @@
 		1AFE3326299C538B0092C464 /* EpisodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeViewController.xib; sourceTree = "<group>"; };
 		1AFE3330299D16300092C464 /* Results-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results-Extension.swift"; sourceTree = "<group>"; };
 		1AFE3332299D36910092C464 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		1AFE3334299E38BC0092C464 /* RealManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealManagerProtocol.swift; sourceTree = "<group>"; };
 		420BF37A2655ACE600E3A2A8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4212F413263F29CC00B9C021 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
 				1AFD3490298BEF910074C338 /* XMLParserManager.swift */,
 				1A48E5742999807D00A07331 /* AudioManager.swift */,
+				1AFE3334299E38BC0092C464 /* RealManagerProtocol.swift */,
 				1AFE3332299D36910092C464 /* RealmManager.swift */,
 			);
 			path = Managers;
@@ -517,6 +520,7 @@
 				1A48E11E2995800700275BB4 /* NowPlayingViewController.swift in Sources */,
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
+				1AFE3335299E38BC0092C464 /* RealManagerProtocol.swift in Sources */,
 				1AFE3333299D36910092C464 /* RealmManager.swift in Sources */,
 				1AFE3331299D16300092C464 /* Results-Extension.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,

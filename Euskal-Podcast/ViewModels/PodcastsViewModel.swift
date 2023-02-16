@@ -21,12 +21,13 @@ final class PodcastsViewModel {
     // Observable subjets.
     var programs = PassthroughSubject<[Program], Error>()
     
-    private var realmManager = RealmManager() // TODO: - Make this better.
+    private var realmManager: RealManagerProtocol
     
     // MARK: - Methods
     
-    init(apiManager: APIManager) {
+    init(apiManager: APIManager, realManager: RealManagerProtocol) {
         self.apiManager = apiManager
+        self.realmManager = realManager
         
         subscriptions()
     }

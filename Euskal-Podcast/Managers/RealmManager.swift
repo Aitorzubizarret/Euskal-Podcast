@@ -12,17 +12,22 @@ final class RealmManager {
     
     // MARK: - Properties
     
-    private var realm: Realm?
+    var realm: Realm
     
     // MARK: - Methods
     
     init() {
-        do {
-            realm = try Realm()
-        } catch let error {
-            print("RealmManager Init Error : \(error)")
-        }
+        realm = try! Realm()
+//        do {
+//            realm = try Realm()
+//        } catch let error {
+//            print("RealmManager Init Error : \(error)")
+//        }
     }
+    
+}
+
+extension RealmManager: RealManagerProtocol {
     
     func savePrograms(programs: [ProgramXML]) {
         for program in programs {
@@ -59,8 +64,6 @@ final class RealmManager {
     }
     
     func addProgram(program: Program) {
-        guard let realm = realm else { return }
-        
         do {
             try realm.write({
                 realm.add(program)
@@ -71,8 +74,6 @@ final class RealmManager {
     }
     
     func getAllPrograms() -> [Program] {
-        guard let realm = realm else { return [] }
-        
         let programsResults: Results<Program> = realm.objects(Program.self)
         let programsArray: [Program] = programsResults.toArray()
         
@@ -80,8 +81,6 @@ final class RealmManager {
     }
     
     func deleteAll() {
-        guard let realm = realm else { return }
-        
         let programsResults: Results<Program> = realm.objects(Program.self)
         
         do {

@@ -40,7 +40,8 @@ class TabBar: UITabBarController {
     private func setupVCs() {
         // Podcasts Tab.
         let podcastsAPIManager = APIManager()
-        let podcastsViewModel = PodcastsViewModel(apiManager: podcastsAPIManager)
+        let podcastsRealmManager = RealmManager()
+        let podcastsViewModel = PodcastsViewModel(apiManager: podcastsAPIManager, realManager: podcastsRealmManager)
         let podcastsVC = PodcastsViewController(coordinator: podcastsCoordinator, viewModel: podcastsViewModel)
         
         podcastsVC.tabBarItem = UITabBarItem(title: "Podcastak",
