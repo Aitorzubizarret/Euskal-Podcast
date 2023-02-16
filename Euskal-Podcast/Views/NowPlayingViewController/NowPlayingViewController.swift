@@ -21,19 +21,20 @@ class NowPlayingViewController: UIViewController {
     
     // MARK: - Properties
     
-    var isPlaying: Bool = false {
+    var currentEpisode: Episode? {
+        didSet {
+            if let currentEpisode = currentEpisode {
+                episodeTitleLabel.text = currentEpisode.title
+            }
+        }
+    }
+    
+    var isPlaying: Bool = true {
         didSet {
             if isPlaying {
                 playPauseImageView.image = UIImage(systemName: "pause.circle")
             } else {
                 playPauseImageView.image = UIImage(systemName: "play.circle")
-            }
-        }
-    }
-    var currentEpisode: Episode? {
-        didSet {
-            if let currentEpisode = currentEpisode {
-                episodeTitleLabel.text = currentEpisode.title
             }
         }
     }
@@ -80,10 +81,12 @@ class NowPlayingViewController: UIViewController {
     }
     
     @objc private func playPauseAction() {
-        if isPlaying {
+        if AudioManager.shared.isPlaying() {
             AudioManager.shared.pauseSong()
+            isPlaying = false
         } else {
             AudioManager.shared.playSong()
+            isPlaying = true
         }
     }
     
@@ -93,11 +96,10 @@ class NowPlayingViewController: UIViewController {
     }
     
     @objc private func songPlaying() {
-        isPlaying = true
-        
         if let episode = AudioManager.shared.episode {
             currentEpisode = episode
         }
+        isPlaying = true
     }
     
     @objc private func songPause() {
