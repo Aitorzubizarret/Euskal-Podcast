@@ -13,4 +13,5 @@ extension Notification.Name {
     static let hideNowPlayingView = Notification.Name("hideNowPlayingView")
     static let songPlaying = Notification.Name("songPlaying")
     static let songPause = Notification.Name("songPause")
+    static let audioFinished = Notification.Name("audioFinished")
 }

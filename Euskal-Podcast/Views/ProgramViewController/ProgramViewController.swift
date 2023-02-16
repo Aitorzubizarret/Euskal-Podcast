@@ -102,6 +102,10 @@ class ProgramViewController: UIViewController {
                                        selector: #selector(songIsPause),
                                        name: .songPause,
                                        object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songIsPause),
+                                       name: .audioFinished,
+                                       object: nil)
     }
     
     @objc private func songIsPlaying() {

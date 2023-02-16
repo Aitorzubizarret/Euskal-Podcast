@@ -106,6 +106,10 @@ class PlayerViewController: UIViewController {
                                        selector: #selector(updateButtonPlay),
                                        name: .songPause,
                                        object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(updateButtonPause),
+                                       name: .audioFinished,
+                                       object: nil)
     }
     
     private func setupTimer() {

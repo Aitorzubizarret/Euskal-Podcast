@@ -71,6 +71,10 @@ class NowPlayingViewController: UIViewController {
                                        selector: #selector(songPause),
                                        name: .songPause,
                                        object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songPause),
+                                       name: .audioFinished,
+                                       object: nil)
     }
     
     private func closeView() {

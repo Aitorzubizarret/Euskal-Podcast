@@ -33,6 +33,14 @@ final class AudioManager {
     
     private init() {
         configurePlayer()
+        setupNotificationsObservers()
+    }
+    
+    private func setupNotificationsObservers() {
+        notificationCenter.addObserver(self,
+                                       selector: #selector(audioFinished),
+                                       name: .AVPlayerItemDidPlayToEndTime,
+                                       object: nil)
     }
     
     private func configurePlayer() {
@@ -110,6 +118,11 @@ final class AudioManager {
         return currentTimeInSeconds
     }
     
+    @objc private func audioFinished() {
+        notifySongPause()
+        updateRemoteDisplayInfo()
+    }
+    
 }
 
 // MARK: - Methods that uses NotificationCenter.
@@ -133,6 +146,11 @@ extension AudioManager {
     
     func notifySongPause() {
         let notification = Notification(name: .songPause)
+        notificationCenter.post(notification)
+    }
+    
+    func notifySongFinished() {
+        let notification = Notification(name: .audioFinished)
         notificationCenter.post(notification)
     }
     
