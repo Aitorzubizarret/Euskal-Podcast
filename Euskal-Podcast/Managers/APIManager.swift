@@ -30,10 +30,6 @@ final class APIManager {
     private let urlPath: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/"
     private let sourcesURL: String = "main.json"
     
-    private var companiesGroup = DispatchGroup()
-    
-    private var tempCompanies: [Company] = []
-    
     // MARK: - Methods
     
     init() {
@@ -145,47 +141,5 @@ final class APIManager {
 //        task.resume()
 //        
 //    }
-    
-    ///
-    /// Gets data from one company from the API.
-    ///
-    private func getCompanyData(urlString: String) {
-        let companyURLString = urlPath + urlString
-        
-        guard let safeURL: URL = URL(string: companyURLString) else { return }
-        
-        companiesGroup.enter()
-        
-        let task = URLSession.shared.dataTask(with: safeURL) { data, response, error in
-            
-            if let safeError = error {
-                print("Error \(safeError.localizedDescription)")
-                self.companiesGroup.leave()
-                return
-            }
-            
-            if let safeResponse = response {
-                //print("Response \(safeResponse)")
-            }
-            
-            if let safeData = data {
-                // For debug purposes.
-                //let receivedData: String = String(data: safeData, encoding: .utf8) ?? ""
-                //debugPrint("DebugPrint - Data: \(receivedData) - Response: \(response) - Error: \(error)")
-                
-                do {
-                    let company = try JSONDecoder().decode(Company.self, from: safeData)
-                    
-                    self.tempCompanies.append(company)
-                } catch let error {
-                    print("Error JSONDecoder : \(error)")
-                }
-            }
-            
-            self.companiesGroup.leave()
-            
-        }
-        task.resume()
-    }
     
 }
