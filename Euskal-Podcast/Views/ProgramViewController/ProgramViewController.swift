@@ -172,7 +172,7 @@ extension ProgramViewController: UITableViewDataSource {
                 cell.durationText = episode.getDurationFormatted()
                 
                 if AudioManager.shared.getEpisodeId() == episode.id {
-                    cell.isPlaying = AudioManager.shared.isPlaying
+                    cell.isPlaying = AudioManager.shared.isPlaying()
                 } else {
                     cell.isPlaying = false
                 }

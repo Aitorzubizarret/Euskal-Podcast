@@ -24,7 +24,6 @@ final class AudioManager {
     var episode: Episode?
     var programName: String?
     var programImage: URL?
-    var isPlaying: Bool = false
     var totalDurationString = ""
     
     // Notification Center.
@@ -76,7 +75,6 @@ final class AudioManager {
         notifyShowNowPlayingView()
         
         player?.play()
-        isPlaying = true
         
         notifySongPlaying()
         
@@ -85,7 +83,6 @@ final class AudioManager {
     
     func playSong() {
         player?.play()
-        isPlaying = true
         
         notifySongPlaying()
         
@@ -94,7 +91,6 @@ final class AudioManager {
     
     func pauseSong() {
         player?.pause()
-        isPlaying = false
         
         notifySongPause()
         
@@ -132,6 +128,18 @@ extension AudioManager {
         notificationCenter.post(notification)
     }
     
+    func isPlaying() -> Bool {
+        if let player = player {
+            if player.timeControlStatus == AVPlayer.TimeControlStatus.playing {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
 }
 
 // MARK: - Methods for Controlling Background Audio from Control Center.
@@ -142,23 +150,18 @@ extension AudioManager {
         let commandCenter = MPRemoteCommandCenter.shared()
         
         commandCenter.playCommand.addTarget { [unowned self] event in
-            if !self.isPlaying {
+            if !isPlaying() {
                 self.player?.play()
-                self.isPlaying = true
-                
                 notifySongPlaying()
                 
                 return .success
             }
-            
             return .commandFailed
         }
         
         commandCenter.pauseCommand.addTarget { [unowned self] event in
-            if self.isPlaying {
+            if isPlaying() {
                 self.player?.pause()
-                self.isPlaying = false
-                
                 notifySongPause()
                 
                 return .success
