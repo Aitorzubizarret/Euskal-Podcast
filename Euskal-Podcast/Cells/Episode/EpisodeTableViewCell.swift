@@ -97,8 +97,6 @@ class EpisodeTableViewCell: UITableViewCell {
         } else {
             delegate?.playEpisode(rowAt: rowAt)
         }
-        
-        isPlaying.toggle()
     }
     
 }

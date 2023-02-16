@@ -13,12 +13,13 @@ class ProgramViewController: UIViewController {
     
     // MARK: - Properties
     
-    var coordinator: Coordinator
-    
     private let tableView = UITableView()
-    
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let episodeTableViewCellIdentifier: String = "EpisodeTableViewCell"
+    
+    private let notificationCenter = NotificationCenter.default
+    
+    var coordinator: Coordinator
     
     var program: Program? {
         didSet {
@@ -27,6 +28,8 @@ class ProgramViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    
+    var isPlaying: Bool = false
     
     // MARK: - Methods
     
@@ -45,7 +48,9 @@ class ProgramViewController: UIViewController {
         
         title = "Programa"
         
+        isPlaying = AudioManager.shared.isPlaying()
         setupTableView()
+        setupNotificationsObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,9 +69,6 @@ class ProgramViewController: UIViewController {
         navigationController?.navigationBar.layoutIfNeeded()
     }
     
-    ///
-    /// Setup the TableView.
-    ///
     private func setupTableView() {
         view.addSubview(tableView)
         
@@ -89,6 +91,37 @@ class ProgramViewController: UIViewController {
         
         let episodeCell: UINib = UINib(nibName: episodeTableViewCellIdentifier, bundle: nil)
         tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCellIdentifier)
+    }
+    
+    private func setupNotificationsObservers() {
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songIsPlaying),
+                                       name: .songPlaying,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songIsPause),
+                                       name: .songPause,
+                                       object: nil)
+    }
+    
+    @objc private func songIsPlaying() {
+        isPlaying = true
+        
+        updateVisibleCell()
+    }
+    
+    @objc private func songIsPause() {
+        isPlaying = false
+        
+        updateVisibleCell()
+    }
+    
+    private func updateVisibleCell() {
+        guard let visibleCells = tableView.indexPathsForVisibleRows else { return }
+        
+        tableView.beginUpdates()
+        tableView.reloadRows(at: visibleCells, with: .none)
+        tableView.endUpdates()
     }
     
 }
@@ -172,7 +205,7 @@ extension ProgramViewController: UITableViewDataSource {
                 cell.durationText = episode.getDurationFormatted()
                 
                 if AudioManager.shared.getEpisodeId() == episode.id {
-                    cell.isPlaying = AudioManager.shared.isPlaying()
+                    cell.isPlaying = isPlaying
                 } else {
                     cell.isPlaying = false
                 }
