@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class PlayerViewController: UIViewController {
     
@@ -35,115 +34,110 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Properties
     
-    var episodeXML: EpisodeXML?
+    var episode: Episode
     
     private var updateSliderPosition: Bool = true
     
-    private var player: AVPlayer?
-    private var playerItem: AVPlayerItem?
-    private var isPlaying: Bool = false
-    private var isPlayerConfigured: Bool = false
+    // Notification Center.
+    private let notificationCenter = NotificationCenter.default
+    
+    private var timer: Timer?
     
     // MARK: - Methods
+    
+    init(episode: Episode) {
+        self.episode = episode
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        displayCurrentTime()
+        setupNotificationsObservers()
+        setupTimer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        player?.pause()
+        super.viewWillDisappear(animated)
+        
+        timer?.invalidate()
     }
     
-    ///
-    /// Setup the View.
-    ///
     private func setupView() {
         // Button.
-        playPauseButton.backgroundColor = UIColor.blue
-        playPauseButton.setTitle("Play", for: .normal)
+        playPauseButton.layer.borderWidth = 1
+        playPauseButton.layer.borderColor = UIColor.black.cgColor
         playPauseButton.layer.cornerRadius = 25
+        if AudioManager.shared.isPlaying() {
+            updateButtonPause()
+        } else {
+            updateButtonPlay()
+        }
         
         // ImageView.
         coverImageView.backgroundColor = UIColor.red
         coverImageView.layer.cornerRadius = 10
         
-        // Check if we have an Episode.
-        guard let episodeXML = episodeXML else { return }
-        
         // Label
-        titleLabel.text = episodeXML.title
+        titleLabel.text = episode.title
         currentDurationTimeLabel.text = "00:00"
-        totalDurationTimeLabel.text = "00:00"
+        totalDurationTimeLabel.text = episode.getDurationFormatted()
         
         // Slider.
         durationSlider.minimumValue = 0
         durationSlider.maximumValue = 1
         durationSlider.setValue(0, animated: false)
         durationSlider.isContinuous = false
-        
-        configurePlayer(episode: episodeXML)
     }
     
-    ///
-    /// Configure the Player.
-    ///
-    private func configurePlayer(episode: EpisodeXML) {
-        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
+    private func setupNotificationsObservers() {
+        notificationCenter.addObserver(self, selector: #selector(updateButtonPause),
+                                       name: Notification.Name(rawValue: "SongPlaying"), object: nil)
         
-        // Makes posible to listen to audio files even in "silent mode".
-        try! AVAudioSession.sharedInstance().setCategory(.playback)
-        
-        let asset = AVAsset(url: episodeAudioURL)
-        playerItem = AVPlayerItem(asset: asset)
-        player = AVPlayer(playerItem: playerItem)
-        
-        guard let safePlayer = player,
-              let currentItem = safePlayer.currentItem else { return }
-
-        safePlayer.volume = 1.0
-
-        totalDurationTimeLabel.text = episode.getDurationFormatted()
-
-        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
-            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-            let episodeCurrentTime = CMTimeGetSeconds(time)
-            let progress: Float = Float(episodeCurrentTime/episodeDuration)
-            if self.updateSliderPosition {
-                self.durationSlider.setValue(progress, animated: true)
-            }
-
-            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
-        }
-
-        isPlayerConfigured = true
+        notificationCenter.addObserver(self, selector: #selector(updateButtonPlay),
+                                       name: Notification.Name(rawValue: "SongPause"), object: nil)
     }
     
-    ///
-    /// Play or Pause the media file.
-    ///
+    private func setupTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(displayCurrentTime), userInfo: nil, repeats: true)
+    }
+    
     private func playPauseAction() {
-        if isPlaying {
-            playPauseButton.setTitle("Play", for: .normal)
-            player?.pause()
+        if AudioManager.shared.isPlaying() {
+            AudioManager.shared.pauseSong()
+            updateButtonPlay()
         } else {
-            playPauseButton.setTitle("Pause", for: .normal)
-            player?.play()
+            AudioManager.shared.playSong()
+            updateButtonPause()
         }
-        
-        isPlaying.toggle()
+    }
+    
+    @objc private func updateButtonPlay() {
+        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    @objc private func updateButtonPause() {
+        playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     ///
     /// Calculate how much time has been played from the MP3 file and display it on a label.
     ///
-    private func displayCurrentTime(timeInSeconds: Int) {
+    @objc private func displayCurrentTime() {
+        let episodeDuration: Int = Int(episode.duration) ?? 0
+        let episodeCurrentTime: Int = AudioManager.shared.getCurrentPlayedTime()
+        
         // Label.
-        var seconds: Int = 0
+        var seconds: Int = episodeCurrentTime
         var minutes: Int = 0
         
-        seconds = timeInSeconds
         if seconds > 59 {
             minutes = seconds / 60
             seconds = seconds - (minutes * 60)
@@ -151,18 +145,22 @@ class PlayerViewController: UIViewController {
         
         let timeString = String(format: "%02d:%02d", minutes, seconds)
         currentDurationTimeLabel.text = timeString
+        
+        // Slider.
+        let progress: Float = Float(Float(episodeCurrentTime) / Float(episodeDuration))
+        if updateSliderPosition {
+            durationSlider.setValue(progress, animated: true)
+        }
     }
     
     private func seekAudioFilePosition(position: Double) {
-        guard let episodeXML = episodeXML else { return }
+        let time = episode.getDurationInSeconds() * position
         
-        let time = episodeXML.getDurationInSeconds() * position
-        
-        player?.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000), completionHandler: { success in
-            if success {
-                self.updateSliderPosition = true
-            }
-        })
+//        player?.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000), completionHandler: { success in
+//            if success {
+//                self.updateSliderPosition = true
+//            }
+//        })
     }
     
 }

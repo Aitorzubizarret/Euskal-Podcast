@@ -102,6 +102,14 @@ final class AudioManager {
         return episode.id
     }
     
+    func getCurrentPlayedTime() -> Int {
+        guard let currentItem = playerItem else { return 0 }
+        
+        // Int or Float64
+        let currentTimeInSeconds: Int = Int(CMTimeGetSeconds(currentItem.currentTime()))
+        return currentTimeInSeconds
+    }
+    
 }
 
 // MARK: - Methods that uses NotificationCenter.
