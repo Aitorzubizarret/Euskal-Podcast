@@ -62,17 +62,20 @@ class NowPlayingViewController: UIViewController {
     }
     
     private func setupNotificationsObservers() {
-        notificationCenter.addObserver(self, selector: #selector(songPlaying),
-                                       name: Notification.Name(rawValue: "SongPlaying"), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(songPause),
-                                       name: Notification.Name(rawValue: "SongPause"), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songPlaying),
+                                       name: .songPlaying,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(songPause),
+                                       name: .songPause,
+                                       object: nil)
     }
     
     private func closeView() {
         AudioManager.shared.pauseSong()
         
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "HideNowPlayingView"))
+        let notification = Notification(name: .hideNowPlayingView)
         notificationCenter.post(notification)
     }
     
@@ -85,7 +88,7 @@ class NowPlayingViewController: UIViewController {
     }
     
     @objc private func showPlayerFull() {
-        let notification = Notification(name: Notification.Name(rawValue: "ShowPlayerViewController"))
+        let notification = Notification(name: .showPlayerViewController)
         notificationCenter.post(notification)
     }
     

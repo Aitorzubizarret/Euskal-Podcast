@@ -85,14 +85,18 @@ class TabBar: UITabBarController {
     }
     
     private func setupNotificationsObservers() {
-        notificationCenter.addObserver(self, selector: #selector(showNowPlayingView),
-                                       name: Notification.Name(rawValue: "ShowNowPlayingView"), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(hideNowPlayingView),
-                                       name: Notification.Name(rawValue: "HideNowPlayingView"), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(showPlayerView),
-                                       name: Notification.Name(rawValue: "ShowPlayerViewController"), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(showNowPlayingView),
+                                       name: .showNowPlayingView,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(hideNowPlayingView),
+                                       name: .hideNowPlayingView,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(showPlayerView),
+                                       name: .showPlayerViewController,
+                                       object: nil)
     }
     
 }

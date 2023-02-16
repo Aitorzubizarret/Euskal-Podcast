@@ -117,22 +117,22 @@ final class AudioManager {
 extension AudioManager {
     
     func notifyShowNowPlayingView() {
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "ShowNowPlayingView"))
+        let notification = Notification(name: .showNowPlayingView)
         notificationCenter.post(notification)
     }
     
     func notifyHideNowPlayingView() {
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "HideNowPlayingView"))
+        let notification = Notification(name: .hideNowPlayingView)
         notificationCenter.post(notification)
     }
     
     func notifySongPlaying() {
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "SongPlaying"))
+        let notification = Notification(name: .songPlaying)
         notificationCenter.post(notification)
     }
     
     func notifySongPause() {
-        let notification: Notification = Notification(name: Notification.Name(rawValue: "SongPause"))
+        let notification = Notification(name: .songPause)
         notificationCenter.post(notification)
     }
     

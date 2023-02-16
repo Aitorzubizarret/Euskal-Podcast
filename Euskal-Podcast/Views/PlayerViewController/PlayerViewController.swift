@@ -98,11 +98,14 @@ class PlayerViewController: UIViewController {
     }
     
     private func setupNotificationsObservers() {
-        notificationCenter.addObserver(self, selector: #selector(updateButtonPause),
-                                       name: Notification.Name(rawValue: "SongPlaying"), object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(updateButtonPlay),
-                                       name: Notification.Name(rawValue: "SongPause"), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(updateButtonPause),
+                                       name: .songPlaying,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(updateButtonPlay),
+                                       name: .songPause,
+                                       object: nil)
     }
     
     private func setupTimer() {
