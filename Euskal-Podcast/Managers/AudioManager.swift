@@ -22,6 +22,7 @@ final class AudioManager {
     
     // Audio files data.
     var episode: Episode?
+    var program: Program?
     var programName: String?
     var programImage: URL?
     var totalDurationString = ""
@@ -50,40 +51,25 @@ final class AudioManager {
         setupRemoteControls()
     }
     
-    func playSong(episode: Episode, programName: String, programImageString: String) {
-        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL),
-              let programImageURL: URL = URL(string: programImageString) else { return }
+    func playSong(episode: Episode, program: Program) {
+        guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
         
         self.episode = episode
-        self.programName = programName
-        self.programImage = programImageURL
+        self.program = program
         
         let asset = AVAsset(url: episodeAudioURL)
         playerItem = AVPlayerItem(asset: asset)
         player = AVPlayer(playerItem: playerItem)
         
-        guard let safePlayer = player,
-              let currentItem = safePlayer.currentItem else { return }
+        guard let player = player else { return }
 
-        safePlayer.volume = 1.0
+        player.volume = 1.0
         
         totalDurationString = episode.getDurationFormatted()
-
-//        safePlayer.addPeriodicTimeObserver(forInterval: CMTime.init(seconds: 1, preferredTimescale: 1), queue: .main) { time in
-//            let episodeDuration = CMTimeGetSeconds(currentItem.duration)
-//            let episodeCurrentTime = CMTimeGetSeconds(time)
-//            let progress: Float = Float(episodeCurrentTime/episodeDuration)
-//            if self.updateSliderPosition {
-//                self.durationSlider.setValue(progress, animated: true)
-//            }
-//
-//            self.displayCurrentTime(timeInSeconds: Int(time.seconds))
-//        }
+        
+        player.play()
         
         notifyShowNowPlayingView()
-        
-        player?.play()
-        
         notifySongPlaying()
         
         updateRemoteDisplayInfo()
@@ -258,14 +244,22 @@ extension AudioManager {
         var nowPlayingInfo = [String: Any]()
         
         // Artist -> Podcast Program Title.
-        nowPlayingInfo[MPMediaItemPropertyArtist] = self.programName
+        nowPlayingInfo[MPMediaItemPropertyArtist] = program?.title
         
-        // TODO: - Get image from the Program.
         // Image.
-        if let image = UIImage(systemName: "exclamationmark.triangle") {
-            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
+        var programImage: UIImage? = UIImage(systemName: "exclamationmark.triangle")
+        
+        if let program = program,
+           let imageURL: URL = URL(string: program.imageURL) {
+            let tempUIImageView: UIImageView = UIImageView()
+            tempUIImageView.kf.setImage(with: imageURL)
+            
+            programImage = tempUIImageView.image
+        }
+        if let image = programImage {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { size in
                 return image
-            }
+            })
         }
         
         // Title.

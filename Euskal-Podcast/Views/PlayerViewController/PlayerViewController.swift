@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PlayerViewController: UIViewController {
     
@@ -37,6 +38,7 @@ class PlayerViewController: UIViewController {
     // MARK: - Properties
     
     var episode: Episode
+    var program: Program
     
     private var updateSliderPosition: Bool = true
     
@@ -47,8 +49,9 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(episode: Episode) {
+    init(episode: Episode, program: Program) {
         self.episode = episode
+        self.program = program
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,12 +77,24 @@ class PlayerViewController: UIViewController {
     
     private func setupView() {
         // ImageView.
-        pictureImageView.backgroundColor = UIColor.red
-        pictureImageView.layer.cornerRadius = 10
+        pictureImageView.backgroundColor = UIColor.lightGray
+        if let imageURL: URL = URL(string: program.imageURL) {
+            pictureImageView.kf.setImage(with: imageURL)
+        }
+        
+        pictureImageView.layer.borderWidth = 1
+        pictureImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
+        pictureImageView.layer.masksToBounds = false
+        
+        pictureImageView.layer.shadowOffset = CGSize.init(width: 0, height: 4)
+        pictureImageView.layer.shadowColor = UIColor.gray.cgColor
+        pictureImageView.layer.shadowRadius = 4
+        pictureImageView.layer.shadowOpacity = 0.5
         
         // Label
         titleLabel.text = episode.title
-        programNameLabel.text = ""
+        programNameLabel.text = program.title
         currentDurationTimeLabel.text = "00:00"
         totalDurationTimeLabel.text = episode.getDurationFormatted()
         descriptionLabel.text = episode.descriptionText

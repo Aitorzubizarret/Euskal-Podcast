@@ -227,8 +227,7 @@ extension ProgramViewController: EpisodeCellDelegate {
         guard let program = program else { return }
         
         let selectedEpisode = program.episodes[rowAt]
-        
-        AudioManager.shared.playSong(episode: selectedEpisode, programName: program.title, programImageString: program.imageURL)
+        AudioManager.shared.playSong(episode: selectedEpisode, program: program)
     }
     
     func pauseEpisode(rowAt: Int) {
