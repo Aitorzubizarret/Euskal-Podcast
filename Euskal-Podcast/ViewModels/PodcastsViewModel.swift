@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Combine
+import RealmSwift
 
 final class PodcastsViewModel {
     
@@ -16,10 +17,8 @@ final class PodcastsViewModel {
     var apiManager: APIManager
     private var subscribedTo: [AnyCancellable] = []
     
-    var allPrograms: [ProgramXML] = []
-    
     // Observable subjets.
-    var programs = PassthroughSubject<[Program], Error>()
+    var programs = PassthroughSubject<Results<Program>, Error>()
     
     private var realmManager: RealManagerProtocol
     
@@ -40,11 +39,18 @@ final class PodcastsViewModel {
                 self?.saveProgramsInRealm(programs: programs)
             }
         }.store(in: &subscribedTo)
+        
+        realmManager.allPrograms.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] programs in
+            self?.programs.send(programs)
+        }.store(in: &subscribedTo)
+
     }
     
     func getData() {
-        //fetchRSSPrograms()
-        getRealmData()
+        getAllPrograms()
+        fetchRSSPrograms()
         //deleteAllRealmData()
     }
     
@@ -68,8 +74,8 @@ extension PodcastsViewModel {
         realmManager.savePrograms(programs: programs)
     }
     
-    func getRealmData() {
-        programs.send(realmManager.getAllPrograms())
+    func getAllPrograms() {
+        realmManager.getAllPrograms()
     }
     
     func deleteAllRealmData() {

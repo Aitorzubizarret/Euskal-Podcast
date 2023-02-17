@@ -7,12 +7,16 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 final class RealmManager {
     
     // MARK: - Properties
     
     var realm: Realm
+    
+    // Observable subjets.
+    var allPrograms = PassthroughSubject<Results<Program>, Error>()
     
     // MARK: - Methods
     
@@ -25,42 +29,56 @@ final class RealmManager {
 //        }
     }
     
+    
+    
 }
 
 extension RealmManager: RealManagerProtocol {
     
     func savePrograms(programs: [ProgramXML]) {
         for program in programs {
-            // Create the Object.
-            let newProgram = Program()
-            newProgram.title = program.title
-            newProgram.descriptionText = program.description
-            newProgram.category = program.category
-            newProgram.imageURL = program.imageURL
-            newProgram.explicit = program.explicit
-            newProgram.language = program.language
-            newProgram.author = program.author
-            newProgram.link = program.link
-            newProgram.copyright = program.copyright
-            newProgram.copyrightOwnerName = program.copyrightOwnerName
-            newProgram.copyrightOwnerEmail = program.copyrightOwnerEmail
-            
-            for episode in program.episodes {
-                let newEpisode = Episode()
-                newEpisode.title = episode.title
-                newEpisode.descriptionText = episode.description
-                newEpisode.pubDate = episode.pubDate
-                newEpisode.explicit = episode.explicit
-                newEpisode.audioFileURL = episode.audioFileURL
-                newEpisode.audioFileSize = episode.audioFileSize
-                newEpisode.duration = episode.duration
-                newEpisode.link = episode.link
+            // Search Program in the DB before.
+            let foundPrograms = realm.objects(Program.self).filter("title = '\(program.title)'")
+            if foundPrograms.isEmpty {
+                print("NOT Found Program")
                 
-                newProgram.episodes.append(newEpisode)
+                // Create the Object.
+                let newProgram = Program()
+                newProgram.title = program.title
+                newProgram.descriptionText = program.description
+                newProgram.category = program.category
+                newProgram.imageURL = program.imageURL
+                newProgram.explicit = program.explicit
+                newProgram.language = program.language
+                newProgram.author = program.author
+                newProgram.link = program.link
+                newProgram.copyright = program.copyright
+                newProgram.copyrightOwnerName = program.copyrightOwnerName
+                newProgram.copyrightOwnerEmail = program.copyrightOwnerEmail
+                
+                for episode in program.episodes {
+                    let newEpisode = Episode()
+                    newEpisode.title = episode.title
+                    newEpisode.descriptionText = episode.description
+                    newEpisode.pubDate = episode.pubDate
+                    newEpisode.explicit = episode.explicit
+                    newEpisode.audioFileURL = episode.audioFileURL
+                    newEpisode.audioFileSize = episode.audioFileSize
+                    newEpisode.duration = episode.duration
+                    newEpisode.link = episode.link
+                    
+                    newProgram.episodes.append(newEpisode)
+                }
+                
+                addProgram(program: newProgram)
+            } else {
+                for program in foundPrograms {
+                    print("Found Program: \(program.title)")
+                }
             }
-            
-            addProgram(program: newProgram)
         }
+        
+        allPrograms.send(realm.objects(Program.self))
     }
     
     func addProgram(program: Program) {
@@ -73,11 +91,15 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func getAllPrograms() -> [Program] {
-        let programsResults: Results<Program> = realm.objects(Program.self)
-        let programsArray: [Program] = programsResults.toArray()
-        
-        return programsArray
+//    func getAllPrograms() -> [Program] {
+//        let programsResults: Results<Program> = realm.objects(Program.self)
+//        let programsArray: [Program] = programsResults.toArray()
+//        
+//        return programsArray
+//    }
+    
+    func getAllPrograms() {
+        allPrograms.send(realm.objects(Program.self))
     }
     
     func deleteAll() {

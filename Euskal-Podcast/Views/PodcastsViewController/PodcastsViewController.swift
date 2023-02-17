@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import RealmSwift
 
 class PodcastsViewController: UIViewController {
     
@@ -21,7 +22,7 @@ class PodcastsViewController: UIViewController {
     private var viewModel: PodcastsViewModel
     private var subscribedTo: [AnyCancellable] = []
     
-    private var programs: [Program] = [] {
+    private var programs: Results<Program>? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -82,6 +83,8 @@ class PodcastsViewController: UIViewController {
 extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let programs = programs else { return }
+        
         coordinator.showProgramDetail(program: programs[indexPath.row])
     }
     
@@ -96,17 +99,19 @@ extension PodcastsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return programs.count
+        return programs?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
         
-        let program = programs[indexPath.row]
-        cell.iconURL = program.imageURL
-        cell.titleText = program.title
-        cell.descriptionText = program.descriptionText
-        cell.authorText = program.author
+        if let programs = programs {
+            let program = programs[indexPath.row]
+            cell.iconURL = program.imageURL
+            cell.titleText = program.title
+            cell.descriptionText = program.descriptionText
+            cell.authorText = program.author
+        }
         
         return cell
     }
