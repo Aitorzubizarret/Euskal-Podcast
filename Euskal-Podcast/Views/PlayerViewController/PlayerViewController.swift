@@ -11,26 +11,28 @@ class PlayerViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    @IBOutlet weak var elementsStackView: UIStackView!
-    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var programNameLabel: UILabel!
     
     @IBOutlet weak var durationSlider: UISlider!
-    @IBAction func durationSliderTouchOn(_ sender: Any) {
+    @IBAction func sliderStartAction(_ sender: Any) {
+        // Action : TouchDown.
         updateSliderPosition = false
     }
-    @IBAction func durationSliderEndMoving(_ sender: Any) {
+    @IBAction func sliderEndAction(_ sender: Any) {
         let slider = sender as! UISlider
-        seekAudioFilePosition(position: Double(slider.value))
+        AudioManager.shared.seekAudioTo(position: Double(slider.value))
     }
     
     @IBOutlet weak var currentDurationTimeLabel: UILabel!
     @IBOutlet weak var totalDurationTimeLabel: UILabel!
     
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBAction func playPauseButtonTapped(_ sender: Any) {
-        playPauseAction()
-    }
+    @IBOutlet weak var goBack15ImageView: UIImageView!
+    @IBOutlet weak var playPauseImageView: UIImageView!
+    @IBOutlet weak var goForward15ImageView: UIImageView!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     // MARK: - Properties
     
@@ -71,30 +73,38 @@ class PlayerViewController: UIViewController {
     }
     
     private func setupView() {
-        // Button.
-        playPauseButton.layer.borderWidth = 1
-        playPauseButton.layer.borderColor = UIColor.black.cgColor
-        playPauseButton.layer.cornerRadius = 25
-        if AudioManager.shared.isPlaying() {
-            updateButtonPause()
-        } else {
-            updateButtonPlay()
-        }
-        
         // ImageView.
-        coverImageView.backgroundColor = UIColor.red
-        coverImageView.layer.cornerRadius = 10
+        pictureImageView.backgroundColor = UIColor.red
+        pictureImageView.layer.cornerRadius = 10
         
         // Label
         titleLabel.text = episode.title
+        programNameLabel.text = ""
         currentDurationTimeLabel.text = "00:00"
         totalDurationTimeLabel.text = episode.getDurationFormatted()
+        descriptionLabel.text = episode.descriptionText
         
         // Slider.
         durationSlider.minimumValue = 0
         durationSlider.maximumValue = 1
         durationSlider.setValue(0, animated: false)
         durationSlider.isContinuous = false
+        durationSlider.setThumbImage(UIImage(systemName: "circlebadge.fill"), for: .normal)
+        
+        // Gesture Recognizers.
+        let tapBack15GR = UITapGestureRecognizer(target: self, action: #selector(goBack15Action))
+        goBack15ImageView.addGestureRecognizer(tapBack15GR)
+        goBack15ImageView.isUserInteractionEnabled = true
+        
+        let tapPlayPauseGR = UITapGestureRecognizer(target: self, action: #selector(playPauseAction))
+        playPauseImageView.addGestureRecognizer(tapPlayPauseGR)
+        playPauseImageView.isUserInteractionEnabled = true
+        
+        let tapForward15GR = UITapGestureRecognizer(target: self, action: #selector(goForward15Action))
+        goForward15ImageView.addGestureRecognizer(tapForward15GR)
+        goForward15ImageView.isUserInteractionEnabled = true
+        
+        AudioManager.shared.isPlaying() ? updateButtonPause() : updateButtonPlay()
     }
     
     private func setupNotificationsObservers() {
@@ -110,13 +120,22 @@ class PlayerViewController: UIViewController {
                                        selector: #selector(updateButtonPause),
                                        name: .audioFinished,
                                        object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(updateSlider),
+                                       name: .seekFinished,
+                                       object: nil)
     }
     
     private func setupTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(displayCurrentTime), userInfo: nil, repeats: true)
     }
     
-    private func playPauseAction() {
+    @objc private func goBack15Action() {
+        updateSliderPosition = false
+        AudioManager.shared.fastBackward15()
+    }
+    
+    @objc private func playPauseAction() {
         if AudioManager.shared.isPlaying() {
             AudioManager.shared.pauseSong()
             updateButtonPlay()
@@ -126,12 +145,17 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    @objc private func goForward15Action() {
+        updateSliderPosition = false
+        AudioManager.shared.fastForward15()
+    }
+    
     @objc private func updateButtonPlay() {
-        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playPauseImageView.image = UIImage(systemName: "play.fill")
     }
     
     @objc private func updateButtonPause() {
-        playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playPauseImageView.image = UIImage(systemName: "pause.fill")
     }
     
     ///
@@ -160,14 +184,9 @@ class PlayerViewController: UIViewController {
         }
     }
     
-    private func seekAudioFilePosition(position: Double) {
-        let time = episode.getDurationInSeconds() * position
-        
-//        player?.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000), completionHandler: { success in
-//            if success {
-//                self.updateSliderPosition = true
-//            }
-//        })
+    @objc private func updateSlider() {
+        updateSliderPosition = true
+        displayCurrentTime()
     }
     
 }

@@ -105,6 +105,52 @@ final class AudioManager {
         updateRemoteDisplayInfo()
     }
     
+    func fastBackward15() {
+        guard let player = player else { return }
+        
+        let seekDuration: Float64 = 15
+        
+        let playerCurrentTime = CMTimeGetSeconds(player.currentTime())
+        
+        var newTime = playerCurrentTime - seekDuration
+        if newTime < 0 {
+            newTime = 0
+        }
+        
+        let time2: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+        player.seek(to: time2) { success in
+            self.notifySeekFinished()
+        }
+    }
+    
+    func fastForward15() {
+        guard let player = player,
+              let duration = player.currentItem?.duration else { return }
+        
+        let seekDuration: Float64 = 15
+        
+        let playerCurrentTime = CMTimeGetSeconds(player.currentTime())
+        
+        let newTime = playerCurrentTime + seekDuration
+        if newTime < CMTimeGetSeconds(duration) {
+            let time2: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+            player.seek(to: time2) { success in
+                self.notifySeekFinished()
+            }
+        }
+        
+    }
+    
+    func seekAudioTo(position: Double) {
+        guard let player = player,
+              let episode = episode else { return }
+        
+        let time = episode.getDurationInSeconds() * position
+        player.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000)) { success in
+            self.notifySeekFinished()
+        }
+    }
+    
     func getEpisodeId() -> String {
         guard let episode = episode else { return "" }
         return episode.id
@@ -151,6 +197,11 @@ extension AudioManager {
     
     func notifySongFinished() {
         let notification = Notification(name: .audioFinished)
+        notificationCenter.post(notification)
+    }
+    
+    func notifySeekFinished() {
+        let notification = Notification(name: .seekFinished)
         notificationCenter.post(notification)
     }
     

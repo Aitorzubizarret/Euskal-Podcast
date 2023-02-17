@@ -14,4 +14,5 @@ extension Notification.Name {
     static let songPlaying = Notification.Name("songPlaying")
     static let songPause = Notification.Name("songPause")
     static let audioFinished = Notification.Name("audioFinished")
+    static let seekFinished = Notification.Name("seekFinished")
 }
