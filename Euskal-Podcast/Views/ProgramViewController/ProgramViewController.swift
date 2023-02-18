@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import RealmSwift
 
 class ProgramViewController: UIViewController {
     
@@ -22,14 +21,9 @@ class ProgramViewController: UIViewController {
     private var coordinator: Coordinator
     private var viewModel: ProgramViewModel
     private var subscribedTo: [AnyCancellable] = []
-    private var programs: Results<Program>? {
+    private var program: Program = Program() {
         didSet {
-            if let programs = programs,
-               programs.count == 1 {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
+            tableView.reloadData()
         }
     }
     private var programId: String
@@ -107,9 +101,9 @@ class ProgramViewController: UIViewController {
     
     private func subscriptions() {
         viewModel.program.sink { receiveCompletion in
-            print("Received completion")
-        } receiveValue: { [weak self] programs in
-            self?.programs = programs
+            print("Receive completion")
+        } receiveValue: { [weak self] program in
+            self?.program = program
         }.store(in: &subscribedTo)
         
         viewModel.audioIsPlaying.sink { receiveCompletion in
@@ -135,11 +129,8 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            if let programs = programs,
-               let program = programs.first {
-                let selectedEpisode: Episode = program.episodes[indexPath.row]
-                coordinator.showEpisodeDetail(episode: selectedEpisode)
-            }
+            let selectedEpisode: Episode = program.episodes[indexPath.row]
+            coordinator.showEpisodeDetail(episode: selectedEpisode)
         }
     }
     
@@ -154,12 +145,7 @@ extension ProgramViewController: UITableViewDelegate {
 extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let programs = programs,
-           let program = programs.first {
-            return (program.episodes.count > 0) ? 2 : 1
-        } else {
-            return 0
-        }
+        return program.episodes.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -167,12 +153,7 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             return ""
         default:
-            if let programs = programs,
-               let program = programs.first {
-                return program.title
-            } else {
-                return ""
-            }
+            return program.title
         }
     }
     
@@ -180,12 +161,7 @@ extension ProgramViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            if let programs = programs,
-               let program = programs.first {
-                return program.episodes.count
-            } else {
-                return 0
-            }
+            return program.episodes.count
         }
     }
     
@@ -193,31 +169,27 @@ extension ProgramViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
-            if let programs = programs,
-               let program = programs.first {
-                cell.imageURL = program.imageURL
-                cell.titleName = program.title
-                cell.descriptionText = program.descriptionText
-            }
+            
+            cell.imageURL = program.imageURL
+            cell.titleName = program.title
+            cell.descriptionText = program.descriptionText
+            
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
             cell.delegate = self
             cell.rowAt = indexPath.row
             
-            if let programs = programs,
-               let program = programs.first {
-                let episode = program.episodes[indexPath.row]
-                cell.releaseDateText = episode.getPublishedDateFormatter()
-                cell.titleText = episode.title
-                cell.descriptionText = episode.descriptionText
-                cell.durationText = episode.getDurationFormatted()
-                
-                if AudioManager.shared.getEpisodeId() == episode.id {
-                    cell.isPlaying = isPlaying
-                } else {
-                    cell.isPlaying = false
-                }
+            let episode = program.episodes[indexPath.row]
+            cell.releaseDateText = episode.getPublishedDateFormatter()
+            cell.titleText = episode.title
+            cell.descriptionText = episode.descriptionText
+            cell.durationText = episode.getDurationFormatted()
+            
+            if AudioManager.shared.getEpisodeId() == episode.id { // TODO: Don't use AudioManager, use the ViewModel.
+                cell.isPlaying = isPlaying
+            } else {
+                cell.isPlaying = false
             }
             
             return cell
@@ -229,15 +201,12 @@ extension ProgramViewController: UITableViewDataSource {
 extension ProgramViewController: EpisodeCellDelegate {
     
     func playEpisode(rowAt: Int) {
-        guard let programs = programs,
-              let program = programs.first else { return }
-        
         let selectedEpisode = program.episodes[rowAt]
-        AudioManager.shared.playSong(episode: selectedEpisode, program: program)
+        AudioManager.shared.playSong(episode: selectedEpisode, program: program) // TODO: Don't use AudioManager, use the ViewModel.
     }
     
     func pauseEpisode(rowAt: Int) {
-        AudioManager.shared.pauseSong()
+        AudioManager.shared.pauseSong() // TODO: Don't use AudioManager, use the ViewModel.
     }
     
 }

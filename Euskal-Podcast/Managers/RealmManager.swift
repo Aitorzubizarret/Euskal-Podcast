@@ -17,7 +17,7 @@ final class RealmManager {
     
     // Observable subjets.
     var allPrograms = PassthroughSubject<Results<Program>, Error>()
-    var searchProgram = PassthroughSubject<Results<Program>, Error>()
+    var foundProgram = PassthroughSubject<Results<Program>, Error>()
     
     // MARK: - Methods
     
@@ -29,8 +29,6 @@ final class RealmManager {
 //            print("RealmManager Init Error : \(error)")
 //        }
     }
-    
-    
     
 }
 
@@ -117,7 +115,7 @@ extension RealmManager: RealManagerProtocol {
     
     func searchProgram(id: String) {
         let foundPrograms = realm.objects(Program.self).filter("id = '\(id)'")
-        searchProgram.send(foundPrograms)
+        foundProgram.send(foundPrograms)
     }
     
 }

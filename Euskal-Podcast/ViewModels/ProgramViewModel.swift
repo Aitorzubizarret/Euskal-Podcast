@@ -18,7 +18,7 @@ final class ProgramViewModel {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var program = PassthroughSubject<Results<Program>, Error>()
+    var program = PassthroughSubject<Program, Error>()
     var audioIsPlaying = PassthroughSubject<Bool, Error>()
     
     private let notificationCenter = NotificationCenter.default
@@ -48,12 +48,13 @@ final class ProgramViewModel {
     }
     
     private func subscriptions() {
-        realmManager.searchProgram.sink { receiveCompletion in
+        realmManager.foundProgram.sink { receiveCompletion in
             print("Received completion")
-        } receiveValue: { [weak self] programs in
-            self?.program.send(programs)
+        } receiveValue: { [weak self] program in
+            DispatchQueue.main.async {
+                self?.checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: program)
+            }
         }.store(in: &subscribedTo)
-
     }
     
     @objc private func audioPlaying() {
@@ -66,6 +67,14 @@ final class ProgramViewModel {
     
     @objc private func audioFinished() {
         audioIsPlaying.send(false)
+    }
+    
+    private func checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: Results<Program>) {
+        if !foundProgram.isEmpty && foundProgram.count == 1 {
+            guard let onlyFoundProgram = foundProgram.first else { return }
+            
+            program.send(onlyFoundProgram)
+        }
     }
     
 }
