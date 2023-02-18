@@ -19,8 +19,6 @@ class ProgramViewController: UIViewController {
     private let mainTitleTableViewCellIdentifier: String = "MainTitleTableViewCell"
     private let episodeTableViewCellIdentifier: String = "EpisodeTableViewCell"
     
-    private let notificationCenter = NotificationCenter.default
-    
     private var coordinator: Coordinator
     private var viewModel: ProgramViewModel
     private var subscribedTo: [AnyCancellable] = []
@@ -36,7 +34,11 @@ class ProgramViewController: UIViewController {
     }
     private var programId: String
     
-    var isPlaying: Bool = false
+    var isPlaying: Bool = false {
+        didSet {
+            updateVisibleCells()
+        }
+    }
     
     // MARK: - Methods
     
@@ -57,9 +59,7 @@ class ProgramViewController: UIViewController {
         
         title = "Programa"
         
-        isPlaying = AudioManager.shared.isPlaying()
         setupTableView()
-        setupNotificationsObservers()
         subscriptions()
         
         viewModel.searchProgram(id: programId)
@@ -105,43 +105,21 @@ class ProgramViewController: UIViewController {
         tableView.register(episodeCell, forCellReuseIdentifier: episodeTableViewCellIdentifier)
     }
     
-    private func setupNotificationsObservers() {
-        notificationCenter.addObserver(self,
-                                       selector: #selector(songIsPlaying),
-                                       name: .songPlaying,
-                                       object: nil)
-        notificationCenter.addObserver(self,
-                                       selector: #selector(songIsPause),
-                                       name: .songPause,
-                                       object: nil)
-        notificationCenter.addObserver(self,
-                                       selector: #selector(songIsPause),
-                                       name: .audioFinished,
-                                       object: nil)
-    }
-    
     private func subscriptions() {
         viewModel.program.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] programs in
             self?.programs = programs
         }.store(in: &subscribedTo)
-
-    }
-    
-    @objc private func songIsPlaying() {
-        isPlaying = true
         
-        updateVisibleCell()
+        viewModel.audioIsPlaying.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] isPlaying in
+            self?.isPlaying = isPlaying
+        }.store(in: &subscribedTo)
     }
     
-    @objc private func songIsPause() {
-        isPlaying = false
-        
-        updateVisibleCell()
-    }
-    
-    private func updateVisibleCell() {
+    private func updateVisibleCells() {
         guard let visibleCells = tableView.indexPathsForVisibleRows else { return }
         
         tableView.beginUpdates()
@@ -162,10 +140,6 @@ extension ProgramViewController: UITableViewDelegate {
                 let selectedEpisode: Episode = program.episodes[indexPath.row]
                 coordinator.showEpisodeDetail(episode: selectedEpisode)
             }
-//            if let program = program {
-//                let selectedEpisode: Episode = program.episodes[indexPath.row]
-//                coordinator.showEpisodeDetail(episode: selectedEpisode)
-//            }
         }
     }
     
@@ -186,11 +160,6 @@ extension ProgramViewController: UITableViewDataSource {
         } else {
             return 0
         }
-//        if let safeProgram = program {
-//            return (safeProgram.episodes.count > 0) ? 2 : 1
-//        } else {
-//            return 0
-//        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -204,11 +173,6 @@ extension ProgramViewController: UITableViewDataSource {
             } else {
                 return ""
             }
-//            if let program = program {
-//                return program.title
-//            } else {
-//                return ""
-//            }
         }
     }
     
@@ -222,11 +186,6 @@ extension ProgramViewController: UITableViewDataSource {
             } else {
                 return 0
             }
-//            if let program = program {
-//                return program.episodes.count
-//            } else {
-//                return 0
-//            }
         }
     }
     
@@ -240,11 +199,6 @@ extension ProgramViewController: UITableViewDataSource {
                 cell.titleName = program.title
                 cell.descriptionText = program.descriptionText
             }
-//            if let program = program {
-//                cell.imageURL = program.imageURL
-//                cell.titleName = program.title
-//                cell.descriptionText = program.descriptionText
-//            }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
@@ -265,19 +219,6 @@ extension ProgramViewController: UITableViewDataSource {
                     cell.isPlaying = false
                 }
             }
-//            if let program = program {
-//                let episode = program.episodes[indexPath.row]
-//                cell.releaseDateText = episode.getPublishedDateFormatter()
-//                cell.titleText = episode.title
-//                cell.descriptionText = episode.descriptionText
-//                cell.durationText = episode.getDurationFormatted()
-//
-//                if AudioManager.shared.getEpisodeId() == episode.id {
-//                    cell.isPlaying = isPlaying
-//                } else {
-//                    cell.isPlaying = false
-//                }
-//            }
             
             return cell
         }
@@ -290,7 +231,6 @@ extension ProgramViewController: EpisodeCellDelegate {
     func playEpisode(rowAt: Int) {
         guard let programs = programs,
               let program = programs.first else { return }
-//        guard let program = program else { return }
         
         let selectedEpisode = program.episodes[rowAt]
         AudioManager.shared.playSong(episode: selectedEpisode, program: program)
