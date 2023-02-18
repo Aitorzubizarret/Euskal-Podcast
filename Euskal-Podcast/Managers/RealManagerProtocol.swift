@@ -12,9 +12,11 @@ import Combine
 protocol RealManagerProtocol {
     var realm: Realm { get set }
     var allPrograms: PassthroughSubject<Results<Program>, Error> { get set }
+    var searchProgram: PassthroughSubject<Results<Program>, Error> { get set }
     
     func savePrograms(programs: [ProgramXML])
     func addProgram(program: Program)
     func getAllPrograms()
     func deleteAll()
+    func searchProgram(id: String)
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Combine
+import RealmSwift
 
 class ProgramViewController: UIViewController {
     
@@ -19,22 +21,29 @@ class ProgramViewController: UIViewController {
     
     private let notificationCenter = NotificationCenter.default
     
-    var coordinator: Coordinator
-    
-    var program: Program? {
+    private var coordinator: Coordinator
+    private var viewModel: ProgramViewModel
+    private var subscribedTo: [AnyCancellable] = []
+    private var programs: Results<Program>? {
         didSet {
-            guard let _ = program else { return }
-            
-            tableView.reloadData()
+            if let programs = programs,
+               programs.count == 1 {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
+    private var programId: String
     
     var isPlaying: Bool = false
     
     // MARK: - Methods
     
-    init(coordinator: Coordinator) {
+    init(coordinator: Coordinator, viewModel: ProgramViewModel, programId: String) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
+        self.programId = programId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,6 +60,9 @@ class ProgramViewController: UIViewController {
         isPlaying = AudioManager.shared.isPlaying()
         setupTableView()
         setupNotificationsObservers()
+        subscriptions()
+        
+        viewModel.searchProgram(id: programId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +120,15 @@ class ProgramViewController: UIViewController {
                                        object: nil)
     }
     
+    private func subscriptions() {
+        viewModel.program.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] programs in
+            self?.programs = programs
+        }.store(in: &subscribedTo)
+
+    }
+    
     @objc private func songIsPlaying() {
         isPlaying = true
         
@@ -136,10 +157,15 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            if let program = program {
+            if let programs = programs,
+               let program = programs.first {
                 let selectedEpisode: Episode = program.episodes[indexPath.row]
                 coordinator.showEpisodeDetail(episode: selectedEpisode)
             }
+//            if let program = program {
+//                let selectedEpisode: Episode = program.episodes[indexPath.row]
+//                coordinator.showEpisodeDetail(episode: selectedEpisode)
+//            }
         }
     }
     
@@ -154,11 +180,17 @@ extension ProgramViewController: UITableViewDelegate {
 extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let safeProgram = program {
-            return (safeProgram.episodes.count > 0) ? 2 : 1
+        if let programs = programs,
+           let program = programs.first {
+            return (program.episodes.count > 0) ? 2 : 1
         } else {
             return 0
         }
+//        if let safeProgram = program {
+//            return (safeProgram.episodes.count > 0) ? 2 : 1
+//        } else {
+//            return 0
+//        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -166,11 +198,17 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             return ""
         default:
-            if let program = program {
+            if let programs = programs,
+               let program = programs.first {
                 return program.title
             } else {
                 return ""
             }
+//            if let program = program {
+//                return program.title
+//            } else {
+//                return ""
+//            }
         }
     }
     
@@ -178,11 +216,17 @@ extension ProgramViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            if let program = program {
+            if let programs = programs,
+               let program = programs.first {
                 return program.episodes.count
             } else {
                 return 0
             }
+//            if let program = program {
+//                return program.episodes.count
+//            } else {
+//                return 0
+//            }
         }
     }
     
@@ -190,18 +234,25 @@ extension ProgramViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
-            if let program = program {
+            if let programs = programs,
+               let program = programs.first {
                 cell.imageURL = program.imageURL
                 cell.titleName = program.title
                 cell.descriptionText = program.descriptionText
             }
+//            if let program = program {
+//                cell.imageURL = program.imageURL
+//                cell.titleName = program.title
+//                cell.descriptionText = program.descriptionText
+//            }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: episodeTableViewCellIdentifier, for: indexPath) as! EpisodeTableViewCell
             cell.delegate = self
             cell.rowAt = indexPath.row
             
-            if let program = program {
+            if let programs = programs,
+               let program = programs.first {
                 let episode = program.episodes[indexPath.row]
                 cell.releaseDateText = episode.getPublishedDateFormatter()
                 cell.titleText = episode.title
@@ -214,6 +265,19 @@ extension ProgramViewController: UITableViewDataSource {
                     cell.isPlaying = false
                 }
             }
+//            if let program = program {
+//                let episode = program.episodes[indexPath.row]
+//                cell.releaseDateText = episode.getPublishedDateFormatter()
+//                cell.titleText = episode.title
+//                cell.descriptionText = episode.descriptionText
+//                cell.durationText = episode.getDurationFormatted()
+//
+//                if AudioManager.shared.getEpisodeId() == episode.id {
+//                    cell.isPlaying = isPlaying
+//                } else {
+//                    cell.isPlaying = false
+//                }
+//            }
             
             return cell
         }
@@ -224,7 +288,9 @@ extension ProgramViewController: UITableViewDataSource {
 extension ProgramViewController: EpisodeCellDelegate {
     
     func playEpisode(rowAt: Int) {
-        guard let program = program else { return }
+        guard let programs = programs,
+              let program = programs.first else { return }
+//        guard let program = program else { return }
         
         let selectedEpisode = program.episodes[rowAt]
         AudioManager.shared.playSong(episode: selectedEpisode, program: program)

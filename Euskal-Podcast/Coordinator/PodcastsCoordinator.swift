@@ -26,9 +26,10 @@ final class PodcastsCoordinator {
 
 extension PodcastsCoordinator: Coordinator {
     
-    func showProgramDetail(program: Program) {
-        let programVC = ProgramViewController(coordinator: self)
-        programVC.program = program
+    func showProgramDetail(programId: String) {
+        let programRealmManager: RealManagerProtocol = RealmManager()
+        let programViewModel = ProgramViewModel(realmManager: programRealmManager)
+        let programVC = ProgramViewController(coordinator: self, viewModel: programViewModel, programId: programId)
         
         navigationController.show(programVC, sender: nil)
     }

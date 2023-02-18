@@ -85,7 +85,7 @@ extension PodcastsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let programs = programs else { return }
         
-        coordinator.showProgramDetail(program: programs[indexPath.row])
+        coordinator.showProgramDetail(programId: programs[indexPath.row].id)
     }
     
 }
