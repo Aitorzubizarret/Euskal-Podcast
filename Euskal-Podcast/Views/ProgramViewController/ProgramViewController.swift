@@ -57,6 +57,7 @@ class ProgramViewController: UIViewController {
         subscriptions()
         
         viewModel.searchProgram(id: programId)
+        isPlaying = viewModel.checkAudioIsPlaying()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,8 +187,8 @@ extension ProgramViewController: UITableViewDataSource {
             cell.descriptionText = episode.descriptionText
             cell.durationText = episode.getDurationFormatted()
             
-            if AudioManager.shared.getEpisodeId() == episode.id { // TODO: Don't use AudioManager, use the ViewModel.
-                cell.isPlaying = isPlaying
+            if viewModel.checkEpisodeIsPlaying(episodeId: episode.id) && isPlaying {
+                cell.isPlaying = true
             } else {
                 cell.isPlaying = false
             }
@@ -202,11 +203,11 @@ extension ProgramViewController: EpisodeCellDelegate {
     
     func playEpisode(rowAt: Int) {
         let selectedEpisode = program.episodes[rowAt]
-        AudioManager.shared.playSong(episode: selectedEpisode, program: program) // TODO: Don't use AudioManager, use the ViewModel.
+        viewModel.playEpisode(episode: selectedEpisode, program: program)
     }
     
     func pauseEpisode(rowAt: Int) {
-        AudioManager.shared.pauseSong() // TODO: Don't use AudioManager, use the ViewModel.
+        viewModel.pauseEpisode()
     }
     
 }

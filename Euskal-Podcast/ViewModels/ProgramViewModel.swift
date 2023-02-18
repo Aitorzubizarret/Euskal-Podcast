@@ -77,6 +77,27 @@ final class ProgramViewModel {
         }
     }
     
+    func checkEpisodeIsPlaying(episodeId: String) -> Bool {
+        let playingEpisodeId = AudioManager.shared.getEpisodeId()
+        return (playingEpisodeId == episodeId) ? true : false
+    }
+    
+    func checkAudioIsPlaying() -> Bool {
+        return AudioManager.shared.isPlaying()
+    }
+    
+    func playEpisode() {
+        AudioManager.shared.playSong()
+    }
+    
+    func playEpisode(episode: Episode, program: Program) {
+        AudioManager.shared.playSong(episode: episode, program: program)
+    }
+    
+    func pauseEpisode() {
+        AudioManager.shared.pauseSong()
+    }
+    
 }
 
 // MARK: - RealmManager methods.

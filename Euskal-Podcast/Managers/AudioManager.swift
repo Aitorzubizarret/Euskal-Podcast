@@ -192,15 +192,9 @@ extension AudioManager {
     }
     
     func isPlaying() -> Bool {
-        if let player = player {
-            if player.timeControlStatus == AVPlayer.TimeControlStatus.playing {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
-        }
+        guard let player = player else { return false }
+        
+        return (player.timeControlStatus == AVPlayer.TimeControlStatus.playing)
     }
     
 }
