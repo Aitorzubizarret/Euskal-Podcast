@@ -21,14 +21,5 @@ class Program: Object {
     @objc dynamic var copyright: String = ""
     @objc dynamic var copyrightOwnerName: String = ""
     @objc dynamic var copyrightOwnerEmail: String = ""
-    var episodes: [Episode] {
-        get {
-            return _episodes.map {$0}
-        }
-        set {
-            _episodes.removeAll()
-            _episodes.append(objectsIn: newValue)
-        }
-    }
-    let _episodes = RealmSwift.List<Episode>()
+    let episodes = List<Episode>()
 }
