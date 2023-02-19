@@ -19,6 +19,7 @@ final class ProgramViewModel {
     
     // Observable subjets.
     var program = PassthroughSubject<Program, Error>()
+    var episodes = PassthroughSubject<[Episode], Error>()
     var audioIsPlaying = PassthroughSubject<Bool, Error>()
     
     private let notificationCenter = NotificationCenter.default
@@ -73,8 +74,21 @@ final class ProgramViewModel {
         if !foundProgram.isEmpty && foundProgram.count == 1 {
             guard let onlyFoundProgram = foundProgram.first else { return }
             
-            program.send(onlyFoundProgram)
+            self.program.send(onlyFoundProgram)
+            orderEpisodesByDate(program: onlyFoundProgram, asc: false)
         }
+    }
+    
+    func orderEpisodesByDate(program: Program, asc: Bool) {
+        var orderedEpisodes: [Episode] = []
+        
+        if asc {
+            orderedEpisodes = program.episodes.sorted(by: { $0.pubDate < $1.pubDate })
+        } else {
+            orderedEpisodes = program.episodes.sorted(by: { $0.pubDate > $1.pubDate })
+        }
+        
+        self.episodes.send(orderedEpisodes)
     }
     
     func checkEpisodeIsPlaying(episodeId: String) -> Bool {

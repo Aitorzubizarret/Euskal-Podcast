@@ -26,6 +26,11 @@ class ProgramViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    private var episodes: [Episode] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private var programId: String
     
     var isPlaying: Bool = false {
@@ -107,6 +112,12 @@ class ProgramViewController: UIViewController {
             self?.program = program
         }.store(in: &subscribedTo)
         
+        viewModel.episodes.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] episodes in
+            self?.episodes = episodes
+        }.store(in: &subscribedTo)
+        
         viewModel.audioIsPlaying.sink { receiveCompletion in
             print("Receive completion")
         } receiveValue: { [weak self] isPlaying in
@@ -146,7 +157,7 @@ extension ProgramViewController: UITableViewDelegate {
 extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return program.episodes.isEmpty ? 1 : 2
+        return episodes.isEmpty ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -162,7 +173,7 @@ extension ProgramViewController: UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return program.episodes.count
+            return episodes.count
         }
     }
     
@@ -181,7 +192,7 @@ extension ProgramViewController: UITableViewDataSource {
             cell.delegate = self
             cell.rowAt = indexPath.row
             
-            let episode = program.episodes[indexPath.row]
+            let episode = episodes[indexPath.row]
             cell.releaseDateText = episode.getPublishedDateFormatter()
             cell.titleText = episode.title
             cell.descriptionText = episode.descriptionText
@@ -202,7 +213,7 @@ extension ProgramViewController: UITableViewDataSource {
 extension ProgramViewController: EpisodeCellDelegate {
     
     func playEpisode(rowAt: Int) {
-        let selectedEpisode = program.episodes[rowAt]
+        let selectedEpisode = episodes[rowAt]
         viewModel.playEpisode(episode: selectedEpisode, program: program)
     }
     
