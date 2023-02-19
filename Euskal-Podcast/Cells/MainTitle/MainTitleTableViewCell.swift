@@ -52,10 +52,6 @@ class MainTitleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    override func layoutSubviews() {
-        setupMainViewBackgroundGradient()
-    }
-    
     private func setupView() {
         // Cell
         selectionStyle = .none
@@ -74,17 +70,6 @@ class MainTitleTableViewCell: UITableViewCell {
         backgroundImageImageView.layer.shadowOpacity = 0.5
         
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
-    }
-    
-    private func setupMainViewBackgroundGradient() {
-        // Gradient background for the main view.
-        let colorTop = UIColor.template.lightPurple.cgColor
-        let colorBottom = UIColor.template.darkPurple.cgColor
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.bounds
-        gradientLayer.colors = [colorTop, colorBottom]
-        mainView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
 }

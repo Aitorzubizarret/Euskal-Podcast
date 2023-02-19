@@ -23,6 +23,8 @@ class ProgramViewController: UIViewController {
     private var subscribedTo: [AnyCancellable] = []
     private var program: Program = Program() {
         didSet {
+            title = program.title
+            
             tableView.reloadData()
         }
     }
@@ -56,29 +58,11 @@ class ProgramViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Programa"
-        
         setupTableView()
         subscriptions()
         
         viewModel.searchProgram(id: programId)
         isPlaying = viewModel.checkAudioIsPlaying()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor.template.lightPurple
-
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.layoutIfNeeded()
     }
     
     private func setupTableView() {
@@ -158,15 +142,6 @@ extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return episodes.isEmpty ? 1 : 2
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return ""
-        default:
-            return program.title
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
