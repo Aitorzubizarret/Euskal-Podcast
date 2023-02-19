@@ -183,13 +183,26 @@ class PlayerViewController: UIViewController {
         // Label.
         var seconds: Int = episodeCurrentTime
         var minutes: Int = 0
+        var hours: Int = 0
         
         if seconds > 59 {
             minutes = seconds / 60
             seconds = seconds - (minutes * 60)
         }
         
-        let timeString = String(format: "%02d:%02d", minutes, seconds)
+        if minutes > 59 {
+            hours = minutes / 60
+            minutes = minutes - (hours * 60)
+        }
+        
+        var timeString = ""
+        if hours > 0 {
+            timeString = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            timeString = String(format: "%02d:%02d", minutes, seconds)
+        }
+        
+        //let timeString = String(format: "%02d:%02d", minutes, seconds)
         currentDurationTimeLabel.text = timeString
         
         // Slider.
