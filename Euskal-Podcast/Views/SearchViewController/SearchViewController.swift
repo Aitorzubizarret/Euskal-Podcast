@@ -99,7 +99,14 @@ extension SearchViewController: UISearchBarDelegate {
 
 // MARK: - UITableView Delegate
 
-extension SearchViewController: UITableViewDelegate {}
+extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedEpisode = foundEpisodes[indexPath.row]
+        coordinator.showEpisodeDetail(episode: selectedEpisode)
+    }
+    
+}
 
 // MARK: - UITableView Data Source
 
