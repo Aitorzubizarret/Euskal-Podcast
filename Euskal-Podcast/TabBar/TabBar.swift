@@ -51,7 +51,9 @@ class TabBar: UITabBarController {
         podcastsCoordinator.navigationController.viewControllers = [podcastsVC]
         
         // Search Tab.
-        let searchVC = SearchViewController(coordinator: searchCoordinator)
+        let searchRealmManager: RealManagerProtocol = RealmManager()
+        let searchViewModel = SearchViewModel(realmManager: searchRealmManager)
+        let searchVC = SearchViewController(coordinator: searchCoordinator, viewModel: searchViewModel)
         
         searchVC.tabBarItem = UITabBarItem(title: "Bilatu",
                                            image: UIImage(systemName: "magnifyingglass.circle"),

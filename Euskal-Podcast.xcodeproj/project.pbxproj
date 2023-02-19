@@ -32,6 +32,7 @@
 		1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */; };
 		1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */; };
 		1AE7AE5E299FFB1E00B5D7D4 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */; };
+		1AE7AE6029A2ACAC00B5D7D4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
 		1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3325299C538B0092C464 /* EpisodeViewController.swift */; };
@@ -92,6 +93,7 @@
 		1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewModel.swift; sourceTree = "<group>"; };
 		1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
+		1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
 		1AFE3325299C538B0092C464 /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			children = (
 				1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */,
 				1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */,
+				1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				1ADAD5F02993A26B007AEDB6 /* MeCoordinator.swift in Sources */,
 				42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */,
 				42EEDC592643324E00698755 /* Episode.swift in Sources */,
+				1AE7AE6029A2ACAC00B5D7D4 /* SearchViewModel.swift in Sources */,
 				1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */,
 				1ADAD5FA2993AFD5007AEDB6 /* SearchViewController.swift in Sources */,
 				1AFE3337299E68340092C464 /* NotificationName-Extension.swift in Sources */,

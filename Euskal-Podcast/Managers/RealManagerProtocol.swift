@@ -13,10 +13,12 @@ protocol RealManagerProtocol {
     var realm: Realm { get set }
     var allPrograms: PassthroughSubject<Results<Program>, Error> { get set }
     var foundProgram: PassthroughSubject<Results<Program>, Error> { get set }
+    var foundEpisodes: PassthroughSubject<Results<Episode>, Error> { get set }
     
     func savePrograms(programs: [ProgramXML])
     func addProgram(program: Program)
     func getAllPrograms()
     func deleteAll()
     func searchProgram(id: String)
+    func searchEpisodes(text: String)
 }
