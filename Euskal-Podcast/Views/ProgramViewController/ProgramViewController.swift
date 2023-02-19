@@ -146,7 +146,7 @@ extension ProgramViewController: UITableViewDelegate {
 extension ProgramViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return program.episodes.count
+        return program.episodes.isEmpty ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
