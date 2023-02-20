@@ -16,6 +16,7 @@ final class RealmManager {
     var realm: Realm
     
     // Observable subjets.
+    var allChannels = PassthroughSubject<Results<Channel>, Error>()
     var allPrograms = PassthroughSubject<Results<Program>, Error>()
     var foundProgram = PassthroughSubject<Results<Program>, Error>()
     var foundEpisodes = PassthroughSubject<Results<Episode>, Error>()
@@ -104,6 +105,22 @@ extension RealmManager: RealManagerProtocol {
         allPrograms.send(realm.objects(Program.self))
     }
     
+    func saveChannels(channels: [Channel]) {
+        for channel in channels {
+            addChannel(channel: channel)
+        }
+    }
+    
+    func addChannel(channel: Channel) {
+        do {
+            try realm.write({
+                realm.add(channel)
+            })
+        } catch let error {
+            print("RealmManager addChannel Error: \(error)")
+        }
+    }
+    
     func addProgram(program: Program) {
         do {
             try realm.write({
@@ -133,6 +150,10 @@ extension RealmManager: RealManagerProtocol {
     
     func getAllPrograms() {
         allPrograms.send(realm.objects(Program.self))
+    }
+    
+    func getAllChannels() {
+        allChannels.send(realm.objects(Channel.self))
     }
     
     func deleteAll() {

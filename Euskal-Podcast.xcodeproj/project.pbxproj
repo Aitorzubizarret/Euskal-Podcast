@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A24EEF929A3A46B00E60EAF /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24EEF729A3A46B00E60EAF /* ChannelsViewController.swift */; };
+		1A24EEFA29A3A46B00E60EAF /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A24EEF829A3A46B00E60EAF /* ChannelsViewController.xib */; };
+		1A24EEFE29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24EEFC29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift */; };
+		1A24EEFF29A3A6BD00E60EAF /* SmallListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A24EEFD29A3A6BD00E60EAF /* SmallListItemTableViewCell.xib */; };
+		1A24EF0329A3AF7E00E60EAF /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24EF0129A3AF7E00E60EAF /* ChannelTableViewCell.swift */; };
+		1A24EF0429A3AF7E00E60EAF /* ChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A24EF0229A3AF7E00E60EAF /* ChannelTableViewCell.xib */; };
 		1A38DAE0285F9D7500120AD7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1A38DADF285F9D7500120AD7 /* Kingfisher */; };
 		1A48E11E2995800700275BB4 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A48E11C2995800700275BB4 /* NowPlayingViewController.swift */; };
 		1A48E11F2995800700275BB4 /* NowPlayingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A48E11D2995800700275BB4 /* NowPlayingViewController.xib */; };
@@ -17,6 +23,9 @@
 		1A7CC4A9285E7D79003F2379 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4A8285E7D79003F2379 /* APIManager.swift */; };
 		1A7CC4AF285F2C3E003F2379 /* MainTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */; };
 		1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A7CC4AE285F2C3E003F2379 /* MainTitleTableViewCell.xib */; };
+		1A7DF0A429A3C97D00D0AA55 /* StaticDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A329A3C97D00D0AA55 /* StaticDataManager.swift */; };
+		1A7DF0A629A3E2F700D0AA55 /* ChannelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */; };
+		1A7DF0A829A3E97900D0AA55 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A729A3E97900D0AA55 /* UserDefaultsManager.swift */; };
 		1A975623287C710C006C213A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975622287C710C006C213A /* Source.swift */; };
 		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
@@ -33,6 +42,7 @@
 		1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */; };
 		1AE7AE5E299FFB1E00B5D7D4 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */; };
 		1AE7AE6029A2ACAC00B5D7D4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */; };
+		1AE7AE6229A39B7300B5D7D4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7AE6129A39B7300B5D7D4 /* Channel.swift */; };
 		1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF85E89298A961E0087C77B /* Coordinator.swift */; };
 		1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD3490298BEF910074C338 /* XMLParserManager.swift */; };
 		1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE3325299C538B0092C464 /* EpisodeViewController.swift */; };
@@ -69,6 +79,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A24EEF729A3A46B00E60EAF /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
+		1A24EEF829A3A46B00E60EAF /* ChannelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
+		1A24EEFC29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListItemTableViewCell.swift; sourceTree = "<group>"; };
+		1A24EEFD29A3A6BD00E60EAF /* SmallListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallListItemTableViewCell.xib; sourceTree = "<group>"; };
+		1A24EF0129A3AF7E00E60EAF /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
+		1A24EF0229A3AF7E00E60EAF /* ChannelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelTableViewCell.xib; sourceTree = "<group>"; };
 		1A48E11C2995800700275BB4 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		1A48E11D2995800700275BB4 /* NowPlayingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NowPlayingViewController.xib; sourceTree = "<group>"; };
 		1A48E5742999807D00A07331 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
@@ -78,6 +94,9 @@
 		1A7CC4A8285E7D79003F2379 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		1A7CC4AD285F2C3E003F2379 /* MainTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTitleTableViewCell.swift; sourceTree = "<group>"; };
 		1A7CC4AE285F2C3E003F2379 /* MainTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTitleTableViewCell.xib; sourceTree = "<group>"; };
+		1A7DF0A329A3C97D00D0AA55 /* StaticDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticDataManager.swift; sourceTree = "<group>"; };
+		1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewModel.swift; sourceTree = "<group>"; };
+		1A7DF0A729A3E97900D0AA55 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		1A975622287C710C006C213A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
@@ -94,6 +113,7 @@
 		1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewModel.swift; sourceTree = "<group>"; };
 		1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
 		1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		1AE7AE6129A39B7300B5D7D4 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		1AF85E89298A961E0087C77B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AFD3490298BEF910074C338 /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
 		1AFE3325299C538B0092C464 /* EpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +166,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A24EEF629A3A44900E60EAF /* ChannelsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1A24EEF729A3A46B00E60EAF /* ChannelsViewController.swift */,
+				1A24EEF829A3A46B00E60EAF /* ChannelsViewController.xib */,
+			);
+			path = ChannelsViewController;
+			sourceTree = "<group>";
+		};
+		1A24EEFB29A3A67100E60EAF /* SmallListItem */ = {
+			isa = PBXGroup;
+			children = (
+				1A24EEFC29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift */,
+				1A24EEFD29A3A6BD00E60EAF /* SmallListItemTableViewCell.xib */,
+			);
+			path = SmallListItem;
+			sourceTree = "<group>";
+		};
+		1A24EF0029A3AF6700E60EAF /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				1A24EF0129A3AF7E00E60EAF /* ChannelTableViewCell.swift */,
+				1A24EF0229A3AF7E00E60EAF /* ChannelTableViewCell.xib */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
 		1A48E11B29957FDA00275BB4 /* NowPlayingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +215,8 @@
 		1A7CC4A7285E7D50003F2379 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1A7DF0A329A3C97D00D0AA55 /* StaticDataManager.swift */,
+				1A7DF0A729A3E97900D0AA55 /* UserDefaultsManager.swift */,
 				1A7CC4A8285E7D79003F2379 /* APIManager.swift */,
 				1AFD3490298BEF910074C338 /* XMLParserManager.swift */,
 				1A48E5742999807D00A07331 /* AudioManager.swift */,
@@ -288,6 +337,7 @@
 				1AF85E85298A92F30087C77B /* ProgramViewController */,
 				1AFE3324299C535D0092C464 /* EpisodeViewController */,
 				1AF85E84298A92DD0087C77B /* ProgramsViewController */,
+				1A24EEF629A3A44900E60EAF /* ChannelsViewController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				1A975622287C710C006C213A /* Source.swift */,
+				1AE7AE6129A39B7300B5D7D4 /* Channel.swift */,
 				426DCB92264C85BD0020AC72 /* Program.swift */,
 				1A4D99E9298AD5FE003A1A38 /* ProgramXML.swift */,
 				42EEDC582643324E00698755 /* Episode.swift */,
@@ -325,6 +376,7 @@
 		427E1C412640AF6000FBCDF7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1A24EEFB29A3A67100E60EAF /* SmallListItem */,
 				1A7CC4AC285F2BE5003F2379 /* MainTitle */,
 				1A975624287C85DD006C213A /* Source */,
 				42621E25264DB39A00271A85 /* Program */,
@@ -332,6 +384,7 @@
 				42F38ADE2651C76D005F9AB1 /* ProgramsListCell */,
 				42621E24264DB38200271A85 /* Season */,
 				427E1C482640B15A00FBCDF7 /* Episode */,
+				1A24EF0029A3AF6700E60EAF /* Channel */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -351,6 +404,7 @@
 				1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */,
 				1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */,
 				1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */,
+				1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -491,6 +545,7 @@
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				42F38ADB2651A7D7005F9AB1 /* ProgramsListTableViewCell.xib in Resources */,
 				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
+				1A24EF0429A3AF7E00E60EAF /* ChannelTableViewCell.xib in Resources */,
 				1ADAD5F72993AFC8007AEDB6 /* PodcastsViewController.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
 				1AFE3328299C538B0092C464 /* EpisodeViewController.xib in Resources */,
@@ -503,6 +558,8 @@
 				1A48E11F2995800700275BB4 /* NowPlayingViewController.xib in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
 				1A7CC4B0285F2C3E003F2379 /* MainTitleTableViewCell.xib in Resources */,
+				1A24EEFF29A3A6BD00E60EAF /* SmallListItemTableViewCell.xib in Resources */,
+				1A24EEFA29A3A46B00E60EAF /* ChannelsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,16 +577,22 @@
 				1AE7AE6029A2ACAC00B5D7D4 /* SearchViewModel.swift in Sources */,
 				1AFE3327299C538B0092C464 /* EpisodeViewController.swift in Sources */,
 				1ADAD5FA2993AFD5007AEDB6 /* SearchViewController.swift in Sources */,
+				1A24EEF929A3A46B00E60EAF /* ChannelsViewController.swift in Sources */,
 				1AFE3337299E68340092C464 /* NotificationName-Extension.swift in Sources */,
 				1ADAD5F62993AFC8007AEDB6 /* PodcastsViewController.swift in Sources */,
 				1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */,
+				1A24EEFE29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift in Sources */,
 				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				1AE7AE5E299FFB1E00B5D7D4 /* ProgramViewModel.swift in Sources */,
 				1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */,
 				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
+				1A24EF0329A3AF7E00E60EAF /* ChannelTableViewCell.swift in Sources */,
 				1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */,
+				1AE7AE6229A39B7300B5D7D4 /* Channel.swift in Sources */,
 				1A48E11E2995800700275BB4 /* NowPlayingViewController.swift in Sources */,
+				1A7DF0A429A3C97D00D0AA55 /* StaticDataManager.swift in Sources */,
+				1A7DF0A629A3E2F700D0AA55 /* ChannelsViewModel.swift in Sources */,
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				1AFE3335299E38BC0092C464 /* RealManagerProtocol.swift in Sources */,
@@ -548,6 +611,7 @@
 				1A48E5752999807D00A07331 /* AudioManager.swift in Sources */,
 				1A4D99EC298ADBF3003A1A38 /* EpisodeXML.swift in Sources */,
 				1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */,
+				1A7DF0A829A3E97900D0AA55 /* UserDefaultsManager.swift in Sources */,
 				428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */,
 				1A7CC4AF285F2C3E003F2379 /* MainTitleTableViewCell.swift in Sources */,
 				1ADAD5EC2993A253007AEDB6 /* PodcastsCoordinator.swift in Sources */,

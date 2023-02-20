@@ -41,4 +41,12 @@ extension SearchCoordinator: Coordinator {
         navigationController.show(episodeVC, sender: nil)
     }
     
+    func showChannelList() {
+        let channelsRealmManager: RealManagerProtocol = RealmManager()
+        let channelsViewModel = ChannelsViewModel(realmManager: channelsRealmManager)
+        let channelListVC = ChannelsViewController(coordinator: self, viewModel: channelsViewModel)
+        
+        navigationController.show(channelListVC, sender: nil)
+    }
+    
 }

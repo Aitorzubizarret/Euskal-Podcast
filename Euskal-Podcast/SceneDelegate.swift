@@ -18,6 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        // User Defaults.
+        let userDefaultsManager = UserDefaultsManager()
+        if userDefaultsManager.isFirstTime() {
+            // Static Data.
+            let staticDataRealmManager: RealManagerProtocol = RealmManager()
+            let staticDataManager = StaticDataManager(realmManager: staticDataRealmManager)
+            staticDataManager.start()
+        }
+        userDefaultsManager.saveIsAppsFirstTime()
+        
         // Creates the Tabbar Controller.
         tabbarController = TabBar()
         

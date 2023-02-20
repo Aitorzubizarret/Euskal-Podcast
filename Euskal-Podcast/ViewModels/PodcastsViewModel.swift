@@ -40,18 +40,22 @@ final class PodcastsViewModel {
             }
         }.store(in: &subscribedTo)
         
+        realmManager.allChannels.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] channels in
+            self?.fetchRSSChannels(channels: channels.toArray())
+        }.store(in: &subscribedTo)
+        
         realmManager.allPrograms.sink { receiveCompletion in
             print("Receive completion")
         } receiveValue: { [weak self] programs in
             self?.programs.send(programs)
         }.store(in: &subscribedTo)
-
     }
     
     func getData() {
         getAllPrograms()
-        fetchRSSPrograms()
-        //deleteAllRealmData()
+        getAllChannels()
     }
     
 }
@@ -60,8 +64,8 @@ final class PodcastsViewModel {
 
 extension PodcastsViewModel {
     
-    func fetchRSSPrograms() {
-        apiManager.fetchPrograms()
+    func fetchRSSChannels(channels: [Channel]) {
+        apiManager.fetchChannels(channels: channels)
     }
     
 }
@@ -76,6 +80,10 @@ extension PodcastsViewModel {
     
     func getAllPrograms() {
         realmManager.getAllPrograms()
+    }
+    
+    func getAllChannels() {
+        realmManager.getAllChannels()
     }
     
     func deleteAllRealmData() {
