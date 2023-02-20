@@ -38,10 +38,9 @@ extension RealmManager: RealManagerProtocol {
     func savePrograms(programs: [ProgramXML]) {
         for program in programs {
             // Search Program in the DB before.
-            let foundPrograms = realm.objects(Program.self).filter("title = '\(program.title)'")
-            if foundPrograms.isEmpty {
-                print("NOT Found Program")
-                
+            let foundProgramsInRealm = realm.objects(Program.self).filter("title == '\(program.title)' && author == '\(program.author)'")
+            
+            if foundProgramsInRealm.isEmpty {
                 // Create the Object.
                 let newProgram = Program()
                 newProgram.title = program.title
@@ -71,10 +70,34 @@ extension RealmManager: RealManagerProtocol {
                 }
                 
                 addProgram(program: newProgram)
-            } else {
-                for program in foundPrograms {
-                    print("Found Program: \(program.title)")
+            } else if foundProgramsInRealm.count == 1 {
+                let foundProgram = foundProgramsInRealm[0]
+                if program.episodes.count != foundProgram.episodes.count {
+                    
+                    // Get the last episode by PubDate.
+                    let lastPubDateEpisode: Episode? = foundProgramsInRealm[0].episodes.max { $0.pubDate < $1.pubDate }
+                    
+                    if let lastPubDateEpisode = lastPubDateEpisode {
+                        for episode in program.episodes {
+                            if episode.pubDate > lastPubDateEpisode.pubDate {
+                                let newEpisode = Episode()
+                                newEpisode.title = episode.title
+                                newEpisode.descriptionText = episode.description
+                                newEpisode.pubDate = episode.pubDate
+                                newEpisode.explicit = episode.explicit
+                                newEpisode.audioFileURL = episode.audioFileURL
+                                newEpisode.audioFileSize = episode.audioFileSize
+                                newEpisode.duration = episode.duration
+                                newEpisode.link = episode.link
+                                
+                                addEpisodeToProgramInRealm(program: foundProgram, episode: newEpisode)
+                            }
+                        }
+                    }
                 }
+                
+            } else {
+                print("Duplicate programs?")
             }
         }
         
@@ -97,6 +120,16 @@ extension RealmManager: RealManagerProtocol {
 //        
 //        return programsArray
 //    }
+    
+    func addEpisodeToProgramInRealm(program: Program, episode: Episode) {
+        do {
+            try realm.write({
+                program.episodes.append(episode)
+            })
+        } catch let error {
+            print("Error RealmManager - addEpisodeToProgram - \(error)")
+        }
+    }
     
     func getAllPrograms() {
         allPrograms.send(realm.objects(Program.self))

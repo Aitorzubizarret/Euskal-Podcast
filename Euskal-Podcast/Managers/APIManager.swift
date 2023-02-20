@@ -45,7 +45,6 @@ final class APIManager {
             
             self?.allPrograms.append(program)
         }.store(in: &subscribedTo)
-
     }
     
     func fetchPrograms() {
