@@ -12,20 +12,17 @@ final class APIManager {
     
     // MARK: - Properties
     
-    var xmlParserManager: XMLParserManager = XMLParserManager()
+    private var xmlParserManager: XMLParserManager = XMLParserManager()
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
     var programs = PassthroughSubject<[ProgramXML], Error>()
     
-    var allPrograms: [ProgramXML] = []
-    
-    // Create a dispatch queue.
-    let dispatchQueue = DispatchQueue(label: "DownloadingPodcasts", qos: .background)
-    
-    // Create a semaphore.
-    let semaphore = DispatchSemaphore(value: 0)
-    
+    var allPrograms: [ProgramXML] = [] {
+        didSet {
+            self.programs.send(allPrograms)
+        }
+    }
     
     private let urlPath: String = "https://www.aitorzubizarreta.eus/jsons/euskalpodcast/"
     private let sourcesURL: String = "main.json"
@@ -40,9 +37,6 @@ final class APIManager {
         xmlParserManager.program.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] program in
-            // Signals that the 'current' API request has completed
-            self!.semaphore.signal()
-            
             self?.allPrograms.append(program)
         }.store(in: &subscribedTo)
     }
@@ -50,12 +44,7 @@ final class APIManager {
     func fetchChannels(channels: [Channel]) {
         for channel in channels {
             self.xmlParserManager.parseURL(urlString: channel.urlAddress)
-            
-            // Wait until the previous API request completes.
-            self.semaphore.wait()
         }
-        
-        self.programs.send(self.allPrograms)
     }
     
     ///

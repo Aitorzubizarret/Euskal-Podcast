@@ -12,6 +12,8 @@ class XMLParserManager: NSObject {
     
     // MARK: - Properties
     
+    let serialQueue = DispatchQueue.init(label: "serialQueue")
+    
     // Observable subjets.
     var program = PassthroughSubject<ProgramXML, Error>()
     
@@ -49,8 +51,7 @@ class XMLParserManager: NSObject {
     func parseURL(urlString: String) {
         guard let safeURL: URL = URL(string: urlString) else { return }
         
-        let concurrentQueue = DispatchQueue(label: "XMLParser")
-        concurrentQueue.async {
+        serialQueue.async {
             self.parser = XMLParser(contentsOf: safeURL) ?? XMLParser()
             self.parser.delegate = self
             self.parser.parse()
