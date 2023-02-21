@@ -16,10 +16,10 @@ final class RealmManager {
     var realm: Realm
     
     // Observable subjets.
-    var allChannels = PassthroughSubject<Results<Channel>, Error>()
-    var allPrograms = PassthroughSubject<Results<Program>, Error>()
-    var foundProgram = PassthroughSubject<Results<Program>, Error>()
-    var foundEpisodes = PassthroughSubject<Results<Episode>, Error>()
+    var allChannels = PassthroughSubject<[Channel], Error>()
+    var allPrograms = PassthroughSubject<[Program], Error>()
+    var foundProgram = PassthroughSubject<[Program], Error>()
+    var foundEpisodes = PassthroughSubject<[Episode], Error>()
     
     // MARK: - Methods
     
@@ -103,7 +103,8 @@ extension RealmManager: RealManagerProtocol {
             }
         }
         
-        allPrograms.send(realm.objects(Program.self))
+        let programs = realm.objects(Program.self)
+        allPrograms.send(programs.toArray())
     }
     
     func saveChannels(channels: [Channel]) {
@@ -150,11 +151,13 @@ extension RealmManager: RealManagerProtocol {
     }
     
     func getAllPrograms() {
-        allPrograms.send(realm.objects(Program.self))
+        let programs = realm.objects(Program.self)
+        allPrograms.send(programs.toArray())
     }
     
     func getAllChannels() {
-        allChannels.send(realm.objects(Channel.self))
+        let channels = realm.objects(Channel.self)
+        allChannels.send(channels.toArray())
     }
     
     func deleteAll() {
@@ -172,6 +175,20 @@ extension RealmManager: RealManagerProtocol {
     func deleteChannel(channel: Channel) {
         do {
             try realm.write({
+                // Get the Program.
+                let programs = realm.objects(Program.self).filter("channelId == '\(channel.id)'")
+                
+                // Delete all the Episodes of that Program.
+                for program in programs {
+                    for episode in program.episodes {
+                        realm.delete(episode)
+                    }
+                }
+                
+                // Delete the Program.
+                realm.delete(programs)
+                
+                // Delete the Chanell.
                 realm.delete(channel)
             })
         } catch let error {
@@ -181,12 +198,12 @@ extension RealmManager: RealManagerProtocol {
     
     func searchProgram(id: String) {
         let foundPrograms = realm.objects(Program.self).filter("id = '\(id)'")
-        foundProgram.send(foundPrograms)
+        foundProgram.send(foundPrograms.toArray())
     }
     
     func searchEpisodes(text: String) {
         let searchResultsEpisodes = realm.objects(Episode.self).filter("title contains '\(text)'")
-        foundEpisodes.send(searchResultsEpisodes)
+        foundEpisodes.send(searchResultsEpisodes.toArray())
     }
     
 }

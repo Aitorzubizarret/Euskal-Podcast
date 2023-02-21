@@ -30,7 +30,7 @@ final class ChannelsViewModel {
         realmManager.allChannels.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] channels in
-            self?.channels.send(channels.toArray())
+            self?.channels.send(channels)
         }.store(in: &subscribedTo)
     }
     

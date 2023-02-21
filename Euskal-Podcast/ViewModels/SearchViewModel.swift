@@ -30,7 +30,7 @@ final class SearchViewModel {
         realmManager.foundEpisodes.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] episodes in
-            self?.foundEpisodes.send(episodes.toArray())
+            self?.foundEpisodes.send(episodes)
         }.store(in: &subscribedTo)
     }
     

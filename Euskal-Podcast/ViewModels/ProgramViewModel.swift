@@ -70,7 +70,7 @@ final class ProgramViewModel {
         audioIsPlaying.send(false)
     }
     
-    private func checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: Results<Program>) {
+    private func checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: [Program]) {
         if !foundProgram.isEmpty && foundProgram.count == 1 {
             guard let onlyFoundProgram = foundProgram.first else { return }
             

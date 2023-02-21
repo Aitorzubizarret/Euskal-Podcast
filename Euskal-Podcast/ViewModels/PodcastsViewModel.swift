@@ -18,7 +18,7 @@ final class PodcastsViewModel {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var programs = PassthroughSubject<Results<Program>, Error>()
+    var programs = PassthroughSubject<[Program], Error>()
     
     private var realmManager: RealManagerProtocol
     
@@ -43,7 +43,7 @@ final class PodcastsViewModel {
         realmManager.allChannels.sink { receiveCompletion in
             print("Receive completion")
         } receiveValue: { [weak self] channels in
-            self?.fetchRSSChannels(channels: channels.toArray())
+            self?.fetchRSSChannels(channels: channels)
         }.store(in: &subscribedTo)
         
         realmManager.allPrograms.sink { receiveCompletion in
