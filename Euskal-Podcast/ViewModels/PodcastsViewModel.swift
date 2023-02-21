@@ -61,6 +61,35 @@ final class PodcastsViewModel {
         getAllPrograms()
     }
     
+    func getAmountEpisode(program: Program) -> String {
+        let episodeNumber = program.episodes.count
+        let episodeLastDateFormatted = getLastEpisodeDateFormatted(program: program)
+        
+        return "\(episodeNumber) Atal - Azkena: \(episodeLastDateFormatted)"
+    }
+    
+    private func getLastEpisodeDateFormatted(program: Program) -> String {
+        var lastEpisodeDateFormatted = ""
+        
+        // Get last Episode.
+        let lastEpisode = program.episodes.max { $0.pubDate < $1.pubDate }
+        if let lastEpisode = lastEpisode {
+            
+            // Get last Episodes pubDate.
+            let lastEpisodePubDate = lastEpisode.pubDate
+            
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .short
+            formatter.locale = Locale(identifier: "eu")
+            
+            let relativeDate = formatter.localizedString(for: lastEpisodePubDate, relativeTo: Date())
+            
+            lastEpisodeDateFormatted = relativeDate
+        }
+        
+        return lastEpisodeDateFormatted
+    }
+    
 }
 
 // MARK: - APIManager methods.

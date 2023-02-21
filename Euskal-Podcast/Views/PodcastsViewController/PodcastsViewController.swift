@@ -110,6 +110,7 @@ extension PodcastsViewController: UITableViewDataSource {
         cell.iconURL = program.imageURL
         cell.titleText = program.title
         cell.descriptionText = program.descriptionText
+        cell.episodesInfo = viewModel.getAmountEpisode(program: program)
         cell.authorText = program.author
         
         return cell

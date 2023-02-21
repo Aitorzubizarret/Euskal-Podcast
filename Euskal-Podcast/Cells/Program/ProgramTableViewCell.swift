@@ -14,6 +14,7 @@ class ProgramTableViewCell: UITableViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var episodesInfoLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
@@ -34,6 +35,11 @@ class ProgramTableViewCell: UITableViewCell {
     var descriptionText: String = "" {
         didSet {
             descriptionLabel.text = descriptionText
+        }
+    }
+    var episodesInfo: String = "" {
+        didSet {
+            episodesInfoLabel.text = episodesInfo
         }
     }
     var authorText: String = "" {
@@ -71,6 +77,9 @@ class ProgramTableViewCell: UITableViewCell {
         photoImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
         
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        
+        // Labels.
+        episodesInfoLabel.textColor = UIColor.template.purple
     }
     
 }
