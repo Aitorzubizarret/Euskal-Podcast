@@ -44,6 +44,7 @@ extension RealmManager: RealManagerProtocol {
             if foundProgramsInRealm.isEmpty {
                 // Create the Object.
                 let newProgram = Program()
+                newProgram.channelId = program.channelId
                 newProgram.title = program.title
                 newProgram.descriptionText = program.description
                 newProgram.category = program.category

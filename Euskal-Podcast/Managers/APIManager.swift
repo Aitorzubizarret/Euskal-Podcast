@@ -43,7 +43,7 @@ final class APIManager {
     
     func fetchChannels(channels: [Channel]) {
         for channel in channels {
-            self.xmlParserManager.parseURL(urlString: channel.urlAddress)
+            self.xmlParserManager.parseChannel(urlAddress: channel.urlAddress, id: channel.id)
         }
     }
     

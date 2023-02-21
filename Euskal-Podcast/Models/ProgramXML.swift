@@ -8,6 +8,7 @@
 import Foundation
 
 struct ProgramXML: Codable {
+    let channelId: String
     let title: String
     let description: String
     let category: String

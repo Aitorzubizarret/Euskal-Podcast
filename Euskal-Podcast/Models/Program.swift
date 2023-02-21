@@ -10,6 +10,7 @@ import RealmSwift
 
 class Program: Object {
     @objc dynamic var id = UUID().uuidString
+    @objc dynamic var channelId: String = ""
     @objc dynamic var title: String = ""
     @objc dynamic var descriptionText: String = ""
     @objc dynamic var category: String = ""

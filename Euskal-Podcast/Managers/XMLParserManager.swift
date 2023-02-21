@@ -19,6 +19,8 @@ class XMLParserManager: NSObject {
     
     var parser = XMLParser()
     
+    var channelId: String = ""
+    
     var XMLcontent : String = ""
     
     var newProgram: ProgramXML?
@@ -48,10 +50,12 @@ class XMLParserManager: NSObject {
     
     // MARK: - Methods
     
-    func parseURL(urlString: String) {
-        guard let safeURL: URL = URL(string: urlString) else { return }
+    func parseChannel(urlAddress: String, id: String) {
+        guard let safeURL: URL = URL(string: urlAddress) else { return }
         
         serialQueue.async {
+            self.channelId = id
+            
             self.parser = XMLParser(contentsOf: safeURL) ?? XMLParser()
             self.parser.delegate = self
             self.parser.parse()
@@ -166,18 +170,19 @@ extension XMLParserManager: XMLParserDelegate {
             // Program data.
             switch elementName {
             case "channel":
-                let program = ProgramXML(title: programTitle,
-                                            description: programDescription,
-                                            category: programCategory,
-                                            imageURL: programImageURL,
-                                            explicit: programExplicit,
-                                            language: programLanguage,
-                                            author: programAuthor,
-                                            link: programLink,
-                                            copyright: programCopyright,
-                                            copyrightOwnerName: programCopyrightOwnerName,
-                                            copyrightOwnerEmail: programCopyrightOwnerEmail,
-                                            episodes: episodes)
+                let program = ProgramXML(channelId: channelId,
+                                         title: programTitle,
+                                         description: programDescription,
+                                         category: programCategory,
+                                         imageURL: programImageURL,
+                                         explicit: programExplicit,
+                                         language: programLanguage,
+                                         author: programAuthor,
+                                         link: programLink,
+                                         copyright: programCopyright,
+                                         copyrightOwnerName: programCopyrightOwnerName,
+                                         copyrightOwnerEmail: programCopyrightOwnerEmail,
+                                         episodes: episodes)
                 newProgram = program
             case "title":
                 if programTitle != XMLcontent {
