@@ -119,20 +119,20 @@ class PlayerViewController: UIViewController {
         goForward15ImageView.addGestureRecognizer(tapForward15GR)
         goForward15ImageView.isUserInteractionEnabled = true
         
-        AudioManager.shared.isPlaying() ? updateButtonPause() : updateButtonPlay()
+        AudioManager.shared.isPlaying() ? updateButtonSongPlaying() : updateButtonSongPause()
     }
     
     private func setupNotificationsObservers() {
         notificationCenter.addObserver(self,
-                                       selector: #selector(updateButtonPause),
+                                       selector: #selector(updateButtonSongPlaying),
                                        name: .songPlaying,
                                        object: nil)
         notificationCenter.addObserver(self,
-                                       selector: #selector(updateButtonPlay),
+                                       selector: #selector(updateButtonSongPause),
                                        name: .songPause,
                                        object: nil)
         notificationCenter.addObserver(self,
-                                       selector: #selector(updateButtonPause),
+                                       selector: #selector(updateButtonSongFinished),
                                        name: .audioFinished,
                                        object: nil)
         notificationCenter.addObserver(self,
@@ -153,10 +153,10 @@ class PlayerViewController: UIViewController {
     @objc private func playPauseAction() {
         if AudioManager.shared.isPlaying() {
             AudioManager.shared.pauseSong()
-            updateButtonPlay()
+            updateButtonSongPause()
         } else {
             AudioManager.shared.playSong()
-            updateButtonPause()
+            updateButtonSongPlaying()
         }
     }
     
@@ -165,12 +165,16 @@ class PlayerViewController: UIViewController {
         AudioManager.shared.fastForward15()
     }
     
-    @objc private func updateButtonPlay() {
+    @objc private func updateButtonSongPause() {
         playPauseImageView.image = UIImage(systemName: "play.fill")
     }
     
-    @objc private func updateButtonPause() {
+    @objc private func updateButtonSongPlaying() {
         playPauseImageView.image = UIImage(systemName: "pause.fill")
+    }
+    
+    @objc private func updateButtonSongFinished() {
+        playPauseImageView.image = UIImage(systemName: "play.fill")
     }
     
     ///

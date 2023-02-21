@@ -19,6 +19,7 @@ final class AudioManager {
     // Audio Player.
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
+    private var isAudioFinised: Bool = false
     
     // Audio files data.
     var episode: Episode?
@@ -76,6 +77,11 @@ final class AudioManager {
     }
     
     func playSong() {
+        if isAudioFinised {
+            player?.seek(to: .zero, toleranceBefore: .zero, toleranceAfter: .zero)
+            isAudioFinised = false
+        }
+        
         player?.play()
         
         notifySongPlaying()
@@ -151,7 +157,9 @@ final class AudioManager {
     }
     
     @objc private func audioFinished() {
-        notifySongPause()
+        isAudioFinised = true
+        
+        notifySongFinished()
         updateRemoteDisplayInfo()
     }
     
