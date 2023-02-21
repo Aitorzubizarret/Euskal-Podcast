@@ -168,6 +168,16 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
+    func deleteChannel(channel: Channel) {
+        do {
+            try realm.write({
+                realm.delete(channel)
+            })
+        } catch let error {
+            print("RealmManager deleteChannel Error: \(error)")
+        }
+    }
+    
     func searchProgram(id: String) {
         let foundPrograms = realm.objects(Program.self).filter("id = '\(id)'")
         foundProgram.send(foundPrograms)

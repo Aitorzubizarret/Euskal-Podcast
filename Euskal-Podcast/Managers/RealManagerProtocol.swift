@@ -31,6 +31,7 @@ protocol RealManagerProtocol {
     func getAllChannels()
     
     func deleteAll()
+    func deleteChannel(channel: Channel)
     
     func searchProgram(id: String)
     func searchEpisodes(text: String)

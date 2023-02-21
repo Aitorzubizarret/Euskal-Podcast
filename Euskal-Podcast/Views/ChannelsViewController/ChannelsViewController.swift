@@ -26,6 +26,9 @@ class ChannelsViewController: UIViewController {
         }
     }
     
+    private var addBarButton = UIBarButtonItem()
+    private var deleteBarButton = UIBarButtonItem()
+    
     // MARK: - Methods
     
     init(coordinator: Coordinator, viewModel: ChannelsViewModel) {
@@ -39,15 +42,28 @@ class ChannelsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Podcast Iturriak"
         
+        setupNavbar()
         setupTableView()
         subscriptions()
         
         viewModel.getChannels()
+    }
+    
+    private func setupNavbar() {
+        initBarButtons()
     }
     
     private func setupTableView() {
@@ -68,6 +84,25 @@ class ChannelsViewController: UIViewController {
         } receiveValue: { [weak self] channels in
             self?.channels = channels
         }.store(in: &subscribedTo)
+    }
+    
+    @objc func deleteModeTableView() {
+        tableView.isEditing = true
+        
+        deleteBarButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .plain, target: self, action: #selector(initBarButtons))
+        navigationItem.rightBarButtonItems = [deleteBarButton]
+    }
+    
+    @objc func addModeTableView() {
+        
+    }
+    
+    @objc private func initBarButtons() {
+        tableView.isEditing = false
+        
+        addBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addModeTableView))
+        deleteBarButton = UIBarButtonItem(image: UIImage(systemName: "minus"), style: .plain, target: self, action: #selector(deleteModeTableView))
+        navigationItem.rightBarButtonItems = [deleteBarButton, addBarButton]
     }
     
 }
@@ -96,6 +131,24 @@ extension ChannelsViewController: UITableViewDataSource {
         cell.urlAddressText = channel.urlAddress
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            tableView.beginUpdates()
+            
+            let selectedChannel = channels[indexPath.row]
+            viewModel.deleteChannel(channel: selectedChannel)
+            channels.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
     }
     
 }
