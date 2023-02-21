@@ -53,9 +53,12 @@ final class PodcastsViewModel {
         }.store(in: &subscribedTo)
     }
     
-    func getData() {
-        getAllPrograms()
+    func fetchChannels() {
         getAllChannels()
+    }
+    
+    func getPrograms() {
+        getAllPrograms()
     }
     
 }
@@ -64,7 +67,7 @@ final class PodcastsViewModel {
 
 extension PodcastsViewModel {
     
-    func fetchRSSChannels(channels: [Channel]) {
+    private func fetchRSSChannels(channels: [Channel]) {
         apiManager.fetchChannels(channels: channels)
     }
     
@@ -74,19 +77,19 @@ extension PodcastsViewModel {
 
 extension PodcastsViewModel {
     
-    func saveProgramsInRealm(programs: [ProgramXML]) {
+    private func saveProgramsInRealm(programs: [ProgramXML]) {
         realmManager.savePrograms(programs: programs)
     }
     
-    func getAllPrograms() {
+    private func getAllPrograms() {
         realmManager.getAllPrograms()
     }
     
-    func getAllChannels() {
+    private func getAllChannels() {
         realmManager.getAllChannels()
     }
     
-    func deleteAllRealmData() {
+    private func deleteAllRealmData() {
         realmManager.deleteAll()
     }
     

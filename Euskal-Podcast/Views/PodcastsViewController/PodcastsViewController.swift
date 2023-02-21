@@ -51,7 +51,11 @@ class PodcastsViewController: UIViewController {
         setupTableView()
         subscriptions()
         
-        viewModel.getData()
+        viewModel.fetchChannels()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getPrograms()
     }
     
     private func setupTableView() {
