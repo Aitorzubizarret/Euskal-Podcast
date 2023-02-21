@@ -43,7 +43,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Bilatu"
+        title = "BILATU"
         
         subscriptions()
         setupSearchBar()

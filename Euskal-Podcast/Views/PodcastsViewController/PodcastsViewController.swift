@@ -45,7 +45,7 @@ class PodcastsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Podcastak"
+        title = "PODCASTAK"
         
         setupTableView()
         subscriptions()

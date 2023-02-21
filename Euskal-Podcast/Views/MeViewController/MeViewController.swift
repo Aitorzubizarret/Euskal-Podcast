@@ -32,7 +32,7 @@ class MeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Ni"
+        title = "NI"
         
         setupTableView()
     }

@@ -44,9 +44,9 @@ class TabBar: UITabBarController {
         let podcastsViewModel = PodcastsViewModel(apiManager: podcastsAPIManager, realManager: podcastsRealmManager)
         let podcastsVC = PodcastsViewController(coordinator: podcastsCoordinator, viewModel: podcastsViewModel)
         
-        podcastsVC.tabBarItem = UITabBarItem(title: "Podcastak",
-                                            image: UIImage(systemName: "list.bullet.circle"),
-                                            selectedImage: UIImage(systemName: "list.bullet.circle.fill"))
+        podcastsVC.tabBarItem = UITabBarItem(title: "PODCASTAK",
+                                            image: UIImage(systemName: "dot.radiowaves.up.forward"),
+                                            selectedImage: UIImage(systemName: "dot.radiowaves.up.forward"))
         
         podcastsCoordinator.navigationController.viewControllers = [podcastsVC]
         
@@ -55,18 +55,18 @@ class TabBar: UITabBarController {
         let searchViewModel = SearchViewModel(realmManager: searchRealmManager)
         let searchVC = SearchViewController(coordinator: searchCoordinator, viewModel: searchViewModel)
         
-        searchVC.tabBarItem = UITabBarItem(title: "Bilatu",
-                                           image: UIImage(systemName: "magnifyingglass.circle"),
-                                           selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
+        searchVC.tabBarItem = UITabBarItem(title: "BILATU",
+                                           image: UIImage(systemName: "magnifyingglass"),
+                                           selectedImage: UIImage(systemName: "magnifyingglass"))
         
         searchCoordinator.navigationController.viewControllers = [searchVC]
         
         // Me Tab.
         let meVC = MeViewController(coordinator: meCoordinator)
         
-        meVC.tabBarItem = UITabBarItem(title: "Ni",
-                                       image: UIImage(systemName: "person.crop.circle"),
-                                       selectedImage: UIImage(systemName: "person.crop.circle.fill"))
+        meVC.tabBarItem = UITabBarItem(title: "NI",
+                                       image: UIImage(systemName: "person"),
+                                       selectedImage: UIImage(systemName: "person.fill"))
         
         meCoordinator.navigationController.viewControllers = [meVC]
         
