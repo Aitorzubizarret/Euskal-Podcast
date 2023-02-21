@@ -15,9 +15,9 @@ extension UIColor {
         static let lightRose: UIColor = UIColor(red: 1.00, green: 0.78, blue: 0.87, alpha: 1.00) // ffc8dd
         static let darkRose: UIColor = UIColor(red: 1.00, green: 0.69, blue: 0.80, alpha: 1.00) // ffafcc
         
-        static let lightPurple: UIColor = UIColor(red: 0.80, green: 0.71, blue: 0.86, alpha: 1.00) // cdb4db
-        static let purple: UIColor = UIColor(red: 0.73, green: 0.64, blue: 0.78, alpha: 1.00) // baa4c7
-        static let darkPurple: UIColor = UIColor(red: 0.66, green: 0.58, blue: 0.71, alpha: 1.00) // a995b5
+        static let lightPurple: UIColor = UIColor(red: 0.88, green: 0.67, blue: 1.00, alpha: 1.00) // e0aaff
+        static let purple: UIColor = UIColor(red: 0.62, green: 0.31, blue: 0.87, alpha: 1.00) // 7209b7
+        static let darkPurple: UIColor = UIColor(red: 0.14, green: 0.00, blue: 0.27, alpha: 1.00) // 240046
     }
     
 }
