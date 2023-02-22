@@ -29,11 +29,18 @@ class TabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTabBarAppearance()
+        
         setupVCs()
         
         embedNowPlayingViewController()
         
         setupNotificationsObservers()
+    }
+    
+    private func setupTabBarAppearance() {
+        let appearance = UITabBar.appearance()
+        appearance.tintColor = UIColor.template.purple
     }
     
     /// Setup ViewControllers.
