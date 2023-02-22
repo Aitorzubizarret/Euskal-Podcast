@@ -112,6 +112,23 @@ final class ProgramViewModel {
         AudioManager.shared.pauseSong()
     }
     
+    func getEpisodesInfoAndProgramCopyright(program: Program) -> String {
+        var result: String = ""
+        
+        // Episodes Info.
+        switch program.episodes.count {
+        case 1:
+            result = "Atal 1"
+        default:
+            result = "\(program.episodes.count) Atal"
+        }
+        
+        // Copyright Info.
+        result = result + " - " + program.copyright
+        
+        return result
+    }
+    
 }
 
 // MARK: - RealmManager methods.

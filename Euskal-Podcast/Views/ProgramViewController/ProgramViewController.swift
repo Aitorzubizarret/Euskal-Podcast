@@ -160,6 +160,7 @@ extension ProgramViewController: UITableViewDataSource {
             cell.imageURL = program.imageURL
             cell.titleName = program.title
             cell.descriptionText = program.descriptionText
+            cell.episodesInfo = viewModel.getEpisodesInfoAndProgramCopyright(program: program)
             
             return cell
         default:

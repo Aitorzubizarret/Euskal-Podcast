@@ -16,10 +16,19 @@ class MainTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var backgroundImageImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var separatorImageView: UIImageView!
+    @IBOutlet weak var episodesInfoLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
     
+    var imageURL: String = "" {
+        didSet {
+            guard let safeImageURL: URL = URL(string: imageURL) else { return }
+            
+            backgroundImageImageView.kf.setImage(with: safeImageURL)
+        }
+    }
     var titleName: String = "" {
         didSet {
             nameLabel.text = titleName
@@ -30,11 +39,9 @@ class MainTitleTableViewCell: UITableViewCell {
             descriptionLabel.text = descriptionText
         }
     }
-    var imageURL: String = "" {
+    var episodesInfo: String = "" {
         didSet {
-            guard let safeImageURL: URL = URL(string: imageURL) else { return }
-            
-            backgroundImageImageView.kf.setImage(with: safeImageURL)
+            episodesInfoLabel.text = episodesInfo
         }
     }
     
@@ -69,6 +76,7 @@ class MainTitleTableViewCell: UITableViewCell {
         backgroundImageImageView.layer.shadowRadius = 4
         backgroundImageImageView.layer.shadowOpacity = 0.5
         
+        separatorImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
     
