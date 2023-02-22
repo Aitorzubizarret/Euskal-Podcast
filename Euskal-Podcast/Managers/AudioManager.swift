@@ -66,7 +66,7 @@ final class AudioManager {
 
         player.volume = 1.0
         
-        totalDurationString = episode.getDurationFormatted()
+        totalDurationString = episode.duration != 0 ? episode.duration.asTimeFormatted() : AudioManager.shared.getAudioDurationInSeconds().asTimeFormatted()
         
         player.play()
         
@@ -137,7 +137,7 @@ final class AudioManager {
         guard let player = player,
               let episode = episode else { return }
         
-        let time = episode.getDurationInSeconds() * position
+        let time = Double(episode.duration) * position
         player.seek(to: CMTime(value: CMTimeValue(time * 1000), timescale: 1000)) { success in
             self.notifySeekFinished()
         }
@@ -146,6 +146,17 @@ final class AudioManager {
     func getEpisodeId() -> String {
         guard let episode = episode else { return "" }
         return episode.id
+    }
+    
+    func getAudioDurationInSeconds() -> Int {
+        var result: Int = 0
+        if let duration = playerItem?.duration {
+            let seconds: Double = CMTimeGetSeconds(duration)
+            if let converted = Int(exactly: seconds.rounded()) {
+              result = converted
+            }
+        }
+        return result
     }
     
     func getCurrentPlayedTime() -> Int {

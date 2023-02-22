@@ -96,7 +96,7 @@ class PlayerViewController: UIViewController {
         titleLabel.text = episode.title
         programNameLabel.text = program.title
         currentDurationTimeLabel.text = "00:00"
-        totalDurationTimeLabel.text = episode.getDurationFormatted()
+        totalDurationTimeLabel.text = episode.duration != 0 ? episode.duration.asTimeFormatted() : AudioManager.shared.getAudioDurationInSeconds().asTimeFormatted()
         descriptionLabel.text = episode.descriptionText
         
         // Slider.
@@ -181,7 +181,7 @@ class PlayerViewController: UIViewController {
     /// Calculate how much time has been played from the MP3 file and display it on a label.
     ///
     @objc private func displayCurrentTime() {
-        let episodeDuration: Int = Int(episode.duration) ?? 0
+        let episodeDuration: Int = episode.duration != 0 ? episode.duration : AudioManager.shared.getAudioDurationInSeconds()
         let episodeCurrentTime: Int = AudioManager.shared.getCurrentPlayedTime()
         
         // Label.

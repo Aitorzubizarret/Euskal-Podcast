@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1CC29229A690E700216BAB /* Int-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CC29129A690E700216BAB /* Int-Extension.swift */; };
 		1A24EEF929A3A46B00E60EAF /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24EEF729A3A46B00E60EAF /* ChannelsViewController.swift */; };
 		1A24EEFA29A3A46B00E60EAF /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A24EEF829A3A46B00E60EAF /* ChannelsViewController.xib */; };
 		1A24EEFE29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A24EEFC29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A1CC29129A690E700216BAB /* Int-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int-Extension.swift"; sourceTree = "<group>"; };
 		1A24EEF729A3A46B00E60EAF /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
 		1A24EEF829A3A46B00E60EAF /* ChannelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		1A24EEFC29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallListItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				1A7C938328611697003E0C00 /* UIColor-Extension.swift */,
 				1AFE3330299D16300092C464 /* Results-Extension.swift */,
 				1AFE3336299E68340092C464 /* NotificationName-Extension.swift */,
+				1A1CC29129A690E700216BAB /* Int-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
 				1A4D99EA298AD5FE003A1A38 /* ProgramXML.swift in Sources */,
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
+				1A1CC29229A690E700216BAB /* Int-Extension.swift in Sources */,
 				1A7C938428611697003E0C00 /* UIColor-Extension.swift in Sources */,
 				42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */,
 				1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */,

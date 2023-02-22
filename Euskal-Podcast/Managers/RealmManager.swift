@@ -32,6 +32,37 @@ final class RealmManager {
 //        }
     }
     
+    private func convertStringToInt(value: String) -> Int {
+        var result: Int = 0
+        var seconds: Int = 0
+        var minutes: Int = 0
+        var hours: Int = 0
+        
+        let valueComponents = value.components(separatedBy: ":")
+        
+        switch valueComponents.count {
+        case 1:
+            seconds = Int(valueComponents[0]) ?? 0
+        case 2:
+            minutes = Int(valueComponents[0]) ?? 0
+            seconds = Int(valueComponents[1]) ?? 0
+            if let minutes = Int(valueComponents[0]),
+               let seconds = Int(valueComponents[1]) {
+                result = (minutes * 60) + seconds
+            }
+        case 3:
+            hours = Int(valueComponents[0]) ?? 0
+            minutes = Int(valueComponents[1]) ?? 0
+            seconds = Int(valueComponents[2]) ?? 0
+        default:
+            result = 0
+        }
+        
+        result = (hours * 3600) + (minutes * 60) + seconds
+        
+        return result
+    }
+    
 }
 
 extension RealmManager: RealManagerProtocol {
@@ -65,7 +96,7 @@ extension RealmManager: RealManagerProtocol {
                     newEpisode.explicit = episode.explicit
                     newEpisode.audioFileURL = episode.audioFileURL
                     newEpisode.audioFileSize = episode.audioFileSize
-                    newEpisode.duration = episode.duration
+                    newEpisode.duration = convertStringToInt(value: episode.duration)
                     newEpisode.link = episode.link
                     
                     newProgram.episodes.append(newEpisode)
@@ -89,7 +120,7 @@ extension RealmManager: RealManagerProtocol {
                                 newEpisode.explicit = episode.explicit
                                 newEpisode.audioFileURL = episode.audioFileURL
                                 newEpisode.audioFileSize = episode.audioFileSize
-                                newEpisode.duration = episode.duration
+                                newEpisode.duration = convertStringToInt(value: episode.duration)
                                 newEpisode.link = episode.link
                                 
                                 addEpisodeToProgramInRealm(program: foundProgram, episode: newEpisode)

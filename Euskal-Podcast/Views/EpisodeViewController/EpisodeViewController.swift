@@ -59,7 +59,7 @@ class EpisodeViewController: UIViewController {
         explicitValueLabel.text = episode.explicit
         audioFileURLValueLabel.text = episode.audioFileURL
         audioFileSizeValueLabel.text = episode.audioFileSize
-        durationValueLabel.text = episode.getDurationFormatted()
+        durationValueLabel.text = episode.duration.asTimeFormatted()
         linkValueLabel.text = episode.link
     }
     

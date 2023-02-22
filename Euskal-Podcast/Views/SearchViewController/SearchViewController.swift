@@ -127,7 +127,7 @@ extension SearchViewController: UITableViewDataSource {
         cell.releaseDateText = episode.getPublishedDateFormatter()
         cell.titleText = episode.title
         cell.descriptionText = episode.descriptionText
-        cell.durationText = episode.getDurationFormatted()
+        cell.durationText = episode.duration.asTimeFormatted()
         
         return cell
     }
