@@ -227,8 +227,8 @@ extension RealmManager: RealManagerProtocol {
     }
     
     func searchTextInProgramsAndEpisodes(text: String) {
-        let searchTextInPrograms = realm.objects(Program.self).filter("title contains '\(text)' OR descriptionText contains '\(text)'")
-        let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains '\(text)' OR descriptionText contains '\(text)'")
+        let searchTextInPrograms = realm.objects(Program.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
+        let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
         
         foundProgramsWithText.send(searchTextInPrograms.toArray())
         foundEpisodesWithText.send(searchTextInEpisodes.toArray())
