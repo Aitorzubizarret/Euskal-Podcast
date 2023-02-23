@@ -16,11 +16,6 @@ class ProgramsListTableViewCell: UITableViewCell {
     
     // MARK: - UI Elements
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var seeAllButton: UIButton!
-    @IBAction func seeAllButtonTapped(_ sender: Any) {
-        goToProgramsList()
-    }
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
@@ -55,12 +50,6 @@ class ProgramsListTableViewCell: UITableViewCell {
     private func setupView() {
         // Cell
         selectionStyle = .none
-        
-        // Label.
-        titleLabel.text = "Programak"
-        
-        // Button.
-        seeAllButton.setTitle("Zerrenda", for: .normal)
         
         // UIimageView.
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
