@@ -26,6 +26,13 @@ final class SearchCoordinator {
 
 extension SearchCoordinator: Coordinator {
     
+    func showPodcastList(programs: [Program]) {
+        let podcastListViewModel = PodcastListViewModel(programs: programs)
+        let podcastListVC = PodcastListViewController(coordinator: self, viewModel: podcastListViewModel)
+        
+        navigationController.show(podcastListVC, sender: nil)
+    }
+    
     func showProgramDetail(programId: String) {
         let programRealmManager: RealManagerProtocol = RealmManager()
         let programViewModel = ProgramViewModel(realmManager: programRealmManager)

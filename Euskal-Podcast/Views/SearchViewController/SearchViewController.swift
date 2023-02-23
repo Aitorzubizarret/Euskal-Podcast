@@ -227,8 +227,7 @@ extension SearchViewController: ProgramListCellDelegate {
 extension SearchViewController: SectionTitleCellDelegate {
     
     func showListAction() {
-        // TODO: Finish this method.
-        print("showListAction")
+        coordinator.showPodcastList(programs: foundPrograms)
     }
     
 }
