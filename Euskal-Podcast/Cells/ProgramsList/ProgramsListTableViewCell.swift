@@ -77,12 +77,6 @@ class ProgramsListTableViewCell: UITableViewCell {
         collectionView.register(programCell, forCellWithReuseIdentifier: programCollectionViewCellIdentifier)
     }
     
-    ///
-    /// Go to ProgramsViewController.
-    ///
-    private func goToProgramsList() {
-        delegate?.showAllPrograms()
-    }
 }
 
 // MARK: - UICollectionView Delegate

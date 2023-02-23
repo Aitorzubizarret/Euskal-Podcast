@@ -27,9 +27,6 @@
 		1A7DF0A429A3C97D00D0AA55 /* StaticDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A329A3C97D00D0AA55 /* StaticDataManager.swift */; };
 		1A7DF0A629A3E2F700D0AA55 /* ChannelsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */; };
 		1A7DF0A829A3E97900D0AA55 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7DF0A729A3E97900D0AA55 /* UserDefaultsManager.swift */; };
-		1A975623287C710C006C213A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975622287C710C006C213A /* Source.swift */; };
-		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
-		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
 		1AD8924129A7853B0003B1A3 /* SectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */; };
 		1AD8924229A7853B0003B1A3 /* SectionTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */; };
 		1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5E92993112C007AEDB6 /* TabBar.swift */; };
@@ -60,15 +57,11 @@
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */; };
 		42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */; };
-		42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */; };
-		42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */; };
 		426DCB93264C85BD0020AC72 /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB92264C85BD0020AC72 /* Program.swift */; };
 		427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */; };
 		427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */; };
 		428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428C2B572662EAB4009E5B0F /* ProgramViewController.swift */; };
 		428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 428C2B582662EAB4009E5B0F /* ProgramViewController.xib */; };
-		42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BB9C142659A6980014A560 /* ProgramsViewController.swift */; };
-		42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42BB9C152659A6980014A560 /* ProgramsViewController.xib */; };
 		42BE3FA526486F9B00C6DA7E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE3FA426486F9B00C6DA7E /* CloudKit.framework */; };
 		42EBBB29263DAB7800463FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB28263DAB7800463FB4 /* AppDelegate.swift */; };
 		42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EBBB2A263DAB7800463FB4 /* SceneDelegate.swift */; };
@@ -101,9 +94,6 @@
 		1A7DF0A329A3C97D00D0AA55 /* StaticDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticDataManager.swift; sourceTree = "<group>"; };
 		1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewModel.swift; sourceTree = "<group>"; };
 		1A7DF0A729A3E97900D0AA55 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		1A975622287C710C006C213A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
-		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
-		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
 		1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewCell.swift; sourceTree = "<group>"; };
 		1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleTableViewCell.xib; sourceTree = "<group>"; };
 		1ADAD5E92993112C007AEDB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -133,15 +123,11 @@
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCell.swift; sourceTree = "<group>"; };
 		42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
-		42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTableViewCell.swift; sourceTree = "<group>"; };
-		42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeasonTableViewCell.xib; sourceTree = "<group>"; };
 		426DCB92264C85BD0020AC72 /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeTableViewCell.xib; sourceTree = "<group>"; };
 		428C2B572662EAB4009E5B0F /* ProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
 		428C2B582662EAB4009E5B0F /* ProgramViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramViewController.xib; sourceTree = "<group>"; };
-		42BB9C142659A6980014A560 /* ProgramsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsViewController.swift; sourceTree = "<group>"; };
-		42BB9C152659A6980014A560 /* ProgramsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramsViewController.xib; sourceTree = "<group>"; };
 		42BE3FA126486F9500C6DA7E /* Euskal-Podcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Euskal-Podcast.entitlements"; sourceTree = "<group>"; };
 		42BE3FA426486F9B00C6DA7E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		42EBBB25263DAB7800463FB4 /* Euskal-Podcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Euskal-Podcast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,15 +228,6 @@
 			path = MainTitle;
 			sourceTree = "<group>";
 		};
-		1A975624287C85DD006C213A /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				1A975626287C85F7006C213A /* SourceTableViewCell.xib */,
-				1A975625287C85F7006C213A /* SourceTableViewCell.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		1AD8923E29A785250003B1A3 /* SectionTitle */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,15 +270,6 @@
 				1ADAD5FD2993AFE0007AEDB6 /* MeViewController.xib */,
 			);
 			path = MeViewController;
-			sourceTree = "<group>";
-		};
-		1AF85E84298A92DD0087C77B /* ProgramsViewController */ = {
-			isa = PBXGroup;
-			children = (
-				42BB9C152659A6980014A560 /* ProgramsViewController.xib */,
-				42BB9C142659A6980014A560 /* ProgramsViewController.swift */,
-			);
-			path = ProgramsViewController;
 			sourceTree = "<group>";
 		};
 		1AF85E85298A92F30087C77B /* ProgramViewController */ = {
@@ -352,7 +320,6 @@
 				1AF85E86298A93030087C77B /* PlayerViewController */,
 				1AF85E85298A92F30087C77B /* ProgramViewController */,
 				1AFE3324299C535D0092C464 /* EpisodeViewController */,
-				1AF85E84298A92DD0087C77B /* ProgramsViewController */,
 				1A24EEF629A3A44900E60EAF /* ChannelsViewController */,
 			);
 			path = Views;
@@ -361,7 +328,6 @@
 		425DCB5C263E0E4100958689 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1A975622287C710C006C213A /* Source.swift */,
 				1AE7AE6129A39B7300B5D7D4 /* Channel.swift */,
 				426DCB92264C85BD0020AC72 /* Program.swift */,
 				1A4D99E9298AD5FE003A1A38 /* ProgramXML.swift */,
@@ -369,15 +335,6 @@
 				1A4D99EB298ADBF3003A1A38 /* EpisodeXML.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		42621E24264DB38200271A85 /* Season */ = {
-			isa = PBXGroup;
-			children = (
-				42621E32264DB3D800271A85 /* SeasonTableViewCell.xib */,
-				42621E31264DB3D800271A85 /* SeasonTableViewCell.swift */,
-			);
-			path = Season;
 			sourceTree = "<group>";
 		};
 		42621E25264DB39A00271A85 /* Program */ = {
@@ -395,11 +352,9 @@
 				1AD8923E29A785250003B1A3 /* SectionTitle */,
 				1A24EEFB29A3A67100E60EAF /* SmallListItem */,
 				1A7CC4AC285F2BE5003F2379 /* MainTitle */,
-				1A975624287C85DD006C213A /* Source */,
 				42621E25264DB39A00271A85 /* Program */,
 				42F38AD72651A7B1005F9AB1 /* ProgramsList */,
 				42F38ADE2651C76D005F9AB1 /* ProgramsListCell */,
-				42621E24264DB38200271A85 /* Season */,
 				427E1C482640B15A00FBCDF7 /* Episode */,
 				1A24EF0029A3AF6700E60EAF /* Channel */,
 			);
@@ -562,16 +517,13 @@
 				1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */,
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
 				42F38ADB2651A7D7005F9AB1 /* ProgramsListTableViewCell.xib in Resources */,
-				42621E34264DB3D800271A85 /* SeasonTableViewCell.xib in Resources */,
 				1A24EF0429A3AF7E00E60EAF /* ChannelTableViewCell.xib in Resources */,
 				1ADAD5F72993AFC8007AEDB6 /* PodcastsViewController.xib in Resources */,
 				427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */,
 				1AFE3328299C538B0092C464 /* EpisodeViewController.xib in Resources */,
 				42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */,
-				42BB9C172659A6980014A560 /* ProgramsViewController.xib in Resources */,
 				428C2B5A2662EAB4009E5B0F /* ProgramViewController.xib in Resources */,
 				42EBBB32263DAB7800463FB4 /* Assets.xcassets in Resources */,
-				1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */,
 				1ADAD5FB2993AFD5007AEDB6 /* SearchViewController.xib in Resources */,
 				1A48E11F2995800700275BB4 /* NowPlayingViewController.xib in Resources */,
 				42F38AE22651C7A1005F9AB1 /* ProgramCollectionViewCell.xib in Resources */,
@@ -600,18 +552,15 @@
 				1ADAD5F62993AFC8007AEDB6 /* PodcastsViewController.swift in Sources */,
 				1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */,
 				1A24EEFE29A3A6BD00E60EAF /* SmallListItemTableViewCell.swift in Sources */,
-				42BB9C162659A6980014A560 /* ProgramsViewController.swift in Sources */,
 				4212F415263F29CC00B9C021 /* PlayerViewController.swift in Sources */,
 				1AE7AE5E299FFB1E00B5D7D4 /* ProgramViewModel.swift in Sources */,
 				1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */,
-				1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */,
 				1A24EF0329A3AF7E00E60EAF /* ChannelTableViewCell.swift in Sources */,
 				1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */,
 				1AE7AE6229A39B7300B5D7D4 /* Channel.swift in Sources */,
 				1A48E11E2995800700275BB4 /* NowPlayingViewController.swift in Sources */,
 				1A7DF0A429A3C97D00D0AA55 /* StaticDataManager.swift in Sources */,
 				1A7DF0A629A3E2F700D0AA55 /* ChannelsViewModel.swift in Sources */,
-				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				1AFE3335299E38BC0092C464 /* RealManagerProtocol.swift in Sources */,
 				1AD8924129A7853B0003B1A3 /* SectionTitleTableViewCell.swift in Sources */,
@@ -622,7 +571,6 @@
 				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
 				1A1CC29229A690E700216BAB /* Int-Extension.swift in Sources */,
 				1A7C938428611697003E0C00 /* UIColor-Extension.swift in Sources */,
-				42621E33264DB3D800271A85 /* SeasonTableViewCell.swift in Sources */,
 				1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */,
 				42F38AE12651C7A1005F9AB1 /* ProgramCollectionViewCell.swift in Sources */,
 				1A7CC4A9285E7D79003F2379 /* APIManager.swift in Sources */,
