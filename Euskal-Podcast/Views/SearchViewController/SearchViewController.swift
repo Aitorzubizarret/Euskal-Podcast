@@ -89,6 +89,9 @@ class SearchViewController: UIViewController {
         let programCell: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
         tableView.register(programCell, forCellReuseIdentifier: "ProgramsListTableViewCell")
         
+        let sectionTitleCell: UINib = UINib(nibName: "SectionTitleTableViewCell", bundle: nil)
+        tableView.register(sectionTitleCell, forCellReuseIdentifier: "SectionTitleTableViewCell")
+        
         let episodeCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
         tableView.register(episodeCell, forCellReuseIdentifier: "EpisodeTableViewCell")
     }
@@ -122,8 +125,10 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedEpisode = foundEpisodes[indexPath.row]
-        coordinator.showEpisodeDetail(episode: selectedEpisode)
+        if indexPath.section == 2 {
+            let selectedEpisode = foundEpisodes[indexPath.row]
+            coordinator.showEpisodeDetail(episode: selectedEpisode)
+        }
     }
     
 }
@@ -133,7 +138,7 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,7 +146,11 @@ extension SearchViewController: UITableViewDataSource {
             return 1
         }
         
-        if section == 1 {
+        if section == 1 && !foundEpisodes.isEmpty {
+            return 1
+        }
+        
+        if section == 2 {
             return foundEpisodes.count
         }
         
@@ -159,6 +168,17 @@ extension SearchViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
+            
+            cell.delegate = self
+            cell.titleText = "ATALAK" + " - \(foundEpisodes.count)"
+            cell.hideBottomLine = false
+            cell.hideShowListButton = true
+            
+            return cell
+        }
+        
+        if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
             
             let episode = foundEpisodes[indexPath.row]
@@ -176,6 +196,8 @@ extension SearchViewController: UITableViewDataSource {
     
 }
 
+// MARK: - ProgramListCell Delegate
+
 extension SearchViewController: ProgramListCellDelegate {
     
     func showAllPrograms() {
@@ -185,6 +207,17 @@ extension SearchViewController: ProgramListCellDelegate {
     func showSelectedProgram(position: Int) {
         let programId: String = foundPrograms[position].id
         coordinator.showProgramDetail(programId: programId)
+    }
+    
+}
+
+// MARK: - SectionTitleCell Delegate
+
+extension SearchViewController: SectionTitleCellDelegate {
+    
+    func showListAction() {
+        // TODO: Finish this method.
+        print("showListAction")
     }
     
 }

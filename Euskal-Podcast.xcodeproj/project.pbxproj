@@ -30,6 +30,8 @@
 		1A975623287C710C006C213A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975622287C710C006C213A /* Source.swift */; };
 		1A975627287C85F7006C213A /* SourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A975625287C85F7006C213A /* SourceTableViewCell.swift */; };
 		1A975628287C85F7006C213A /* SourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A975626287C85F7006C213A /* SourceTableViewCell.xib */; };
+		1AD8924129A7853B0003B1A3 /* SectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */; };
+		1AD8924229A7853B0003B1A3 /* SectionTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */; };
 		1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5E92993112C007AEDB6 /* TabBar.swift */; };
 		1ADAD5EC2993A253007AEDB6 /* PodcastsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */; };
 		1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */; };
@@ -102,6 +104,8 @@
 		1A975622287C710C006C213A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		1A975625287C85F7006C213A /* SourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTableViewCell.swift; sourceTree = "<group>"; };
 		1A975626287C85F7006C213A /* SourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceTableViewCell.xib; sourceTree = "<group>"; };
+		1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewCell.swift; sourceTree = "<group>"; };
+		1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleTableViewCell.xib; sourceTree = "<group>"; };
 		1ADAD5E92993112C007AEDB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsCoordinator.swift; sourceTree = "<group>"; };
 		1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -247,6 +251,15 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		1AD8923E29A785250003B1A3 /* SectionTitle */ = {
+			isa = PBXGroup;
+			children = (
+				1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */,
+				1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */,
+			);
+			path = SectionTitle;
+			sourceTree = "<group>";
+		};
 		1ADAD5E829931103007AEDB6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +392,7 @@
 		427E1C412640AF6000FBCDF7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1AD8923E29A785250003B1A3 /* SectionTitle */,
 				1A24EEFB29A3A67100E60EAF /* SmallListItem */,
 				1A7CC4AC285F2BE5003F2379 /* MainTitle */,
 				1A975624287C85DD006C213A /* Source */,
@@ -543,6 +557,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD8924229A7853B0003B1A3 /* SectionTitleTableViewCell.xib in Resources */,
 				42EBBB35263DAB7800463FB4 /* LaunchScreen.storyboard in Resources */,
 				1ADAD5FF2993AFE0007AEDB6 /* MeViewController.xib in Resources */,
 				4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */,
@@ -599,6 +614,7 @@
 				1A975623287C710C006C213A /* Source.swift in Sources */,
 				42EBBB2B263DAB7800463FB4 /* SceneDelegate.swift in Sources */,
 				1AFE3335299E38BC0092C464 /* RealManagerProtocol.swift in Sources */,
+				1AD8924129A7853B0003B1A3 /* SectionTitleTableViewCell.swift in Sources */,
 				1AFE3333299D36910092C464 /* RealmManager.swift in Sources */,
 				1AFE3331299D16300092C464 /* Results-Extension.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
