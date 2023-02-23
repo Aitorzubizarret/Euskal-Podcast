@@ -21,6 +21,11 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel
     
     private var subscribedTo: [AnyCancellable] = []
+    private var foundPrograms: [Program] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private var foundEpisodes: [Episode] = [] {
         didSet {
             tableView.reloadData()
@@ -51,6 +56,12 @@ class SearchViewController: UIViewController {
     }
     
     private func subscriptions() {
+        viewModel.foundPrograms.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] programs in
+            self?.foundPrograms = programs
+        }.store(in: &subscribedTo)
+        
         viewModel.foundEpisodes.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] episodes in
@@ -75,10 +86,11 @@ class SearchViewController: UIViewController {
         tableView.separatorStyle = .none
         
         // Register cells.
-        let programCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
-        tableView.register(programCell, forCellReuseIdentifier: "EpisodeTableViewCell")
+        let programCell: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
+        tableView.register(programCell, forCellReuseIdentifier: "ProgramsListTableViewCell")
         
-        tableView.estimatedRowHeight = 110
+        let episodeCell: UINib = UINib(nibName: "EpisodeTableViewCell", bundle: nil)
+        tableView.register(episodeCell, forCellReuseIdentifier: "EpisodeTableViewCell")
     }
     
 }
@@ -88,7 +100,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchEpisodes(text: searchText)
+        viewModel.searchTextInProgramsAndEpisodes(text: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -100,6 +112,14 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - UITableView Delegate
 
 extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 256
+        }
+        
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedEpisode = foundEpisodes[indexPath.row]
@@ -113,23 +133,58 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foundEpisodes.count
+        if section == 0 && !foundPrograms.isEmpty {
+            return 1
+        }
+        
+        if section == 1 {
+            return foundEpisodes.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramsListTableViewCell", for: indexPath) as! ProgramsListTableViewCell
+            cell.delegate = self
+            
+            cell.programs = foundPrograms
+            
+            return cell
+        }
         
-        let episode = foundEpisodes[indexPath.row]
-        cell.releaseDateText = episode.getPublishedDateFormatter()
-        cell.titleText = episode.title
-        cell.descriptionText = episode.descriptionText
-        cell.durationText = episode.duration.asTimeFormatted()
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
+            
+            let episode = foundEpisodes[indexPath.row]
+            cell.releaseDateText = episode.getPublishedDateFormatter()
+            cell.titleText = episode.title
+            cell.descriptionText = episode.descriptionText
+            cell.durationText = episode.duration.asTimeFormatted()
+            
+            return cell
+        }
         
-        return cell
+        return UITableViewCell()
+        
+    }
+    
+}
+
+extension SearchViewController: ProgramListCellDelegate {
+    
+    func showAllPrograms() {
+        // TODO: - Create the ViewController to show the Programs and then the methods in Coordinator.
+    }
+    
+    func showSelectedProgram(position: Int) {
+        let programId: String = foundPrograms[position].id
+        coordinator.showProgramDetail(programId: programId)
     }
     
 }

@@ -19,7 +19,8 @@ final class RealmManager {
     var allChannels = PassthroughSubject<[Channel], Error>()
     var allPrograms = PassthroughSubject<[Program], Error>()
     var foundProgram = PassthroughSubject<[Program], Error>()
-    var foundEpisodes = PassthroughSubject<[Episode], Error>()
+    var foundProgramsWithText = PassthroughSubject<[Program], Error>()
+    var foundEpisodesWithText = PassthroughSubject<[Episode], Error>()
     
     // MARK: - Methods
     
@@ -164,13 +165,6 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-//    func getAllPrograms() -> [Program] {
-//        let programsResults: Results<Program> = realm.objects(Program.self)
-//        let programsArray: [Program] = programsResults.toArray()
-//        
-//        return programsArray
-//    }
-    
     func addEpisodeToProgramInRealm(program: Program, episode: Episode) {
         do {
             try realm.write({
@@ -232,9 +226,12 @@ extension RealmManager: RealManagerProtocol {
         foundProgram.send(foundPrograms.toArray())
     }
     
-    func searchEpisodes(text: String) {
-        let searchResultsEpisodes = realm.objects(Episode.self).filter("title contains '\(text)'")
-        foundEpisodes.send(searchResultsEpisodes.toArray())
+    func searchTextInProgramsAndEpisodes(text: String) {
+        let searchTextInPrograms = realm.objects(Program.self).filter("title contains '\(text)' OR descriptionText contains '\(text)'")
+        let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains '\(text)' OR descriptionText contains '\(text)'")
+        
+        foundProgramsWithText.send(searchTextInPrograms.toArray())
+        foundEpisodesWithText.send(searchTextInEpisodes.toArray())
     }
     
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,23 +38,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnS-RK-FKX">
-                                <rect key="frame" x="0.0" y="123" width="106" height="17"/>
+                                <rect key="frame" x="0.0" y="127" width="106" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="yfo-qo-lCs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hnS-RK-FKX" secondAttribute="bottom" id="92H-5I-Gud"/>
                             <constraint firstItem="Skh-uM-Pdk" firstAttribute="leading" secondItem="hQ5-by-Mgb" secondAttribute="leading" constant="2" id="Bw4-B3-HbO"/>
                             <constraint firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="Jls-yg-N3O"/>
                             <constraint firstAttribute="height" constant="170" id="Lkm-RB-vAJ"/>
                             <constraint firstItem="BG4-Ry-VDi" firstAttribute="top" secondItem="Skh-uM-Pdk" secondAttribute="bottom" constant="5" id="Vem-15-ehj"/>
                             <constraint firstItem="hnS-RK-FKX" firstAttribute="trailing" secondItem="BG4-Ry-VDi" secondAttribute="trailing" id="c3g-Mu-SgN"/>
-                            <constraint firstItem="hnS-RK-FKX" firstAttribute="top" secondItem="BG4-Ry-VDi" secondAttribute="bottom" id="g3u-j4-lD3"/>
+                            <constraint firstItem="hnS-RK-FKX" firstAttribute="top" secondItem="BG4-Ry-VDi" secondAttribute="bottom" constant="4" id="g3u-j4-lD3"/>
                             <constraint firstItem="hnS-RK-FKX" firstAttribute="leading" secondItem="BG4-Ry-VDi" secondAttribute="leading" id="i3P-T7-xin"/>
                             <constraint firstAttribute="trailing" secondItem="Skh-uM-Pdk" secondAttribute="trailing" constant="8" id="icC-YY-0We"/>
                             <constraint firstItem="Skh-uM-Pdk" firstAttribute="top" secondItem="hQ5-by-Mgb" secondAttribute="top" constant="2" id="rFQ-tv-GlK"/>

@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ProgramListCellDelegate {
+    func showAllPrograms()
+    func showSelectedProgram(position: Int)
+}
+
 class ProgramsListTableViewCell: UITableViewCell {
     
     // MARK: - UI Elements
@@ -17,17 +22,17 @@ class ProgramsListTableViewCell: UITableViewCell {
         goToProgramsList()
     }
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
     
-    var coordinator: Coordinator?
-    
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
-    var programs: [ProgramXML] = [] {
+    var programs: [Program] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
+    var delegate: ProgramListCellDelegate?
     
     // MARK: - Methods
     
@@ -57,6 +62,8 @@ class ProgramsListTableViewCell: UITableViewCell {
         // Button.
         seeAllButton.setTitle("Zerrenda", for: .normal)
         
+        // UIimageView.
+        bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
     
     ///
@@ -69,7 +76,7 @@ class ProgramsListTableViewCell: UITableViewCell {
         // Layout.
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 10
         }
@@ -85,7 +92,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     /// Go to ProgramsViewController.
     ///
     private func goToProgramsList() {
-//        coordinator?.goToPrograms(programs: programs)
+        delegate?.showAllPrograms()
     }
 }
 
@@ -94,7 +101,7 @@ class ProgramsListTableViewCell: UITableViewCell {
 extension ProgramsListTableViewCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        coordinator?.goToProgram(program: programs[indexPath.row])
+        delegate?.showSelectedProgram(position: indexPath.row)
     }
     
 }

@@ -13,6 +13,7 @@ final class SearchViewModel {
     
     // MARK: - Properties
     
+    var foundPrograms = PassthroughSubject<[Program], Error>()
     var foundEpisodes = PassthroughSubject<[Episode], Error>()
     private var subscribedTo: [AnyCancellable] = []
     
@@ -27,8 +28,14 @@ final class SearchViewModel {
     }
     
     private func subscriptions() {
-        realmManager.foundEpisodes.sink { receiveCompletion in
+        realmManager.foundProgramsWithText.sink { receiveCompletion in
             print("Received completion")
+        } receiveValue: { [weak self] programs in
+            self?.foundPrograms.send(programs)
+        }.store(in: &subscribedTo)
+        
+        realmManager.foundEpisodesWithText.sink { receiveCompletion in
+            print("Receive completion")
         } receiveValue: { [weak self] episodes in
             self?.foundEpisodes.send(episodes)
         }.store(in: &subscribedTo)
@@ -40,8 +47,8 @@ final class SearchViewModel {
 
 extension SearchViewModel {
     
-    func searchEpisodes(text: String) {
-        realmManager.searchEpisodes(text: text)
+    func searchTextInProgramsAndEpisodes(text: String) {
+        realmManager.searchTextInProgramsAndEpisodes(text: text)
     }
     
 }

@@ -17,7 +17,8 @@ protocol RealManagerProtocol {
     var allChannels: PassthroughSubject<[Channel], Error> { get set }
     var allPrograms: PassthroughSubject<[Program], Error> { get set }
     var foundProgram: PassthroughSubject<[Program], Error> { get set }
-    var foundEpisodes: PassthroughSubject<[Episode], Error> { get set }
+    var foundProgramsWithText: PassthroughSubject<[Program], Error> { get set }
+    var foundEpisodesWithText: PassthroughSubject<[Episode], Error> { get set }
     
     // MARK: - Methods
     
@@ -34,5 +35,5 @@ protocol RealManagerProtocol {
     func deleteChannel(channel: Channel)
     
     func searchProgram(id: String)
-    func searchEpisodes(text: String)
+    func searchTextInProgramsAndEpisodes(text: String)
 }

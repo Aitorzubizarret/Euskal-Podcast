@@ -18,7 +18,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var program: ProgramXML? {
+    var program: Program? {
         didSet {
             guard let receivedProgram = program else { return }
             
