@@ -30,7 +30,7 @@ class EpisodeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var coordinator: Coordinator
+    private var coordinator: Coordinator
     
     public var episode: Episode?
     

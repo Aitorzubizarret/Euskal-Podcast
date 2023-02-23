@@ -15,11 +15,11 @@ class MeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var coordinator: MeCoordinator
+    private var coordinator: Coordinator
     
     // MARK: - Methods
     
-    init(coordinator: MeCoordinator) {
+    init(coordinator: Coordinator) {
         self.coordinator = coordinator
         
         super.init(nibName: nil, bundle: nil)

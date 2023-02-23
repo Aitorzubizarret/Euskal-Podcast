@@ -11,10 +11,6 @@ class TabBar: UITabBarController {
     
     // MARK: - Properties
     
-    private let podcastsCoordinator = PodcastsCoordinator()
-    private let searchCoordinator = SearchCoordinator()
-    private let meCoordinator = MeCoordinator()
-    
     var nowPlayingView: UIView = {
         let customView = UIView()
         customView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +42,7 @@ class TabBar: UITabBarController {
     /// Setup ViewControllers.
     private func setupVCs() {
         // Podcasts Tab.
+        let podcastsCoordinator: Coordinator = PodcastsCoordinator()
         let podcastsAPIManager = APIManager()
         let podcastsRealmManager = RealmManager()
         let podcastsViewModel = PodcastsViewModel(apiManager: podcastsAPIManager, realManager: podcastsRealmManager)
@@ -58,6 +55,7 @@ class TabBar: UITabBarController {
         podcastsCoordinator.navigationController.viewControllers = [podcastsVC]
         
         // Search Tab.
+        let searchCoordinator: Coordinator = SearchCoordinator()
         let searchRealmManager: RealManagerProtocol = RealmManager()
         let searchViewModel = SearchViewModel(realmManager: searchRealmManager)
         let searchVC = SearchViewController(coordinator: searchCoordinator, viewModel: searchViewModel)
@@ -69,6 +67,7 @@ class TabBar: UITabBarController {
         searchCoordinator.navigationController.viewControllers = [searchVC]
         
         // Me Tab.
+        let meCoordinator: Coordinator = MeCoordinator()
         let meVC = MeViewController(coordinator: meCoordinator)
         
         meVC.tabBarItem = UITabBarItem(title: "NI",

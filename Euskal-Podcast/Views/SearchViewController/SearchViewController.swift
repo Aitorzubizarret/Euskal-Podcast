@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
-    var coordinator: SearchCoordinator
+    private var coordinator: Coordinator
     var viewModel: SearchViewModel
     
     private var subscribedTo: [AnyCancellable] = []
@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(coordinator: SearchCoordinator, viewModel: SearchViewModel) {
+    init(coordinator: Coordinator, viewModel: SearchViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         

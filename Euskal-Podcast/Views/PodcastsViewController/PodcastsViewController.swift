@@ -16,7 +16,7 @@ class PodcastsViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var coordinator: PodcastsCoordinator
+    private var coordinator: Coordinator
     
     private var viewModel: PodcastsViewModel
     private var subscribedTo: [AnyCancellable] = []
@@ -31,7 +31,7 @@ class PodcastsViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(coordinator: PodcastsCoordinator, viewModel: PodcastsViewModel) {
+    init(coordinator: Coordinator, viewModel: PodcastsViewModel) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         

@@ -15,7 +15,7 @@ class ProgramsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var coordinator: Coordinator
+    private var coordinator: Coordinator
     
     private let programTableViewCell: String = "ProgramTableViewCell"
     
