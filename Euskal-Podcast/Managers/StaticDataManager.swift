@@ -286,6 +286,16 @@ final class StaticDataManager {
         newChannel53.urlAddress = "https://baleafunk.eus/api/v1/channels/hodeiaezdaexistitzen/rss"
         channels.append(newChannel53)
         
+        let newChannel54 = Channel()
+        newChannel54.name = "Akabo bakea"
+        newChannel54.urlAddress = "https://www.eitb.eus/multimedia/podcast/950929.xml"
+        channels.append(newChannel54)
+        
+        let newChannel55 = Channel()
+        newChannel55.name = "Xerezaderen Artxiboa"
+        newChannel55.urlAddress = "http://www.xerezade.org/media-rss"
+        channels.append(newChannel55)
+        
         /*
          let newChannel = Channel()
          newChannel.name = ""
