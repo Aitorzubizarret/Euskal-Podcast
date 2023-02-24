@@ -19,34 +19,14 @@ class XMLParserManager: NSObject {
     
     var parser = XMLParser()
     
-    var channelId: String = ""
-    
     var XMLcontent : String = ""
     
     var newProgram: Program?
-    var programTitle:               String = ""
-    var programDescription:         String = ""
-    var programCategory:            String = ""
-    var programImageURL:            String = ""
-    var programExplicit:            String = ""
-    var programLanguage:            String = ""
-    var programAuthor:              String = ""
-    var programLink:                String = ""
-    var programCopyright:           String = ""
-    var programCopyrightOwnerName:  String = ""
-    var programCopyrightOwnerEmail: String = ""
+    var newEpisode: Episode?
+    var channelId: String = ""
+    var isItem: Bool = false
     
-    var isItem:               Bool = false
-    var episodeTitle:       String = ""
-    var episodeDescription: String = ""
-    var episodePubDate:       Date = Date()
-    var episodeExplicit:    String = ""
-    var episodeFileURL:     String = ""
-    var episodeFileSize:    String = ""
-    var episodeDuration:    String = ""
-    var episodeLink:        String = ""
-    
-    var episodes: [Episode] = []
+    var nothing: String = ""
     
     // MARK: - Methods
     
@@ -93,67 +73,54 @@ class XMLParserManager: NSObject {
         return result
     }
     
+    private func formatPudDate(stringDate: String) -> Date {
+        var cleanXMLContent = stringDate
+        
+        // Clean bad XML pubDate.
+        // Mon, 04 Jul 2016 19:41:17 GMT +0200 -> Mon, 04 Jul 2016 19:41:17 +0200
+        if cleanXMLContent.contains("GMT") {
+            cleanXMLContent = cleanXMLContent.replacingOccurrences(of: "GMT ", with: "")
+        }
+        
+        let dateFormatter = DateFormatter() // Tue, 31 Jan 2023 23:00:00 GMT -> E, d MMM yyyy HH:mm:ss Z
+        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        
+        return dateFormatter.date(from: cleanXMLContent) ?? Date()
+    }
+    
 }
 
 extension XMLParserManager: XMLParserDelegate {
     
     func parserDidStartDocument(_ parser: XMLParser) {
+        newProgram = Program()
+        
         XMLcontent = ""
-        
-        newProgram = nil
-        programTitle = ""
-        programDescription = ""
-        programCategory = ""
-        programImageURL = ""
-        programExplicit = ""
-        programLanguage = ""
-        programAuthor = ""
-        programLink = ""
-        programCopyright = ""
-        programCopyrightOwnerName = ""
-        programCopyrightOwnerEmail = ""
-        
         isItem = false
-        episodeTitle = ""
-        episodeDescription = ""
-        episodePubDate = Date()
-        episodeExplicit = ""
-        episodeFileURL = ""
-        episodeFileSize = ""
-        episodeDuration = ""
-        episodeLink = ""
-        
-        episodes = []
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if elementName == "item" {
-            isItem = true
+            newEpisode = Episode()
             
-            episodeTitle = ""
-            episodeDescription = ""
-            episodePubDate = Date()
-            episodeExplicit = ""
-            episodeFileURL = ""
-            episodeFileSize = ""
-            episodeDuration = ""
-            episodeLink = ""
+            isItem = true
         }
         
         for (key, value) in attributeDict {
             if elementName == "itunes:image" {
                 if key == "href" {
-                    programImageURL = value
+                    newProgram?.imageURL = value
                 }
             } else if elementName == "itunes:category" {
                 if key == "text" {
-                    programCategory = value
+                    newProgram?.category = value
                 }
             } else if elementName == "enclosure" {
                 if key == "url" {
-                    episodeFileURL = value
+                    newEpisode?.audioFileURL = value
                 } else if key == "length" {
-                    episodeFileSize = value
+                    newEpisode?.audioFileSize = value
                 }
             }
         }
@@ -166,91 +133,84 @@ extension XMLParserManager: XMLParserDelegate {
             // Episode data.
             switch elementName {
             case "item":
-                let newEpisode = Episode()
-                newEpisode.title = episodeTitle
-                newEpisode.descriptionText = episodeDescription
-                newEpisode.pubDate = episodePubDate
-                newEpisode.explicit = episodeExplicit
-                newEpisode.audioFileURL = episodeFileURL
-                newEpisode.audioFileSize = episodeFileSize
-                newEpisode.duration = convertStringToInt(value: episodeDuration)
-                newEpisode.link = episodeLink
+                guard let newProgram = newProgram,
+                      let newEpisode = newEpisode else { return }
                 
-                episodes.append(newEpisode)
-                
+                newProgram.episodes.append(newEpisode)
                 isItem = false
             case "title":
-                episodeTitle = episodeTitle + XMLcontent
+                guard let newEpisode = newEpisode else { return }
+                
+                newEpisode.title = newEpisode.title + XMLcontent
             case "description":
-                episodeDescription = episodeDescription + XMLcontent
+                guard let newEpisode = newEpisode else { return }
+                
+                newEpisode.descriptionText = newEpisode.descriptionText + XMLcontent
             case "pubDate":
-                var cleanXMLContent = XMLcontent
-                // Clean bad XML pubDate.
-                // Mon, 04 Jul 2016 19:41:17 GMT +0200 -> Mon, 04 Jul 2016 19:41:17 +0200
-                if cleanXMLContent.contains("GMT") {
-                    cleanXMLContent = cleanXMLContent.replacingOccurrences(of: "GMT ", with: "")
-                }
+                guard let newEpisode = newEpisode else { return }
                 
-                let dateFormatter = DateFormatter() // Tue, 31 Jan 2023 23:00:00 GMT -> E, d MMM yyyy HH:mm:ss Z
-                dateFormatter.dateFormat = "E, d MMM yyyy HH:mm:ss Z"
-                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-                let episodeDate: Date = dateFormatter.date(from: cleanXMLContent) ?? Date()
-                
-                episodePubDate = episodeDate
+                newEpisode.pubDate = formatPudDate(stringDate: XMLcontent)
             case "itunes:explicit":
-                episodeExplicit = episodeExplicit + XMLcontent
+                guard let newEpisode = newEpisode else { return }
+                
+                newEpisode.explicit = newEpisode.explicit + XMLcontent
             case "itunes:duration":
-                episodeDuration = episodeDuration + XMLcontent
+                newEpisode?.duration  = convertStringToInt(value: XMLcontent)
             case "link":
-                episodeLink = episodeLink + XMLcontent
+                guard let newEpisode = newEpisode else { return }
+                
+                newEpisode.link = newEpisode.link + XMLcontent
             default:
-                let a: Int = 0
+                nothing = ""
             }
         } else {
             // Program data.
             switch elementName {
             case "channel":
-                let program = Program()
-                program.channelId = channelId
-                program.title = programTitle
-                program.descriptionText = programDescription
-                program.category = programCategory
-                program.imageURL = programImageURL
-                program.explicit = programExplicit
-                program.language = programLanguage
-                program.author = programAuthor
-                program.link = programLink
-                program.copyright = programCopyright
-                program.copyrightOwnerName = programCopyrightOwnerName
-                program.copyrightOwnerEmail = programCopyrightOwnerEmail
-                for episode in episodes {
-                    program.episodes.append(episode)
-                }
-                newProgram = program
+                nothing = ""
             case "title":
-                if programTitle != XMLcontent {
-                    programTitle = programTitle + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                if newProgram.title != XMLcontent {
+                    newProgram.title = newProgram.title + XMLcontent
                 }
             case "description":
-                programDescription = programDescription + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.descriptionText = newProgram.descriptionText + XMLcontent
             case "itunes:image":
-                programImageURL = programImageURL + XMLcontent
+                guard let newProgram = newProgram else { return }
+                newProgram.imageURL = newProgram.imageURL + XMLcontent
             case "itunes:explicit":
-                programExplicit = programExplicit + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.explicit = newProgram.explicit + XMLcontent
             case "language":
-                programLanguage = programLanguage + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.language = newProgram.language + XMLcontent
             case "itunes:author":
-                programAuthor = programAuthor + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.author = newProgram.author + XMLcontent
             case "link":
-                programLink = programLink + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.link = newProgram.link + XMLcontent
             case "copyright":
-                programCopyright = programCopyright + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.copyright = newProgram.copyright + XMLcontent
             case "itunes:name":
-                programCopyrightOwnerName = programCopyrightOwnerName + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.copyrightOwnerName = newProgram.copyrightOwnerName + XMLcontent
             case "itunes:email":
-                programCopyrightOwnerEmail = programCopyrightOwnerEmail + XMLcontent
+                guard let newProgram = newProgram else { return }
+                
+                newProgram.copyrightOwnerEmail = newProgram.copyrightOwnerEmail + XMLcontent
             default:
-                let a: Int = 0
+                nothing = ""
             }
         }
         
