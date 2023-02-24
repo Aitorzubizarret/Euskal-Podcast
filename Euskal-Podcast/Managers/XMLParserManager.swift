@@ -15,7 +15,7 @@ class XMLParserManager: NSObject {
     let serialQueue = DispatchQueue.init(label: "serialQueue")
     
     // Observable subjets.
-    var program = PassthroughSubject<ProgramXML, Error>()
+    var program = PassthroughSubject<Program, Error>()
     
     var parser = XMLParser()
     
@@ -23,7 +23,7 @@ class XMLParserManager: NSObject {
     
     var XMLcontent : String = ""
     
-    var newProgram: ProgramXML?
+    var newProgram: Program?
     var programTitle:               String = ""
     var programDescription:         String = ""
     var programCategory:            String = ""
@@ -46,7 +46,7 @@ class XMLParserManager: NSObject {
     var episodeDuration:    String = ""
     var episodeLink:        String = ""
     
-    var episodes: [EpisodeXML] = []
+    var episodes: [Episode] = []
     
     // MARK: - Methods
     
@@ -60,6 +60,37 @@ class XMLParserManager: NSObject {
             self.parser.delegate = self
             self.parser.parse()
         }
+    }
+    
+    private func convertStringToInt(value: String) -> Int {
+        var result: Int = 0
+        var seconds: Int = 0
+        var minutes: Int = 0
+        var hours: Int = 0
+        
+        let valueComponents = value.components(separatedBy: ":")
+        
+        switch valueComponents.count {
+        case 1:
+            seconds = Int(valueComponents[0]) ?? 0
+        case 2:
+            minutes = Int(valueComponents[0]) ?? 0
+            seconds = Int(valueComponents[1]) ?? 0
+            if let minutes = Int(valueComponents[0]),
+               let seconds = Int(valueComponents[1]) {
+                result = (minutes * 60) + seconds
+            }
+        case 3:
+            hours = Int(valueComponents[0]) ?? 0
+            minutes = Int(valueComponents[1]) ?? 0
+            seconds = Int(valueComponents[2]) ?? 0
+        default:
+            result = 0
+        }
+        
+        result = (hours * 3600) + (minutes * 60) + seconds
+        
+        return result
     }
     
 }
@@ -135,14 +166,16 @@ extension XMLParserManager: XMLParserDelegate {
             // Episode data.
             switch elementName {
             case "item":
-                let newEpisode = EpisodeXML(title: episodeTitle,
-                                            description: episodeDescription,
-                                            pubDate: episodePubDate,
-                                            explicit: episodeExplicit,
-                                            audioFileURL: episodeFileURL,
-                                            audioFileSize: episodeFileSize,
-                                            duration: episodeDuration,
-                                            link: episodeLink)
+                let newEpisode = Episode()
+                newEpisode.title = episodeTitle
+                newEpisode.descriptionText = episodeDescription
+                newEpisode.pubDate = episodePubDate
+                newEpisode.explicit = episodeExplicit
+                newEpisode.audioFileURL = episodeFileURL
+                newEpisode.audioFileSize = episodeFileSize
+                newEpisode.duration = convertStringToInt(value: episodeDuration)
+                newEpisode.link = episodeLink
+                
                 episodes.append(newEpisode)
                 
                 isItem = false
@@ -177,19 +210,22 @@ extension XMLParserManager: XMLParserDelegate {
             // Program data.
             switch elementName {
             case "channel":
-                let program = ProgramXML(channelId: channelId,
-                                         title: programTitle,
-                                         description: programDescription,
-                                         category: programCategory,
-                                         imageURL: programImageURL,
-                                         explicit: programExplicit,
-                                         language: programLanguage,
-                                         author: programAuthor,
-                                         link: programLink,
-                                         copyright: programCopyright,
-                                         copyrightOwnerName: programCopyrightOwnerName,
-                                         copyrightOwnerEmail: programCopyrightOwnerEmail,
-                                         episodes: episodes)
+                let program = Program()
+                program.channelId = channelId
+                program.title = programTitle
+                program.descriptionText = programDescription
+                program.category = programCategory
+                program.imageURL = programImageURL
+                program.explicit = programExplicit
+                program.language = programLanguage
+                program.author = programAuthor
+                program.link = programLink
+                program.copyright = programCopyright
+                program.copyrightOwnerName = programCopyrightOwnerName
+                program.copyrightOwnerEmail = programCopyrightOwnerEmail
+                for episode in episodes {
+                    program.episodes.append(episode)
+                }
                 newProgram = program
             case "title":
                 if programTitle != XMLcontent {

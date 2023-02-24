@@ -16,9 +16,9 @@ final class APIManager {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var programs = PassthroughSubject<[ProgramXML], Error>()
+    var programs = PassthroughSubject<[Program], Error>()
     
-    var allPrograms: [ProgramXML] = [] {
+    var allPrograms: [Program] = [] {
         didSet {
             self.programs.send(allPrograms)
         }

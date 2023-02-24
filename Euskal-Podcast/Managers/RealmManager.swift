@@ -68,42 +68,13 @@ final class RealmManager {
 
 extension RealmManager: RealManagerProtocol {
     
-    func savePrograms(programs: [ProgramXML]) {
+    func savePrograms(programs: [Program]) {
         for program in programs {
             // Search Program in the DB before.
             let foundProgramsInRealm = realm.objects(Program.self).filter("title == '\(program.title)' && author == '\(program.author)'")
             
             if foundProgramsInRealm.isEmpty {
-                // Create the Object.
-                let newProgram = Program()
-                newProgram.channelId = program.channelId
-                newProgram.title = program.title
-                newProgram.descriptionText = program.description
-                newProgram.category = program.category
-                newProgram.imageURL = program.imageURL
-                newProgram.explicit = program.explicit
-                newProgram.language = program.language
-                newProgram.author = program.author
-                newProgram.link = program.link
-                newProgram.copyright = program.copyright
-                newProgram.copyrightOwnerName = program.copyrightOwnerName
-                newProgram.copyrightOwnerEmail = program.copyrightOwnerEmail
-                
-                for episode in program.episodes {
-                    let newEpisode = Episode()
-                    newEpisode.title = episode.title
-                    newEpisode.descriptionText = episode.description
-                    newEpisode.pubDate = episode.pubDate
-                    newEpisode.explicit = episode.explicit
-                    newEpisode.audioFileURL = episode.audioFileURL
-                    newEpisode.audioFileSize = episode.audioFileSize
-                    newEpisode.duration = convertStringToInt(value: episode.duration)
-                    newEpisode.link = episode.link
-                    
-                    newProgram.episodes.append(newEpisode)
-                }
-                
-                addProgram(program: newProgram)
+                addProgram(program: program)
             } else if foundProgramsInRealm.count == 1 {
                 let foundProgram = foundProgramsInRealm[0]
                 if program.episodes.count != foundProgram.episodes.count {
@@ -113,18 +84,8 @@ extension RealmManager: RealManagerProtocol {
                     
                     if let lastPubDateEpisode = lastPubDateEpisode {
                         for episode in program.episodes {
-                            if episode.pubDate > lastPubDateEpisode.pubDate {
-                                let newEpisode = Episode()
-                                newEpisode.title = episode.title
-                                newEpisode.descriptionText = episode.description
-                                newEpisode.pubDate = episode.pubDate
-                                newEpisode.explicit = episode.explicit
-                                newEpisode.audioFileURL = episode.audioFileURL
-                                newEpisode.audioFileSize = episode.audioFileSize
-                                newEpisode.duration = convertStringToInt(value: episode.duration)
-                                newEpisode.link = episode.link
-                                
-                                addEpisodeToProgramInRealm(program: foundProgram, episode: newEpisode)
+                            if episode.pubDate > lastPubDateEpisode.pubDate {                                
+                                addEpisodeToProgramInRealm(program: foundProgram, episode: episode)
                             }
                         }
                     }
