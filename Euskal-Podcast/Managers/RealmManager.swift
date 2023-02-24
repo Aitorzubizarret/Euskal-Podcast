@@ -33,55 +33,28 @@ final class RealmManager {
 //        }
     }
     
-    private func convertStringToInt(value: String) -> Int {
-        var result: Int = 0
-        var seconds: Int = 0
-        var minutes: Int = 0
-        var hours: Int = 0
-        
-        let valueComponents = value.components(separatedBy: ":")
-        
-        switch valueComponents.count {
-        case 1:
-            seconds = Int(valueComponents[0]) ?? 0
-        case 2:
-            minutes = Int(valueComponents[0]) ?? 0
-            seconds = Int(valueComponents[1]) ?? 0
-            if let minutes = Int(valueComponents[0]),
-               let seconds = Int(valueComponents[1]) {
-                result = (minutes * 60) + seconds
-            }
-        case 3:
-            hours = Int(valueComponents[0]) ?? 0
-            minutes = Int(valueComponents[1]) ?? 0
-            seconds = Int(valueComponents[2]) ?? 0
-        default:
-            result = 0
-        }
-        
-        result = (hours * 3600) + (minutes * 60) + seconds
-        
-        return result
-    }
-    
 }
+
+// MARK: - RealmManagerProtocol
 
 extension RealmManager: RealManagerProtocol {
     
-    func savePrograms(programs: [Program]) {
+    func savePrograms(_ programs: [Program]) {
         for program in programs {
-            // Search Program in the DB before.
+            // Search the Program in the Realm DB.
             let foundProgramsInRealm = realm.objects(Program.self).filter("title == '\(program.title)' && author == '\(program.author)'")
             
+            // If no program found save it, and if one program found check the amount of episode to update them.
             if foundProgramsInRealm.isEmpty {
                 addProgram(program: program)
             } else if foundProgramsInRealm.count == 1 {
                 let foundProgram = foundProgramsInRealm[0]
+                
                 if program.episodes.count != foundProgram.episodes.count {
-                    
                     // Get the last episode by PubDate.
                     let lastPubDateEpisode: Episode? = foundProgramsInRealm[0].episodes.max { $0.pubDate < $1.pubDate }
                     
+                    // If there is an episode check if it's the last one (using the PubDate) and if new episodes found, save them.
                     if let lastPubDateEpisode = lastPubDateEpisode {
                         for episode in program.episodes {
                             if episode.pubDate > lastPubDateEpisode.pubDate {                                
@@ -147,8 +120,6 @@ extension RealmManager: RealManagerProtocol {
     }
     
     func deleteAll() {
-        let programsResults: Results<Program> = realm.objects(Program.self)
-        
         do {
             try realm.write({
                 realm.deleteAll()

@@ -107,7 +107,7 @@ extension PodcastsViewModel {
 extension PodcastsViewModel {
     
     private func saveProgramsInRealm(programs: [Program]) {
-        realmManager.savePrograms(programs: programs)
+        realmManager.savePrograms(programs)
     }
     
     private func getAllPrograms() {

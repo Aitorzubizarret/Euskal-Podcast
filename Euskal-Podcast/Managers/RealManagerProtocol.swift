@@ -22,7 +22,7 @@ protocol RealManagerProtocol {
     
     // MARK: - Methods
     
-    func savePrograms(programs: [Program])
+    func savePrograms(_ programs: [Program])
     func saveChannels(channels: [Channel])
     
     func addChannel(channel: Channel)
