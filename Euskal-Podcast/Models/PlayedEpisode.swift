@@ -21,7 +21,7 @@ extension PlayedEpisode {
     func getDateFormatted() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, yyyy/MM/dd - HH:mm:ss"
-        dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale(identifier: "eu")
         
         let playedDate: String = dateFormatter.string(from: date)

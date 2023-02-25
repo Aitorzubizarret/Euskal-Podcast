@@ -105,17 +105,27 @@ extension RealmManager: RealManagerProtocol {
         let lastPlayedEpisode = realm.objects(PlayedEpisode.self).sorted(byKeyPath: "date", ascending: false).first
         
         // Check the last saved 'PlayedEpisode's Episode' and the current 'PlayedEpisode's Episode' are not the same Episode.
-        if let lastPlayedEpisode = lastPlayedEpisode,
-           let lastEpisode = lastPlayedEpisode.episode,
-           let currentEpisode = playedEpisode.episode {
-            if lastEpisode.id != currentEpisode.id {
-                do {
-                    try realm.write({
-                        realm.add(playedEpisode)
-                    })
-                } catch let error {
-                    print("RealmManager addPlayedEpisode Error: \(error)")
+        if let lastPlayedEpisode = lastPlayedEpisode {
+            if let lastEpisode = lastPlayedEpisode.episode,
+               let currentEpisode = playedEpisode.episode {
+                if lastEpisode.id != currentEpisode.id {
+                    do {
+                        try realm.write({
+                            realm.add(playedEpisode)
+                        })
+                    } catch let error {
+                        print("RealmManager addPlayedEpisode Error: \(error)")
+                    }
                 }
+            }
+        } else {
+            // There is no "PlayedEpisode" yet in the RealmDB.
+            do {
+                try realm.write({
+                    realm.add(playedEpisode)
+                })
+            } catch let error {
+                print("RealmManager addPlayedEpisode Error: \(error)")
             }
         }
     }
