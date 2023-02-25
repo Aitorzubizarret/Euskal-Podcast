@@ -38,7 +38,7 @@ class PlayerViewController: UIViewController {
     // MARK: - Properties
     
     var episode: Episode
-    var program: Program
+    var podcast: Podcast
     
     private var updateSliderPosition: Bool = true
     
@@ -49,9 +49,9 @@ class PlayerViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(episode: Episode, program: Program) {
+    init(episode: Episode, podcast: Podcast) {
         self.episode = episode
-        self.program = program
+        self.podcast = podcast
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,7 +78,7 @@ class PlayerViewController: UIViewController {
     private func setupView() {
         // ImageView.
         pictureImageView.backgroundColor = UIColor.lightGray
-        if let imageURL: URL = URL(string: program.imageURL) {
+        if let imageURL: URL = URL(string: podcast.imageURL) {
             pictureImageView.kf.setImage(with: imageURL)
         }
         
@@ -94,7 +94,7 @@ class PlayerViewController: UIViewController {
         
         // Label
         titleLabel.text = episode.title
-        programNameLabel.text = program.title
+        programNameLabel.text = podcast.title
         currentDurationTimeLabel.text = "00:00"
         totalDurationTimeLabel.text = episode.duration != 0 ? episode.duration.asTimeFormatted() : AudioManager.shared.getAudioDurationInSeconds().asTimeFormatted()
         descriptionLabel.text = episode.descriptionText

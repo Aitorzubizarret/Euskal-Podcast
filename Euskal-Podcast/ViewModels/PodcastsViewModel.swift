@@ -18,7 +18,7 @@ final class PodcastsViewModel {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var programs = PassthroughSubject<[Program], Error>()
+    var podcasts = PassthroughSubject<[Podcast], Error>()
     
     private var realmManager: RealManagerProtocol
     
@@ -32,11 +32,11 @@ final class PodcastsViewModel {
     }
     
     private func subscriptions() {
-        apiManager.programs.sink { receiveCompletion in
+        apiManager.podcasts.sink { receiveCompletion in
             print("Received completion")
-        } receiveValue: { [weak self] programs in
+        } receiveValue: { [weak self] podcasts in
             DispatchQueue.main.async {
-                self?.saveProgramsInRealm(programs: programs)
+                self?.savePodcastsInRealm(podcasts: podcasts)
             }
         }.store(in: &subscribedTo)
         
@@ -46,10 +46,10 @@ final class PodcastsViewModel {
             self?.fetchRSSChannels(channels: channels)
         }.store(in: &subscribedTo)
         
-        realmManager.allPrograms.sink { receiveCompletion in
+        realmManager.allPodcasts.sink { receiveCompletion in
             print("Receive completion")
-        } receiveValue: { [weak self] programs in
-            self?.programs.send(programs)
+        } receiveValue: { [weak self] podcasts in
+            self?.podcasts.send(podcasts)
         }.store(in: &subscribedTo)
     }
     
@@ -57,22 +57,22 @@ final class PodcastsViewModel {
         getAllChannels()
     }
     
-    func getPrograms() {
-        getAllPrograms()
+    func getPodcasts() {
+        getAllPodcasts()
     }
     
-    func getAmountEpisode(program: Program) -> String {
-        let episodeNumber = program.episodes.count
-        let episodeLastDateFormatted = getLastEpisodeDateFormatted(program: program)
+    func getAmountEpisode(podcast: Podcast) -> String {
+        let episodeNumber = podcast.episodes.count
+        let episodeLastDateFormatted = getLastEpisodeDateFormatted(podcast: podcast)
         
         return "\(episodeNumber) Atal - Azkena: \(episodeLastDateFormatted)"
     }
     
-    private func getLastEpisodeDateFormatted(program: Program) -> String {
+    private func getLastEpisodeDateFormatted(podcast: Podcast) -> String {
         var lastEpisodeDateFormatted = ""
         
         // Get last Episode.
-        let lastEpisode = program.episodes.max { $0.pubDate < $1.pubDate }
+        let lastEpisode = podcast.episodes.max { $0.pubDate < $1.pubDate }
         if let lastEpisode = lastEpisode {
             
             // Get last Episodes pubDate.
@@ -106,12 +106,12 @@ extension PodcastsViewModel {
 
 extension PodcastsViewModel {
     
-    private func saveProgramsInRealm(programs: [Program]) {
-        realmManager.savePrograms(programs)
+    private func savePodcastsInRealm(podcasts: [Podcast]) {
+        realmManager.savePodcasts(podcasts)
     }
     
-    private func getAllPrograms() {
-        realmManager.getAllPrograms()
+    private func getAllPodcasts() {
+        realmManager.getAllPodcasts()
     }
     
     private func getAllChannels() {

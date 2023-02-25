@@ -15,13 +15,13 @@ class XMLParserManager: NSObject {
     let serialQueue = DispatchQueue.init(label: "serialQueue")
     
     // Observable subjets.
-    var program = PassthroughSubject<Program, Error>()
+    var podcast = PassthroughSubject<Podcast, Error>()
     
     var parser = XMLParser()
     
     var XMLcontent : String = ""
     
-    var newProgram: Program?
+    var newPodcast: Podcast?
     var newEpisode: Episode?
     var channelId: String = ""
     var isItem: Bool = false
@@ -94,7 +94,7 @@ class XMLParserManager: NSObject {
 extension XMLParserManager: XMLParserDelegate {
     
     func parserDidStartDocument(_ parser: XMLParser) {
-        newProgram = Program()
+        newPodcast = Podcast()
         
         XMLcontent = ""
         isItem = false
@@ -110,11 +110,11 @@ extension XMLParserManager: XMLParserDelegate {
         for (key, value) in attributeDict {
             if elementName == "itunes:image" {
                 if key == "href" {
-                    newProgram?.imageURL = value
+                    newPodcast?.imageURL = value
                 }
             } else if elementName == "itunes:category" {
                 if key == "text" {
-                    newProgram?.category = value
+                    newPodcast?.category = value
                 }
             } else if elementName == "enclosure" {
                 if key == "url" {
@@ -133,10 +133,10 @@ extension XMLParserManager: XMLParserDelegate {
             // Episode data.
             switch elementName {
             case "item":
-                guard let newProgram = newProgram,
+                guard let newPodcast = newPodcast,
                       let newEpisode = newEpisode else { return }
                 
-                newProgram.episodes.append(newEpisode)
+                newPodcast.episodes.append(newEpisode)
                 isItem = false
             case "title":
                 guard let newEpisode = newEpisode else { return }
@@ -169,46 +169,47 @@ extension XMLParserManager: XMLParserDelegate {
             case "channel":
                 nothing = ""
             case "title":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                if newProgram.title != XMLcontent {
-                    newProgram.title = newProgram.title + XMLcontent
+                if newPodcast.title != XMLcontent {
+                    newPodcast.title = newPodcast.title + XMLcontent
                 }
             case "description":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.descriptionText = newProgram.descriptionText + XMLcontent
+                newPodcast.descriptionText = newPodcast.descriptionText + XMLcontent
             case "itunes:image":
-                guard let newProgram = newProgram else { return }
-                newProgram.imageURL = newProgram.imageURL + XMLcontent
+                guard let newPodcast = newPodcast else { return }
+                
+                newPodcast.imageURL = newPodcast.imageURL + XMLcontent
             case "itunes:explicit":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.explicit = newProgram.explicit + XMLcontent
+                newPodcast.explicit = newPodcast.explicit + XMLcontent
             case "language":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.language = newProgram.language + XMLcontent
+                newPodcast.language = newPodcast.language + XMLcontent
             case "itunes:author":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.author = newProgram.author + XMLcontent
+                newPodcast.author = newPodcast.author + XMLcontent
             case "link":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.link = newProgram.link + XMLcontent
+                newPodcast.link = newPodcast.link + XMLcontent
             case "copyright":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.copyright = newProgram.copyright + XMLcontent
+                newPodcast.copyright = newPodcast.copyright + XMLcontent
             case "itunes:name":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.copyrightOwnerName = newProgram.copyrightOwnerName + XMLcontent
+                newPodcast.copyrightOwnerName = newPodcast.copyrightOwnerName + XMLcontent
             case "itunes:email":
-                guard let newProgram = newProgram else { return }
+                guard let newPodcast = newPodcast else { return }
                 
-                newProgram.copyrightOwnerEmail = newProgram.copyrightOwnerEmail + XMLcontent
+                newPodcast.copyrightOwnerEmail = newPodcast.copyrightOwnerEmail + XMLcontent
             default:
                 nothing = ""
             }
@@ -222,8 +223,8 @@ extension XMLParserManager: XMLParserDelegate {
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        if let newProgram = newProgram {
-            program.send(newProgram)
+        if let newPodcast = newPodcast {
+            podcast.send(newPodcast)
         }
     }
     

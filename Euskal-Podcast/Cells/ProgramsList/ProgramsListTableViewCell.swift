@@ -22,7 +22,7 @@ class ProgramsListTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     let programCollectionViewCellIdentifier: String = "ProgramCollectionViewCell"
-    var programs: [Program] = [] {
+    var podcasts: [Podcast] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -97,11 +97,11 @@ extension ProgramsListTableViewCell: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return programs.count
+        return podcasts.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: programCollectionViewCellIdentifier, for: indexPath) as! ProgramCollectionViewCell
-        cell.program = programs[indexPath.row]
+        cell.podcast = podcasts[indexPath.row]
         return cell
     }
 }

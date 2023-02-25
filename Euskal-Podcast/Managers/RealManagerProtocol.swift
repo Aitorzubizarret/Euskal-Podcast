@@ -15,28 +15,29 @@ protocol RealManagerProtocol {
     
     var realm: Realm { get set }
     var allChannels: PassthroughSubject<[Channel], Error> { get set }
-    var allPrograms: PassthroughSubject<[Program], Error> { get set }
+    var allPodcasts: PassthroughSubject<[Podcast], Error> { get set }
     var allPlayedEpisodes: PassthroughSubject<[PlayedEpisode], Error> { get set }
-    var foundProgram: PassthroughSubject<[Program], Error> { get set }
-    var foundProgramsWithText: PassthroughSubject<[Program], Error> { get set }
+    var foundPodcasts: PassthroughSubject<[Podcast], Error> { get set }
+    var foundPodcastsWithText: PassthroughSubject<[Podcast], Error> { get set }
     var foundEpisodesWithText: PassthroughSubject<[Episode], Error> { get set }
     
     // MARK: - Methods
     
-    func savePrograms(_ programs: [Program])
+    func savePodcasts(_ podcasts: [Podcast])
     func saveChannels(channels: [Channel])
     
     func addChannel(channel: Channel)
-    func addProgram(program: Program)
+    func addPodcast(_ podcast: Podcast)
     func addPlayedEpisode(_ playedEpisode: PlayedEpisode)
+    func addEpisodeToPodcastInRealm(_ episode: Episode, _ podcast: Podcast)
     
     func getAllChannels()
-    func getAllPrograms()
+    func getAllPodcasts()
     func getAllPlayedEpisodes()
     
     func deleteAll()
     func deleteChannel(channel: Channel)
     
-    func searchProgram(id: String)
-    func searchTextInProgramsAndEpisodes(text: String)
+    func searchPodcast(id: String)
+    func searchTextInPodcastsAndEpisodes(text: String)
 }

@@ -26,19 +26,19 @@ final class SearchCoordinator {
 
 extension SearchCoordinator: Coordinator {
     
-    func showPodcastList(programs: [Program]) {
-        let podcastListViewModel = PodcastListViewModel(programs: programs)
+    func showPodcastList(podcasts: [Podcast]) {
+        let podcastListViewModel = PodcastListViewModel(podcasts: podcasts)
         let podcastListVC = PodcastListViewController(coordinator: self, viewModel: podcastListViewModel)
         
         navigationController.show(podcastListVC, sender: nil)
     }
     
-    func showProgramDetail(programId: String) {
-        let programRealmManager: RealManagerProtocol = RealmManager()
-        let programViewModel = ProgramViewModel(realmManager: programRealmManager)
-        let programVC = ProgramViewController(coordinator: self, viewModel: programViewModel, programId: programId)
+    func showPodcastDetail(podcastId: String) {
+        let podcastRealmManager: RealManagerProtocol = RealmManager()
+        let podcastViewModel = ProgramViewModel(realmManager: podcastRealmManager)
+        let podcastVC = ProgramViewController(coordinator: self, viewModel: podcastViewModel, podcastId: podcastId)
         
-        navigationController.show(programVC, sender: nil)
+        navigationController.show(podcastVC, sender: nil)
     }
     
     func showEpisodeDetail(episode: Episode) {

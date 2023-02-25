@@ -132,8 +132,8 @@ extension TabBar {
     
     @objc private func showPlayerView() {
         if let episode = AudioManager.shared.episode,
-           let program = AudioManager.shared.program {
-            let playerVC = PlayerViewController(episode: episode, program: program)
+           let podcast = AudioManager.shared.podcast {
+            let playerVC = PlayerViewController(episode: episode, podcast: podcast)
             playerVC.modalPresentationStyle = .pageSheet
             present(playerVC, animated: true)
         }

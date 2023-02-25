@@ -56,7 +56,7 @@ class PodcastListViewController: UIViewController {
 extension PodcastListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator.showProgramDetail(programId: viewModel.getProgramId(index: indexPath.row))
+        coordinator.showPodcastDetail(podcastId: viewModel.getPodcastId(index: indexPath.row))
     }
     
 }
@@ -70,18 +70,18 @@ extension PodcastListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getAmountPrograms()
+        return viewModel.getAmountPodcasts()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
         
-        let program = viewModel.getProgram(index: indexPath.row)
-        cell.iconURL = program.imageURL
-        cell.titleText = program.title
-        cell.descriptionText = program.descriptionText
+        let podcast = viewModel.getPodcast(index: indexPath.row)
+        cell.iconURL = podcast.imageURL
+        cell.titleText = podcast.title
+        cell.descriptionText = podcast.descriptionText
         cell.episodesInfo = viewModel.getAmountEpisode(index: indexPath.row)
-        cell.authorText = program.author
+        cell.authorText = podcast.author
         
         return cell
     }

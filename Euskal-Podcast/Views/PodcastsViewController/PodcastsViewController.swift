@@ -21,7 +21,7 @@ class PodcastsViewController: UIViewController {
     private var viewModel: PodcastsViewModel
     private var subscribedTo: [AnyCancellable] = []
     
-    private var programs: [Program] = [] {
+    private var podcasts: [Podcast] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -54,7 +54,7 @@ class PodcastsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.getPrograms()
+        viewModel.getPodcasts()
     }
     
     private func setupTableView() {
@@ -72,10 +72,10 @@ class PodcastsViewController: UIViewController {
     }
     
     private func subscriptions() {
-        viewModel.programs.sink { receiveCompletion in
+        viewModel.podcasts.sink { receiveCompletion in
             print("Received completion")
-        } receiveValue: { [weak self] programs in
-            self?.programs = programs
+        } receiveValue: { [weak self] podcasts in
+            self?.podcasts = podcasts
         }.store(in: &subscribedTo)
     }
     
@@ -86,7 +86,7 @@ class PodcastsViewController: UIViewController {
 extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator.showProgramDetail(programId: programs[indexPath.row].id)
+        coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
     }
     
 }
@@ -100,18 +100,18 @@ extension PodcastsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return programs.count
+        return podcasts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
         
-        let program = programs[indexPath.row]
-        cell.iconURL = program.imageURL
-        cell.titleText = program.title
-        cell.descriptionText = program.descriptionText
-        cell.episodesInfo = viewModel.getAmountEpisode(program: program)
-        cell.authorText = program.author
+        let podcast = podcasts[indexPath.row]
+        cell.iconURL = podcast.imageURL
+        cell.titleText = podcast.title
+        cell.descriptionText = podcast.descriptionText
+        cell.episodesInfo = viewModel.getAmountEpisode(podcast: podcast)
+        cell.authorText = podcast.author
         
         return cell
     }

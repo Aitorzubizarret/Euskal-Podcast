@@ -16,11 +16,11 @@ final class APIManager {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var programs = PassthroughSubject<[Program], Error>()
+    var podcasts = PassthroughSubject<[Podcast], Error>()
     
-    var allPrograms: [Program] = [] {
+    var allPodcasts: [Podcast] = [] {
         didSet {
-            self.programs.send(allPrograms)
+            self.podcasts.send(allPodcasts)
         }
     }
     
@@ -34,11 +34,12 @@ final class APIManager {
     }
     
     private func subscriptions() {
-        xmlParserManager.program.sink { receiveCompletion in
+        xmlParserManager.podcast.sink { receiveCompletion in
             print("Received completion")
-        } receiveValue: { [weak self] program in
-            self?.allPrograms.append(program)
+        } receiveValue: { [weak self] podcast in
+            self?.allPodcasts.append(podcast)
         }.store(in: &subscribedTo)
+
     }
     
     func fetchChannels(channels: [Channel]) {

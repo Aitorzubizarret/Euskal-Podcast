@@ -18,18 +18,18 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var program: Program? {
+    var podcast: Podcast? {
         didSet {
-            guard let receivedProgram = program else { return }
+            guard let podcast = podcast else { return }
             
             // Title.
-            titleLabel.text = receivedProgram.title
+            titleLabel.text = podcast.title
             
             // Description.
-            descriptionLabel.text = receivedProgram.copyrightOwnerName
+            descriptionLabel.text = podcast.copyrightOwnerName
             
             // Image.
-            if let iconURL: URL = URL(string: receivedProgram.imageURL) {
+            if let iconURL: URL = URL(string: podcast.imageURL) {
                 photoImageView.kf.setImage(with: iconURL)
             }
         }

@@ -1,14 +1,14 @@
 //
-//  Program.swift
+//  Podcast.swift
 //  Euskal-Podcast
 //
-//  Created by Aitor Zubizarreta Perez on 12/05/2021.
+//  Created by Aitor Zubizarreta on 2023-02-25.
 //
 
 import Foundation
 import RealmSwift
 
-class Program: Object {
+class Podcast: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var channelId: String = ""
     @objc dynamic var title: String = ""

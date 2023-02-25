@@ -18,7 +18,7 @@ final class ProgramViewModel {
     private var subscribedTo: [AnyCancellable] = []
     
     // Observable subjets.
-    var program = PassthroughSubject<Program, Error>()
+    var podcast = PassthroughSubject<Podcast, Error>()
     var episodes = PassthroughSubject<[Episode], Error>()
     var audioIsPlaying = PassthroughSubject<Bool, Error>()
     
@@ -49,11 +49,11 @@ final class ProgramViewModel {
     }
     
     private func subscriptions() {
-        realmManager.foundProgram.sink { receiveCompletion in
+        realmManager.foundPodcasts.sink { receiveCompletion in
             print("Received completion")
-        } receiveValue: { [weak self] program in
+        } receiveValue: { [weak self] podcasts in
             DispatchQueue.main.async {
-                self?.checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: program)
+                self?.checkFoundPodcastsIsNotEmptyAndHasOnlyOne(foundPodcasts: podcasts)
             }
         }.store(in: &subscribedTo)
     }
@@ -70,22 +70,22 @@ final class ProgramViewModel {
         audioIsPlaying.send(false)
     }
     
-    private func checkFoundProgramIsNotEmptyAndHasOnlyOne(foundProgram: [Program]) {
-        if !foundProgram.isEmpty && foundProgram.count == 1 {
-            guard let onlyFoundProgram = foundProgram.first else { return }
+    private func checkFoundPodcastsIsNotEmptyAndHasOnlyOne(foundPodcasts: [Podcast]) {
+        if !foundPodcasts.isEmpty && foundPodcasts.count == 1 {
+            guard let onlyFoundPodcast = foundPodcasts.first else { return }
             
-            self.program.send(onlyFoundProgram)
-            orderEpisodesByDate(program: onlyFoundProgram, asc: false)
+            self.podcast.send(onlyFoundPodcast)
+            orderEpisodesByDate(podcast: onlyFoundPodcast, asc: false)
         }
     }
     
-    func orderEpisodesByDate(program: Program, asc: Bool) {
+    func orderEpisodesByDate(podcast: Podcast, asc: Bool) {
         var orderedEpisodes: [Episode] = []
         
         if asc {
-            orderedEpisodes = program.episodes.sorted(by: { $0.pubDate < $1.pubDate })
+            orderedEpisodes = podcast.episodes.sorted(by: { $0.pubDate < $1.pubDate })
         } else {
-            orderedEpisodes = program.episodes.sorted(by: { $0.pubDate > $1.pubDate })
+            orderedEpisodes = podcast.episodes.sorted(by: { $0.pubDate > $1.pubDate })
         }
         
         self.episodes.send(orderedEpisodes)
@@ -104,10 +104,10 @@ final class ProgramViewModel {
         AudioManager.shared.playSong()
     }
     
-    func playEpisode(episode: Episode, program: Program) {
-        AudioManager.shared.playSong(episode: episode, program: program)
+    func playEpisode(episode: Episode, podcast: Podcast) {
+        AudioManager.shared.playSong(episode: episode, podcast: podcast)
         
-        var playedEpisode = PlayedEpisode()
+        let playedEpisode = PlayedEpisode()
         playedEpisode.episode = episode
         realmManager.addPlayedEpisode(playedEpisode)
     }
@@ -116,19 +116,19 @@ final class ProgramViewModel {
         AudioManager.shared.pauseSong()
     }
     
-    func getEpisodesInfoAndProgramCopyright(program: Program) -> String {
+    func getEpisodesInfoAndPodcastCopyright(podcast: Podcast) -> String {
         var result: String = ""
         
         // Episodes Info.
-        switch program.episodes.count {
+        switch podcast.episodes.count {
         case 1:
             result = "Atal 1"
         default:
-            result = "\(program.episodes.count) Atal"
+            result = "\(podcast.episodes.count) Atal"
         }
         
         // Copyright Info.
-        result = result + " - " + program.copyright
+        result = result + " - " + podcast.copyright
         
         return result
     }
@@ -140,7 +140,7 @@ final class ProgramViewModel {
 extension ProgramViewModel {
     
     func searchProgram(id: String) {
-        realmManager.searchProgram(id: id)
+        realmManager.searchPodcast(id: id)
     }
     
 }

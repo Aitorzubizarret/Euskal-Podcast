@@ -36,6 +36,7 @@
 		1AD8925429A979CE0003B1A3 /* PlayedEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8925329A979CE0003B1A3 /* PlayedEpisodesViewModel.swift */; };
 		1AD8925829A982A40003B1A3 /* PlayedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8925629A982A40003B1A3 /* PlayedEpisodeTableViewCell.swift */; };
 		1AD8925929A982A40003B1A3 /* PlayedEpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD8925729A982A40003B1A3 /* PlayedEpisodeTableViewCell.xib */; };
+		1AD8925B29AA955C0003B1A3 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8925A29AA955C0003B1A3 /* Podcast.swift */; };
 		1ADAD5EA2993112C007AEDB6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5E92993112C007AEDB6 /* TabBar.swift */; };
 		1ADAD5EC2993A253007AEDB6 /* PodcastsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */; };
 		1ADAD5EE2993A261007AEDB6 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */; };
@@ -64,7 +65,6 @@
 		4212F416263F29CC00B9C021 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4212F414263F29CC00B9C021 /* PlayerViewController.xib */; };
 		42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */; };
 		42621E2F264DB3CA00271A85 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */; };
-		426DCB93264C85BD0020AC72 /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426DCB92264C85BD0020AC72 /* Program.swift */; };
 		427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */; };
 		427E1C452640B13B00FBCDF7 /* EpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */; };
 		428C2B592662EAB4009E5B0F /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428C2B572662EAB4009E5B0F /* ProgramViewController.swift */; };
@@ -110,6 +110,7 @@
 		1AD8925329A979CE0003B1A3 /* PlayedEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayedEpisodesViewModel.swift; sourceTree = "<group>"; };
 		1AD8925629A982A40003B1A3 /* PlayedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		1AD8925729A982A40003B1A3 /* PlayedEpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayedEpisodeTableViewCell.xib; sourceTree = "<group>"; };
+		1AD8925A29AA955C0003B1A3 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		1ADAD5E92993112C007AEDB6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1ADAD5EB2993A253007AEDB6 /* PodcastsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsCoordinator.swift; sourceTree = "<group>"; };
 		1ADAD5ED2993A261007AEDB6 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -137,7 +138,6 @@
 		4212F414263F29CC00B9C021 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		42621E2C264DB3CA00271A85 /* ProgramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramTableViewCell.swift; sourceTree = "<group>"; };
 		42621E2D264DB3CA00271A85 /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
-		426DCB92264C85BD0020AC72 /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		427E1C422640B13B00FBCDF7 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		427E1C432640B13B00FBCDF7 /* EpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeTableViewCell.xib; sourceTree = "<group>"; };
 		428C2B572662EAB4009E5B0F /* ProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				1AE7AE6129A39B7300B5D7D4 /* Channel.swift */,
-				426DCB92264C85BD0020AC72 /* Program.swift */,
+				1AD8925A29AA955C0003B1A3 /* Podcast.swift */,
 				42EEDC582643324E00698755 /* Episode.swift */,
 				1AD8924D29A8EFC90003B1A3 /* PlayedEpisode.swift */,
 			);
@@ -620,12 +620,12 @@
 				1AFE3333299D36910092C464 /* RealmManager.swift in Sources */,
 				1AFE3331299D16300092C464 /* Results-Extension.swift in Sources */,
 				427E1C442640B13B00FBCDF7 /* EpisodeTableViewCell.swift in Sources */,
-				426DCB93264C85BD0020AC72 /* Program.swift in Sources */,
 				1A1CC29229A690E700216BAB /* Int-Extension.swift in Sources */,
 				1A7C938428611697003E0C00 /* UIColor-Extension.swift in Sources */,
 				1AFD3491298BEF910074C338 /* XMLParserManager.swift in Sources */,
 				42F38AE12651C7A1005F9AB1 /* ProgramCollectionViewCell.swift in Sources */,
 				1A7CC4A9285E7D79003F2379 /* APIManager.swift in Sources */,
+				1AD8925B29AA955C0003B1A3 /* Podcast.swift in Sources */,
 				1AD8925129A8EFFB0003B1A3 /* PlayedEpisodesViewController.swift in Sources */,
 				42621E2E264DB3CA00271A85 /* ProgramTableViewCell.swift in Sources */,
 				42F38ADA2651A7D7005F9AB1 /* ProgramsListTableViewCell.swift in Sources */,

@@ -11,38 +11,38 @@ final class PodcastListViewModel {
     
     // MARK: - Properties
     
-    var programs: [Program]
+    var podcasts: [Podcast]
     
     // MARK: - Methods
     
-    init(programs: [Program]) {
-        self.programs = programs
+    init(podcasts: [Podcast]) {
+        self.podcasts = podcasts
     }
     
-    func getAmountPrograms() -> Int {
-        return programs.count
+    func getAmountPodcasts() -> Int {
+        return podcasts.count
     }
     
-    func getProgram(index: Int) -> Program {
-        return programs[index]
+    func getPodcast(index: Int) -> Podcast {
+        return podcasts[index]
     }
     
-    func getProgramId(index: Int) -> String {
-        return programs[index].id
+    func getPodcastId(index: Int) -> String {
+        return podcasts[index].id
     }
     
     func getAmountEpisode(index: Int) -> String {
-        let episodeNumber = programs[index].episodes.count
-        let episodeLastDateFormatted = getLastEpisodeDateFormatted(program: programs[index])
+        let episodeNumber = podcasts[index].episodes.count
+        let episodeLastDateFormatted = getLastEpisodeDateFormatted(podcast: podcasts[index])
         
         return "\(episodeNumber) Atal - Azkena: \(episodeLastDateFormatted)"
     }
     
-    private func getLastEpisodeDateFormatted(program: Program) -> String {
+    private func getLastEpisodeDateFormatted(podcast: Podcast) -> String {
         var lastEpisodeDateFormatted = ""
         
         // Get last Episode.
-        let lastEpisode = program.episodes.max { $0.pubDate < $1.pubDate }
+        let lastEpisode = podcast.episodes.max { $0.pubDate < $1.pubDate }
         if let lastEpisode = lastEpisode {
             
             // Get last Episodes pubDate.

@@ -21,9 +21,9 @@ class ProgramViewController: UIViewController {
     private var coordinator: Coordinator
     private var viewModel: ProgramViewModel
     private var subscribedTo: [AnyCancellable] = []
-    private var program: Program = Program() {
+    private var podcast: Podcast = Podcast() {
         didSet {
-            title = program.title
+            title = podcast.title
             
             tableView.reloadData()
         }
@@ -33,7 +33,7 @@ class ProgramViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    private var programId: String
+    private var podcastId: String
     
     var isPlaying: Bool = false {
         didSet {
@@ -43,10 +43,10 @@ class ProgramViewController: UIViewController {
     
     // MARK: - Methods
     
-    init(coordinator: Coordinator, viewModel: ProgramViewModel, programId: String) {
+    init(coordinator: Coordinator, viewModel: ProgramViewModel, podcastId: String) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-        self.programId = programId
+        self.podcastId = podcastId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,7 +61,7 @@ class ProgramViewController: UIViewController {
         setupTableView()
         subscriptions()
         
-        viewModel.searchProgram(id: programId)
+        viewModel.searchProgram(id: podcastId)
         isPlaying = viewModel.checkAudioIsPlaying()
     }
     
@@ -90,11 +90,12 @@ class ProgramViewController: UIViewController {
     }
     
     private func subscriptions() {
-        viewModel.program.sink { receiveCompletion in
+        viewModel.podcast.sink { receiveCompletion in
             print("Receive completion")
-        } receiveValue: { [weak self] program in
-            self?.program = program
+        } receiveValue: { [weak self] podcast in
+            self?.podcast = podcast
         }.store(in: &subscribedTo)
+
         
         viewModel.episodes.sink { receiveCompletion in
             print("Receive completion")
@@ -125,7 +126,7 @@ extension ProgramViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            let selectedEpisode: Episode = program.episodes[indexPath.row]
+            let selectedEpisode: Episode = podcast.episodes[indexPath.row]
             coordinator.showEpisodeDetail(episode: selectedEpisode)
         }
     }
@@ -157,10 +158,10 @@ extension ProgramViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
             
-            cell.imageURL = program.imageURL
-            cell.titleName = program.title
-            cell.descriptionText = program.descriptionText
-            cell.episodesInfo = viewModel.getEpisodesInfoAndProgramCopyright(program: program)
+            cell.imageURL = podcast.imageURL
+            cell.titleName = podcast.title
+            cell.descriptionText = podcast.descriptionText
+            cell.episodesInfo = viewModel.getEpisodesInfoAndPodcastCopyright(podcast: podcast)
             
             return cell
         default:
@@ -190,7 +191,7 @@ extension ProgramViewController: EpisodeCellDelegate {
     
     func playEpisode(rowAt: Int) {
         let selectedEpisode = episodes[rowAt]
-        viewModel.playEpisode(episode: selectedEpisode, program: program)
+        viewModel.playEpisode(episode: selectedEpisode, podcast: podcast)
     }
     
     func pauseEpisode(rowAt: Int) {

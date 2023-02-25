@@ -17,10 +17,10 @@ final class RealmManager {
     
     // Observable subjets.
     var allChannels = PassthroughSubject<[Channel], Error>()
-    var allPrograms = PassthroughSubject<[Program], Error>()
+    var allPodcasts = PassthroughSubject<[Podcast], Error>()
     var allPlayedEpisodes = PassthroughSubject<[PlayedEpisode], Error>()
-    var foundProgram = PassthroughSubject<[Program], Error>()
-    var foundProgramsWithText = PassthroughSubject<[Program], Error>()
+    var foundPodcasts = PassthroughSubject<[Podcast], Error>()
+    var foundPodcastsWithText = PassthroughSubject<[Podcast], Error>()
     var foundEpisodesWithText = PassthroughSubject<[Episode], Error>()
     
     // MARK: - Methods
@@ -40,26 +40,26 @@ final class RealmManager {
 
 extension RealmManager: RealManagerProtocol {
     
-    func savePrograms(_ programs: [Program]) {
-        for program in programs {
+    func savePodcasts(_ podcasts: [Podcast]) {
+        for podcast in podcasts {
             // Search the Program in the Realm DB.
-            let foundProgramsInRealm = realm.objects(Program.self).filter("title == '\(program.title)' && author == '\(program.author)'")
+            let foundPodcastsInRealm = realm.objects(Podcast.self).filter("title == '\(podcast.title)' && author == '\(podcast.author)'")
             
             // If no program found save it, and if one program found check the amount of episode to update them.
-            if foundProgramsInRealm.isEmpty {
-                addProgram(program: program)
-            } else if foundProgramsInRealm.count == 1 {
-                let foundProgram = foundProgramsInRealm[0]
+            if foundPodcastsInRealm.isEmpty {
+                addPodcast(podcast)
+            } else if foundPodcastsInRealm.count == 1 {
+                let foundPodcast = foundPodcastsInRealm[0]
                 
-                if program.episodes.count != foundProgram.episodes.count {
+                if podcast.episodes.count != foundPodcast.episodes.count {
                     // Get the last episode by PubDate.
-                    let lastPubDateEpisode: Episode? = foundProgramsInRealm[0].episodes.max { $0.pubDate < $1.pubDate }
+                    let lastPubDateEpisode: Episode? = foundPodcastsInRealm[0].episodes.max { $0.pubDate < $1.pubDate }
                     
                     // If there is an episode check if it's the last one (using the PubDate) and if new episodes found, save them.
                     if let lastPubDateEpisode = lastPubDateEpisode {
-                        for episode in program.episodes {
-                            if episode.pubDate > lastPubDateEpisode.pubDate {                                
-                                addEpisodeToProgramInRealm(program: foundProgram, episode: episode)
+                        for episode in podcast.episodes {
+                            if episode.pubDate > lastPubDateEpisode.pubDate {
+                                addEpisodeToPodcastInRealm(episode, foundPodcast)
                             }
                         }
                     }
@@ -70,8 +70,8 @@ extension RealmManager: RealManagerProtocol {
             }
         }
         
-        let programs = realm.objects(Program.self)
-        allPrograms.send(programs.toArray())
+        let podcasts = realm.objects(Podcast.self)
+        allPodcasts.send(podcasts.toArray())
     }
     
     func saveChannels(channels: [Channel]) {
@@ -90,13 +90,13 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func addProgram(program: Program) {
+    func addPodcast(_ podcast: Podcast) {
         do {
             try realm.write({
-                realm.add(program)
+                realm.add(podcast)
             })
         } catch let error {
-            print("RealmManager addProgram Error: \(error)")
+            print("RealmManager addPodcast Error: \(error)")
         }
     }
     
@@ -120,13 +120,13 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func addEpisodeToProgramInRealm(program: Program, episode: Episode) {
+    func addEpisodeToPodcastInRealm(_ episode: Episode, _ podcast: Podcast) {
         do {
             try realm.write({
-                program.episodes.append(episode)
+                podcast.episodes.append(episode)
             })
         } catch let error {
-            print("Error RealmManager - addEpisodeToProgram - \(error)")
+            print("Error RealmManager - addEpisodeToPodcastInRealm - \(error)")
         }
     }
     
@@ -135,9 +135,9 @@ extension RealmManager: RealManagerProtocol {
         allChannels.send(channels.toArray())
     }
     
-    func getAllPrograms() {
-        let programs = realm.objects(Program.self)
-        allPrograms.send(programs.toArray())
+    func getAllPodcasts() {
+        let podcasts = realm.objects(Podcast.self)
+        allPodcasts.send(podcasts.toArray())
     }
     
     func getAllPlayedEpisodes() {
@@ -158,20 +158,20 @@ extension RealmManager: RealManagerProtocol {
     func deleteChannel(channel: Channel) {
         do {
             try realm.write({
-                // Get the Program.
-                let programs = realm.objects(Program.self).filter("channelId == '\(channel.id)'")
+                // Get the Podcast.
+                let podcasts = realm.objects(Podcast.self).filter("channelId == '\(channel.id)'")
                 
-                // Delete all the Episodes of that Program.
-                for program in programs {
-                    for episode in program.episodes {
+                // Delete all the Episodes of that Podcast.
+                for podcast in podcasts {
+                    for episode in podcast.episodes {
                         realm.delete(episode)
                     }
                 }
                 
-                // Delete the Program.
-                realm.delete(programs)
+                // Delete the Podcasts.
+                realm.delete(podcasts)
                 
-                // Delete the Chanell.
+                // Delete the Chanel.
                 realm.delete(channel)
             })
         } catch let error {
@@ -179,16 +179,16 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func searchProgram(id: String) {
-        let foundPrograms = realm.objects(Program.self).filter("id = '\(id)'")
-        foundProgram.send(foundPrograms.toArray())
+    func searchPodcast(id: String) {
+        let foundPodcast = realm.objects(Podcast.self).filter("id = '\(id)'")
+        foundPodcasts.send(foundPodcast.toArray())
     }
     
-    func searchTextInProgramsAndEpisodes(text: String) {
-        let searchTextInPrograms = realm.objects(Program.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
+    func searchTextInPodcastsAndEpisodes(text: String) {
+        let searchTextInPrograms = realm.objects(Podcast.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
         let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
         
-        foundProgramsWithText.send(searchTextInPrograms.toArray())
+        foundPodcastsWithText.send(searchTextInPrograms.toArray())
         foundEpisodesWithText.send(searchTextInEpisodes.toArray())
     }
     

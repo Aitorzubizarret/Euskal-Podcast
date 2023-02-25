@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel
     
     private var subscribedTo: [AnyCancellable] = []
-    private var foundPrograms: [Program] = [] {
+    private var foundPodcasts: [Podcast] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -56,10 +56,10 @@ class SearchViewController: UIViewController {
     }
     
     private func subscriptions() {
-        viewModel.foundPrograms.sink { receiveCompletion in
+        viewModel.foundPodcasts.sink { receiveCompletion in
             print("Receive completion")
-        } receiveValue: { [weak self] programs in
-            self?.foundPrograms = programs
+        } receiveValue: { [weak self] podcasts in
+            self?.foundPodcasts = podcasts
         }.store(in: &subscribedTo)
         
         viewModel.foundEpisodes.sink { receiveCompletion in
@@ -138,11 +138,11 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && !foundPrograms.isEmpty {
+        if section == 0 && !foundPodcasts.isEmpty {
             return 1
         }
         
-        if section == 1 && !foundPrograms.isEmpty {
+        if section == 1 && !foundPodcasts.isEmpty {
             return 1
         }
         
@@ -162,7 +162,7 @@ extension SearchViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
             
             cell.delegate = self
-            cell.titleText = "PODCASTAK" + " - \(foundPrograms.count)"
+            cell.titleText = "PODCASTAK" + " - \(foundPodcasts.count)"
             cell.hideBottomLine = true
             cell.hideShowListButton = false
             
@@ -173,7 +173,7 @@ extension SearchViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramsListTableViewCell", for: indexPath) as! ProgramsListTableViewCell
             cell.delegate = self
             
-            cell.programs = foundPrograms
+            cell.podcasts = foundPodcasts
             
             return cell
         }
@@ -216,8 +216,8 @@ extension SearchViewController: ProgramListCellDelegate {
     }
     
     func showSelectedProgram(position: Int) {
-        let programId: String = foundPrograms[position].id
-        coordinator.showProgramDetail(programId: programId)
+        let podcastId: String = foundPodcasts[position].id
+        coordinator.showPodcastDetail(podcastId: podcastId)
     }
     
 }
@@ -227,7 +227,7 @@ extension SearchViewController: ProgramListCellDelegate {
 extension SearchViewController: SectionTitleCellDelegate {
     
     func showListAction() {
-        coordinator.showPodcastList(programs: foundPrograms)
+        coordinator.showPodcastList(podcasts: foundPodcasts)
     }
     
 }

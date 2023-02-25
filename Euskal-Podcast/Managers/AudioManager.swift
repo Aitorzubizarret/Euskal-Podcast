@@ -23,7 +23,7 @@ final class AudioManager {
     
     // Audio files data.
     var episode: Episode?
-    var program: Program?
+    var podcast: Podcast?
     var programName: String?
     var programImage: URL?
     var totalDurationString = ""
@@ -52,11 +52,11 @@ final class AudioManager {
         setupRemoteControls()
     }
     
-    func playSong(episode: Episode, program: Program) {
+    func playSong(episode: Episode, podcast: Podcast) {
         guard let episodeAudioURL: URL = URL(string: episode.audioFileURL) else { return }
         
         self.episode = episode
-        self.program = program
+        self.podcast = podcast
         
         let asset = AVAsset(url: episodeAudioURL)
         playerItem = AVPlayerItem(asset: asset)
@@ -257,13 +257,13 @@ extension AudioManager {
         var nowPlayingInfo = [String: Any]()
         
         // Artist -> Podcast Program Title.
-        nowPlayingInfo[MPMediaItemPropertyArtist] = program?.title
+        nowPlayingInfo[MPMediaItemPropertyArtist] = podcast?.title
         
         // Image.
         var programImage: UIImage? = UIImage(systemName: "exclamationmark.triangle")
         
-        if let program = program,
-           let imageURL: URL = URL(string: program.imageURL) {
+        if let podcast = podcast,
+           let imageURL: URL = URL(string: podcast.imageURL) {
             let tempUIImageView: UIImageView = UIImageView()
             tempUIImageView.kf.setImage(with: imageURL)
             
