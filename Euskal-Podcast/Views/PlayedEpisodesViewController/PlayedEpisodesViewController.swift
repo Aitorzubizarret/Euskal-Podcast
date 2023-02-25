@@ -93,9 +93,9 @@ extension PlayedEpisodesViewController: UITableViewDataSource {
         
         if let episode = playedEpisode.episode {
             cell.playedDateFormatted = playedEpisode.getDateFormatted()
-            cell.pictureURL = "" // TODO: Create a method to obtein the Podcast image of an Episode.
+            cell.pictureURL = viewModel.getPodcastImageFromEpisodeId(episode)
             cell.episodeName = episode.title
-            cell.podcastName = "" // TODO: Create a method to obtein the Podcast name of an Episode.
+            cell.podcastName = viewModel.getPodcastNameFromEpisode(episode)
         }
         
         return cell

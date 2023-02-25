@@ -38,12 +38,20 @@ final class PlayedEpisodesViewModel {
         realmManager.getAllPlayedEpisodes()
     }
     
-    func getPodcastImageFromEpisodeId(_ episodeId: String) -> String {
-        return ""
+    func getPodcastImageFromEpisodeId(_ episode: Episode) -> String {
+        if let podcast = episode.podcast {
+            return podcast.imageURL
+        } else {
+            return ""
+        }
     }
     
-    func getPodcastNameFromEpisodeId(_ episodeId: String) -> String {
-        return "Yoko Ona"
+    func getPodcastNameFromEpisode(_ episode: Episode) -> String {
+        if let podcast = episode.podcast {
+            return podcast.title
+        } else {
+            return ""
+        }
     }
     
 }

@@ -136,6 +136,7 @@ extension XMLParserManager: XMLParserDelegate {
                 guard let newPodcast = newPodcast,
                       let newEpisode = newEpisode else { return }
                 
+                newEpisode.podcast = newPodcast
                 newPodcast.episodes.append(newEpisode)
                 isItem = false
             case "title":
