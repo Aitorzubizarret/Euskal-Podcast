@@ -18,6 +18,7 @@ final class RealmManager {
     // Observable subjets.
     var allChannels = PassthroughSubject<[Channel], Error>()
     var allPrograms = PassthroughSubject<[Program], Error>()
+    var allPlayedEpisodes = PassthroughSubject<[PlayedEpisode], Error>()
     var foundProgram = PassthroughSubject<[Program], Error>()
     var foundProgramsWithText = PassthroughSubject<[Program], Error>()
     var foundEpisodesWithText = PassthroughSubject<[Episode], Error>()
@@ -99,6 +100,26 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
+    func addPlayedEpisode(_ playedEpisode: PlayedEpisode) {
+        // Get the last added 'PlayedEpisode'.
+        let lastPlayedEpisode = realm.objects(PlayedEpisode.self).sorted(byKeyPath: "date", ascending: false).first
+        
+        // Check the last saved 'PlayedEpisode's Episode' and the current 'PlayedEpisode's Episode' are not the same Episode.
+        if let lastPlayedEpisode = lastPlayedEpisode,
+           let lastEpisode = lastPlayedEpisode.episode,
+           let currentEpisode = playedEpisode.episode {
+            if lastEpisode.id != currentEpisode.id {
+                do {
+                    try realm.write({
+                        realm.add(playedEpisode)
+                    })
+                } catch let error {
+                    print("RealmManager addPlayedEpisode Error: \(error)")
+                }
+            }
+        }
+    }
+    
     func addEpisodeToProgramInRealm(program: Program, episode: Episode) {
         do {
             try realm.write({
@@ -109,14 +130,19 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
+    func getAllChannels() {
+        let channels = realm.objects(Channel.self)
+        allChannels.send(channels.toArray())
+    }
+    
     func getAllPrograms() {
         let programs = realm.objects(Program.self)
         allPrograms.send(programs.toArray())
     }
     
-    func getAllChannels() {
-        let channels = realm.objects(Channel.self)
-        allChannels.send(channels.toArray())
+    func getAllPlayedEpisodes() {
+        let playedEpisodes = realm.objects(PlayedEpisode.self).sorted(byKeyPath: "date", ascending: false)
+        allPlayedEpisodes.send(playedEpisodes.toArray())
     }
     
     func deleteAll() {

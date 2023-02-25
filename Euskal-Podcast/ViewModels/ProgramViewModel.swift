@@ -106,6 +106,10 @@ final class ProgramViewModel {
     
     func playEpisode(episode: Episode, program: Program) {
         AudioManager.shared.playSong(episode: episode, program: program)
+        
+        var playedEpisode = PlayedEpisode()
+        playedEpisode.episode = episode
+        realmManager.addPlayedEpisode(playedEpisode)
     }
     
     func pauseEpisode() {

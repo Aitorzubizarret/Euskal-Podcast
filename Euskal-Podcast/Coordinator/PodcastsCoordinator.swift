@@ -56,4 +56,12 @@ extension PodcastsCoordinator: Coordinator {
         navigationController.show(channelListVC, sender: nil)
     }
     
+    func showPlayedEpisodes() {
+        let playedEpisodeRealmManager: RealManagerProtocol = RealmManager()
+        let playedEpisodeViewModel = PlayedEpisodesViewModel(realmManager: playedEpisodeRealmManager)
+        let playedEpisodesVC = PlayedEpisodesViewController(coordinator: self, viewModel: playedEpisodeViewModel)
+        
+        navigationController.show(playedEpisodesVC, sender: nil)
+    }
+    
 }

@@ -16,6 +16,7 @@ protocol RealManagerProtocol {
     var realm: Realm { get set }
     var allChannels: PassthroughSubject<[Channel], Error> { get set }
     var allPrograms: PassthroughSubject<[Program], Error> { get set }
+    var allPlayedEpisodes: PassthroughSubject<[PlayedEpisode], Error> { get set }
     var foundProgram: PassthroughSubject<[Program], Error> { get set }
     var foundProgramsWithText: PassthroughSubject<[Program], Error> { get set }
     var foundEpisodesWithText: PassthroughSubject<[Episode], Error> { get set }
@@ -27,9 +28,11 @@ protocol RealManagerProtocol {
     
     func addChannel(channel: Channel)
     func addProgram(program: Program)
+    func addPlayedEpisode(_ playedEpisode: PlayedEpisode)
     
-    func getAllPrograms()
     func getAllChannels()
+    func getAllPrograms()
+    func getAllPlayedEpisodes()
     
     func deleteAll()
     func deleteChannel(channel: Channel)

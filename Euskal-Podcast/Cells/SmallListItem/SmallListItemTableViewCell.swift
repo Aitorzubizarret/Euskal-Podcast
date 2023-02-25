@@ -20,7 +20,7 @@ class SmallListItemTableViewCell: UITableViewCell {
     
     enum ItemTypes {
         case channels
-        case searches
+        case played
     }
     
     var itemType: ItemTypes? {
@@ -31,9 +31,9 @@ class SmallListItemTableViewCell: UITableViewCell {
             case .channels:
                 iconImageView.image = UIImage(systemName: "antenna.radiowaves.left.and.right")
                 titleLabel.text = "Podcast Iturriak"
-            case .searches:
-                iconImageView.image = UIImage(systemName: "magnifyingglass")
-                titleLabel.text = "Bestelakoa"
+            case .played:
+                iconImageView.image = UIImage(systemName: "play")
+                titleLabel.text = "Entzundako Podcast Atalak"
             }
         }
     }
