@@ -23,6 +23,7 @@ class XMLParserManager: NSObject {
     
     var newPodcast: Podcast?
     var newEpisode: Episode?
+    
     var channelId: String = ""
     var isItem: Bool = false
     
@@ -30,11 +31,11 @@ class XMLParserManager: NSObject {
     
     // MARK: - Methods
     
-    func parseChannel(urlAddress: String, id: String) {
-        guard let safeURL: URL = URL(string: urlAddress) else { return }
+    func parseChannel(channelId: String, channelURL: String) {
+        guard let safeURL: URL = URL(string: channelURL) else { return }
         
         serialQueue.async {
-            self.channelId = id
+            self.channelId = channelId
             
             self.parser = XMLParser(contentsOf: safeURL) ?? XMLParser()
             self.parser.delegate = self
@@ -165,10 +166,10 @@ extension XMLParserManager: XMLParserDelegate {
                 nothing = ""
             }
         } else {
-            // Program data.
+            // Podcast data.
             switch elementName {
             case "channel":
-                nothing = ""
+                newPodcast?.channelId = channelId
             case "title":
                 guard let newPodcast = newPodcast else { return }
                 

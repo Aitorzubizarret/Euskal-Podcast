@@ -43,7 +43,7 @@ final class PodcastsViewModel {
         realmManager.allChannels.sink { receiveCompletion in
             print("Receive completion")
         } receiveValue: { [weak self] channels in
-            self?.fetchRSSChannels(channels: channels)
+            self?.fetchAllChannels(channels)
         }.store(in: &subscribedTo)
         
         realmManager.allPodcasts.sink { receiveCompletion in
@@ -96,8 +96,10 @@ final class PodcastsViewModel {
 
 extension PodcastsViewModel {
     
-    private func fetchRSSChannels(channels: [Channel]) {
-        apiManager.fetchChannels(channels: channels)
+    private func fetchAllChannels(_ channels: [Channel]) {
+        for channel in channels {
+            self.apiManager.fetchChannel(channel)
+        }
     }
     
 }

@@ -13,4 +13,5 @@ class Channel: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var urlAddress: String = ""
     @objc dynamic var appendDate: Date = Date()
+    @objc dynamic var downloaded: Bool = false
 }

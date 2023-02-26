@@ -13,6 +13,7 @@ class ChannelTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var urlAddressLabel: UILabel!
+    @IBOutlet weak var downloadStatusLabel: UILabel!
     @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
@@ -25,6 +26,11 @@ class ChannelTableViewCell: UITableViewCell {
     var urlAddressText: String = "" {
         didSet {
             urlAddressLabel.text = urlAddressText
+        }
+    }
+    var downloadStatus: String = "" {
+        didSet {
+            downloadStatusLabel.text = downloadStatus
         }
     }
     

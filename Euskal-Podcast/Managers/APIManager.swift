@@ -39,13 +39,10 @@ final class APIManager {
         } receiveValue: { [weak self] podcast in
             self?.allPodcasts.append(podcast)
         }.store(in: &subscribedTo)
-
     }
     
-    func fetchChannels(channels: [Channel]) {
-        for channel in channels {
-            self.xmlParserManager.parseChannel(urlAddress: channel.urlAddress, id: channel.id)
-        }
+    func fetchChannel(_ channel: Channel) {
+        xmlParserManager.parseChannel(channelId: channel.id, channelURL: channel.urlAddress)
     }
     
     ///

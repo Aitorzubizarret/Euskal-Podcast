@@ -129,6 +129,7 @@ extension ChannelsViewController: UITableViewDataSource {
         let channel = channels[indexPath.row]
         cell.nameText = channel.name
         cell.urlAddressText = channel.urlAddress
+        cell.downloadStatus = channel.downloaded ? "Deskargatuta" : "Errorea"
         
         return cell
     }

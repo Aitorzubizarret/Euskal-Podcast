@@ -42,12 +42,13 @@ extension RealmManager: RealManagerProtocol {
     
     func savePodcasts(_ podcasts: [Podcast]) {
         for podcast in podcasts {
-            // Search the Program in the Realm DB.
+            // Search the Podcast in Realm DB.
             let foundPodcastsInRealm = realm.objects(Podcast.self).filter("title == '\(podcast.title)' && author == '\(podcast.author)'")
             
-            // If no program found save it, and if one program found check the amount of episode to update them.
+            // If no Podcast found save it, and if one Podcast found check the amount of episodes to update them.
             if foundPodcastsInRealm.isEmpty {
                 addPodcast(podcast)
+                updateChannelDownloaded(channelId: podcast.channelId)
             } else if foundPodcastsInRealm.count == 1 {
                 let foundPodcast = foundPodcastsInRealm[0]
                 
@@ -66,7 +67,7 @@ extension RealmManager: RealManagerProtocol {
                 }
                 
             } else {
-                print("Duplicate programs?")
+                print("Duplicate Podcasts?")
             }
         }
         
@@ -200,6 +201,20 @@ extension RealmManager: RealManagerProtocol {
         
         foundPodcastsWithText.send(searchTextInPrograms.toArray())
         foundEpisodesWithText.send(searchTextInEpisodes.toArray())
+    }
+    
+    private func updateChannelDownloaded(channelId: String) {
+        let foundChannel = realm.objects(Channel.self).filter("id = %@", channelId).first
+        
+        if let foundChannel = foundChannel {
+            do {
+                try realm.write {
+                    foundChannel.downloaded = true
+                }
+            } catch let error {
+                print("RealmManager updateChannelDownloaded Error: \(error)")
+            }
+        }
     }
     
 }
