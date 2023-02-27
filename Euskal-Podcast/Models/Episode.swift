@@ -20,7 +20,7 @@ class Episode: Object {
     @objc dynamic var link: String = ""
     @objc dynamic var podcast: Podcast?
     
-    func getPublishedDateFormatter() -> String {
+    func getPublishedDateFormatted() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, yyyy/MM/dd"
         dateFormatter.timeZone = TimeZone.init(identifier: "GMT")
@@ -30,8 +30,12 @@ class Episode: Object {
         return episodeDate.uppercased()
     }
     
-    func convertToMb() -> String {
-        return "3 Mb"
+    func getFileSizeFormatted() -> String {
+        let fileSize: Int64 = Int64(audioFileSize) ?? 0
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .binary
+        
+        return formatter.string(fromByteCount: fileSize)
     }
     
 }

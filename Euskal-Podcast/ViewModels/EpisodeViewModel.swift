@@ -28,7 +28,7 @@ final class EpisodeViewModel {
     }
     
     func getPubDateFormatter() -> String {
-        return episode.getPublishedDateFormatter()
+        return episode.getPublishedDateFormatted()
     }
     
     func getExplicit() -> String {
@@ -40,7 +40,7 @@ final class EpisodeViewModel {
     }
     
     func getAudioFileSize() -> String {
-        return episode.audioFileSize
+        return episode.getFileSizeFormatted()
     }
     
     func getDurationFormatted() -> String {

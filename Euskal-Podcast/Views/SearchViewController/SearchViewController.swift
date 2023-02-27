@@ -183,7 +183,7 @@ extension SearchViewController: UITableViewDataSource {
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
             let episode = foundEpisodes[indexPath.row]
-            cell.releaseDateText = episode.getPublishedDateFormatter()
+            cell.releaseDateText = episode.getPublishedDateFormatted()
             cell.titleText = episode.title
             cell.descriptionText = episode.descriptionText
             cell.durationText = episode.duration.asTimeFormatted()
