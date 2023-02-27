@@ -21,6 +21,7 @@ final class ProgramViewModel {
     var podcast = PassthroughSubject<Podcast, Error>()
     var episodes = PassthroughSubject<[Episode], Error>()
     var audioIsPlaying = PassthroughSubject<Bool, Error>()
+    var podcastIsBeingFollowed = PassthroughSubject<Bool, Error>()
     
     private let notificationCenter = NotificationCenter.default
     
@@ -56,6 +57,13 @@ final class ProgramViewModel {
                 self?.checkFoundPodcastsIsNotEmptyAndHasOnlyOne(foundPodcasts: podcasts)
             }
         }.store(in: &subscribedTo)
+        
+        realmManager.podcastIsBeingFollowed.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] isBeingFollowed in
+            self?.podcastIsBeingFollowed.send(isBeingFollowed)
+        }.store(in: &subscribedTo)
+
     }
     
     @objc private func audioPlaying() {
@@ -133,6 +141,17 @@ final class ProgramViewModel {
         return result
     }
     
+    func followPodcast(podcast: Podcast) {
+        let followingPodcast = FollowingPodcast()
+        followingPodcast.podcast = podcast
+        
+        realmManager.addFollowingPodcast(followingPodcast)
+    }
+    
+    func unfollowPodcast(podcast: Podcast) {
+        realmManager.deleteFollowingPodcast(podcastId: podcast.id)
+    }
+    
 }
 
 // MARK: - RealmManager methods.
@@ -141,6 +160,10 @@ extension ProgramViewModel {
     
     func searchProgram(id: String) {
         realmManager.searchPodcast(id: id)
+    }
+    
+    func checkPodcastIsBeingFollowed(_ podcast: Podcast) {
+        realmManager.searchPodcastInFollowingPodcasts(podcastId: podcast.id)
     }
     
 }

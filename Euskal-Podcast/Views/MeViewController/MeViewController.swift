@@ -56,12 +56,15 @@ class MeViewController: UIViewController {
 extension MeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             coordinator.showChannelList()
-        }
-        
-        if indexPath.row == 1 {
+        case 1:
             coordinator.showPlayedEpisodes()
+        case 2:
+            coordinator.showSubscriptions()
+        default:
+            print("")
         }
     }
     
@@ -80,16 +83,21 @@ extension MeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SmallListItemTableViewCell", for: indexPath) as! SmallListItemTableViewCell
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             cell.itemType = .channels
-        } else {
+        case 1:
             cell.itemType = .played
+        case 2:
+            cell.itemType = .subcriptions
+        default:
+            print("")
         }
         
         return cell

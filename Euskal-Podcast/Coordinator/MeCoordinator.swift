@@ -64,4 +64,12 @@ extension MeCoordinator: Coordinator {
         navigationController.show(playedEpisodesVC, sender: nil)
     }
     
+    func showSubscriptions() {
+        let followingPodcastsRealmManager: RealManagerProtocol = RealmManager()
+        let followingPodcastsViewModel = FollowingPodcastsViewModel(realmManager: followingPodcastsRealmManager)
+        let followingPodcastsVC = FollowingPodcastsViewController(coordinator: self, viewModel: followingPodcastsViewModel)
+        
+        navigationController.show(followingPodcastsVC, sender: nil)
+    }
+    
 }

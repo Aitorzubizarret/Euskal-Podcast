@@ -25,6 +25,8 @@ class ProgramViewController: UIViewController {
         didSet {
             title = podcast.title
             
+            viewModel.checkPodcastIsBeingFollowed(podcast)
+            
             tableView.reloadData()
         }
     }
@@ -36,6 +38,12 @@ class ProgramViewController: UIViewController {
     private var podcastId: String
     
     var isPlaying: Bool = false {
+        didSet {
+            updateVisibleCells()
+        }
+    }
+    
+    var isFollowed: Bool = false {
         didSet {
             updateVisibleCells()
         }
@@ -95,7 +103,6 @@ class ProgramViewController: UIViewController {
         } receiveValue: { [weak self] podcast in
             self?.podcast = podcast
         }.store(in: &subscribedTo)
-
         
         viewModel.episodes.sink { receiveCompletion in
             print("Receive completion")
@@ -107,6 +114,12 @@ class ProgramViewController: UIViewController {
             print("Receive completion")
         } receiveValue: { [weak self] isPlaying in
             self?.isPlaying = isPlaying
+        }.store(in: &subscribedTo)
+        
+        viewModel.podcastIsBeingFollowed.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] isBeingFollowed in
+            self?.isFollowed = isBeingFollowed
         }.store(in: &subscribedTo)
     }
     
@@ -157,10 +170,12 @@ extension ProgramViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: mainTitleTableViewCellIdentifier, for: indexPath) as! MainTitleTableViewCell
+            cell.delegate = self
             
             cell.imageURL = podcast.imageURL
             cell.titleName = podcast.title
             cell.descriptionText = podcast.descriptionText
+            cell.isFollowing = isFollowed
             cell.episodesInfo = viewModel.getEpisodesInfoAndPodcastCopyright(podcast: podcast)
             
             return cell
@@ -186,6 +201,23 @@ extension ProgramViewController: UITableViewDataSource {
     }
     
 }
+
+// MARK: - MainTitleCell Delegate
+
+extension ProgramViewController: MainTitleCellDelegate {
+    
+    func follow() {
+        viewModel.followPodcast(podcast: podcast)
+    }
+    
+    func unfollow() {
+        viewModel.unfollowPodcast(podcast: podcast)
+    }
+    
+}
+
+
+// MARK: - EpisodeCell Delegate
 
 extension ProgramViewController: EpisodeCellDelegate {
     

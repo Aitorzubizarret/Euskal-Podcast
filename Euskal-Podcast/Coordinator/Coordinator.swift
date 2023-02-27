@@ -16,4 +16,5 @@ protocol Coordinator {
     func showEpisodeDetail(episode: Episode)
     func showChannelList()
     func showPlayedEpisodes()
+    func showSubscriptions()
 }
