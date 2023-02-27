@@ -18,7 +18,7 @@ class SearchViewController: UIViewController {
     // MARK: - Properties
     
     private var coordinator: Coordinator
-    var viewModel: SearchViewModel
+    private var viewModel: SearchViewModel
     
     private var subscribedTo: [AnyCancellable] = []
     private var foundPodcasts: [Podcast] = [] {
@@ -50,23 +50,10 @@ class SearchViewController: UIViewController {
         
         title = "BILATU"
         
-        subscriptions()
         setupSearchBar()
         setupTableView()
-    }
-    
-    private func subscriptions() {
-        viewModel.foundPodcasts.sink { receiveCompletion in
-            print("Receive completion")
-        } receiveValue: { [weak self] podcasts in
-            self?.foundPodcasts = podcasts
-        }.store(in: &subscribedTo)
         
-        viewModel.foundEpisodes.sink { receiveCompletion in
-            print("Received completion")
-        } receiveValue: { [weak self] episodes in
-            self?.foundEpisodes = episodes
-        }.store(in: &subscribedTo)
+        subscriptions()
     }
     
     private func setupSearchBar() {
@@ -96,6 +83,19 @@ class SearchViewController: UIViewController {
         tableView.register(episodeCell, forCellReuseIdentifier: "EpisodeTableViewCell")
     }
     
+    private func subscriptions() {
+        viewModel.foundPodcasts.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] podcasts in
+            self?.foundPodcasts = podcasts
+        }.store(in: &subscribedTo)
+        
+        viewModel.foundEpisodes.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] episodes in
+            self?.foundEpisodes = episodes
+        }.store(in: &subscribedTo)
+    }
 }
 
 // MARK: - UISearchBar Delegate
@@ -138,71 +138,59 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && !foundPodcasts.isEmpty {
-            return 1
-        }
-        
-        if section == 1 && !foundPodcasts.isEmpty {
-            return 1
-        }
-        
-        if section == 2 && !foundEpisodes.isEmpty {
-            return 1
-        }
-        
-        if section == 3 {
+        switch section {
+        case 0:
+            if !foundPodcasts.isEmpty {
+                return 1
+            }
+        case 1:
+            if !foundPodcasts.isEmpty {
+                return 1
+            }
+        case 2:
+            if !foundEpisodes.isEmpty {
+                return 1
+            }
+        case 3:
             return foundEpisodes.count
+        default:
+            return 0
         }
-        
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
-            
             cell.delegate = self
             cell.titleText = "PODCASTAK" + " - \(foundPodcasts.count)"
             cell.hideBottomLine = true
             cell.hideShowListButton = false
-            
             return cell
-        }
-        
-        if indexPath.section == 1 {
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramsListTableViewCell", for: indexPath) as! ProgramsListTableViewCell
             cell.delegate = self
-            
             cell.podcasts = foundPodcasts
-            
             return cell
-        }
-        
-        if indexPath.section == 2 {
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
-            
             cell.delegate = self
             cell.titleText = "ATALAK" + " - \(foundEpisodes.count)"
             cell.hideBottomLine = false
             cell.hideShowListButton = true
-            
             return cell
-        }
-        
-        if indexPath.section == 3 {
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
-            
             let episode = foundEpisodes[indexPath.row]
             cell.releaseDateText = episode.getPublishedDateFormatter()
             cell.titleText = episode.title
             cell.descriptionText = episode.descriptionText
             cell.durationText = episode.duration.asTimeFormatted()
-            
             return cell
+        default:
+            return UITableViewCell()
         }
-        
-        return UITableViewCell()
-        
     }
     
 }
