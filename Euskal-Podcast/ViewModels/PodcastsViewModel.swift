@@ -75,31 +75,9 @@ final class PodcastsViewModel {
     
     func getAmountEpisode(podcast: Podcast) -> String {
         let episodeNumber = podcast.episodes.count
-        let episodeLastDateFormatted = getLastEpisodeDateFormatted(podcast: podcast)
+        let lastEpisodesPubDateFormatter = podcast.getLastEpisodesPubDateFormatted()
         
-        return "\(episodeNumber) Atal - Azkena: \(episodeLastDateFormatted)"
-    }
-    
-    private func getLastEpisodeDateFormatted(podcast: Podcast) -> String {
-        var lastEpisodeDateFormatted = ""
-        
-        // Get last Episode.
-        let lastEpisode = podcast.episodes.max { $0.pubDate < $1.pubDate }
-        if let lastEpisode = lastEpisode {
-            
-            // Get last Episodes pubDate.
-            let lastEpisodePubDate = lastEpisode.pubDate
-            
-            let formatter = RelativeDateTimeFormatter()
-            formatter.unitsStyle = .short
-            formatter.locale = Locale(identifier: "eu")
-            
-            let relativeDate = formatter.localizedString(for: lastEpisodePubDate, relativeTo: Date())
-            
-            lastEpisodeDateFormatted = relativeDate
-        }
-        
-        return lastEpisodeDateFormatted
+        return "\(episodeNumber) Atal - Azkena: \(lastEpisodesPubDateFormatter)"
     }
     
     private func getPodcastsFromFollowingPodcasts(followingPodcasts: [FollowingPodcast]) {

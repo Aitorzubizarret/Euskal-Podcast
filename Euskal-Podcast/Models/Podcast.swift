@@ -24,3 +24,28 @@ class Podcast: Object {
     @objc dynamic var copyrightOwnerEmail: String = ""
     let episodes = List<Episode>()
 }
+
+extension Podcast {
+    
+    func getLastEpisodesPubDateFormatted() -> String {
+        // Get last episode.
+        let lastEpisode = episodes.max { $0.pubDate < $1.pubDate }
+        
+        if let lastEpisode = lastEpisode {
+            // Get lastEpisodes PubDate.
+            let lastEpisodePubDate = lastEpisode.pubDate
+            
+            // Formatter.
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .short
+            formatter.locale = Locale(identifier: "eu")
+            
+            let relativeDate = formatter.localizedString(for: lastEpisodePubDate, relativeTo: Date())
+            
+            return relativeDate
+        } else {
+            return "-"
+        }
+    }
+    
+}
