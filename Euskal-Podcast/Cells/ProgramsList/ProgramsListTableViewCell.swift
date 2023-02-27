@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ProgramListCellDelegate {
-    func showAllPrograms()
     func showSelectedProgram(position: Int)
 }
 

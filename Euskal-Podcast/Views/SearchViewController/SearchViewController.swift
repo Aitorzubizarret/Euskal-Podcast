@@ -211,10 +211,6 @@ extension SearchViewController: UITableViewDataSource {
 
 extension SearchViewController: ProgramListCellDelegate {
     
-    func showAllPrograms() {
-        // TODO: - Create the ViewController to show the Programs and then the methods in Coordinator.
-    }
-    
     func showSelectedProgram(position: Int) {
         let podcastId: String = foundPodcasts[position].id
         coordinator.showPodcastDetail(podcastId: podcastId)
