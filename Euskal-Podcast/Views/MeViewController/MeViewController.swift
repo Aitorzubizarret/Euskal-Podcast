@@ -62,7 +62,7 @@ extension MeViewController: UITableViewDelegate {
         case 1:
             coordinator.showPlayedEpisodes()
         case 2:
-            coordinator.showSubscriptions()
+            coordinator.showFollowingPodcasts()
         default:
             print("")
         }

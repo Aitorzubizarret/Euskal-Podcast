@@ -189,7 +189,7 @@ extension PodcastsViewController: UITableViewDataSource {
 extension PodcastsViewController: SectionTitleCellDelegate {
     
     func showListAction() {
-        coordinator.showPodcastList(podcasts: followingPodcasts)
+        coordinator.showFollowingPodcasts()
     }
     
 }

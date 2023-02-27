@@ -40,7 +40,7 @@ final class FollowingPodcastsViewModel {
         }.store(in: &subscribedTo)
     }
     
-    func getAllSubscriptions() {
+    func getFollowingPodcasts() {
         realmManager.getAllFollowingPodcasts()
     }
     

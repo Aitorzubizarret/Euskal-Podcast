@@ -45,8 +45,10 @@ class FollowingPodcastsViewController: UIViewController {
         
         subscriptions()
         setupTableView()
-        
-        viewModel.getAllSubscriptions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getFollowingPodcasts()
     }
     
     private func subscriptions() {
@@ -75,7 +77,13 @@ class FollowingPodcastsViewController: UIViewController {
 
 // MARK: - UITableView Delegate
 
-extension FollowingPodcastsViewController: UITableViewDelegate {}
+extension FollowingPodcastsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
+    }
+    
+}
 
 // MARK: - UITableView Data Source
 
