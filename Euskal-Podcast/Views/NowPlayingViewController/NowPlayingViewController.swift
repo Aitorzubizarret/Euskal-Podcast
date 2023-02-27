@@ -6,18 +6,23 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NowPlayingViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    @IBOutlet weak var topLineImageView: UIImageView!
+    @IBOutlet weak var customView: UIView!
     @IBOutlet weak var playPauseImageView: UIImageView!
-    
+    @IBOutlet weak var episodeImageView: UIImageView!
     @IBOutlet weak var episodeTitleLabel: UILabel!
+    @IBOutlet weak var podcastNameLabel: UILabel!
     
     @IBAction func closeViewButtonTapped(_ sender: Any) {
         closeView()
     }
+    @IBOutlet weak var bottomLineImageView: UIImageView!
     
     // MARK: - Properties
     
@@ -25,6 +30,12 @@ class NowPlayingViewController: UIViewController {
         didSet {
             if let currentEpisode = currentEpisode {
                 episodeTitleLabel.text = currentEpisode.title
+                
+                if let podcast = currentEpisode.podcast,
+                   let iconURL: URL = URL(string: podcast.imageURL) {
+                    episodeImageView.kf.setImage(with: iconURL)
+                    podcastNameLabel.text = podcast.title
+                }
             }
         }
     }
@@ -60,6 +71,14 @@ class NowPlayingViewController: UIViewController {
         let viewTapGR = UITapGestureRecognizer(target: self, action: #selector(showPlayerFull))
         view.addGestureRecognizer(viewTapGR)
         view.isUserInteractionEnabled = true
+        
+        // ImageViews.
+        topLineImageView.backgroundColor = UIColor.template.purple
+        bottomLineImageView.backgroundColor = UIColor.template.purple
+        
+        // UIView.
+        customView.backgroundColor = UIColor.template.purple.withAlphaComponent(0.95)
+        
     }
     
     private func setupNotificationsObservers() {
