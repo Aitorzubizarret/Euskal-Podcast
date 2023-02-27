@@ -29,6 +29,7 @@
 		1AAC084429ACF86F0014106E /* FollowingPodcastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAC084229ACF86F0014106E /* FollowingPodcastsViewController.swift */; };
 		1AAC084529ACF86F0014106E /* FollowingPodcastsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AAC084329ACF86F0014106E /* FollowingPodcastsViewController.xib */; };
 		1AAC084729ACF9240014106E /* FollowingPodcastsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAC084629ACF9240014106E /* FollowingPodcastsViewModel.swift */; };
+		1AAC084929AD6DE60014106E /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAC084829AD6DE60014106E /* EpisodeViewModel.swift */; };
 		1AD8924129A7853B0003B1A3 /* SectionTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */; };
 		1AD8924229A7853B0003B1A3 /* SectionTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */; };
 		1AD8924629A7EF150003B1A3 /* PodcastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8924429A7EF150003B1A3 /* PodcastListViewController.swift */; };
@@ -107,6 +108,7 @@
 		1AAC084229ACF86F0014106E /* FollowingPodcastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPodcastsViewController.swift; sourceTree = "<group>"; };
 		1AAC084329ACF86F0014106E /* FollowingPodcastsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingPodcastsViewController.xib; sourceTree = "<group>"; };
 		1AAC084629ACF9240014106E /* FollowingPodcastsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPodcastsViewModel.swift; sourceTree = "<group>"; };
+		1AAC084829AD6DE60014106E /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		1AD8923F29A7853B0003B1A3 /* SectionTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewCell.swift; sourceTree = "<group>"; };
 		1AD8924029A7853B0003B1A3 /* SectionTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleTableViewCell.xib; sourceTree = "<group>"; };
 		1AD8924429A7EF150003B1A3 /* PodcastListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastListViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 			children = (
 				1ADAD6022993DA78007AEDB6 /* PodcastsViewModel.swift */,
 				1AE7AE5D299FFB1E00B5D7D4 /* ProgramViewModel.swift */,
+				1AAC084829AD6DE60014106E /* EpisodeViewModel.swift */,
 				1AE7AE5F29A2ACAC00B5D7D4 /* SearchViewModel.swift */,
 				1A7DF0A529A3E2F700D0AA55 /* ChannelsViewModel.swift */,
 				1AD8924829A7F4170003B1A3 /* PodcastListViewModel.swift */,
@@ -631,6 +634,7 @@
 				1AF85E8A298A961E0087C77B /* Coordinator.swift in Sources */,
 				1A24EF0329A3AF7E00E60EAF /* ChannelTableViewCell.swift in Sources */,
 				1ADAD6032993DA78007AEDB6 /* PodcastsViewModel.swift in Sources */,
+				1AAC084929AD6DE60014106E /* EpisodeViewModel.swift in Sources */,
 				1AE7AE6229A39B7300B5D7D4 /* Channel.swift in Sources */,
 				1A48E11E2995800700275BB4 /* NowPlayingViewController.swift in Sources */,
 				1A7DF0A429A3C97D00D0AA55 /* StaticDataManager.swift in Sources */,

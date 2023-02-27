@@ -31,13 +31,13 @@ class EpisodeViewController: UIViewController {
     // MARK: - Properties
     
     private var coordinator: Coordinator
-    
-    public var episode: Episode?
+    private var viewModel: EpisodeViewModel
     
     // MARK: - Methods
     
-    init(coordinator: Coordinator) {
+    init(coordinator: Coordinator, viewModel: EpisodeViewModel) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,16 +51,14 @@ class EpisodeViewController: UIViewController {
 
         title = "Atala"
         
-        guard let episode = episode else { return }
-        
-        titleValueLabel.text = episode.title
-        descriptionValueLabel.text = episode.descriptionText
-        publishedDateValueLabel.text = episode.getPublishedDateFormatter()
-        explicitValueLabel.text = episode.explicit
-        audioFileURLValueLabel.text = episode.audioFileURL
-        audioFileSizeValueLabel.text = episode.audioFileSize
-        durationValueLabel.text = episode.duration.asTimeFormatted()
-        linkValueLabel.text = episode.link
+        titleValueLabel.text = viewModel.getTitle()
+        descriptionValueLabel.text = viewModel.getDescription()
+        publishedDateValueLabel.text = viewModel.getPubDateFormatter()
+        explicitValueLabel.text = viewModel.getExplicit()
+        audioFileURLValueLabel.text = viewModel.getAudioFileURL()
+        audioFileSizeValueLabel.text = viewModel.getAudioFileSize()
+        durationValueLabel.text = viewModel.getDurationFormatted()
+        linkValueLabel.text = viewModel.getLink()
     }
     
 }

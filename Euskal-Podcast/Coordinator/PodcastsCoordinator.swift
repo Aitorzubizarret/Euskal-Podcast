@@ -42,8 +42,8 @@ extension PodcastsCoordinator: Coordinator {
     }
     
     func showEpisodeDetail(episode: Episode) {
-        let episodeVC = EpisodeViewController(coordinator: self)
-        episodeVC.episode = episode
+        let episodeViewModel = EpisodeViewModel(episode: episode)
+        let episodeVC = EpisodeViewController(coordinator: self, viewModel: episodeViewModel)
         
         navigationController.show(episodeVC, sender: nil)
     }
