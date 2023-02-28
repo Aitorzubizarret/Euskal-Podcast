@@ -185,6 +185,7 @@ extension ProgramViewController: UITableViewDataSource {
             cell.rowAt = indexPath.row
             
             let episode = episodes[indexPath.row]
+            cell.coverImageURL = episode.imageURL
             cell.releaseDateText = episode.getPublishedDateFormatted()
             cell.titleText = episode.title
             cell.descriptionText = episode.descriptionText

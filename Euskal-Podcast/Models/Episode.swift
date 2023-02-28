@@ -18,7 +18,11 @@ class Episode: Object {
     @objc dynamic var audioFileSize: String = ""
     @objc dynamic var duration: Int = 0
     @objc dynamic var link: String = ""
+    @objc dynamic var imageURL: String = ""
     @objc dynamic var podcast: Podcast?
+}
+
+extension Episode {
     
     func getPublishedDateFormatted() -> String {
         let dateFormatter = DateFormatter()

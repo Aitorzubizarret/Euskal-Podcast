@@ -111,7 +111,11 @@ extension XMLParserManager: XMLParserDelegate {
         for (key, value) in attributeDict {
             if elementName == "itunes:image" {
                 if key == "href" {
-                    newPodcast?.imageURL = value
+                    if isItem {
+                        newEpisode?.imageURL = value
+                    } else {
+                        newPodcast?.imageURL = value
+                    }
                 }
             } else if elementName == "itunes:category" {
                 if key == "text" {

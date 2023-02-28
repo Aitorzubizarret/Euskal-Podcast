@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol EpisodeCellDelegate {
     func playEpisode(rowAt: Int)
@@ -16,6 +17,10 @@ class EpisodeTableViewCell: UITableViewCell {
 
     // MARK: - UI Elements
     
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var coverImageViewWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var coverImageViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -38,6 +43,20 @@ class EpisodeTableViewCell: UITableViewCell {
         }
     }
     
+    var coverImageURL: String = "" {
+        didSet {
+            if coverImageURL != "",
+               let coverURL: URL = URL(string: coverImageURL) {
+                coverImageView.kf.setImage(with: coverURL)
+                coverImageViewWidthConstraint.constant = 60
+                coverImageViewLeadingConstraint.constant = 20
+            } else {
+                coverImageViewWidthConstraint.constant = 0
+                coverImageViewLeadingConstraint.constant = 0
+            }
+            contentView.layoutIfNeeded()
+        }
+    }
     var releaseDateText: String = "" {
         didSet {
             releaseDateLabel.text = releaseDateText
@@ -81,6 +100,11 @@ class EpisodeTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         // UIImageView.
+        coverImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        coverImageView.layer.cornerRadius = 4
+        coverImageView.layer.borderWidth = 1
+        coverImageView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         
         // Gesture Recognizer.

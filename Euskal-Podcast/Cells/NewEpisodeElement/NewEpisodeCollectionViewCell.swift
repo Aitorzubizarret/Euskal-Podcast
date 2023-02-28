@@ -29,10 +29,17 @@ class NewEpisodeCollectionViewCell: UICollectionViewCell {
             titleLabel.text = episode.title
             episodeDurationLabel.text = episode.duration.asTimeFormatted()
             
-            if let podcast = episode.podcast,
-               let iconURL: URL = URL(string: podcast.imageURL) {
-                coverImageView.kf.setImage(with: iconURL)
+            if let coverURL: URL = URL(string: episode.imageURL) {
+                coverImageView.kf.setImage(with: coverURL)
+            }
+            
+            if let podcast = episode.podcast {
                 podcastNameLabel.text = podcast.title
+                
+                if episode.imageURL.isEmpty,
+                   let coverURL: URL = URL(string: podcast.imageURL) {
+                    coverImageView.kf.setImage(with: coverURL)
+                }
             }
         }
     }
