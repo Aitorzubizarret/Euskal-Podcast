@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FollowingPodcastsViewController" customModule="Euskal_Podcast" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="FB2-Od-fKz" id="dCP-F9-im5"/>
+                <outlet property="collectionView" destination="GfL-Kk-aTm" id="Dpl-ot-Mtc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,18 +20,24 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FB2-Od-fKz">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="GfL-Kk-aTm">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KCS-Qc-Bol">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FB2-Od-fKz" secondAttribute="trailing" id="4cO-qc-VVM"/>
-                <constraint firstItem="FB2-Od-fKz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7TV-5s-b2A"/>
-                <constraint firstItem="FB2-Od-fKz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9PU-aw-R4F"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FB2-Od-fKz" secondAttribute="bottom" id="fih-1m-nS8"/>
+                <constraint firstItem="GfL-Kk-aTm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5o4-7w-Imu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GfL-Kk-aTm" secondAttribute="trailing" id="A8U-aE-lpj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="GfL-Kk-aTm" secondAttribute="bottom" id="NAC-bv-rz8"/>
+                <constraint firstItem="GfL-Kk-aTm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sW9-BY-Q7h"/>
             </constraints>
             <point key="canvasLocation" x="140" y="20"/>
         </view>

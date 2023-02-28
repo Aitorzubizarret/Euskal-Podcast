@@ -12,7 +12,7 @@ class FollowingPodcastsViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ class FollowingPodcastsViewController: UIViewController {
     
     private var podcasts: [Podcast] = [] {
         didSet {
-            tableView.reloadData()
+            collectionView.reloadData()
         }
     }
     
@@ -43,12 +43,31 @@ class FollowingPodcastsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
         subscriptions()
-        setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.getFollowingPodcasts()
+    }
+    
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        // Layout.
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .vertical
+            layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+            layout.minimumInteritemSpacing = 20
+            layout.minimumLineSpacing = 20
+        }
+        
+        collectionView.showsVerticalScrollIndicator = false
+        
+        // Register cells.
+        let programCell: UINib = UINib(nibName: "PodcastElementCollectionViewCell", bundle: nil)
+        collectionView.register(programCell, forCellWithReuseIdentifier: "PodcastElementCollectionViewCell")
     }
     
     private func subscriptions() {
@@ -58,55 +77,42 @@ class FollowingPodcastsViewController: UIViewController {
             self?.podcasts = podcasts
         }.store(in: &subscribedTo)
     }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        // Appearance.
-        tableView.separatorStyle = .none
-        
-        // Register cells.
-        let programCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
-        tableView.register(programCell, forCellReuseIdentifier: "ProgramTableViewCell")
-        
-        tableView.estimatedRowHeight = 110
-    }
-    
 }
 
-// MARK: - UITableView Delegate
+// MARK: - UICollectionView Delegate
 
-extension FollowingPodcastsViewController: UITableViewDelegate {
+extension FollowingPodcastsViewController: UICollectionViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
     }
     
 }
 
-// MARK: - UITableView Data Source
-
-extension FollowingPodcastsViewController: UITableViewDataSource {
+extension FollowingPodcastsViewController: UICollectionViewDelegateFlowLayout {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 60) / 2
+        return CGSize(width: width, height: width)
+    }
+    
+}
+
+// MARK: - UICollectionView Data Source
+
+extension FollowingPodcastsViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return podcasts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
-        
-        let podcast = podcasts[indexPath.row]
-        cell.iconURL = podcast.imageURL
-        cell.titleText = podcast.title
-        cell.descriptionText = podcast.descriptionText
-        cell.episodesInfo = viewModel.getAmountEpisode(podcast: podcast)
-        cell.authorText = podcast.author
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PodcastElementCollectionViewCell", for: indexPath) as! PodcastElementCollectionViewCell
+        cell.podcast = podcasts[indexPath.row]
         return cell
     }
     
