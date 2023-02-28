@@ -17,15 +17,19 @@ final class RealmManager {
     
     // Observable subjets.
     var allChannels = PassthroughSubject<[Channel], Error>()
+    
     var allPodcasts = PassthroughSubject<[Podcast], Error>()
-    var allPlayedEpisodes = PassthroughSubject<[PlayedEpisode], Error>()
-    var allFollowingPodcasts = PassthroughSubject<[FollowingPodcast], Error>()
-    var allNewEpisodes = PassthroughSubject<[Episode], Error>()
     var foundPodcasts = PassthroughSubject<[Podcast], Error>()
     var foundPodcastsWithText = PassthroughSubject<[Podcast], Error>()
+    
     var foundEpisodesWithText = PassthroughSubject<[Episode], Error>()
-    var foundFollowingPodcast = PassthroughSubject<FollowingPodcast, Error>()
+    
+    var allPlayedEpisodes = PassthroughSubject<[PlayedEpisode], Error>()
+    
+    var allFollowingPodcasts = PassthroughSubject<[FollowingPodcast], Error>()
     var podcastIsBeingFollowed = PassthroughSubject<Bool, Error>()
+    
+    var allNewEpisodes = PassthroughSubject<[Episode], Error>()
     
     // MARK: - Methods
     
@@ -43,6 +47,74 @@ final class RealmManager {
 // MARK: - RealmManagerProtocol
 
 extension RealmManager: RealManagerProtocol {
+    
+    // MARK: - Channel
+    
+    func getAllChannels() {
+        let channels = realm.objects(Channel.self)
+        allChannels.send(channels.toArray())
+    }
+    
+    func saveChannels(_ channels: [Channel]) {
+        for channel in channels {
+            addChannel(channel)
+        }
+    }
+    
+    func addChannel(_ channel: Channel) {
+        do {
+            try realm.write({
+                realm.add(channel)
+            })
+        } catch let error {
+            print("RealmManager addChannel Error: \(error)")
+        }
+    }
+    
+    func deleteChannel(_ channel: Channel) {
+        do {
+            try realm.write({
+                // Get the Podcast.
+                let podcasts = realm.objects(Podcast.self).filter("channelId == '\(channel.id)'")
+                
+                // Delete all the Episodes of that Podcast.
+                for podcast in podcasts {
+                    for episode in podcast.episodes {
+                        realm.delete(episode)
+                    }
+                }
+                
+                // Delete the Podcasts.
+                realm.delete(podcasts)
+                
+                // Delete the Chanel.
+                realm.delete(channel)
+            })
+        } catch let error {
+            print("RealmManager deleteChannel Error: \(error)")
+        }
+    }
+    
+    private func updateChannelDownloaded(channelId: String) {
+        let foundChannel = realm.objects(Channel.self).filter("id = %@", channelId).first
+        
+        if let foundChannel = foundChannel {
+            do {
+                try realm.write {
+                    foundChannel.downloaded = true
+                }
+            } catch let error {
+                print("RealmManager updateChannelDownloaded Error: \(error)")
+            }
+        }
+    }
+    
+    // MARK: - Podcast
+    
+    func getAllPodcasts() {
+        let podcasts = realm.objects(Podcast.self)
+        allPodcasts.send(podcasts.toArray())
+    }
     
     func savePodcasts(_ podcasts: [Podcast]) {
         for podcast in podcasts {
@@ -71,28 +143,12 @@ extension RealmManager: RealManagerProtocol {
                 }
                 
             } else {
-                print("Duplicate Podcasts?")
+                print("Duplicate Podcasts! Podcast: \(podcast.title) - foundaPodcastsInRealm: \(foundPodcastsInRealm)")
             }
         }
         
         let podcasts = realm.objects(Podcast.self)
         allPodcasts.send(podcasts.toArray())
-    }
-    
-    func saveChannels(channels: [Channel]) {
-        for channel in channels {
-            addChannel(channel: channel)
-        }
-    }
-    
-    func addChannel(channel: Channel) {
-        do {
-            try realm.write({
-                realm.add(channel)
-            })
-        } catch let error {
-            print("RealmManager addChannel Error: \(error)")
-        }
     }
     
     func addPodcast(_ podcast: Podcast) {
@@ -103,6 +159,30 @@ extension RealmManager: RealManagerProtocol {
         } catch let error {
             print("RealmManager addPodcast Error: \(error)")
         }
+    }
+    
+    func searchPodcastById(_ id: String) {
+        let foundPodcast = realm.objects(Podcast.self).filter("id = '\(id)'")
+        foundPodcasts.send(foundPodcast.toArray())
+    }
+    
+    func searchTextInPodcasts(_ text: String) {
+        let searchTextInPodcasts = realm.objects(Podcast.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
+        foundPodcastsWithText.send(searchTextInPodcasts.toArray())
+    }
+    
+    // MARK: - Episode
+    
+    func searchTextInEpisodes(_ text: String) {
+        let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
+        foundEpisodesWithText.send(searchTextInEpisodes.toArray())
+    }
+    
+    // MARK: - Played Episode
+    
+    func getAllPlayedEpisodes() {
+        let playedEpisodes = realm.objects(PlayedEpisode.self).sorted(byKeyPath: "date", ascending: false)
+        allPlayedEpisodes.send(playedEpisodes.toArray())
     }
     
     func addPlayedEpisode(_ playedEpisode: PlayedEpisode) {
@@ -145,6 +225,13 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
+    // MARK: - Following Podcast
+    
+    func getAllFollowingPodcasts() {
+        let followingPodcasts = realm.objects(FollowingPodcast.self)
+        allFollowingPodcasts.send(followingPodcasts.toArray())
+    }
+    
     func addFollowingPodcast(_ followingPodcast: FollowingPodcast) {
         do {
             try realm.write({
@@ -157,73 +244,12 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func getAllChannels() {
-        let channels = realm.objects(Channel.self)
-        allChannels.send(channels.toArray())
-    }
-    
-    func getAllPodcasts() {
-        let podcasts = realm.objects(Podcast.self)
-        allPodcasts.send(podcasts.toArray())
-    }
-    
-    func getAllPlayedEpisodes() {
-        let playedEpisodes = realm.objects(PlayedEpisode.self).sorted(byKeyPath: "date", ascending: false)
-        allPlayedEpisodes.send(playedEpisodes.toArray())
-    }
-    
-    func getAllFollowingPodcasts() {
-        let followingPodcasts = realm.objects(FollowingPodcast.self)
-        allFollowingPodcasts.send(followingPodcasts.toArray())
-    }
-    
-    func getNewEpisodes() {
-        let newEpisodes = realm.objects(Episode.self).sorted(byKeyPath: "pubDate", ascending: true)
-        let newEpisodesArray: [Episode] = newEpisodes.toArray()
-        let first20NewEpisodes: [Episode] = newEpisodesArray.suffix(21).reversed()
-        allNewEpisodes.send(first20NewEpisodes)
-    }
-    
-    func deleteAll() {
-        do {
-            try realm.write({
-                realm.deleteAll()
-            })
-        } catch let error {
-            print("RealmMamanager deleteAll Error: \(error)")
-        }
-    }
-    
-    func deleteChannel(channel: Channel) {
-        do {
-            try realm.write({
-                // Get the Podcast.
-                let podcasts = realm.objects(Podcast.self).filter("channelId == '\(channel.id)'")
-                
-                // Delete all the Episodes of that Podcast.
-                for podcast in podcasts {
-                    for episode in podcast.episodes {
-                        realm.delete(episode)
-                    }
-                }
-                
-                // Delete the Podcasts.
-                realm.delete(podcasts)
-                
-                // Delete the Chanel.
-                realm.delete(channel)
-            })
-        } catch let error {
-            print("RealmManager deleteChannel Error: \(error)")
-        }
-    }
-    
-    func deleteFollowingPodcast(podcastId: String) {
+    func deleteFollowingPodcastById(_ id: String) {
         let foundFollowingPodcasts = realm.objects(FollowingPodcast.self)
         
         for foundFollowingPodcast in foundFollowingPodcasts {
             if let podcast = foundFollowingPodcast.podcast {
-                if podcast.id == podcastId {
+                if podcast.id == id {
                     do {
                         try realm.write({
                             realm.delete(foundFollowingPodcast)
@@ -239,35 +265,13 @@ extension RealmManager: RealManagerProtocol {
         }
     }
     
-    func searchPodcast(id: String) {
-        let foundPodcast = realm.objects(Podcast.self).filter("id = '\(id)'")
-        foundPodcasts.send(foundPodcast.toArray())
-    }
-    
-    func searchTextInPodcastsAndEpisodes(text: String) {
-        let searchTextInPrograms = realm.objects(Podcast.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
-        let searchTextInEpisodes = realm.objects(Episode.self).filter("title contains[c] '\(text)' OR descriptionText contains[c] '\(text)'")
-        
-        foundPodcastsWithText.send(searchTextInPrograms.toArray())
-        foundEpisodesWithText.send(searchTextInEpisodes.toArray())
-    }
-    
-    func searchFollowingPodcast(podcastId: String) {
-        let foundFollowingPodcasts = realm.objects(FollowingPodcast.self).filter("podcastId = %@", podcastId)
-        
-        if !foundFollowingPodcasts.isEmpty && foundFollowingPodcasts.count == 1,
-           let followingPodcast = foundFollowingPodcasts.first {
-            foundFollowingPodcast.send(followingPodcast)
-        }
-    }
-    
-    func searchPodcastInFollowingPodcasts(podcastId: String) {
+    func searchPodcastInFollowingPodcastsById(_ id: String) {
         var response: Bool = false
         
         let followingPodcasts = realm.objects(FollowingPodcast.self)
         for followingPodcast in followingPodcasts {
             if let podcast = followingPodcast.podcast {
-                if podcastId == podcast.id {
+                if id == podcast.id {
                     response = true
                     break
                 }
@@ -277,17 +281,24 @@ extension RealmManager: RealManagerProtocol {
         podcastIsBeingFollowed.send(response)
     }
     
-    private func updateChannelDownloaded(channelId: String) {
-        let foundChannel = realm.objects(Channel.self).filter("id = %@", channelId).first
-        
-        if let foundChannel = foundChannel {
-            do {
-                try realm.write {
-                    foundChannel.downloaded = true
-                }
-            } catch let error {
-                print("RealmManager updateChannelDownloaded Error: \(error)")
-            }
+    // MARK: - New Episodes
+    
+    func getNewEpisodes() {
+        let newEpisodes = realm.objects(Episode.self).sorted(byKeyPath: "pubDate", ascending: true)
+        let newEpisodesArray: [Episode] = newEpisodes.toArray()
+        let first20NewEpisodes: [Episode] = newEpisodesArray.suffix(21).reversed()
+        allNewEpisodes.send(first20NewEpisodes)
+    }
+    
+    // MARK: - ¿?
+    
+    func deleteAll() {
+        do {
+            try realm.write({
+                realm.deleteAll()
+            })
+        } catch let error {
+            print("RealmMamanager deleteAll Error: \(error)")
         }
     }
     

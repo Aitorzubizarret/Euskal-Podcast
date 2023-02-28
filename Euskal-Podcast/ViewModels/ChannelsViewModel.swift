@@ -40,7 +40,7 @@ final class ChannelsViewModel {
     
     func deleteChannel(channel: Channel) {
         DispatchQueue.main.async {
-            self.realmManager.deleteChannel(channel: channel)
+            self.realmManager.deleteChannel(channel)
         }
     }
     

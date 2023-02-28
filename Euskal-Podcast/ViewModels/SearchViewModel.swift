@@ -48,7 +48,8 @@ final class SearchViewModel {
 extension SearchViewModel {
     
     func searchTextInProgramsAndEpisodes(text: String) {
-        realmManager.searchTextInPodcastsAndEpisodes(text: text)
+        realmManager.searchTextInPodcasts(text)
+        realmManager.searchTextInEpisodes(text)
     }
     
 }

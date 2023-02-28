@@ -305,7 +305,7 @@ final class StaticDataManager {
     }
     
     private func saveChannelsInRealm() {
-        realmManager.saveChannels(channels: channels)
+        realmManager.saveChannels(channels)
     }
     
     func start() {

@@ -149,7 +149,7 @@ final class ProgramViewModel {
     }
     
     func unfollowPodcast(podcast: Podcast) {
-        realmManager.deleteFollowingPodcast(podcastId: podcast.id)
+        realmManager.deleteFollowingPodcastById(podcast.id)
     }
     
 }
@@ -159,11 +159,11 @@ final class ProgramViewModel {
 extension ProgramViewModel {
     
     func searchProgram(id: String) {
-        realmManager.searchPodcast(id: id)
+        realmManager.searchPodcastById(id)
     }
     
     func checkPodcastIsBeingFollowed(_ podcast: Podcast) {
-        realmManager.searchPodcastInFollowingPodcasts(podcastId: podcast.id)
+        realmManager.searchPodcastInFollowingPodcastsById(podcast.id)
     }
     
 }
