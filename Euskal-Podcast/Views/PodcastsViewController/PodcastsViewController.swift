@@ -106,7 +106,9 @@ class PodcastsViewController: UIViewController {
 extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
+        if indexPath.section == 1 || indexPath.section == 3 {
+            coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
+        }
     }
     
 }
