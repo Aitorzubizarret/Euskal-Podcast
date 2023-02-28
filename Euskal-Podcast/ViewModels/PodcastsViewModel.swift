@@ -37,9 +37,7 @@ final class PodcastsViewModel {
         apiManager.podcasts.sink { receiveCompletion in
             print("Received completion")
         } receiveValue: { [weak self] podcasts in
-            DispatchQueue.main.async {
-                self?.savePodcastsInRealm(podcasts: podcasts)
-            }
+            self?.savePodcastsInRealm(podcasts: podcasts)
         }.store(in: &subscribedTo)
         
         realmManager.allChannels.sink { receiveCompletion in
@@ -65,12 +63,10 @@ final class PodcastsViewModel {
         } receiveValue: { [weak self] newEpisodes in
             self?.newEpisodes.send(newEpisodes)
         }.store(in: &subscribedTo)
-
-        
     }
     
     func fetchChannels() {
-        getAllChannels()
+        realmManager.getAllChannels()
     }
     
     func getFollowingPodcasts() {
@@ -82,7 +78,7 @@ final class PodcastsViewModel {
     }
     
     func getPodcasts() {
-        getAllPodcasts()
+        realmManager.getAllPodcasts()
     }
     
     func getAmountEpisode(podcast: Podcast) -> String {
@@ -104,38 +100,20 @@ final class PodcastsViewModel {
         self.followingPodcasts.send(podcasts)
     }
     
-}
-
-// MARK: - APIManager methods.
-
-extension PodcastsViewModel {
+    private func savePodcastsInRealm(podcasts: [Podcast]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.realmManager.savePodcasts(podcasts)
+        }
+    }
+    
+    private func deleteAllRealmData() {
+        realmManager.deleteAll()
+    }
     
     private func fetchAllChannels(_ channels: [Channel]) {
         for channel in channels {
             self.apiManager.fetchChannel(channel)
         }
-    }
-    
-}
-
-// MARK: - RealmManager methods.
-
-extension PodcastsViewModel {
-    
-    private func savePodcastsInRealm(podcasts: [Podcast]) {
-        realmManager.savePodcasts(podcasts)
-    }
-    
-    private func getAllPodcasts() {
-        realmManager.getAllPodcasts()
-    }
-    
-    private func getAllChannels() {
-        realmManager.getAllChannels()
-    }
-    
-    private func deleteAllRealmData() {
-        realmManager.deleteAll()
     }
     
 }
