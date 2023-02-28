@@ -18,6 +18,7 @@ protocol RealManagerProtocol {
     var allPodcasts: PassthroughSubject<[Podcast], Error> { get set }
     var allPlayedEpisodes: PassthroughSubject<[PlayedEpisode], Error> { get set }
     var allFollowingPodcasts: PassthroughSubject<[FollowingPodcast], Error> { get set }
+    var allNewEpisodes: PassthroughSubject<[Episode], Error> { get set }
     var foundPodcasts: PassthroughSubject<[Podcast], Error> { get set }
     var foundPodcastsWithText: PassthroughSubject<[Podcast], Error> { get set }
     var foundEpisodesWithText: PassthroughSubject<[Episode], Error> { get set }
@@ -38,6 +39,7 @@ protocol RealManagerProtocol {
     func getAllPodcasts()
     func getAllPlayedEpisodes()
     func getAllFollowingPodcasts()
+    func getNewEpisodes()
     
     func deleteAll()
     func deleteChannel(channel: Channel)

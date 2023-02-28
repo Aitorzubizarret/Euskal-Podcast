@@ -35,6 +35,13 @@ class PodcastsViewController: UIViewController {
             }
         }
     }
+    private var newEpisodes: [Episode] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // MARK: - Methods
     
@@ -62,6 +69,7 @@ class PodcastsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel.getFollowingPodcasts()
+        viewModel.getNewEpisodes()
         viewModel.getPodcasts()
     }
     
@@ -79,10 +87,11 @@ class PodcastsViewController: UIViewController {
         let podcastListCell: UINib = UINib(nibName: "ProgramsListTableViewCell", bundle: nil)
         tableView.register(podcastListCell, forCellReuseIdentifier: "ProgramsListTableViewCell")
         
+        let newEpisodesListCell: UINib = UINib(nibName: "NewEpisodesListTableViewCell", bundle: nil)
+        tableView.register(newEpisodesListCell, forCellReuseIdentifier: "NewEpisodesListTableViewCell")
+        
         let podcastCell: UINib = UINib(nibName: "ProgramTableViewCell", bundle: nil)
         tableView.register(podcastCell, forCellReuseIdentifier: "ProgramTableViewCell")
-        
-//        tableView.estimatedRowHeight = 110
     }
     
     private func subscriptions() {
@@ -97,6 +106,12 @@ class PodcastsViewController: UIViewController {
         } receiveValue: { [weak self] followingPodcasts in
             self?.followingPodcasts = followingPodcasts
         }.store(in: &subscribedTo)
+        
+        viewModel.newEpisodes.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] receivedNewEpisodes in
+            self?.newEpisodes = receivedNewEpisodes
+        }.store(in: &subscribedTo)
     }
     
 }
@@ -106,7 +121,7 @@ class PodcastsViewController: UIViewController {
 extension PodcastsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 || indexPath.section == 3 {
+        if indexPath.section == 1 || indexPath.section == 5 {
             coordinator.showPodcastDetail(podcastId: podcasts[indexPath.row].id)
         }
     }
@@ -118,7 +133,7 @@ extension PodcastsViewController: UITableViewDelegate {
 extension PodcastsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -136,8 +151,20 @@ extension PodcastsViewController: UITableViewDataSource {
                 return 0
             }
         case 2:
-            return 1
+            if newEpisodes.count > 0 {
+                return 1
+            } else {
+                return 0
+            }
         case 3:
+            if newEpisodes.count > 0 {
+                return 1
+            } else {
+                return 0
+            }
+        case 4:
+            return 1
+        case 5:
             return podcasts.count
         default:
             return 0
@@ -165,12 +192,25 @@ extension PodcastsViewController: UITableViewDataSource {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
             
-            cell.titleText = "PODCAST GUZTIAK"
+            cell.titleText = "ATAL BERRIAK"
             cell.hideBottomLine = true
             cell.hideShowListButton = true
             
             return cell
         case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewEpisodesListTableViewCell", for: indexPath) as! NewEpisodesListTableViewCell
+            cell.delegate = self
+            cell.episodes = newEpisodes
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
+            
+            cell.titleText = "PODCAST GUZTIAK"
+            cell.hideBottomLine = true
+            cell.hideShowListButton = true
+            
+            return cell
+        case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
             
             let podcast = podcasts[indexPath.row]
@@ -188,6 +228,8 @@ extension PodcastsViewController: UITableViewDataSource {
     
 }
 
+// MARK: - SectionTitleCell Delegate
+
 extension PodcastsViewController: SectionTitleCellDelegate {
     
     func showListAction() {
@@ -195,6 +237,18 @@ extension PodcastsViewController: SectionTitleCellDelegate {
     }
     
 }
+
+// MARK: -
+
+extension PodcastsViewController: NewEpisodeCellDelegate {
+    
+    func showSelectedEpisode(position: Int) {
+        coordinator.showEpisodeDetail(episode: newEpisodes[position])
+    }
+    
+}
+
+// MARK: - ProgramListCell Delegate
 
 extension PodcastsViewController: ProgramListCellDelegate {
     

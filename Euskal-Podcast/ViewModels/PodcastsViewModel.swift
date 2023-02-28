@@ -20,6 +20,7 @@ final class PodcastsViewModel {
     // Observable subjets.
     var podcasts = PassthroughSubject<[Podcast], Error>()
     var followingPodcasts = PassthroughSubject<[Podcast], Error>()
+    var newEpisodes = PassthroughSubject<[Episode], Error>()
     
     private var realmManager: RealManagerProtocol
     
@@ -58,7 +59,14 @@ final class PodcastsViewModel {
         } receiveValue: { [weak self] receivedFollowingPodcasts in
             self?.getPodcastsFromFollowingPodcasts(followingPodcasts: receivedFollowingPodcasts)
         }.store(in: &subscribedTo)
+        
+        realmManager.allNewEpisodes.sink { receiveCompletion in
+            print("Receive completion")
+        } receiveValue: { [weak self] newEpisodes in
+            self?.newEpisodes.send(newEpisodes)
+        }.store(in: &subscribedTo)
 
+        
     }
     
     func fetchChannels() {
@@ -67,6 +75,10 @@ final class PodcastsViewModel {
     
     func getFollowingPodcasts() {
         realmManager.getAllFollowingPodcasts()
+    }
+    
+    func getNewEpisodes() {
+        realmManager.getNewEpisodes()
     }
     
     func getPodcasts() {

@@ -20,6 +20,7 @@ final class RealmManager {
     var allPodcasts = PassthroughSubject<[Podcast], Error>()
     var allPlayedEpisodes = PassthroughSubject<[PlayedEpisode], Error>()
     var allFollowingPodcasts = PassthroughSubject<[FollowingPodcast], Error>()
+    var allNewEpisodes = PassthroughSubject<[Episode], Error>()
     var foundPodcasts = PassthroughSubject<[Podcast], Error>()
     var foundPodcastsWithText = PassthroughSubject<[Podcast], Error>()
     var foundEpisodesWithText = PassthroughSubject<[Episode], Error>()
@@ -174,6 +175,13 @@ extension RealmManager: RealManagerProtocol {
     func getAllFollowingPodcasts() {
         let followingPodcasts = realm.objects(FollowingPodcast.self)
         allFollowingPodcasts.send(followingPodcasts.toArray())
+    }
+    
+    func getNewEpisodes() {
+        let newEpisodes = realm.objects(Episode.self).sorted(byKeyPath: "pubDate", ascending: true)
+        let newEpisodesArray: [Episode] = newEpisodes.toArray()
+        let first20NewEpisodes: [Episode] = newEpisodesArray.suffix(21).reversed()
+        allNewEpisodes.send(first20NewEpisodes)
     }
     
     func deleteAll() {
