@@ -296,6 +296,121 @@ final class StaticDataManager {
         newChannel55.urlAddress = "http://www.xerezade.org/media-rss"
         channels.append(newChannel55)
         
+        let newChannel56 = Channel()
+        newChannel56.name = "Urpeko Bonbarda - Zuzeu"
+        newChannel56.urlAddress = "https://feeds.transistor.fm/urpeko-bonbarda"
+        channels.append(newChannel56)
+        
+        let newChannel57 = Channel()
+        newChannel57.name = "Egañaren belaunaldia - Bertsolari.eus"
+        newChannel57.urlAddress = "https://feeds.redcircle.com/7f31613c-6beb-41d7-8309-5180634c12ec"
+        channels.append(newChannel57)
+        
+        let newChannel58 = Channel()
+        newChannel58.name = "Makarrizketak"
+        newChannel58.urlAddress = "https://feeds.redcircle.com/650e9e21-db4e-4c16-a65e-e2003a8bd2ac"
+        channels.append(newChannel58)
+        
+        let newChannel59 = Channel()
+        newChannel59.name = "Bertikala - Naiz.eus"
+        newChannel59.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/bertikala.rss"
+        channels.append(newChannel59)
+        
+        let newChannel60 = Channel()
+        newChannel60.name = "Beste bat - Naiz.eus"
+        newChannel60.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/beste-bat.rss"
+        channels.append(newChannel60)
+        
+        let newChannel61 = Channel()
+        newChannel61.name = "Bilynch - Naiz.eus"
+        newChannel61.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/bilynch.rss"
+        channels.append(newChannel61)
+        
+        let newChannel62 = Channel()
+        newChannel62.name = "Bidaiari - Naiz.eus"
+        newChannel62.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/programas/bidaiari.rss"
+        channels.append(newChannel62)
+        
+        let newChannel63 = Channel()
+        newChannel63.name = "Bideokluba - Naiz.eus"
+        newChannel63.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/saioak/bideokluba.rss"
+        channels.append(newChannel63)
+        
+        let newChannel64 = Channel()
+        newChannel64.name = "Esku artean - Naiz.eus"
+        newChannel64.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/esku-artean.rss"
+        channels.append(newChannel64)
+        
+        let newChannel65 = Channel()
+        newChannel65.name = "Game erauntsia"
+        newChannel65.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/game-erauntsia.rss"
+        channels.append(newChannel65)
+        
+        let newChannel66 = Channel()
+        newChannel66.name = "Gelditu makinak - Naiz.eus"
+        newChannel66.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/gelditu-makinak.rss"
+        channels.append(newChannel66)
+        
+        let newChannel67 = Channel()
+        newChannel67.name = "Global musik - Naiz.eus"
+        newChannel67.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/global-musik.rss"
+        channels.append(newChannel67)
+        
+        let newChannel68 = Channel()
+        newChannel68.name = "Hemen gertatu zen - Naiz.eus"
+        newChannel68.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/emissions/hemen-gertatu-zen.rss"
+        channels.append(newChannel68)
+        
+        let newChannel69 = Channel()
+        newChannel69.name = "Kajerak - Naiz.eus"
+        newChannel69.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/emissions/kajerak.rss"
+        channels.append(newChannel69)
+        
+        let newChannel70 = Channel()
+        newChannel70.name = "Kirolari gaittun - Naiz.eus"
+        newChannel70.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/kirolari-gaittun.rss"
+        channels.append(newChannel70)
+        
+        let newChannel71 = Channel()
+        newChannel71.name = "Musikharia - Naiz.eus"
+        newChannel71.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/musikharia.rss"
+        channels.append(newChannel71)
+        
+        let newChannel72 = Channel()
+        newChannel72.name = "Pagondoan - Naiz.eus"
+        newChannel72.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/saioak/pagondoan.rss"
+        channels.append(newChannel72)
+        
+        let newChannel73 = Channel()
+        newChannel73.name = "Prest - Naiz.eus"
+        newChannel73.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/saioak/prest.rss"
+        channels.append(newChannel73)
+        
+        let newChannel74 = Channel()
+        newChannel74.name = "Reggae fever - Naiz.eus"
+        newChannel74.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/programas/reggae-fever.rss"
+        channels.append(newChannel74)
+        
+        let newChannel75 = Channel()
+        newChannel75.name = "Etxeko uzta - Naiz.eus"
+        newChannel75.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/etxeko-uzta.rss"
+        channels.append(newChannel75)
+        
+        let newChannel76 = Channel()
+        newChannel76.name = "Sateliteak - Naiz.eus"
+        newChannel76.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/programas/sateliteak.rss"
+        channels.append(newChannel76)
+        
+        let newChannel77 = Channel()
+        newChannel77.name = "Dena irailerako - Naiz.eus"
+        newChannel77.urlAddress = "https://irratia.naiz.eus/es/rss/sections/irratia/programas/dena-irailerako.rss"
+        channels.append(newChannel77)
+        
+        let newChannel78 = Channel()
+        newChannel78.name = "Zarramarra - Naiz.eus"
+        newChannel78.urlAddress = "https://irratia.naiz.eus/eu/rss/sections/irratia/saioak/zarramarra.rss"
+        channels.append(newChannel78)
+        
         /*
          let newChannel = Channel()
          newChannel.name = ""
