@@ -58,6 +58,8 @@ class PlayedEpisodeTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
+        selectionStyle = .none
+        
         bottomLineImageView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
     }
     
