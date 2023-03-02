@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
-protocol NewEpisodeCellDelegate {
+protocol NewEpisodeListCellDelegate {
     func showSelectedEpisode(position: Int)
+    func playEpisode(_ episode: Episode)
+    func pauseEpisode()
 }
 
 class NewEpisodesListTableViewCell: UITableViewCell {
@@ -20,8 +23,19 @@ class NewEpisodesListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var viewModel: PodcastsViewModel? {
+        didSet {
+            subscriptions()
+        }
+    }
+    private var subscribedTo: [AnyCancellable] = []
     var episodes: [Episode] = []
-    var delegate: NewEpisodeCellDelegate?
+    var delegate: NewEpisodeListCellDelegate?
+    var isPlaying: Bool = false {
+        didSet {
+            updateVisibleCells()
+        }
+    }
     
     // MARK: - Methods
     
@@ -64,6 +78,21 @@ class NewEpisodesListTableViewCell: UITableViewCell {
         collectionView.register(newEpisodeCell, forCellWithReuseIdentifier: "NewEpisodeCollectionViewCell")
     }
     
+    private func subscriptions() {
+        guard let viewModel = viewModel else { return }
+        
+        viewModel.audioIsPlaying.sink { receiveCompletion in
+            print("Received completion")
+        } receiveValue: { [weak self] isPlaying in
+            self?.isPlaying = isPlaying
+        }.store(in: &subscribedTo)
+    }
+    
+    private func updateVisibleCells() {
+        let visibleItems: [IndexPath] = collectionView.indexPathsForVisibleItems
+        collectionView.reloadItems(at: visibleItems)
+    }
+    
 }
 
 // MARK: - UICollectionView Delegate
@@ -103,8 +132,27 @@ extension NewEpisodesListTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewEpisodeCollectionViewCell", for: indexPath) as! NewEpisodeCollectionViewCell
+        cell.delegate = self
+        cell.rowAt = indexPath.row
         cell.episode = episodes[indexPath.row]
+        if let viewModel = viewModel {
+            cell.isPlaying = viewModel.checkEpisodeIsPlaying(episodes[indexPath.row]) && isPlaying
+        }
         return cell
+    }
+    
+}
+
+// MARK: - NewEpisodeCell Delegate
+
+extension NewEpisodesListTableViewCell: NewEpisodeCellDelegate {
+    
+    func playEpisode(rowAt: Int) {
+        delegate?.playEpisode(episodes[rowAt])
+    }
+    
+    func pauseEpisode(rowAt: Int) {
+        delegate?.pauseEpisode()
     }
     
 }

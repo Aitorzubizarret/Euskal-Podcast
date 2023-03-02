@@ -8,6 +8,11 @@
 import UIKit
 import Kingfisher
 
+protocol NewEpisodeCellDelegate {
+    func playEpisode(rowAt: Int)
+    func pauseEpisode(rowAt: Int)
+}
+
 class NewEpisodeCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Elements
@@ -43,6 +48,18 @@ class NewEpisodeCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    var delegate: NewEpisodeCellDelegate?
+    var rowAt: Int?
+    
+    var isPlaying: Bool = false {
+        didSet {
+            if isPlaying {
+                playPauseImageView.image = UIImage(systemName: "pause.circle")
+            } else {
+                playPauseImageView.image = UIImage(systemName: "play.circle")
+            }
+        }
+    }
     
     // MARK: - Methods
     
@@ -53,7 +70,23 @@ class NewEpisodeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        // Gesture Recognizers.
+        let playPauseGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPauseAction))
+        playPauseImageView.addGestureRecognizer(playPauseGR)
+        playPauseImageView.isUserInteractionEnabled = true
+        
         coverImageView.layer.cornerRadius = 4
+    }
+    
+    @objc private func playPauseAction() {
+        guard let delegate = delegate,
+              let rowAt = rowAt else { return }
+        
+        if isPlaying {
+            delegate.pauseEpisode(rowAt: rowAt)
+        } else {
+            delegate.playEpisode(rowAt: rowAt)
+        }
     }
     
 }

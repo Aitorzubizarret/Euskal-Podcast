@@ -21,8 +21,10 @@ final class PodcastsViewModel {
     var podcasts = PassthroughSubject<[Podcast], Error>()
     var followingPodcasts = PassthroughSubject<[Podcast], Error>()
     var newEpisodes = PassthroughSubject<[Episode], Error>()
+    var audioIsPlaying = PassthroughSubject<Bool, Error>()
     
     private var realmManager: RealManagerProtocol
+    private let notificationCenter = NotificationCenter.default
     
     // MARK: - Methods
     
@@ -30,7 +32,23 @@ final class PodcastsViewModel {
         self.apiManager = apiManager
         self.realmManager = realManager
         
+        setupNotificationsObservers()
         subscriptions()
+    }
+    
+    private func setupNotificationsObservers() {
+        notificationCenter.addObserver(self,
+                                       selector: #selector(audioPlaying),
+                                       name: .songPlaying,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(audioPause),
+                                       name: .songPause,
+                                       object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(audioFinished),
+                                       name: .audioFinished,
+                                       object: nil)
     }
     
     private func subscriptions() {
@@ -114,6 +132,44 @@ final class PodcastsViewModel {
         for channel in channels {
             self.apiManager.fetchChannel(channel)
         }
+    }
+    
+}
+
+// MARK: - Audio Playback
+
+extension PodcastsViewModel {
+    
+    func playEpisode(_ episode: Episode) {
+        guard let podacst = episode.podcast else { return }
+        
+        AudioManager.shared.playSong(episode: episode, podcast: podacst)
+        
+        // TODO: Make this simpler -> realmManager.addEpisodeToPlayedEpisodes(_ episode: Episode)
+        let playedEpisode = PlayedEpisode()
+        playedEpisode.episode = episode
+        realmManager.addPlayedEpisode(playedEpisode)
+    }
+    
+    func pauseEpisode() {
+        AudioManager.shared.pauseSong()
+    }
+    
+    func checkEpisodeIsPlaying(_ episode: Episode) -> Bool {
+        let playingEpisodeId = AudioManager.shared.getEpisodeId()
+        return (playingEpisodeId == episode.id) ? true : false
+    }
+    
+    @objc private func audioPlaying() {
+        audioIsPlaying.send(true)
+    }
+    
+    @objc private func audioPause() {
+        audioIsPlaying.send(false)
+    }
+    
+    @objc private func audioFinished() {
+        audioIsPlaying.send(false)
     }
     
 }

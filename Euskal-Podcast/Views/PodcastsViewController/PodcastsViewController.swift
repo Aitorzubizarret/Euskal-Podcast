@@ -175,51 +175,42 @@ extension PodcastsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
-            
             cell.delegate = self
             cell.titleText = "JARRAITZEN"
             cell.hideBottomLine = true
             cell.hideShowListButton = false
-            
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramsListTableViewCell", for: indexPath) as! ProgramsListTableViewCell
             cell.delegate = self
-            
             cell.podcasts = followingPodcasts
-            
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
-            
             cell.titleText = "ATAL BERRIAK"
             cell.hideBottomLine = true
             cell.hideShowListButton = true
-            
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewEpisodesListTableViewCell", for: indexPath) as! NewEpisodesListTableViewCell
             cell.delegate = self
+            cell.viewModel = viewModel
             cell.episodes = newEpisodes
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell", for: indexPath) as! SectionTitleTableViewCell
-            
             cell.titleText = "PODCAST GUZTIAK"
             cell.hideBottomLine = true
             cell.hideShowListButton = true
-            
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProgramTableViewCell", for: indexPath) as! ProgramTableViewCell
-            
             let podcast = podcasts[indexPath.row]
             cell.iconURL = podcast.imageURL
             cell.titleText = podcast.title
             cell.descriptionText = podcast.descriptionText
             cell.episodesInfo = viewModel.getAmountEpisode(podcast: podcast)
             cell.authorText = podcast.author
-            
             return cell
         default:
             return UITableViewCell()
@@ -240,10 +231,18 @@ extension PodcastsViewController: SectionTitleCellDelegate {
 
 // MARK: -
 
-extension PodcastsViewController: NewEpisodeCellDelegate {
+extension PodcastsViewController: NewEpisodeListCellDelegate {
     
     func showSelectedEpisode(position: Int) {
         coordinator.showEpisodeDetail(episode: newEpisodes[position])
+    }
+    
+    func playEpisode(_ episode: Episode) {
+        viewModel.playEpisode(episode)
+    }
+    
+    func pauseEpisode() {
+        viewModel.pauseEpisode()
     }
     
 }
